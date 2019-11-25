@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info/package_info.dart';
 
 /// 监听添加的自定义控件的点击事件
 typedef ShanYanWidgetEventListener = void Function(String widgetId);
@@ -14,6 +15,7 @@ typedef ShanYanWidgetLayoutEventListener = void Function(
 typedef AuthPageOnClickListener = void Function(AuthPageOnClickEvent event);
 
 class OneKeyLoginManager {
+
   final String flutter_log = "|shanyan_flutter======|";
 
   factory OneKeyLoginManager() => _instance;
@@ -54,7 +56,7 @@ class OneKeyLoginManager {
   }
 
   //闪验SDK 预取号
-  Future<Map<dynamic, dynamic>> getPhoneInfo({String appId}) async {
+  Future<Map<dynamic, dynamic>> getPhoneInfo() async {
     return await _channel.invokeMethod("getPhoneInfo");
   }
 
@@ -146,6 +148,18 @@ class OneKeyLoginManager {
         throw new UnsupportedError("Unrecognized Event");
     }
     return;
+  }
+
+  //iOS
+  Future<Map<dynamic, dynamic>> openLoginAuthListener() async{
+    return await _channel.invokeMethod("openLoginAuthListener");
+  }
+  Future<Map<dynamic, dynamic>> oneKeyLoginListener() async{
+    return await _channel.invokeMethod("oneKeyLoginListener");
+  }
+  //一键登录
+  Future<void> quickAuthLoginWithConfigure(Map configure){
+    _channel.invokeMethod("quickAuthLoginWithConfigure");
   }
 }
 
@@ -435,3 +449,5 @@ String getStringFromEnum<T>(T) {
 
   return T.toString().split('.').last;
 }
+
+

@@ -5,6 +5,7 @@ import 'package:shanyan/shanyan.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
+import 'dart:io';
 
 void main() => runApp(new MyApp());
 
@@ -27,6 +28,8 @@ class _MyAppState extends State<MyApp> {
   int _code = 0;
   String _content = "content=";
 
+  Map ios_uiConfigure;
+
   final OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
 
   @override
@@ -34,7 +37,6 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     initListener();
-    initPlatformState();
   }
 
   @override
@@ -50,31 +52,44 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initListener() async {
-    //闪验SDK 设置调试模式开关
-    oneKeyLoginManager.setDebug(true);
-    oneKeyLoginManager.setOnClickPrivacyListener();
-    oneKeyLoginManager.setAuthPageOnClickListener(
-            (AuthPageOnClickEvent authPageOnClickEvent) {
-          Map map = authPageOnClickEvent.toMap();
-          setState(() {
-            _code = map[shanyan_code];
-            _result = map[shanyan_result];
-            _content = " code===" + _code.toString() + "\n result===" + _result;
-            if (1000 == map[shanyan_code]) {
-              oneKeyLoginManager.finishAuthActivity();
-              _toast("一键登录 获取token成功");
-            } else {
-              _toast("点击：${map[shanyan_result]}");
-            }
+
+    if (Platform.isIOS){
+
+    }else if(Platform.isAndroid){
+      //闪验SDK 设置调试模式开关
+      oneKeyLoginManager.setDebug(true);
+      oneKeyLoginManager.setOnClickPrivacyListener();
+      oneKeyLoginManager.setAuthPageOnClickListener(
+              (AuthPageOnClickEvent authPageOnClickEvent) {
+            Map map = authPageOnClickEvent.toMap();
+            setState(() {
+              _code = map[shanyan_code];
+              _result = map[shanyan_result];
+              _content = " code===" + _code.toString() + "\n result===" + _result;
+              if (1000 == map[shanyan_code]) {
+                oneKeyLoginManager.finishAuthActivity();
+                _toast("一键登录 获取token成功");
+              } else {
+                _toast("点击：${map[shanyan_result]}");
+              }
+            });
           });
-        });
+    }
+
   }
 
   Future<void> initPlatformState() async {
+
+    String appId;
+    if (Platform.isIOS){
+      appId = "7I5nJT7h";
+    }else if(Platform.isAndroid){
+      appId = "loXN4jDs";
+    }
     //闪验SDK 初始化
     oneKeyLoginManager
         .init(
-      appId: "loXN4jDs",
+      appId: appId,
     )
         .then((map) {
       setState(() {
@@ -97,18 +112,46 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> openLoginAuthPlatformState() async {
-    //闪验SDK 拉起授权页
-    oneKeyLoginManager
-        .openLoginAuth(
-      isFinish: false,
-    )
-        .then((map) {
-      setState(() {
-        _code = map[shanyan_code];
-        _result = map[shanyan_result];
-        _content = " code===" + _code.toString() + "\n result===" + _result;
+
+    if (Platform.isIOS){
+
+      //先设置SDK回调
+
+      //openLoginAuthListener:调起授权页回调
+      oneKeyLoginManager.openLoginAuthListener().then((map){
+        setState(() {
+          _code = map[shanyan_code];
+          _result = map[shanyan_result];
+          _content = " code===" + _code.toString() + "\n result===" + _result;
+        });
       });
-    });
+
+      //openLoginAuthListener:调起授权页成功，后续回调
+      oneKeyLoginManager.oneKeyLoginListener().then((map){
+        setState(() {
+          _code = map[shanyan_code];
+          _result = map[shanyan_result];
+          _content = " code===" + _code.toString() + "\n result===" + _result;
+        });
+      });
+
+      //调起授权页
+      oneKeyLoginManager.quickAuthLoginWithConfigure(ios_uiConfigure);
+
+    }else if(Platform.isAndroid){
+      //闪验SDK 拉起授权页
+      oneKeyLoginManager
+          .openLoginAuth(
+        isFinish: false,
+      )
+          .then((map) {
+        setState(() {
+          _code = map[shanyan_code];
+          _result = map[shanyan_result];
+          _content = " code===" + _code.toString() + "\n result===" + _result;
+        });
+      });
+    }
   }
 
   Future<void> startAuthenticationState() async {

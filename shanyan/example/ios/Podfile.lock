@@ -1,0 +1,41 @@
+PODS:
+  - CL_ShanYanSDK (2.3.0.2)
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+  - package_info (0.0.1):
+    - Flutter
+  - shanyan (0.0.1):
+    - CL_ShanYanSDK (~> 2.3.0.0)
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
+  - shanyan (from `.symlinks/plugins/shanyan/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CL_ShanYanSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
+  shanyan:
+    :path: ".symlinks/plugins/shanyan/ios"
+
+SPEC CHECKSUMS:
+  CL_ShanYanSDK: 20ef68b3cc6f9e978c49c16b5c5fbaaefcff63b9
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
+  shanyan: 53b1e489f34de2b68ab21830bd849d92ae9c4337
+
+PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
+
+COCOAPODS: 1.8.4
