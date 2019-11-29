@@ -10,7 +10,7 @@
 即将上线
 
 ## Documents
-[闪验SDK-Flutter插件集成文档](https://github.com/253CL/CLShanYan_Flutter/wiki/Flutter-插件集成文档)
+[闪验SDK-Flutter插件集成文档](https://github.com/253CL/CLShanYan_Flutter/wiki/闪验SDK-Flutter插件集成文档)
 
 
 ## WebSite
