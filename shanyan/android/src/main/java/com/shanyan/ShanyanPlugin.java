@@ -100,8 +100,7 @@ public class ShanyanPlugin implements MethodCallHandler {
     }
 
     private void startAuthentication(MethodCall call, final Result result) {
-        String phoneNum = call.argument("phoneNum");
-        OneKeyLoginManager.getInstance().startAuthentication(phoneNum, new AuthenticationExecuteListener() {
+        OneKeyLoginManager.getInstance().startAuthentication(new AuthenticationExecuteListener() {
             @Override
             public void authenticationRespond(int code, String msg) {
                 Map<String, Object> map = new HashMap<>();
