@@ -5,46 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feabf20f-43cd-44f1-b2ca-94a00111ce74" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/example/assets/img/bb4bf6b9301170c7fa0a766b1024d2d3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkBoxNor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkBoxSEL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkbox-multiple-bl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkbox-multiple-bl@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkbox-multiple-bl@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkbox-multiple-ma.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkbox-multiple-ma@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/checkbox-multiple-ma@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/close-black.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/close-black@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/close-white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/close-white@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/eb9a0dae18491990a43fe02832d3cafa.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/homeHL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/logo_shanyan_text.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/qq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/shanyanlogo1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/shanyanlogo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/sinaweibo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/userHL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/assets/img/weixin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/shanyan.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/shanyan.podspec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shanyan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shanyan.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shanyan.iml" beforeDir="false" afterPath="$PROJECT_DIR$/shanyan.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -67,11 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="135">
+              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -89,8 +55,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="18" selection-start-line="4" selection-end-line="5" />
+            <state relative-caret-position="474">
+              <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,7 +81,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="-307">
               <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="15" />
             </state>
           </provider>
@@ -121,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ios/shanyan.podspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="270">
+              <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -148,15 +117,15 @@
         <option value="$PROJECT_DIR$/example/android/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
-        <option value="$PROJECT_DIR$/ios/shanyan.podspec" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/ios/shanyan.podspec" />
         <option value="$PROJECT_DIR$/lib/shanyan.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="152" />
-    <option name="width" value="1666" />
+    <option name="y" value="96" />
+    <option name="width" value="1316" />
     <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -166,9 +135,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,12 +145,20 @@
             <path>
               <item name="shanyan" type="b2602c69:ProjectViewProjectNode" />
               <item name="shanyan" type="462c0819:PsiDirectoryNode" />
+              <item name="ios" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shanyan" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shanyan" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,9 +206,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="152" y="0" width="1666" height="1080" extended-state="0" />
+    <frame x="0" y="96" width="1316" height="1080" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49834436" visible="true" weight="0.18719211" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49834436" visible="true" weight="0.2566719" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -249,7 +224,7 @@
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.32917964" />
       <window_info anchor="bottom" id="Debug" order="5" />
-      <window_info anchor="bottom" id="Terminal" order="6" visible="true" weight="0.29959515" />
+      <window_info anchor="bottom" id="Terminal" order="6" visible="true" weight="0.12753037" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
@@ -332,28 +307,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ios/Classes/ShanyanPlugin.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ios/shanyan.podspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.lock">
+    <entry file="file://$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+10/lib/package_info.dart">
@@ -363,17 +325,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.lock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="-307">
           <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/shanyan.podspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" selection-start-line="4" selection-end-line="5" />
+        <state relative-caret-position="474">
+          <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

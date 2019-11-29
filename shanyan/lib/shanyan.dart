@@ -23,18 +23,18 @@ class OneKeyLoginManager {
 
   final MethodChannel _channel;
 
-  /// 授权页默认控件的点击事件（“一键登录按钮”、返回按钮（包括物理返回键）、协议条款）
+  /// 授权页默认控件的点击事件（“一键登录按钮”、返回按钮（包括物理返回键）、协议条款） Android
   setAuthPageOnClickListener(AuthPageOnClickListener callback) {
     _eventHanders.authPageEvents.add(callback);
   }
 
-  /// 自定义控件的点击事件
+  /// 自定义控件的点击事件 Android
   addClikWidgetEventListener(
       String eventId, ShanYanWidgetEventListener callback) {
     _eventHanders.clickEventsMap[eventId] = callback;
   }
 
-  // 自定布局的点击事件
+  // 自定布局的点击事件 Android
   addClikWidgetLayoutEventListener(ShanYanWidgetLayoutEventListener callback) {
     _eventHanders.clickLayoutEvents.add(callback);
   }
@@ -44,44 +44,48 @@ class OneKeyLoginManager {
   static final _instance =
   new OneKeyLoginManager.private(const MethodChannel("shanyan"));
 
-  /// 设置调试模式开关
+  /// 设置调试模式开关 Android
   void setDebug(bool debug) {
     _channel.invokeMethod("setDebugMode", {"debug": debug});
   }
 
-  //闪验SDK 初始化
+  //闪验SDK 初始化(Android+iOS)
   Future<Map<dynamic, dynamic>> init({String appId}) async {
     _channel.setMethodCallHandler(_handlerMethod);
     return await _channel.invokeMethod("init", {"appId": appId});
   }
 
-  //闪验SDK 预取号
+  //闪验SDK 预取号(Android+iOS)
   Future<Map<dynamic, dynamic>> getPhoneInfo() async {
     return await _channel.invokeMethod("getPhoneInfo");
   }
 
-  //闪验SDK 拉起授权页
+  //闪验SDK 拉起授权页 Android
   Future<Map<dynamic, dynamic>> openLoginAuth({bool isFinish}) async {
     return await _channel.invokeMethod("openLoginAuth", {"isFinish": isFinish});
   }
 
-  //闪验SDK 主动销毁授权页
+  //闪验SDK 主动销毁授权页 Android
   void finishAuthActivity() {
     _channel.invokeMethod("finishAuthActivity");
   }
 
-  //闪验SDK 设置点击协议监听
+  //闪验SDK 设置点击协议监听 Android
   void setOnClickPrivacyListener() {
     _channel.invokeMethod("setOnClickPrivacyListener");
   }
 
-  //闪验SDK 本机号校验获取token
-  Future<Map<dynamic, dynamic>> startAuthentication({String phoneNum}) async {
-    return await _channel
-        .invokeMethod("startAuthentication", {"phoneNum": phoneNum});
+//  //闪验SDK 本机号校验获取token (Android+iOS)
+//  Future<Map<dynamic, dynamic>> startAuthentication({String phoneNum}) async {
+//    return await _channel
+//        .invokeMethod("startAuthentication", {"phoneNum": phoneNum});
+//  }
+  //闪验SDK 本机号校验获取token (Android+iOS)
+  Future<Map<dynamic, dynamic>> startAuthentication() async {
+    return await _channel.invokeMethod("startAuthentication");
   }
 
-  //闪验SDK 配置授权页
+  //闪验SDK 配置授权页 Android
   void setAuthThemeConfig(
       {ShanYanUIConfig uiConfig,
         List<ShanYanCustomWidget> widgets,
@@ -110,7 +114,7 @@ class OneKeyLoginManager {
     }
     _channel.invokeMethod("setAuthThemeConfig", para);
   }
-
+  //Android
   Future<void> _handlerMethod(MethodCall call) async {
     switch (call.method) {
       case 'onReceiveAuthPageEvent':
@@ -150,7 +154,12 @@ class OneKeyLoginManager {
     return;
   }
 
+
+
   //iOS
+  Future<Map<dynamic, dynamic>> setCustomInterface() async{
+    return await _channel.invokeMethod("setCustomInterface");
+  }
   Future<Map<dynamic, dynamic>> openLoginAuthListener() async{
     return await _channel.invokeMethod("openLoginAuthListener");
   }
@@ -159,7 +168,11 @@ class OneKeyLoginManager {
   }
   //一键登录
   Future<void> quickAuthLoginWithConfigure(Map configure){
-    _channel.invokeMethod("quickAuthLoginWithConfigure");
+    _channel.invokeMethod("quickAuthLoginWithConfigure",configure);
+  }
+  //关闭授权页
+  Future<void> finishAuthControllerCompletion() async{
+    return await _channel.invokeMethod("finishAuthControllerCompletion");
   }
 }
 

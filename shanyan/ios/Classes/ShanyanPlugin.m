@@ -9,7 +9,7 @@
 @property (nonatomic,copy)FlutterResult openLoginAuthListener;
 @property (nonatomic,copy)FlutterResult oneKeyLoginListener;
 @property (nonatomic,copy)FlutterResult customInterface ;
-@property(nonatomic,weak)NSObject<FlutterPluginRegistrar>*registrar;
+@property(nonatomic,strong)NSObject<FlutterPluginRegistrar>*registrar;
 @end
 
 @implementation ShanyanPlugin
@@ -39,6 +39,18 @@
       [self init:call complete:result];
   }else if ([@"getPhoneInfo" isEqualToString:call.method]){
       [self preGetPhonenumber:result];
+  }else if ([@"setCustomInterface" isEqualToString:call.method]){
+      [self setCustomInterface:result];
+  }else if ([@"openLoginAuthListener" isEqualToString:call.method]){
+      [self openLoginAuthListener:result];
+  }else if ([@"oneKeyLoginListener" isEqualToString:call.method]){
+      [self oneKeyLoginListener:result];
+  }else if ([@"quickAuthLoginWithConfigure" isEqualToString:call.method]){
+      [self quickAuthLoginWithConfigure:call.arguments];
+  }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
+      [self finishAuthControllerCompletion:result];
+  }else if ([@"startAuthentication" isEqualToString:call.method]){
+      [self startAuthentication:result];
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -72,11 +84,7 @@
                 }
             }else{
                 result[@"code"] = @(1000);
-                if (completeResult.data != nil  && completeResult.data.count > 0) {
-                    result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
-                }else{
-                    result[@"result"] = completeResult.message;
-                }
+                result[@"result"] = completeResult.message;
             }
             complete(result);
         }
@@ -105,11 +113,7 @@
                            }
                        }else{
                            result[@"code"] = @(1022);
-                           if (completeResult.data != nil  && completeResult.data.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
+                           result[@"result"] = completeResult.message;
                        }
                        complete(result);
         }
@@ -126,70 +130,78 @@
 }
 
 -(void)quickAuthLoginWithConfigure:(NSDictionary *)clUIConfigure{
+
+    @try {
+ 
+    } @catch (NSException *exception) {
+        
+    } @finally {
+
+    }
     
     CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
-    baseUIConfigure.viewController = [self findVisibleVC];;
-    baseUIConfigure.manualDismiss = @(YES);
-    
-    [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
-        
-        NSLog(@"%@",completeResult.message);
-    
-                    NSMutableDictionary * result = [NSMutableDictionary new];
-                       
-                       
-                       if (completeResult.error) {
-                           result[@"code"] = @(completeResult.error.code);
-                           if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
-                           }else if (completeResult.error.domain != nil){
-                               result[@"result"] = completeResult.error.domain;
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }else{
-                           result[@"code"] = @(1000);
-                           if (completeResult.data != nil  && completeResult.data.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }
-            if (self.openLoginAuthListener) {
-                self.openLoginAuthListener(result);
-                self.openLoginAuthListener = nil;
-            }
-    } oneKeyLoginListener:^(CLCompleteResult * _Nonnull completeResult) {
-            NSMutableDictionary * result = [NSMutableDictionary new];
-                       
-                       
-                       if (completeResult.error) {
-                           result[@"code"] = @(completeResult.error.code);
-                           if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
-                           }else if (completeResult.error.domain != nil){
-                               result[@"result"] = completeResult.error.domain;
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }else{
-                           result[@"code"] = @(1000);
-                           if (completeResult.data != nil  && completeResult.data.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }
-            if (self.oneKeyLoginListener) {
-                self.oneKeyLoginListener(result);
-                self.oneKeyLoginListener = nil;
-            }
-    }];
+     baseUIConfigure.viewController = [self findVisibleVC];;
+     baseUIConfigure.manualDismiss = @(YES);
+     
+     [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
+         
+             NSLog(@"%@",completeResult.message);
+
+             NSMutableDictionary * result = [NSMutableDictionary new];
+
+             if (completeResult.error) {
+                result[@"code"] = @(completeResult.error.code);
+                if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
+                    result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                }else if (completeResult.error.domain != nil){
+                    result[@"result"] = completeResult.error.domain;
+                }else{
+                    result[@"result"] = completeResult.message;
+                }
+             }else{
+                result[@"code"] = @(1000);
+                if (completeResult.data != nil  && completeResult.data.count > 0) {
+                    result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
+                }else{
+                    result[@"result"] = completeResult.message;
+                }
+             }
+             if (self.openLoginAuthListener) {
+                 self.openLoginAuthListener(result);
+             }
+     } oneKeyLoginListener:^(CLCompleteResult * _Nonnull completeResult) {
+             NSMutableDictionary * result = [NSMutableDictionary new];
+                        
+                        
+                        if (completeResult.error) {
+                            result[@"code"] = @(completeResult.error.code);
+                            if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
+                                result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                            }else if (completeResult.error.domain != nil){
+                                result[@"result"] = completeResult.error.domain;
+                            }else{
+                                result[@"result"] = completeResult.message;
+                            }
+                        }else{
+                            result[@"code"] = @(1000);
+                            if (completeResult.data != nil  && completeResult.data.count > 0) {
+                                result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
+                            }else{
+                                result[@"result"] = completeResult.message;
+                            }
+                        }
+             if (self.oneKeyLoginListener) {
+                 self.oneKeyLoginListener(result);
+             }
+     }];
 }
 
 -(NSString * )assetPathWithConfig:(NSString *)configureDicPath{
     NSString * key = [self.registrar lookupKeyForAsset:configureDicPath];
     NSString * path = [[NSBundle mainBundle] pathForResource:key ofType:nil];
+    if (path == nil) {
+        path = @"";
+    }
     return path;
 }
 
@@ -204,7 +216,7 @@
         NSString * clBackgroundImg = configureDic[@"clBackgroundImg"];
         {
 
-            NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clBackgroundImg]]];
+            NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clBackgroundImg]]];
             UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
             baseConfigure.clBackgroundImg = clBackgroundImg_value;
         }
@@ -224,7 +236,7 @@
         
         NSString   * clNavigationBackBtnImage = configureDic[@"clNavigationBackBtnImage"];
         {
-            NSData * clNavigationBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clNavigationBackBtnImage]]];
+            NSData * clNavigationBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationBackBtnImage]]];
             UIImage * clNavigationBackBtnImage_value = [UIImage imageWithData:clNavigationBackBtnImageData];
             baseConfigure.clNavigationBackBtnImage = clNavigationBackBtnImage_value;
         }
@@ -256,7 +268,7 @@
         };
         NSString  * clNavigationBackgroundImage = configureDic[@"clNavigationBackgroundImage"];
         {
-            NSData * clNavigationBackgroundImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clNavigationBackgroundImage]]];
+            NSData * clNavigationBackgroundImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationBackgroundImage]]];
             UIImage * clNavigationBackgroundImage_value = [UIImage imageWithData:clNavigationBackgroundImageData];
             baseConfigure.clNavigationBackgroundImage = clNavigationBackgroundImage_value;
         };
@@ -266,7 +278,7 @@
         };
         NSString  * clNavigationShadowImage = configureDic[@"clNavigationShadowImage"];
         {
-            NSData * clNavigationShadowImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clNavigationShadowImage]]];
+            NSData * clNavigationShadowImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationShadowImage]]];
             UIImage * clNavigationShadowImage_value = [UIImage imageWithData:clNavigationShadowImageData];
             baseConfigure.clNavigationShadowImage = clNavigationShadowImage_value;
         };
@@ -278,7 +290,7 @@
         /**Logo*/
         NSString * clLogoImage = configureDic[@"clLogoImage"];
         {
-            NSData * clLogoImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clLogoImage]]];
+            NSData * clLogoImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLogoImage]]];
             UIImage * clLogoImage_value = [UIImage imageWithData:clLogoImageData];
             baseConfigure.clLogoImage = clLogoImage_value;
         }
@@ -354,14 +366,14 @@
         /**按钮背景图片*/
         NSString  * clLoginBtnNormalBgImage = configureDic[@"clLoginBtnNormalBgImage"];
         {
-            NSData * clLoginBtnNormalBgImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clLoginBtnNormalBgImage]]];
+            NSData * clLoginBtnNormalBgImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLoginBtnNormalBgImage]]];
             UIImage * clLoginBtnNormalBgImage_value = [UIImage imageWithData:clLoginBtnNormalBgImageData];
             baseConfigure.clLoginBtnNormalBgImage = clLoginBtnNormalBgImage_value;
         };
         /**按钮背景高亮图片*/
         NSString  * clLoginBtnHightLightBgImage = configureDic[@"clLoginBtnHightLightBgImage"];
         {
-            NSData * clLoginBtnHightLightBgImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clLoginBtnHightLightBgImage]]];
+            NSData * clLoginBtnHightLightBgImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLoginBtnHightLightBgImage]]];
             UIImage * clLoginBtnHightLightBgImage_value = [UIImage imageWithData:clLoginBtnHightLightBgImageData];
             baseConfigure.clLoginBtnHightLightBgImage = clLoginBtnHightLightBgImage_value;
         };
@@ -502,7 +514,7 @@
         /**隐私协议WEB页面导航返回按钮图片*/
         NSString * clAppPrivacyWebBackBtnImage = configureDic[@"clAppPrivacyWebBackBtnImage"];;;
         {
-            NSData * clAppPrivacyWebBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clAppPrivacyWebBackBtnImage]]];
+            NSData * clAppPrivacyWebBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clAppPrivacyWebBackBtnImage]]];
             UIImage * clAppPrivacyWebBackBtnImage_value = [UIImage imageWithData:clAppPrivacyWebBackBtnImageData];
             baseConfigure.clAppPrivacyWebBackBtnImage = clAppPrivacyWebBackBtnImage_value;
         }
@@ -594,14 +606,14 @@
         /**协议勾选框 非选中状态图片*/
         NSString  *clCheckBoxUncheckedImage = configureDic[@"clCheckBoxUncheckedImage"];
         {
-            NSData * clCheckBoxUncheckedImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clCheckBoxUncheckedImage]]];
+            NSData * clCheckBoxUncheckedImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clCheckBoxUncheckedImage]]];
             UIImage * clCheckBoxUncheckedImage_value = [UIImage imageWithData:clCheckBoxUncheckedImageData];
             baseConfigure.clCheckBoxUncheckedImage = clCheckBoxUncheckedImage_value;
         };
         /**协议勾选框 选中状态图片*/
         NSString  *clCheckBoxCheckedImage = configureDic[@"clCheckBoxCheckedImage"];
         {
-            NSData * clCheckBoxCheckedImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clCheckBoxCheckedImage]]];
+            NSData * clCheckBoxCheckedImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clCheckBoxCheckedImage]]];
             UIImage * clCheckBoxCheckedImage_value = [UIImage imageWithData:clCheckBoxCheckedImageData];
             baseConfigure.clCheckBoxCheckedImage = clCheckBoxCheckedImage_value;
         };
@@ -895,6 +907,7 @@
             };
         }
     } @catch (NSException *exception) {
+        
     }
     return baseConfigure;
 }
@@ -960,7 +973,7 @@
             
             NSString * clButtonImage = clCustomDict[@"image"];
             {
-                NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clButtonImage]]];
+                NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clButtonImage]]];
                 UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
                 //UIButton
                 customViewConfigure.button_image = clBackgroundImg_value;
@@ -971,7 +984,7 @@
             
             NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImage"];
             {
-                NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self assetPathWithConfig:clButtonBackgroundImage]]];
+                NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clButtonBackgroundImage]]];
                 UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
                 customViewConfigure.button_backgroundImage = clBackgroundImg_value;
             }
@@ -1354,7 +1367,7 @@
                                result[@"result"] = completeResult.message;
                            }
                        }else{
-                           result[@"code"] = @(completeResult.code);
+                           result[@"code"] = @(2000);
                            if (completeResult.data != nil  && completeResult.data.count > 0) {
                                result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
                            }else{
