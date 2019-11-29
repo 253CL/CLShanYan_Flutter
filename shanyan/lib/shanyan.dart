@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:package_info/package_info.dart';
 
 /// 监听添加的自定义控件的点击事件
 typedef ShanYanWidgetEventListener = void Function(String widgetId);
@@ -75,11 +74,6 @@ class OneKeyLoginManager {
     _channel.invokeMethod("setOnClickPrivacyListener");
   }
 
-//  //闪验SDK 本机号校验获取token (Android+iOS)
-//  Future<Map<dynamic, dynamic>> startAuthentication({String phoneNum}) async {
-//    return await _channel
-//        .invokeMethod("startAuthentication", {"phoneNum": phoneNum});
-//  }
   //闪验SDK 本机号校验获取token (Android+iOS)
   Future<Map<dynamic, dynamic>> startAuthentication() async {
     return await _channel.invokeMethod("startAuthentication");

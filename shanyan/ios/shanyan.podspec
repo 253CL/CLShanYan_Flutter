@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'shanyan'
-  s.version          = '0.0.1'
+  s.version          = '2.3.0.2'
   s.summary          = 'A new Flutter plugin.'
   s.description      = <<-DESC
 A new Flutter plugin.
@@ -16,7 +16,7 @@ A new Flutter plugin.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
 
-  s.ios.dependency 'CL_ShanYanSDK', '~> 2.2.1.6'
+  s.ios.dependency 'CL_ShanYanSDK', '~> 2.3.0.2'
   s.ios.deployment_target = '8.0'
 end
 

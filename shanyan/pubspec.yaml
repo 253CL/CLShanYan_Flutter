@@ -1,8 +1,8 @@
 name: shanyan
 description: A new Flutter plugin.
-version: 0.0.1
-author:
-homepage:
+version: 2.3.0
+author: CL253 <app@253.com>
+homepage: https://www.253.com
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  package_info:
 
 dev_dependencies:
   flutter_test:
