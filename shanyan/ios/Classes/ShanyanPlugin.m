@@ -76,7 +76,7 @@
             if (completeResult.error) {
                 result[@"code"] = @(completeResult.error.code);
                 if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                    result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                    result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
                 }else if (completeResult.error.domain != nil){
                     result[@"result"] = completeResult.error.domain;
                 }else{
@@ -105,7 +105,8 @@
                        if (completeResult.error) {
                            result[@"code"] = @(completeResult.error.code);
                            if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                               result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
+
                            }else if (completeResult.error.domain != nil){
                                result[@"result"] = completeResult.error.domain;
                            }else{
@@ -152,7 +153,8 @@
              if (completeResult.error) {
                 result[@"code"] = @(completeResult.error.code);
                 if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                    result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                    result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
+
                 }else if (completeResult.error.domain != nil){
                     result[@"result"] = completeResult.error.domain;
                 }else{
@@ -176,7 +178,7 @@
                         if (completeResult.error) {
                             result[@"code"] = @(completeResult.error.code);
                             if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                                result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                                result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
                             }else if (completeResult.error.domain != nil){
                                 result[@"result"] = completeResult.error.domain;
                             }else{
@@ -185,7 +187,10 @@
                         }else{
                             result[@"code"] = @(1000);
                             if (completeResult.data != nil  && completeResult.data.count > 0) {
-                                result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
+
+                                result[@"result"] = [ShanyanPlugin dictToJson:completeResult.data];
+
+                            
                             }else{
                                 result[@"result"] = completeResult.message;
                             }
@@ -194,6 +199,39 @@
                  self.oneKeyLoginListener(result);
              }
      }];
+}
+
++(NSString * )dictToJson:(NSDictionary *)input{
+    NSError *error = nil;
+    NSData *jsonData = nil;
+    if (!input) {
+        return nil;
+    }
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [input enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *keyString = nil;
+        NSString *valueString = nil;
+        if ([key isKindOfClass:[NSString class]]) {
+            keyString = key;
+        }else{
+            keyString = [NSString stringWithFormat:@"%@",key];
+        }
+
+        if ([obj isKindOfClass:[NSString class]]) {
+            valueString = obj;
+        }else{
+            valueString = [NSString stringWithFormat:@"%@",obj];
+        }
+
+        [dict setObject:valueString forKey:keyString];
+    }];
+    jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    if ([jsonData length] == 0 || error != nil) {
+        return nil;
+    }
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
+
 }
 
 -(NSString * )assetPathWithConfig:(NSString *)configureDicPath{
@@ -484,6 +522,18 @@
                 baseConfigure.clAppPrivacySecond = clAppPrivacySecond;
             }
         };
+        /*
+        *隐私条款三:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
+        *@[NSSting,NSURL];
+        */
+        NSArray * clAppPrivacyThird = configureDic[@"clAppPrivacyThird"];
+        {
+            if (clAppPrivacyThird && clAppPrivacyThird.count == 2) {
+                baseConfigure.clAppPrivacyThird = clAppPrivacyThird;
+            }
+        };
+        
+
         /*
          隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth
          **/
@@ -1360,7 +1410,7 @@
                        if (completeResult.error) {
                            result[@"code"] = @(completeResult.error.code);
                            if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.error.userInfo];
+                               result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
                            }else if (completeResult.error.domain != nil){
                                result[@"result"] = completeResult.error.domain;
                            }else{
@@ -1369,7 +1419,7 @@
                        }else{
                            result[@"code"] = @(2000);
                            if (completeResult.data != nil  && completeResult.data.count > 0) {
-                               result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
+                               result[@"result"] = [ShanyanPlugin dictToJson:completeResult.data];
                            }else{
                                result[@"result"] = completeResult.message;
                            }

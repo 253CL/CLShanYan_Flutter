@@ -11,6 +11,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
 import 'dart:io';
+import 'dart:convert' as convert;
 
 void main() => runApp(new MyApp());
 
@@ -170,7 +171,8 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           _code = map[shanyan_code];
           _result = map[shanyan_result];
-          _content = " code===" + _code.toString() + "\n result===" + _result;
+          Map<String, dynamic> result = convert.jsonDecode(_result);
+          _content = " code===" + _code.toString() + "\n result===" + result["token"];
         });
       });
       //调起授权页
@@ -344,7 +346,13 @@ class _MyAppState extends State<MyApp> {
         "clAppPrivacyFirst": ["测试连接A", "https://www.baidu.com"], // 2 item, name and url
         "clAppPrivacySecond": ["测试连接B", "https://www.sina.com"], // 2 item, name and url
 
-        "clCheckBoxVerticalAlignmentToAppPrivacyCenterY": true,
+        "clAppPrivacyNormalDesTextFirst":"A",
+        "clAppPrivacyNormalDesTextSecond":"B",
+        "clAppPrivacyNormalDesTextThird":"C",
+        "clAppPrivacyNormalDesTextFourth": "D",
+
+
+    "clCheckBoxVerticalAlignmentToAppPrivacyCenterY": true,
         "clCheckBoxSize": [30 * screenScale, 30 * screenScale], //2 item, width and height
         "clCheckBoxImageEdgeInsets": [2 * screenScale, 10 * screenScale, 13 * screenScale, 5 * screenScale], //4 item, top left bottom right
         "clCheckBoxUncheckedImage": "assets/Img/checkBoxNor.png",
