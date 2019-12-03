@@ -163,7 +163,7 @@
              }else{
                 result[@"code"] = @(1000);
                 if (completeResult.data != nil  && completeResult.data.count > 0) {
-                    result[@"result"] = [NSString stringWithFormat:@"%@",completeResult.data];
+                    result[@"result"] = [ShanyanPlugin dictToJson:completeResult.data];
                 }else{
                     result[@"result"] = completeResult.message;
                 }
