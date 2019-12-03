@@ -344,13 +344,14 @@ class _MyAppState extends State<MyApp> {
         "clAppPrivacyTextFont": 11 * screenScale,
         "clAppPrivacyTextAlignment": 0, //0: center 1: left 2: right
         "clAppPrivacyFirst": ["测试连接A", "https://www.baidu.com"], // 2 item, name and url
-        "clAppPrivacySecond": ["测试连接B", "https://www.sina.com"], // 2 item, name and url
+        "clAppPrivacySecond": ["测试连接X", "https://www.sina.com"], // 2 item, name and url
+//        "clAppPrivacyThird": ["测试连接C", "https://www.sina.com"], // 2 item, name and url
 
         "clAppPrivacyNormalDesTextFirst":"A",
         "clAppPrivacyNormalDesTextSecond":"B",
-        "clAppPrivacyNormalDesTextThird":"C",
+        "clAppPrivacyNormalDesTextThird":"-",
         "clAppPrivacyNormalDesTextFourth": "D",
-
+        "clAppPrivacyNormalDesTextLast":" ",
 
     "clCheckBoxVerticalAlignmentToAppPrivacyCenterY": true,
         "clCheckBoxSize": [30 * screenScale, 30 * screenScale], //2 item, width and height

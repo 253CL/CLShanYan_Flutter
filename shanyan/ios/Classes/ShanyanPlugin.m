@@ -557,6 +557,12 @@
         {
             baseConfigure.clAppPrivacyNormalDesTextFourth = clAppPrivacyNormalDesTextFourth;
         };
+        
+        NSString *clAppPrivacyNormalDesTextLast = configureDic[@"clAppPrivacyNormalDesTextLast"];;
+        {
+            baseConfigure.clAppPrivacyNormalDesTextLast = clAppPrivacyNormalDesTextLast;
+        };
+        
         /**用户隐私协议WEB页面导航栏标题 默认显示用户条款名称*/
         NSAttributedString * clAppPrivacyWebAttributesTitle;
         /**运营商隐私协议WEB页面导航栏标题 默认显示运营商条款名称*/
