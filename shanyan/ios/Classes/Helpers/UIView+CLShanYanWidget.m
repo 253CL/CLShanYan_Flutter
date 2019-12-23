@@ -21,7 +21,7 @@
 }
 
 -(BOOL)isFinish{
-    return objc_getAssociatedObject(self, _cmd);
+    return [objc_getAssociatedObject(self, _cmd) boolValue];
     //return objc_getAssociatedObject(self, &kAssociatedNewName);
 }
 
