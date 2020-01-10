@@ -41,32 +41,28 @@
             </intent-filter>
         </activity>
 
-        <!-- **********************联通授权页activity************************** -->
         <activity
-            android:name="com.sdk.mobile.manager.login.cucc.OauthActivity"
+            android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:theme="@style/MyTheme"
-            android:screenOrientation="behind" />
-        <!-- **********************移动授权页activity************************** -->
-        <activity
+            android:theme="@style/MyTheme" />
+
+        <activity-alias
             android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:theme="@style/MyTheme"
-            android:screenOrientation="behind" />
-        <!-- **********************电信授权页activity************************** -->
+            android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
+            android:theme="@style/MyTheme" />
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:theme="@style/MyTheme"
-            android:screenOrientation="behind" />
-        <!-- **********************协议页activity************************** -->
+            android:theme="@style/MyTheme" />
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/MyTheme"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="behind"
+            android:theme="@style/MyTheme" />
     </application>
 </manifest>

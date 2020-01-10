@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +12,11 @@ typedef ShanYanWidgetLayoutEventListener = void Function(
     WidgetLayoutOnClickEvent event);
 
 /// 闪验SDK 授权页默认控件点击事件回调
-typedef AuthPageOnClickListener = void Function(AuthPageOnClickEvent event);
+typedef OneKeyLoginListener = void Function(OneKeyLoginEvent event);
+
+typedef AuthPageActionListener = void Function(AuthPageActionEvent event);
 
 class OneKeyLoginManager {
-
   final String flutter_log = "|shanyan_flutter======|";
 
   factory OneKeyLoginManager() => _instance;
@@ -22,9 +24,16 @@ class OneKeyLoginManager {
 
   final MethodChannel _channel;
 
-  /// 授权页默认控件的点击事件（“一键登录按钮”、返回按钮（包括物理返回键）、协议条款） Android
-  setAuthPageOnClickListener(AuthPageOnClickListener callback) {
+  /// 授权页默认控件的点击事件（“一键登录按钮”、返回按钮（包括物理返回键）） Android
+  setOneKeyLoginListener(OneKeyLoginListener callback) {
     _eventHanders.authPageEvents.add(callback);
+  }
+
+  /// 授权页控件的点击事件（“复选框”、"协议"） Android
+  setAuthPageActionListener(AuthPageActionListener callback) {
+    _channel.invokeMethod("setActionListener");
+    _eventHanders.actionEvents.add(callback);
+
   }
 
   /// 自定义控件的点击事件 Android
@@ -33,57 +42,58 @@ class OneKeyLoginManager {
     _eventHanders.clickEventsMap[eventId] = callback;
   }
 
-  // 自定布局的点击事件 Android
+  /// 自定布局的点击事件 Android
   addClikWidgetLayoutEventListener(ShanYanWidgetLayoutEventListener callback) {
+    _eventHanders.clickLayoutEvents.clear();
     _eventHanders.clickLayoutEvents.add(callback);
   }
 
   @visibleForTesting
   OneKeyLoginManager.private(MethodChannel channel) : _channel = channel;
   static final _instance =
-  new OneKeyLoginManager.private(const MethodChannel("shanyan"));
+      new OneKeyLoginManager.private(const MethodChannel("shanyan"));
 
   /// 设置调试模式开关 Android
   void setDebug(bool debug) {
     _channel.invokeMethod("setDebugMode", {"debug": debug});
   }
 
-  //闪验SDK 初始化(Android+iOS)
+  ///闪验SDK 初始化(Android+iOS)
   Future<Map<dynamic, dynamic>> init({String appId}) async {
     _channel.setMethodCallHandler(_handlerMethod);
     return await _channel.invokeMethod("init", {"appId": appId});
   }
 
-  //闪验SDK 预取号(Android+iOS)
+  ///闪验SDK 预取号(Android+iOS)
   Future<Map<dynamic, dynamic>> getPhoneInfo() async {
     return await _channel.invokeMethod("getPhoneInfo");
   }
 
-  //闪验SDK 拉起授权页 Android
+  ///闪验SDK 拉起授权页 Android
   Future<Map<dynamic, dynamic>> openLoginAuth({bool isFinish}) async {
     return await _channel.invokeMethod("openLoginAuth", {"isFinish": isFinish});
   }
 
-  //闪验SDK 主动销毁授权页 Android
-  void finishAuthActivity() {
-    _channel.invokeMethod("finishAuthActivity");
+  ///闪验SDK 设置复选框是否选中 Android+IOS
+  void setCheckBoxValue(bool isChecked) {
+    _channel.invokeMethod("setCheckBoxValue", {"isChecked": isChecked});
   }
 
-  //闪验SDK 设置点击协议监听 Android
-  void setOnClickPrivacyListener() {
-    _channel.invokeMethod("setOnClickPrivacyListener");
+  ///闪验SDK 设置授权页loading是否隐藏 Android+IOS
+  void setLoadingVisibility(bool visibility) {
+    _channel.invokeMethod("setLoadingVisibility", {"visibility": visibility});
   }
 
-  //闪验SDK 本机号校验获取token (Android+iOS)
+  ///闪验SDK 本机号校验获取token (Android+iOS)
   Future<Map<dynamic, dynamic>> startAuthentication() async {
     return await _channel.invokeMethod("startAuthentication");
   }
 
-  //闪验SDK 配置授权页 Android
+  ///闪验SDK 配置授权页 Android
   void setAuthThemeConfig(
       {ShanYanUIConfig uiConfig,
-        List<ShanYanCustomWidget> widgets,
-        List<ShanYanCustomWidgetLayout> widgetLayout}) {
+      List<ShanYanCustomWidget> widgets,
+      List<ShanYanCustomWidgetLayout> widgetLayout}) {
     var para = Map();
     var para1 = uiConfig.toJsonMap();
     para1.removeWhere((key, value) => value == null);
@@ -108,14 +118,15 @@ class OneKeyLoginManager {
     }
     _channel.invokeMethod("setAuthThemeConfig", para);
   }
+
   //Android
   Future<void> _handlerMethod(MethodCall call) async {
     switch (call.method) {
       case 'onReceiveAuthPageEvent':
         {
-          for (AuthPageOnClickListener cb in _eventHanders.authPageEvents) {
+          for (OneKeyLoginListener cb in _eventHanders.authPageEvents) {
             Map json = call.arguments.cast<dynamic, dynamic>();
-            AuthPageOnClickEvent ev = AuthPageOnClickEvent.fromJson(json);
+            OneKeyLoginEvent ev = OneKeyLoginEvent.fromJson(json);
             cb(ev);
           }
         }
@@ -126,7 +137,7 @@ class OneKeyLoginManager {
           bool isContains = _eventHanders.clickEventsMap.containsKey(widgetId);
           if (isContains) {
             ShanYanWidgetEventListener cb =
-            _eventHanders.clickEventsMap[widgetId];
+                _eventHanders.clickEventsMap[widgetId];
             cb(widgetId);
           }
         }
@@ -134,13 +145,23 @@ class OneKeyLoginManager {
       case 'onReceiveClickWidgetLayoutEvent':
         {
           for (ShanYanWidgetLayoutEventListener cb
-          in _eventHanders.clickLayoutEvents) {
+              in _eventHanders.clickLayoutEvents) {
             Map json = call.arguments.cast<dynamic, dynamic>();
             WidgetLayoutOnClickEvent ev =
-            WidgetLayoutOnClickEvent.fromJson(json);
+                WidgetLayoutOnClickEvent.fromJson(json);
             cb(ev);
           }
         }
+        break;
+
+      case 'onReceiveAuthEvent':
+        for (AuthPageActionListener cb in _eventHanders.actionEvents) {
+          Map json = call.arguments.cast<dynamic, dynamic>();
+          AuthPageActionEvent ev = AuthPageActionEvent.fromJson(json);
+          cb(ev);
+          print("onReceiveAuthEvent==="+json.toString());
+        }
+
         break;
       default:
         throw new UnsupportedError("Unrecognized Event");
@@ -148,39 +169,61 @@ class OneKeyLoginManager {
     return;
   }
 
-
-
   //iOS
-  Future<Map<dynamic, dynamic>> setCustomInterface() async{
+  Future<Map<dynamic, dynamic>> setCustomInterface() async {
     return await _channel.invokeMethod("setCustomInterface");
   }
-  Future<Map<dynamic, dynamic>> openLoginAuthListener() async{
+
+  Future<Map<dynamic, dynamic>> openLoginAuthListener() async {
     return await _channel.invokeMethod("openLoginAuthListener");
   }
-  Future<Map<dynamic, dynamic>> oneKeyLoginListener() async{
+
+  Future<Map<dynamic, dynamic>> oneKeyLoginListener() async {
     return await _channel.invokeMethod("oneKeyLoginListener");
   }
+
   //一键登录
-  Future<void> quickAuthLoginWithConfigure(Map configure){
-    _channel.invokeMethod("quickAuthLoginWithConfigure",configure);
+  Future<void> quickAuthLoginWithConfigure(Map configure) {
+    _channel.invokeMethod("quickAuthLoginWithConfigure", configure);
   }
-  //关闭授权页
-  Future<void> finishAuthControllerCompletion() async{
-    return await _channel.invokeMethod("finishAuthControllerCompletion");
+
+  ///闪验SDK 主动销毁授权页 Android+IOS
+  Future<void> finishAuthControllerCompletion() async {
+    if(Platform.isIOS) {
+      return await _channel.invokeMethod("finishAuthControllerCompletion");
+    }else if(Platform.isAndroid){
+      _channel.invokeMethod("finishAuthActivity");
+    }
   }
 }
 
-/// 闪验SDK 授权页默认控件点击事件
-class AuthPageOnClickEvent {
+/// 闪验SDK 授权页一键登录回调
+class OneKeyLoginEvent {
   final int code; //返回码
   final String message; //事件描述
 
-  AuthPageOnClickEvent.fromJson(Map<dynamic, dynamic> json)
+  OneKeyLoginEvent.fromJson(Map<dynamic, dynamic> json)
       : code = json['code'],
         message = json['result'];
 
   Map toMap() {
     return {'code': code, 'result': message};
+  }
+}
+
+/// 闪验SDK 授权页默认控件点击事件
+class AuthPageActionEvent {
+  final int type; //类型
+  final int code; //返回码
+  final String message; //事件描述
+
+  AuthPageActionEvent.fromJson(Map<dynamic, dynamic> json)
+      : type = json['type'],
+        code = json['code'],
+        message = json['message'];
+
+  Map toMap() {
+    return {'type': type, 'code': code, 'message': message};
   }
 }
 
@@ -197,14 +240,15 @@ class WidgetLayoutOnClickEvent {
 
 class ShanYanEventHandlers {
   static final ShanYanEventHandlers _instance =
-  new ShanYanEventHandlers._internal();
+      new ShanYanEventHandlers._internal();
 
   ShanYanEventHandlers._internal();
 
   factory ShanYanEventHandlers() => _instance;
   Map<String, ShanYanWidgetEventListener> clickEventsMap = Map();
   List<ShanYanWidgetLayoutEventListener> clickLayoutEvents = [];
-  List<AuthPageOnClickListener> authPageEvents = [];
+  List<OneKeyLoginListener> authPageEvents = [];
+  List<AuthPageActionListener> actionEvents = [];
 }
 
 /*
@@ -291,7 +335,7 @@ class ShanYanUIConfig {
 
   String setLoadingView; //设置授权页点击一键登录自定义loading
   List<String>
-  setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
+      setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
 
   Map toJsonMap() {
     return {
@@ -456,5 +500,3 @@ String getStringFromEnum<T>(T) {
 
   return T.toString().split('.').last;
 }
-
-

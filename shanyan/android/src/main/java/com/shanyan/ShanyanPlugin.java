@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
+import com.chuanglan.shanyan_sdk.listener.ActionListener;
 import com.chuanglan.shanyan_sdk.listener.AuthenticationExecuteListener;
 import com.chuanglan.shanyan_sdk.listener.GetPhoneInfoListener;
 import com.chuanglan.shanyan_sdk.listener.InitListener;
@@ -47,11 +48,14 @@ public class ShanyanPlugin implements MethodCallHandler {
     // 定义日志 TAG
     private static final String TAG = "|shanyan_flutter======|";
     final String shanyan_code = "code";
+    final String shanyan_type = "type";
+    final String shanyan_message = "message";
     final String shanyan_result = "result";
     final String shanyan_operator = "operator";
     final String shanyan_widgetLayoutId = "widgetLayoutId";
     final String shanyan_widgetId = "widgetId";
     private MethodChannel channel;
+    private Result openLoginAuthListener;
     /**
      * Plugin registration.
      */
@@ -87,16 +91,45 @@ public class ShanyanPlugin implements MethodCallHandler {
         } else if (call.method.equals("finishAuthActivity")) {
             OneKeyLoginManager.getInstance().finishAuthActivity();
         } else if (call.method.equals("setOnClickPrivacyListener")) {
-            setOnClickPrivacyListener();
+            //setOnClickPrivacyListener();
         } else if (call.method.equals("getPreIntStatus")) {
             result.success(OneKeyLoginManager.getInstance().getPreIntStatus());
         } else if (call.method.equals("getOperatorType")) {
             result.success(OneKeyLoginManager.getInstance().getOperatorType(context));
         } else if (call.method.equals("startAuthentication")) {
             startAuthentication(call, result);
+        } else if (call.method.equals("setLoadingVisibility")) {
+            setLoadingVisibility(call);
+        } else if (call.method.equals("setCheckBoxValue")) {
+            setCheckBoxValue(call);
+        } else if (call.method.equals("setActionListener")) {
+            setActionListener(call,result);
         }
 
+    }
 
+    private void setActionListener(MethodCall call,Result result) {
+        OneKeyLoginManager.getInstance().setActionListener(new ActionListener() {
+            @Override
+            public void ActionListner(int i, int i1, String s) {
+                Map<String, Object> map = new HashMap<>();
+                map.put(shanyan_type, i);
+                map.put(shanyan_code, i1);
+                map.put(shanyan_message, s);
+                Log.e("logger","map="+map.toString());
+                channel.invokeMethod("onReceiveAuthEvent", map);
+            }
+        });
+    }
+
+    private void setCheckBoxValue(MethodCall call) {
+        boolean isChecked = call.argument("isChecked");
+        OneKeyLoginManager.getInstance().setCheckBoxValue(isChecked);
+    }
+
+    private void setLoadingVisibility(MethodCall call) {
+        boolean visibility = call.argument("visibility");
+        OneKeyLoginManager.getInstance().setLoadingVisibility(visibility);
     }
 
     private void startAuthentication(MethodCall call, final Result result) {
@@ -248,14 +281,28 @@ public class ShanyanPlugin implements MethodCallHandler {
             }
             if (height > 0) {
                 mLayoutParams1.height = dp2Pix(context, (float) height);
-                ;
             }
             if (null != relativeLayout) {
                 relativeLayout.setLayoutParams(mLayoutParams1);
                 //授权页 隐私协议栏
                 if (null != widgetId) {
-                    ArrayList<String> widgetIdList = (ArrayList) widgetId;
-                    widgetIdList.addAll(Arrays.asList("", "", "", "", ""));
+                    final ArrayList<String> widgetIdList = (ArrayList) widgetId;
+                    if (null != widgetIdList && widgetIdList.size() > 0) {
+                        for (int i = 0; i < widgetIdList.size(); i++) {
+                            if (0 != (getId(widgetIdList.get(i)))) {
+                                final int finalI = i;
+                                relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        final Map<String, Object> jsonMap = new HashMap<>();
+                                        jsonMap.put(shanyan_widgetLayoutId, widgetIdList.get(finalI));
+                                        channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap);
+                                    }
+                                });
+                            }
+
+                        }
+                   /* widgetIdList.addAll(Arrays.asList("", "", "", "", ""));
                     for (int i = 0; i < 5; i++) {
                         switch (i) {
                             case 0:
@@ -318,7 +365,7 @@ public class ShanyanPlugin implements MethodCallHandler {
                                     });
                                 }
                                 break;
-                        }
+                        }*/
 
                     }
                 }
@@ -392,7 +439,6 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (height > 0) {
             mLayoutParams1.height = dp2Pix(context, (float) height);
-            ;
         }
         customView.setLayoutParams(mLayoutParams1);
         final HashMap jsonMap = new HashMap();
