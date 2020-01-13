@@ -62,7 +62,6 @@
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:screenOrientation="behind"
             android:theme="@style/MyTheme" />
     </application>
 </manifest>

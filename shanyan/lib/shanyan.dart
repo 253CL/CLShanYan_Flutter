@@ -90,30 +90,52 @@ class OneKeyLoginManager {
 
   ///闪验SDK 配置授权页 Android
   void setAuthThemeConfig(
-      {ShanYanUIConfig uiConfig,
-      List<ShanYanCustomWidget> widgets,
-      List<ShanYanCustomWidgetLayout> widgetLayout}) {
+      {ShanYanUIConfig uiConfig, ShanYanUIConfig landscapeConfig}) {
     var para = Map();
     var para1 = uiConfig.toJsonMap();
     para1.removeWhere((key, value) => value == null);
-    para["uiConfig"] = para1;
-    if (null != widgets) {
+    para["portraitConfig"] = para1;
+    if (null != uiConfig && null != uiConfig.widgets) {
       var widgetList = List();
-      for (ShanYanCustomWidget widget in widgets) {
+      for (ShanYanCustomWidget widget in uiConfig.widgets) {
         var para2 = widget.toJsonMap();
         para2.removeWhere((key, value) => value == null);
         widgetList.add(para2);
       }
-      para["widgets"] = widgetList;
+      para["portraitWidgets"] = widgetList;
     }
-    if (null != widgetLayout) {
+    if (null != uiConfig && null != uiConfig.widgetLayout) {
       var widgetLayoutList = List();
-      for (ShanYanCustomWidgetLayout widget in widgetLayout) {
+      for (ShanYanCustomWidgetLayout widget in uiConfig.widgetLayout) {
         var para3 = widget.toJsonMap();
         para3.removeWhere((key, value) => value == null);
         widgetLayoutList.add(para3);
       }
-      para["widgetLayout"] = widgetLayoutList;
+      para["portraitWidgetLayout"] = widgetLayoutList;
+    }
+
+    if (null != landscapeConfig) {
+      var para2 = landscapeConfig.toJsonMap();
+      para2.removeWhere((key, value) => value == null);
+      para["landscapeConfig"] = para2;
+      if (null != landscapeConfig && null != landscapeConfig.widgets) {
+        var widgetList = List();
+        for (ShanYanCustomWidget widget in landscapeConfig.widgets) {
+          var para2 = widget.toJsonMap();
+          para2.removeWhere((key, value) => value == null);
+          widgetList.add(para2);
+        }
+        para["landscapeWidgets"] = widgetList;
+      }
+      if (null != landscapeConfig && null != landscapeConfig.widgetLayout) {
+        var widgetLayoutList = List();
+        for (ShanYanCustomWidgetLayout widget in landscapeConfig.widgetLayout) {
+          var para3 = widget.toJsonMap();
+          para3.removeWhere((key, value) => value == null);
+          widgetLayoutList.add(para3);
+        }
+        para["landscapeWidgetLayout"] = widgetLayoutList;
+      }
     }
     _channel.invokeMethod("setAuthThemeConfig", para);
   }
@@ -254,7 +276,7 @@ class ShanYanEventHandlers {
 * 闪验SDK 授权页UI 配置类
 * */
 class ShanYanUIConfig {
-  bool isFinish ; //是否自动销毁
+  bool isFinish; //是否自动销毁
   // 授权页背景
   String setAuthBGImgPath; //普通图片
   String setAuthBgGifPath; //GIF图片（只支持本地gif图，需要放置到drawable文件夹中）
@@ -370,16 +392,18 @@ class ShanYanUIConfig {
   String setLoadingView; //设置授权页点击一键登录自定义loading
   List<String>
       setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
+  List<ShanYanCustomWidgetLayout> widgetLayout;
+  List<ShanYanCustomWidget> widgets;
 
   Map toJsonMap() {
     return {
-      "isFinish":isFinish,
+      "isFinish": isFinish,
       "setAuthBGImgPath": setAuthBGImgPath ??= null,
       "setAuthBgGifPath": setAuthBgGifPath ??= null,
       "setAuthBgVideoPath": setAuthBgVideoPath ??= null,
       "setStatusBarColor": setStatusBarColor ??= null,
       "setLightColor": setLightColor,
-      "setStatusBarHidden": setStatusBarHidden ,
+      "setStatusBarHidden": setStatusBarHidden,
       "setVirtualKeyTransparent": setVirtualKeyTransparent,
       "setFullScreen": setFullScreen,
       "setNavColor": setNavColor ??= null,
@@ -468,6 +492,8 @@ class ShanYanUIConfig {
       "addCustomPrivacyAlertView": addCustomPrivacyAlertView ??= null,
       "setLoadingView": setLoadingView ??= null,
       "setDialogTheme": setDialogTheme ??= null,
+      /*"widgets": widgets ??= null,
+      "widgetLayout": widgetLayout ??= null,*/
     }..removeWhere((key, value) => value == null);
   }
 }

@@ -652,11 +652,10 @@ class _MyAppState extends State<MyApp> {
           _toast("点击其他方式登录");
         }
       });
+      shanYanUIConfig.widgetLayout = shanYanCustomWidgetLayout;
+      shanYanUIConfig.widgets = shanyanCustomWidget;
       shanyanCustomWidget.add(buttonWidget);
-      oneKeyLoginManager.setAuthThemeConfig(
-          uiConfig: shanYanUIConfig,
-          widgets: shanyanCustomWidget,
-          widgetLayout: shanYanCustomWidgetLayout);
+      oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     }
 
     setState(() {
@@ -976,7 +975,7 @@ class _MyAppState extends State<MyApp> {
 
       shanYanCustomWidgetLayout.add(relativeLayoutWidget);
       oneKeyLoginManager.setAuthThemeConfig(
-          uiConfig: shanYanUIConfig, widgetLayout: shanYanCustomWidgetLayout);
+          uiConfig: shanYanUIConfig);
     }
     setState(() {
       _content = "界面配置成功";

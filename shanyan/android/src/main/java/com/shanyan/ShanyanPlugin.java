@@ -101,12 +101,12 @@ public class ShanyanPlugin implements MethodCallHandler {
         } else if (call.method.equals("setCheckBoxValue")) {
             setCheckBoxValue(call);
         } else if (call.method.equals("setActionListener")) {
-            setActionListener(call,result);
+            setActionListener(call, result);
         }
 
     }
 
-    private void setActionListener(MethodCall call,Result result) {
+    private void setActionListener(MethodCall call, Result result) {
         OneKeyLoginManager.getInstance().setActionListener(new ActionListener() {
             @Override
             public void ActionListner(int i, int i1, String s) {
@@ -114,7 +114,7 @@ public class ShanyanPlugin implements MethodCallHandler {
                 map.put(shanyan_type, i);
                 map.put(shanyan_code, i1);
                 map.put(shanyan_message, s);
-                Log.e("logger","map="+map.toString());
+                Log.e("logger", "map=" + map.toString());
                 channel.invokeMethod("onReceiveAuthEvent", map);
             }
         });
@@ -196,13 +196,16 @@ public class ShanyanPlugin implements MethodCallHandler {
     }
 
     private void setAuthThemeConfig(MethodCall call, Result result) {
-        Map uiConfig = call.argument("uiConfig");
-        List<Map> widgetList = call.argument("widgets");
-        List<Map> widgetLayoutList = call.argument("widgetLayout");
+        //竖屏设置
+        Map portraitConfig = call.argument("portraitConfig");
+        List<Map> portraitWidgets = call.argument("portraitWidgets");
+        List<Map> portraitWidgetLayout = call.argument("portraitWidgetLayout");
         ShanYanUIConfig.Builder builder = new ShanYanUIConfig.Builder();
-        setAuthLayoutView(uiConfig, builder);
-        if (null != widgetList) {
-            for (Map widgetMap : widgetList) {
+        if (null != portraitConfig) {
+            setAuthLayoutView(portraitConfig, builder);
+        }
+        if (null != portraitWidgets) {
+            for (Map widgetMap : portraitWidgets) {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
                 if (type.equals("TextView")) {
@@ -212,8 +215,8 @@ public class ShanyanPlugin implements MethodCallHandler {
                 }
             }
         }
-        if (null != widgetLayoutList) {
-            for (Map widgetMap : widgetLayoutList) {
+        if (null != portraitWidgetLayout) {
+            for (Map widgetMap : portraitWidgetLayout) {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
                 if (type.equals("RelativeLayout")) {
@@ -223,8 +226,45 @@ public class ShanyanPlugin implements MethodCallHandler {
                 }
             }
         }
-        ShanYanUIConfig shanYanUIConfig = builder.build();
-        OneKeyLoginManager.getInstance().setAuthThemeConfig(shanYanUIConfig);
+
+        //横屏设置
+        Map landscapeConfig = call.argument("landscapeConfig");
+        List<Map> landscapeWidgets = call.argument("landscapeWidgets");
+        List<Map> landscapeWidgetLayout = call.argument("landscapeWidgetLayout");
+        ShanYanUIConfig.Builder landscapeBuilder = new ShanYanUIConfig.Builder();
+        if (null != portraitConfig) {
+            setAuthLayoutView(landscapeConfig, landscapeBuilder);
+        }
+        if (null != landscapeWidgets) {
+            for (Map widgetMap : landscapeWidgets) {
+                /// 新增自定义的控件
+                String type = (String) widgetMap.get("type");
+                if (type.equals("TextView")) {
+                    addCustomTextWidgets(widgetMap, landscapeBuilder);
+                } else {
+                    Log.e(TAG, "don't support widget");
+                }
+            }
+        }
+        if (null != landscapeWidgetLayout) {
+            for (Map widgetMap : landscapeWidgetLayout) {
+                /// 新增自定义的控件
+                String type = (String) widgetMap.get("type");
+                if (type.equals("RelativeLayout")) {
+                    addCustomRelativeLayoutWidgets(widgetMap, landscapeBuilder);
+                } else {
+                    Log.e(TAG, "don't support widgetlayout");
+                }
+            }
+        }
+        ShanYanUIConfig portraitUIConfig = builder.build();
+        ShanYanUIConfig landscapeUIConfig;
+        if (null != landscapeBuilder) {
+            landscapeUIConfig = landscapeBuilder.build();
+        } else {
+            landscapeUIConfig = null;
+        }
+        OneKeyLoginManager.getInstance().setAuthThemeConfig(portraitUIConfig, landscapeUIConfig);
     }
 
     /**
@@ -372,7 +412,7 @@ public class ShanyanPlugin implements MethodCallHandler {
 
     private void setAuthLayoutView(Map shanYanUIConfig, ShanYanUIConfig.Builder builder) {
         Log.d(TAG, "shanYanUIConfig " + shanYanUIConfig);
-        Object isFinish = valueForKey(shanYanUIConfig,"shanYanUIConfig");
+        Object isFinish = valueForKey(shanYanUIConfig, "shanYanUIConfig");
         Object setAuthBGImgPath = valueForKey(shanYanUIConfig, "setAuthBGImgPath");
         Object setAuthBgGifPath = valueForKey(shanYanUIConfig, "setAuthBgGifPath");
         Object setAuthBgVideoPath = valueForKey(shanYanUIConfig, "setAuthBgVideoPath");
@@ -490,8 +530,8 @@ public class ShanyanPlugin implements MethodCallHandler {
             builder.addCustomPrivacyAlertView(privacyAlertView);
         }
         //授权页背景
-        if (null != isFinish){
-            this.isFinish = (Boolean)isFinish;
+        if (null != isFinish) {
+            this.isFinish = (Boolean) isFinish;
         }
         if (null != getDrawableByReflect(setAuthBGImgPath)) {
             builder.setAuthBGImgPath(getDrawableByReflect(setAuthBGImgPath));
