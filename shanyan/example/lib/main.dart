@@ -169,21 +169,22 @@ class _MyAppState extends State<MyApp> {
           _result = map[shanyan_result];
           _content = " code===" + _code.toString() + "\n result===" + _result;
           if (1000 == map[shanyan_code]) {
-            // oneKeyLoginManager.finishAuthControllerCompletion();
             oneKeyLoginManager.setLoadingVisibility(false);
+            //oneKeyLoginManager.finishAuthControllerCompletion();
             _toast("一键登录 获取token成功");
+          } else if (1011 == map[shanyan_code]) {
+            //取消
           } else {
-            _toast("点击：${map[shanyan_result]}");
+            //失败
+
+            //关闭授权页
+            oneKeyLoginManager.finishAuthControllerCompletion();
           }
         });
       });
 
       //闪验SDK 拉起授权页
-      oneKeyLoginManager
-          .openLoginAuth(
-        isFinish: false,
-      )
-          .then((map) {
+      oneKeyLoginManager.openLoginAuth().then((map) {
         setState(() {
           _code = map[shanyan_code];
           _result = map[shanyan_result];
@@ -590,6 +591,7 @@ class _MyAppState extends State<MyApp> {
       });
     } else if (Platform.isAndroid) {
       ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
+      shanYanUIConfig.isFinish = true;
       shanYanUIConfig.setLogBtnText = "免密登录";
       shanYanUIConfig.setLogoImgPath = "qq";
       shanYanUIConfig.setAuthBGImgPath = "sy_login_test_bg";

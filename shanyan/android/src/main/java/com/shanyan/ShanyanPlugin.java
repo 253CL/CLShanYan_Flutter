@@ -55,11 +55,11 @@ public class ShanyanPlugin implements MethodCallHandler {
     final String shanyan_widgetLayoutId = "widgetLayoutId";
     final String shanyan_widgetId = "widgetId";
     private MethodChannel channel;
-    private Result openLoginAuthListener;
     /**
      * Plugin registration.
      */
     private Context context;
+    private boolean isFinish;
 
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "shanyan");
@@ -90,8 +90,6 @@ public class ShanyanPlugin implements MethodCallHandler {
             openLoginAuth(call, result);
         } else if (call.method.equals("finishAuthActivity")) {
             OneKeyLoginManager.getInstance().finishAuthActivity();
-        } else if (call.method.equals("setOnClickPrivacyListener")) {
-            //setOnClickPrivacyListener();
         } else if (call.method.equals("getPreIntStatus")) {
             result.success(OneKeyLoginManager.getInstance().getPreIntStatus());
         } else if (call.method.equals("getOperatorType")) {
@@ -144,21 +142,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         });
     }
 
-    private void setOnClickPrivacyListener() {
-        OneKeyLoginManager.getInstance().setOnClickPrivacyListener(new OnClickPrivacyListener() {
-            @Override
-            public void getOnClickPrivacyStatus(int i, String s, String s1) {
-                Map<String, Object> map = new HashMap<>();
-                map.put(shanyan_code, i);
-                map.put(shanyan_result, s);
-                map.put(shanyan_operator, s1);
-                channel.invokeMethod("onReceiveAuthPageEvent", map);
-            }
-        });
-    }
-
     private void openLoginAuth(MethodCall call, final Result result) {
-        boolean isFinish = call.argument("isFinish");
         //闪验SDK 拉起授权页
         OneKeyLoginManager.getInstance().openLoginAuth(isFinish, new OpenLoginAuthListener() {
             @Override
@@ -302,71 +286,6 @@ public class ShanyanPlugin implements MethodCallHandler {
                             }
 
                         }
-                   /* widgetIdList.addAll(Arrays.asList("", "", "", "", ""));
-                    for (int i = 0; i < 5; i++) {
-                        switch (i) {
-                            case 0:
-                                final Map<String, Object> jsonMap = new HashMap<>();
-                                jsonMap.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 1:
-                                final Map<String, Object> jsonMap1 = new HashMap<>();
-                                jsonMap1.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap1);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 2:
-                                final Map<String, Object> jsonMap2 = new HashMap<>();
-                                jsonMap2.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap2);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 3:
-                                final Map<String, Object> jsonMap3 = new HashMap<>();
-                                jsonMap3.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap3);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 4:
-                                final Map<String, Object> jsonMap4 = new HashMap<>();
-                                jsonMap4.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap4);
-                                        }
-                                    });
-                                }
-                                break;
-                        }*/
-
                     }
                 }
                 builder.addCustomView(relativeLayout, false, false, null);
@@ -453,9 +372,16 @@ public class ShanyanPlugin implements MethodCallHandler {
 
     private void setAuthLayoutView(Map shanYanUIConfig, ShanYanUIConfig.Builder builder) {
         Log.d(TAG, "shanYanUIConfig " + shanYanUIConfig);
+        Object isFinish = valueForKey(shanYanUIConfig,"shanYanUIConfig");
         Object setAuthBGImgPath = valueForKey(shanYanUIConfig, "setAuthBGImgPath");
         Object setAuthBgGifPath = valueForKey(shanYanUIConfig, "setAuthBgGifPath");
         Object setAuthBgVideoPath = valueForKey(shanYanUIConfig, "setAuthBgVideoPath");
+
+        Object setStatusBarColor = valueForKey(shanYanUIConfig, "setStatusBarColor");
+        Object setLightColor = valueForKey(shanYanUIConfig, "setLightColor");
+        Object setStatusBarHidden = valueForKey(shanYanUIConfig, "setStatusBarHidden");
+        Object setVirtualKeyTransparent = valueForKey(shanYanUIConfig, "setVirtualKeyTransparent");
+
         Object setFullScreen = valueForKey(shanYanUIConfig, "setFullScreen");
         Object setNavColor = valueForKey(shanYanUIConfig, "setNavColor");
         Object setNavText = valueForKey(shanYanUIConfig, "setNavText");
@@ -470,6 +396,8 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setNavReturnBtnOffsetY = valueForKey(shanYanUIConfig, "setNavReturnBtnOffsetY");
         Object setAuthNavHidden = valueForKey(shanYanUIConfig, "setAuthNavHidden");
         Object setAuthNavTransparent = valueForKey(shanYanUIConfig, "setAuthNavTransparent");
+        Object setNavTextBold = valueForKey(shanYanUIConfig, "setNavTextBold");
+
         Object setLogoImgPath = valueForKey(shanYanUIConfig, "setLogoImgPath");
         Object setLogoWidth = valueForKey(shanYanUIConfig, "setLogoWidth");
         Object setLogoHeight = valueForKey(shanYanUIConfig, "setLogoHeight");
@@ -477,6 +405,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setLogoOffsetBottomY = valueForKey(shanYanUIConfig, "setLogoOffsetBottomY");
         Object setLogoHidden = valueForKey(shanYanUIConfig, "setLogoHidden");
         Object setLogoOffsetX = valueForKey(shanYanUIConfig, "setLogoOffsetX");
+
         Object setNumberColor = valueForKey(shanYanUIConfig, "setNumberColor");
         Object setNumFieldOffsetY = valueForKey(shanYanUIConfig, "setNumFieldOffsetY");
         Object setNumFieldOffsetBottomY = valueForKey(shanYanUIConfig, "setNumFieldOffsetBottomY");
@@ -484,6 +413,8 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setNumFieldHeight = valueForKey(shanYanUIConfig, "setNumFieldHeight");
         Object setNumberSize = valueForKey(shanYanUIConfig, "setNumberSize");
         Object setNumFieldOffsetX = valueForKey(shanYanUIConfig, "setNumFieldOffsetX");
+        Object setNumberBold = valueForKey(shanYanUIConfig, "setNumberBold");
+
         Object setLogBtnText = valueForKey(shanYanUIConfig, "setLogBtnText");
         Object setLogBtnTextColor = valueForKey(shanYanUIConfig, "setLogBtnTextColor");
         Object setLogBtnImgPath = valueForKey(shanYanUIConfig, "setLogBtnImgPath");
@@ -493,6 +424,8 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setLogBtnHeight = valueForKey(shanYanUIConfig, "setLogBtnHeight");
         Object setLogBtnWidth = valueForKey(shanYanUIConfig, "setLogBtnWidth");
         Object setLogBtnOffsetX = valueForKey(shanYanUIConfig, "setLogBtnOffsetX");
+        Object setLogBtnTextBold = valueForKey(shanYanUIConfig, "setLogBtnTextBold");
+
         Object setAppPrivacyOne = valueForKey(shanYanUIConfig, "setAppPrivacyOne");
         Object setAppPrivacyTwo = valueForKey(shanYanUIConfig, "setAppPrivacyTwo");
         Object setAppPrivacyThree = valueForKey(shanYanUIConfig, "setAppPrivacyThree");
@@ -510,12 +443,38 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setCheckBoxWH = valueForKey(shanYanUIConfig, "setCheckBoxWH");
         Object setCheckBoxMargin = valueForKey(shanYanUIConfig, "setCheckBoxMargin");
         Object setPrivacyText = valueForKey(shanYanUIConfig, "setPrivacyText");
+        Object setPrivacyTextBold = valueForKey(shanYanUIConfig, "setPrivacyTextBold");
+
         Object setSloganTextColor = valueForKey(shanYanUIConfig, "setSloganTextColor");
         Object setSloganTextSize = valueForKey(shanYanUIConfig, "setSloganTextSize");
         Object setSloganOffsetY = valueForKey(shanYanUIConfig, "setSloganOffsetY");
         Object setSloganHidden = valueForKey(shanYanUIConfig, "setSloganHidden");
         Object setSloganOffsetBottomY = valueForKey(shanYanUIConfig, "setSloganOffsetBottomY");
         Object setSloganOffsetX = valueForKey(shanYanUIConfig, "setSloganOffsetX");
+        Object setSloganTextBold = valueForKey(shanYanUIConfig, "setSloganTextBold");
+
+        Object setShanYanSloganTextColor = valueForKey(shanYanUIConfig, "setShanYanSloganTextColor");
+        Object setShanYanSloganTextSize = valueForKey(shanYanUIConfig, "setShanYanSloganTextSize");
+        Object setShanYanSloganOffsetY = valueForKey(shanYanUIConfig, "setShanYanSloganOffsetY");
+        Object setShanYanSloganHidden = valueForKey(shanYanUIConfig, "setShanYanSloganHidden");
+        Object setShanYanSloganOffsetBottomY = valueForKey(shanYanUIConfig, "setShanYanSloganOffsetBottomY");
+        Object setShanYanSloganOffsetX = valueForKey(shanYanUIConfig, "setShanYanSloganOffsetX");
+        Object setShanYanSloganTextBold = valueForKey(shanYanUIConfig, "setShanYanSloganTextBold");
+
+        Object setPrivacyNavColor = valueForKey(shanYanUIConfig, "setPrivacyNavColor");
+        Object setPrivacyNavTextBold = valueForKey(shanYanUIConfig, "setPrivacyNavTextBold");
+        Object setPrivacyNavTextColor = valueForKey(shanYanUIConfig, "setPrivacyNavTextColor");
+        Object setPrivacyNavTextSize = valueForKey(shanYanUIConfig, "setPrivacyNavTextSize");
+        Object setPrivacyNavReturnImgPath = valueForKey(shanYanUIConfig, "setPrivacyNavReturnImgPath");
+        Object setPrivacyNavReturnImgHidden = valueForKey(shanYanUIConfig, "setPrivacyNavReturnImgHidden");
+        Object setPrivacyNavReturnBtnWidth = valueForKey(shanYanUIConfig, "setPrivacyNavReturnBtnWidth");
+        Object setPrivacyNavReturnBtnHeight = valueForKey(shanYanUIConfig, "setPrivacyNavReturnBtnHeight");
+        Object setPrivacyNavReturnBtnOffsetRightX = valueForKey(shanYanUIConfig, "setPrivacyNavReturnBtnOffsetRightX");
+        Object setPrivacyNavReturnBtnOffsetX = valueForKey(shanYanUIConfig, "setPrivacyNavReturnBtnOffsetX");
+        Object setPrivacyNavReturnBtnOffsetY = valueForKey(shanYanUIConfig, "setPrivacyNavReturnBtnOffsetY");
+
+        Object addCustomPrivacyAlertView = valueForKey(shanYanUIConfig, "addCustomPrivacyAlertView");
+
         Object setLoadingView = valueForKey(shanYanUIConfig, "setLoadingView");
         Object setDialogTheme = valueForKey(shanYanUIConfig, "setDialogTheme");
         if (0 != getLayoutForId((String) setLoadingView)) {
@@ -524,7 +483,16 @@ public class ShanyanPlugin implements MethodCallHandler {
             view_dialog.setLayoutParams(mLayoutParams3);
             builder.setLoadingView(view_dialog);
         }
+        if (0 != getLayoutForId((String) addCustomPrivacyAlertView)) {
+            RelativeLayout.LayoutParams mLayoutParamsAlert = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+            RelativeLayout privacyAlertView = (RelativeLayout) LayoutInflater.from(context).inflate(getLayoutForId((String) addCustomPrivacyAlertView), null);
+            privacyAlertView.setLayoutParams(mLayoutParamsAlert);
+            builder.addCustomPrivacyAlertView(privacyAlertView);
+        }
         //授权页背景
+        if (null != isFinish){
+            this.isFinish = (Boolean)isFinish;
+        }
         if (null != getDrawableByReflect(setAuthBGImgPath)) {
             builder.setAuthBGImgPath(getDrawableByReflect(setAuthBGImgPath));
         }
@@ -534,6 +502,20 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setAuthBgVideoPath) {
             builder.setAuthBgVideoPath((String) setAuthBgVideoPath);
         }
+        //状态栏
+        if (null != setStatusBarColor) {
+            builder.setStatusBarColor(Color.parseColor((String) setStatusBarColor));
+        }
+        if (null != setLightColor) {
+            builder.setLightColor((Boolean) setLightColor);
+        }
+        if (null != setStatusBarHidden) {
+            builder.setLightColor((Boolean) setStatusBarHidden);
+        }
+        if (null != setVirtualKeyTransparent) {
+            builder.setVirtualKeyTransparent((Boolean) setVirtualKeyTransparent);
+        }
+
         //导航栏
         if (null != setFullScreen) {
             builder.setFullScreen((Boolean) setFullScreen);
@@ -576,6 +558,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (null != setAuthNavTransparent) {
             builder.setAuthNavTransparent((Boolean) setAuthNavTransparent);
+        }
+        if (null != setNavTextBold) {
+            builder.setNavTextBold((Boolean) setNavTextBold);
         }
         // 授权页logo
         if (null != setLogoImgPath) {
@@ -621,6 +606,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setNumFieldOffsetX) {
             builder.setNumFieldOffsetX((Integer) setNumFieldOffsetX);
         }
+        if (null != setNumberBold) {
+            builder.setNumberBold((Boolean) setNumberBold);
+        }
         //授权页 登录按钮
 
         if (null != setLogBtnText) {
@@ -649,6 +637,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (null != setLogBtnOffsetX) {
             builder.setLogBtnOffsetX((Integer) setLogBtnOffsetX);
+        }
+        if (null != setLogBtnTextBold) {
+            builder.setLogBtnTextBold((Boolean) setLogBtnTextBold);
         }
         //授权页 隐私协议栏
         if (null != setAppPrivacyOne) {
@@ -716,6 +707,9 @@ public class ShanyanPlugin implements MethodCallHandler {
             setPrivacyTextList.addAll(Arrays.asList("", "", "", "", ""));
             builder.setPrivacyText(setPrivacyTextList.get(0), setPrivacyTextList.get(1), setPrivacyTextList.get(2), setPrivacyTextList.get(3), setPrivacyTextList.get(4));
         }
+        if (null != setPrivacyTextBold) {
+            builder.setPrivacyTextBold((Boolean) setPrivacyTextBold);
+        }
         //授权页 slogan（***提供认证服务）
         if (null != setSloganTextColor) {
             builder.setSloganTextColor(Color.parseColor((String) setSloganTextColor));
@@ -735,6 +729,66 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setSloganOffsetX) {
             builder.setSloganOffsetX((Integer) setSloganOffsetX);
         }
+        if (null != setSloganTextBold) {
+            builder.setSloganTextBold((Boolean) setSloganTextBold);
+        }
+        //授权页 创蓝slogan（创蓝提供技术支持）
+        if (null != setShanYanSloganTextColor) {
+            builder.setShanYanSloganTextColor(Color.parseColor((String) setShanYanSloganTextColor));
+        }
+        if (null != setShanYanSloganTextSize) {
+            builder.setShanYanSloganTextSize((Integer) setShanYanSloganTextSize);
+        }
+        if (null != setShanYanSloganOffsetY) {
+            builder.setShanYanSloganOffsetY((Integer) setShanYanSloganOffsetY);
+        }
+        if (null != setShanYanSloganHidden) {
+            builder.setShanYanSloganHidden((Boolean) setShanYanSloganHidden);
+        }
+        if (null != setShanYanSloganOffsetBottomY) {
+            builder.setShanYanSloganOffsetBottomY((Integer) setShanYanSloganOffsetBottomY);
+        }
+        if (null != setShanYanSloganOffsetX) {
+            builder.setShanYanSloganOffsetX((Integer) setShanYanSloganOffsetX);
+        }
+        if (null != setShanYanSloganTextBold) {
+            builder.setShanYanSloganTextBold((Boolean) setShanYanSloganTextBold);
+        }
+        //协议页导航栏
+        if (null != setPrivacyNavColor) {
+            builder.setPrivacyNavColor(Color.parseColor((String) setPrivacyNavColor));
+        }
+        if (null != setPrivacyNavTextColor) {
+            builder.setPrivacyNavTextColor(Color.parseColor((String) setPrivacyNavTextColor));
+        }
+        if (null != setPrivacyNavTextSize) {
+            builder.setPrivacyNavTextSize((Integer) setPrivacyNavTextSize);
+        }
+        if (null != setPrivacyNavReturnImgPath) {
+            builder.setPrivacyNavReturnImgPath(getDrawableByReflect(setPrivacyNavReturnImgPath));
+        }
+        if (null != setPrivacyNavReturnImgHidden) {
+            builder.setPrivacyNavReturnImgHidden((Boolean) setPrivacyNavReturnImgHidden);
+        }
+        if (null != setPrivacyNavReturnBtnWidth) {
+            builder.setPrivacyNavReturnBtnWidth((Integer) setPrivacyNavReturnBtnWidth);
+        }
+        if (null != setPrivacyNavReturnBtnHeight) {
+            builder.setPrivacyNavReturnBtnHeight((Integer) setPrivacyNavReturnBtnHeight);
+        }
+        if (null != setPrivacyNavReturnBtnOffsetRightX) {
+            builder.setPrivacyNavReturnBtnOffsetRightX((Integer) setPrivacyNavReturnBtnOffsetRightX);
+        }
+        if (null != setPrivacyNavReturnBtnOffsetX) {
+            builder.setPrivacyNavReturnBtnOffsetX((Integer) setPrivacyNavReturnBtnOffsetX);
+        }
+        if (null != setPrivacyNavReturnBtnOffsetY) {
+            builder.setPrivacyNavReturnBtnOffsetY((Integer) setPrivacyNavReturnBtnOffsetY);
+        }
+        if (null != setPrivacyNavTextBold) {
+            builder.setPrivacyNavTextBold((Boolean) setPrivacyNavTextBold);
+        }
+
         if (null != setDialogTheme) {
             ArrayList<String> setDialogThemeList = (ArrayList) setDialogTheme;
             setDialogThemeList.addAll(Arrays.asList("0", "0", "0", "0", "false"));

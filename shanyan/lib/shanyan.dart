@@ -33,7 +33,6 @@ class OneKeyLoginManager {
   setAuthPageActionListener(AuthPageActionListener callback) {
     _channel.invokeMethod("setActionListener");
     _eventHanders.actionEvents.add(callback);
-
   }
 
   /// 自定义控件的点击事件 Android
@@ -70,8 +69,8 @@ class OneKeyLoginManager {
   }
 
   ///闪验SDK 拉起授权页 Android
-  Future<Map<dynamic, dynamic>> openLoginAuth({bool isFinish}) async {
-    return await _channel.invokeMethod("openLoginAuth", {"isFinish": isFinish});
+  Future<Map<dynamic, dynamic>> openLoginAuth() async {
+    return await _channel.invokeMethod("openLoginAuth");
   }
 
   ///闪验SDK 设置复选框是否选中 Android+IOS
@@ -159,7 +158,7 @@ class OneKeyLoginManager {
           Map json = call.arguments.cast<dynamic, dynamic>();
           AuthPageActionEvent ev = AuthPageActionEvent.fromJson(json);
           cb(ev);
-          print("onReceiveAuthEvent==="+json.toString());
+          print("onReceiveAuthEvent===" + json.toString());
         }
 
         break;
@@ -189,9 +188,9 @@ class OneKeyLoginManager {
 
   ///闪验SDK 主动销毁授权页 Android+IOS
   Future<void> finishAuthControllerCompletion() async {
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       return await _channel.invokeMethod("finishAuthControllerCompletion");
-    }else if(Platform.isAndroid){
+    } else if (Platform.isAndroid) {
       _channel.invokeMethod("finishAuthActivity");
     }
   }
@@ -255,11 +254,18 @@ class ShanYanEventHandlers {
 * 闪验SDK 授权页UI 配置类
 * */
 class ShanYanUIConfig {
+  bool isFinish ; //是否自动销毁
   // 授权页背景
   String setAuthBGImgPath; //普通图片
   String setAuthBgGifPath; //GIF图片（只支持本地gif图，需要放置到drawable文件夹中）
 
   String setAuthBgVideoPath; //视频背景
+
+  //授权页 状态栏
+  String setStatusBarColor; //设置状态栏背景颜色
+  bool setLightColor; //设置状态栏字体颜色是否为白色
+  bool setStatusBarHidden; //设置状态栏是否隐藏
+  bool setVirtualKeyTransparent; //设置虚拟键是否透明
 
   //授权页 导航栏
   bool setFullScreen; //设置是否全屏显示（true：全屏；false：不全屏）默认不全屏
@@ -276,6 +282,7 @@ class ShanYanUIConfig {
   int setNavReturnBtnOffsetY; //设置导航栏返回按钮距离屏幕上侧Y偏移
   bool setAuthNavHidden; //设置导航栏是否隐藏（true：隐藏；false：不隐藏）
   bool setAuthNavTransparent; //设置导航栏是否透明（true：透明；false：不透明）
+  bool setNavTextBold; //设置导航栏字体是否加粗（true：加粗；false：不加粗）
 
   // 授权页logo
   String setLogoImgPath; //设置logo图片
@@ -294,6 +301,7 @@ class ShanYanUIConfig {
   int setNumFieldHeight; //设置号码栏高度
   int setNumberSize; //设置号码栏字体大小
   int setNumFieldOffsetX; //设置号码栏相对屏幕左侧X偏移
+  bool setNumberBold; //设置号码栏字体是否加粗（true：加粗；false：不加粗）
 
   //授权页 登录按钮
   String setLogBtnText; //设置登录按钮文字
@@ -305,6 +313,7 @@ class ShanYanUIConfig {
   int setLogBtnHeight; //设置登录按钮高度
   int setLogBtnWidth; //设置登录按钮宽度
   int setLogBtnOffsetX; //设置登录按钮相对屏幕左侧X偏移
+  bool setLogBtnTextBold; //设置登录按钮字体是否加粗（true：加粗；false：不加粗）
 
   //授权页 隐私协议栏
   List<String> setAppPrivacyOne; //设置开发者隐私条款1，包含两个参数：1.名称 2.URL
@@ -324,6 +333,7 @@ class ShanYanUIConfig {
   List<int> setCheckBoxWH; //设置checkbox的宽高，包含两个参数：1.宽 2.高
   List<int> setCheckBoxMargin; //设置checkbox的间距，包含四个参数：1.左间距 2.上间距 3.右间距 4.下间距
   List<String> setPrivacyText; //设置隐私条款名称外的文字,包含五个参数
+  bool setPrivacyTextBold; //设置协议栏字体是否加粗（true：加粗；false：不加粗）
 
   //授权页 slogan（***提供认证服务）
   String setSloganTextColor; //设置slogan文字颜色
@@ -332,16 +342,45 @@ class ShanYanUIConfig {
   bool setSloganHidden = false; //设置slogan是否隐藏（true：隐藏；false：不隐藏）
   int setSloganOffsetBottomY; //设置slogan相对屏幕底部Y偏移
   int setSloganOffsetX; //设置slogan相对屏幕左侧X偏移
+  bool setSloganTextBold; //设置slogan文字字体是否加粗（true：加粗；false：不加粗）
 
+  //创蓝slogan设置
+  int setShanYanSloganTextColor; //设置创蓝slogan文字颜色
+  int setShanYanSloganTextSize; //设置创蓝slogan文字字体大小
+  int setShanYanSloganOffsetY; //设置创蓝slogan相对于标题栏下边缘y偏移
+  bool setShanYanSloganHidden; //设置创蓝slogan是否隐藏（true：隐藏；false：不隐藏）
+  int setShanYanSloganOffsetBottomY; //设置创蓝slogan相对屏幕底部Y偏移
+  int setShanYanSloganOffsetX; //设置创蓝slogan相对屏幕左侧X偏移
+  bool setShanYanSloganTextBold; //设置创蓝slogan文字字体是否加粗（true：加粗；false：不加粗）
+
+  //协议页导航栏
+  int setPrivacyNavColor; //设置协议页导航栏背景颜色
+  bool setPrivacyNavTextBold; //设置协议页导航栏标题文字是否加粗（true：加粗；false：不加粗）
+  int setPrivacyNavTextColor; //设置协议页导航栏标题文字颜色
+  int setPrivacyNavTextSize; //设置协议页导航栏标题文字大小
+  String setPrivacyNavReturnImgPath; //设置协议页导航栏返回按钮图标
+  bool setPrivacyNavReturnImgHidden; //设置协议页导航栏返回按钮是否隐藏（true：隐藏；false：不隐藏）
+  int setPrivacyNavReturnBtnWidth; //设置协议页导航栏返回按钮宽度
+  int setPrivacyNavReturnBtnHeight; //设置协议页导航栏返回按钮高度
+  int setPrivacyNavReturnBtnOffsetRightX; //设置协议页导航栏返回按钮距离屏幕右侧X偏移
+  int setPrivacyNavReturnBtnOffsetX; //设置协议页导航栏返回按钮距离屏幕左侧X偏移
+  int setPrivacyNavReturnBtnOffsetY; //设置协议页导航栏返回按钮距离屏幕上侧Y偏移
+
+  String addCustomPrivacyAlertView; //添加授权页上显示隐私协议弹框
   String setLoadingView; //设置授权页点击一键登录自定义loading
   List<String>
       setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
 
   Map toJsonMap() {
     return {
+      "isFinish":isFinish,
       "setAuthBGImgPath": setAuthBGImgPath ??= null,
       "setAuthBgGifPath": setAuthBgGifPath ??= null,
       "setAuthBgVideoPath": setAuthBgVideoPath ??= null,
+      "setStatusBarColor": setStatusBarColor ??= null,
+      "setLightColor": setLightColor,
+      "setStatusBarHidden": setStatusBarHidden ,
+      "setVirtualKeyTransparent": setVirtualKeyTransparent,
       "setFullScreen": setFullScreen,
       "setNavColor": setNavColor ??= null,
       "setNavText": setNavText ??= null,
@@ -356,6 +395,7 @@ class ShanYanUIConfig {
       "setNavReturnBtnOffsetY": setNavReturnBtnOffsetY ??= null,
       "setAuthNavHidden": setAuthNavHidden,
       "setAuthNavTransparent": setAuthNavTransparent,
+      "setNavTextBold": setNavTextBold,
       "setLogoImgPath": setLogoImgPath ??= null,
       "setLogoWidth": setLogoWidth ??= null,
       "setLogoHeight": setLogoHeight ??= null,
@@ -370,6 +410,7 @@ class ShanYanUIConfig {
       "setNumFieldHeight": setNumFieldHeight ??= null,
       "setNumberSize": setNumberSize ??= null,
       "setNumFieldOffsetX": setNumFieldOffsetX ??= null,
+      "setNumberBold": setNumberBold,
       "setLogBtnText": setLogBtnText ??= null,
       "setLogBtnTextColor": setLogBtnTextColor ??= null,
       "setLogBtnImgPath": setLogBtnImgPath ??= null,
@@ -379,6 +420,7 @@ class ShanYanUIConfig {
       "setLogBtnHeight": setLogBtnHeight ??= null,
       "setLogBtnWidth": setLogBtnWidth ??= null,
       "setLogBtnOffsetX": setLogBtnOffsetX ??= null,
+      "setLogBtnTextBold": setLogBtnTextBold,
       "setAppPrivacyOne": setAppPrivacyOne ??= null,
       "setAppPrivacyTwo": setAppPrivacyTwo ??= null,
       "setAppPrivacyThree": setAppPrivacyThree ??= null,
@@ -396,12 +438,34 @@ class ShanYanUIConfig {
       "setCheckBoxWH": setCheckBoxWH ??= null,
       "setCheckBoxMargin": setCheckBoxMargin ??= null,
       "setPrivacyText": setPrivacyText ??= null,
+      "setPrivacyTextBold": setPrivacyTextBold,
       "setSloganTextColor": setSloganTextColor ??= null,
       "setSloganTextSize": setSloganTextSize ??= null,
       "setSloganOffsetY": setSloganOffsetY ??= null,
       "setSloganHidden": setSloganHidden,
       "setSloganOffsetBottomY": setSloganOffsetBottomY ??= null,
       "setSloganOffsetX": setSloganOffsetX ??= null,
+      "setSloganTextBold": setSloganTextBold,
+      "setShanYanSloganTextColor": setShanYanSloganTextColor ??= null,
+      "setShanYanSloganTextSize": setShanYanSloganTextSize ??= null,
+      "setShanYanSloganOffsetY": setShanYanSloganOffsetY ??= null,
+      "setShanYanSloganHidden": setShanYanSloganHidden,
+      "setShanYanSloganOffsetBottomY": setShanYanSloganOffsetBottomY ??= null,
+      "setShanYanSloganOffsetX": setShanYanSloganOffsetX ??= null,
+      "setShanYanSloganTextBold": setShanYanSloganTextBold,
+      "setPrivacyNavColor": setPrivacyNavColor ??= null,
+      "setPrivacyNavTextBold": setPrivacyNavTextBold,
+      "setPrivacyNavTextColor": setPrivacyNavTextColor ??= null,
+      "setPrivacyNavTextSize": setPrivacyNavTextSize ??= null,
+      "setPrivacyNavReturnImgPath": setPrivacyNavReturnImgPath ??= null,
+      "setPrivacyNavReturnImgHidden": setPrivacyNavReturnImgHidden,
+      "setPrivacyNavReturnBtnWidth": setPrivacyNavReturnBtnWidth ??= null,
+      "setPrivacyNavReturnBtnHeight": setPrivacyNavReturnBtnHeight ??= null,
+      "setPrivacyNavReturnBtnOffsetRightX":
+          setPrivacyNavReturnBtnOffsetRightX ??= null,
+      "setPrivacyNavReturnBtnOffsetX": setPrivacyNavReturnBtnOffsetX ??= null,
+      "setPrivacyNavReturnBtnOffsetY": setPrivacyNavReturnBtnOffsetY ??= null,
+      "addCustomPrivacyAlertView": addCustomPrivacyAlertView ??= null,
       "setLoadingView": setLoadingView ??= null,
       "setDialogTheme": setDialogTheme ??= null,
     }..removeWhere((key, value) => value == null);
