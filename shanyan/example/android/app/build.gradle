@@ -29,7 +29,7 @@ android {
         config {
             keyAlias 'shanyan'
             keyPassword 'sy123456'
-            storeFile file('D:/flutter_shanyan_sdk/CLShanYan_Flutter/shanyan/example/android/app/shanyan_sy123456.jks')
+            storeFile file('shanyan_sy123456.jks')
             storePassword 'sy123456'
         }
     }
