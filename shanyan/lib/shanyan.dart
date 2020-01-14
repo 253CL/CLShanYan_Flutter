@@ -32,6 +32,7 @@ class OneKeyLoginManager {
   /// 授权页控件的点击事件（“复选框”、"协议"） Android
   setAuthPageActionListener(AuthPageActionListener callback) {
     _channel.invokeMethod("setActionListener");
+    _eventHanders.actionEvents.clear();
     _eventHanders.actionEvents.add(callback);
   }
 
@@ -91,6 +92,9 @@ class OneKeyLoginManager {
   ///闪验SDK 配置授权页 Android
   void setAuthThemeConfig(
       {ShanYanUIConfig uiConfig, ShanYanUIConfig landscapeConfig}) {
+
+    print("uiConfig====" + uiConfig.toJsonMap().toString());
+
     var para = Map();
     var para1 = uiConfig.toJsonMap();
     para1.removeWhere((key, value) => value == null);
@@ -115,6 +119,8 @@ class OneKeyLoginManager {
     }
 
     if (null != landscapeConfig) {
+      print("landscapeConfig=====" + landscapeConfig.toJsonMap().toString());
+
       var para2 = landscapeConfig.toJsonMap();
       para2.removeWhere((key, value) => value == null);
       para["landscapeConfig"] = para2;
