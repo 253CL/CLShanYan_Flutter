@@ -232,7 +232,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         List<Map> landscapeWidgets = call.argument("landscapeWidgets");
         List<Map> landscapeWidgetLayout = call.argument("landscapeWidgetLayout");
         ShanYanUIConfig.Builder landscapeBuilder = new ShanYanUIConfig.Builder();
-        if (null != portraitConfig) {
+        if (null != landscapeConfig) {
             setAuthLayoutView(landscapeConfig, landscapeBuilder);
         }
         if (null != landscapeWidgets) {

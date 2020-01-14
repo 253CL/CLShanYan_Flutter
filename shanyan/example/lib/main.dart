@@ -593,7 +593,7 @@ class _MyAppState extends State<MyApp> {
       ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
       shanYanUIConfig.isFinish = true;
       shanYanUIConfig.setLogBtnText = "免密登录";
-      shanYanUIConfig.setLogoImgPath = "qq";
+      shanYanUIConfig.setLogoImgPath = "shanyan_logo";
       shanYanUIConfig.setAuthBGImgPath = "sy_login_test_bg";
       //shanYanUIConfig.setAppPrivacyColor = [0xffffffff,0xff0085d0];
       //shanYanUIConfig.setFullScreen = true;
@@ -652,10 +652,84 @@ class _MyAppState extends State<MyApp> {
           _toast("点击其他方式登录");
         }
       });
+      shanyanCustomWidget.add(buttonWidget);
       shanYanUIConfig.widgetLayout = shanYanCustomWidgetLayout;
       shanYanUIConfig.widgets = shanyanCustomWidget;
-      shanyanCustomWidget.add(buttonWidget);
-      oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
+
+      ShanYanUIConfig landscapeConfig = ShanYanUIConfig();
+      landscapeConfig.isFinish = true;
+      landscapeConfig.setLogBtnText = "免密登录";
+      landscapeConfig.setLogoImgPath = "shanyan_logo";
+      landscapeConfig.setAuthBGImgPath = "sy_login_test_bg";
+      landscapeConfig.setLogoHeight = 36;
+      landscapeConfig.setLogoOffsetY = 14;
+      landscapeConfig.setNumFieldOffsetY = 65;
+      landscapeConfig.setSloganOffsetY = 100;
+      landscapeConfig.setLogBtnOffsetY = 120;
+      landscapeConfig.setAppPrivacyOne = [
+        "闪验用户协议",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html"
+      ];
+      landscapeConfig.setAppPrivacyTwo = [
+        "闪验隐私政策",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
+      ];
+      landscapeConfig.setAppPrivacyThree = [
+        "用户服务条款",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
+      ];
+      landscapeConfig.setAppPrivacyColor = ["#808080", "#00cc00"];
+      landscapeConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "并授权使用本机号码"];
+      landscapeConfig.setPrivacyOffsetBottomY = 10;
+      landscapeConfig.setShanYanSloganHidden = true;
+      landscapeConfig.setCheckBoxMargin = [0, 3, 5, 0];
+      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
+      List<ShanYanCustomWidgetLayout> landscapeCustomWidgetLayout = [];
+      String landscape_layout_name = "relative_item_view";
+      ShanYanCustomWidgetLayout landscapeRelativeLayoutWidget =
+          ShanYanCustomWidgetLayout(landscape_layout_name,
+              ShanYanCustomWidgetLayoutType.RelativeLayout);
+      landscapeRelativeLayoutWidget.top = 170;
+      landscapeRelativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+      oneKeyLoginManager.addClikWidgetLayoutEventListener(
+          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
+        Map map = widgetLayoutOnClickEvent.toMap();
+        if ("weixin" == map[shanyan_widgetLayoutId]) {
+          _toast("点击 微信");
+        } else if ("qq" == map[shanyan_widgetLayoutId]) {
+          _toast("点击 QQ");
+        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
+          _toast("点击 微博");
+        }
+      });
+
+      landscapeCustomWidgetLayout.add(landscapeRelativeLayoutWidget);
+
+      List<ShanYanCustomWidget> landscapeCustomWidget = [];
+      final String landscape_btn_widgetId = "other_custom_button"; // 标识控件 id
+      ShanYanCustomWidget landscapeButtonWidget = ShanYanCustomWidget(
+          landscape_btn_widgetId, ShanYanCustomWidgetType.TextView);
+      landscapeButtonWidget.textContent = "其他方式登录 >";
+      landscapeButtonWidget.top = 10;
+      landscapeButtonWidget.width = 150;
+      landscapeButtonWidget.height = 40;
+      landscapeButtonWidget.backgroundColor = "#330000";
+      landscapeButtonWidget.isFinish = false;
+      //buttonWidget.btnNormalImageName = "";
+      //buttonWidget.btnPressedImageName = "";
+      landscapeButtonWidget.textAlignment =
+          ShanYanCustomWidgetGravityType.center;
+      // 添加点击事件监听
+      oneKeyLoginManager.addClikWidgetEventListener(landscape_btn_widgetId,
+          (eventId) {
+        if ("other_custom_button" == eventId) {
+          _toast("点击其他方式登录");
+        }
+      });
+      landscapeCustomWidget.add(landscapeButtonWidget);
+      landscapeConfig.widgetLayout = landscapeCustomWidgetLayout;
+      oneKeyLoginManager.setAuthThemeConfig(
+          uiConfig: shanYanUIConfig, landscapeConfig: landscapeConfig);
     }
 
     setState(() {
@@ -974,8 +1048,7 @@ class _MyAppState extends State<MyApp> {
       });
 
       shanYanCustomWidgetLayout.add(relativeLayoutWidget);
-      oneKeyLoginManager.setAuthThemeConfig(
-          uiConfig: shanYanUIConfig);
+      oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     }
     setState(() {
       _content = "界面配置成功";
