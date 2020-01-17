@@ -8,7 +8,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - shanyan (from `.symlinks/plugins/shanyan/ios`)
 
@@ -18,7 +18,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   shanyan:
@@ -28,8 +28,8 @@ SPEC CHECKSUMS:
   CL_ShanYanSDK: 20ef68b3cc6f9e978c49c16b5c5fbaaefcff63b9
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
-  shanyan: 19a321ba9d2e2732c32860cef05b1f0a409b9f68
+  shanyan: 9cccb7eaf1d903b79d1e9c7752d0a3b710bef3d9
 
-PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
+PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0.beta.2

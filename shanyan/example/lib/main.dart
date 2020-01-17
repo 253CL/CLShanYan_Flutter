@@ -6,9 +6,15 @@ import 'dart:ui' as prefix0;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+
 import 'package:shanyan/shanyan.dart';
+import 'package:shanyan/shanYanUIConfig.dart';
+import 'package:shanyan/shanYanResult.dart';
+
+import 'package:flutter/cupertino.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'dart:ui';
 import 'dart:io';
 import 'dart:convert' as convert;
@@ -58,17 +64,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initListener() async {
-    if (Platform.isIOS) {
-    } else if (Platform.isAndroid) {
-      //闪验SDK 设置调试模式开关
-      oneKeyLoginManager.setDebug(true);
-      oneKeyLoginManager
-          .setAuthPageActionListener((AuthPageActionEvent authPageActionEvent) {
-        Map map = authPageActionEvent.toMap();
-        print("setActionListener" + map.toString());
-        _toast("点击：${map.toString()}");
-      });
-    }
+//    if (Platform.isIOS) {
+//    } else if (Platform.isAndroid) {
+//      //闪验SDK 设置调试模式开关
+//      oneKeyLoginManager.setDebug(true);
+//      oneKeyLoginManager
+//          .setAuthPageActionListener((AuthPageActionEvent authPageActionEvent) {
+//        Map map = authPageActionEvent.toMap();
+//        print("setActionListener" + map.toString());
+//        _toast("点击：${map.toString()}");
+//      });
+//    }
   }
 
   Future<void> initPlatformState() async {
@@ -79,33 +85,33 @@ class _MyAppState extends State<MyApp> {
       appId = "loXN4jDs";
     }
     //闪验SDK 初始化
-    oneKeyLoginManager
-        .init(
-      appId: appId,
-    )
-        .then((map) {
+    oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
+
       setState(() {
-        _code = map[shanyan_code];
-        _result = map[shanyan_result];
-        _content = " code===" + _code.toString() + "\n result===" + _result;
+        _code = shanYanResult.code;
+        _result = shanYanResult.message;
+        _content = shanYanResult.toJson().toString();
       });
-      if (1000 == map[shanyan_code]) {
+
+      if (1000 == shanYanResult.code) {
         //初始化成功
       } else {
         //初始化失败
       }
+
     });
   }
 
   Future<void> getPhoneInfoPlatformState() async {
     //闪验SDK 预取号
-    oneKeyLoginManager.getPhoneInfo().then((map) {
+    oneKeyLoginManager.getPhoneInfo().then((ShanYanResult shanYanResult) {
       setState(() {
-        _code = map[shanyan_code];
-        _result = map[shanyan_result];
-        _content = " code===" + _code.toString() + "\n result===" + _result;
+        _code = shanYanResult.code;
+        _result = shanYanResult.message;
+        _content = shanYanResult.toJson().toString();
       });
-      if (1022 == map[shanyan_code]) {
+
+      if (1000 == shanYanResult.code) {
         //预取号成功
       } else {
         //预取号失败
@@ -114,84 +120,92 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> openLoginAuthPlatformState() async {
-    if (Platform.isIOS) {
-      //先设置SDK回调监听
-      //openLoginAuthListener:调起授权页回调
-      oneKeyLoginManager.openLoginAuthListener().then((map) {
-        setState(() {
-          _code = map[shanyan_code];
-          _result = map[shanyan_result];
-          _content = " code===" + _code.toString() + "\n result===" + _result;
-        });
 
-        if (1000 == map[shanyan_code]) {
-          //调起授权页成功
-        } else {
-          //调起授权页失败
-        }
+    //闪验SDK 拉起授权页
+    oneKeyLoginManager.openLoginAuth().then((ShanYanResult shanYanResult) {
+      setState(() {
+        _code = shanYanResult.code;
+        _result = shanYanResult.message;
+        _content = shanYanResult.toJson().toString();
       });
 
-      //openLoginAuthListener:调起授权页成功，后续回调
-      oneKeyLoginManager.oneKeyLoginListener().then((map) {
-        int code = map[shanyan_code];
-        if (code == 1000) {
-          //成功
+      if (1000 == shanYanResult.code) {
+        //拉起授权页成功
+      } else {
+        //拉起授权页失败
+      }
+    });
 
-          //关闭授权页
-          oneKeyLoginManager.finishAuthControllerCompletion();
-        } else {
-          if (code == 1011) {
-            //取消
-
-          } else {
-            //失败
-
-            //关闭授权页
-            oneKeyLoginManager.finishAuthControllerCompletion();
-          }
-        }
-        setState(() {
-          _code = map[shanyan_code];
-          _result = map[shanyan_result];
-          Map<String, dynamic> result = convert.jsonDecode(_result);
-          _content =
-              " code===" + _code.toString() + "\n result===" + result["token"];
-        });
-      });
-      //调起授权页
-      oneKeyLoginManager.quickAuthLoginWithConfigure(this.ios_uiConfigure);
-    } else if (Platform.isAndroid) {
-      oneKeyLoginManager
-          .setOneKeyLoginListener((OneKeyLoginEvent oneKeyLoginEvent) {
-        Map map = oneKeyLoginEvent.toMap();
-        setState(() {
-          _code = map[shanyan_code];
-          _result = map[shanyan_result];
-          _content = " code===" + _code.toString() + "\n result===" + _result;
-          if (1000 == map[shanyan_code]) {
-            oneKeyLoginManager.setLoadingVisibility(false);
-            //oneKeyLoginManager.finishAuthControllerCompletion();
-            _toast("一键登录 获取token成功");
-          } else if (1011 == map[shanyan_code]) {
-            //取消
-          } else {
-            //失败
-
-            //关闭授权页
-            oneKeyLoginManager.finishAuthControllerCompletion();
-          }
-        });
-      });
-
-      //闪验SDK 拉起授权页
-      oneKeyLoginManager.openLoginAuth().then((map) {
-        setState(() {
-          _code = map[shanyan_code];
-          _result = map[shanyan_result];
-          _content = " code===" + _code.toString() + "\n result===" + _result;
-        });
-      });
-    }
+//    if (Platform.isIOS) {
+//      //先设置SDK回调监听
+//      //openLoginAuthListener:调起授权页回调
+//      oneKeyLoginManager.openLoginAuthListener().then((map) {
+//        setState(() {
+//          _code = map[shanyan_code];
+//          _result = map[shanyan_result];
+//          _content = " code===" + _code.toString() + "\n result===" + _result;
+//        });
+//
+//        if (1000 == map[shanyan_code]) {
+//          //调起授权页成功
+//        } else {
+//          //调起授权页失败
+//        }
+//      });
+//
+//      //openLoginAuthListener:调起授权页成功，后续回调
+//      oneKeyLoginManager.oneKeyLoginListener().then((map) {
+//        int code = map[shanyan_code];
+//        if (code == 1000) {
+//          //成功
+//
+//          //关闭授权页
+//          oneKeyLoginManager.finishAuthControllerCompletion();
+//        } else {
+//          if (code == 1011) {
+//            //取消
+//
+//          } else {
+//            //失败
+//
+//            //关闭授权页
+//            oneKeyLoginManager.finishAuthControllerCompletion();
+//          }
+//        }
+//        setState(() {
+//          _code = map[shanyan_code];
+//          _result = map[shanyan_result];
+//          Map<String, dynamic> result = convert.jsonDecode(_result);
+//          _content =
+//              " code===" + _code.toString() + "\n result===" + result["token"];
+//        });
+//      });
+//      //调起授权页
+//      oneKeyLoginManager.quickAuthLoginWithConfigure(this.ios_uiConfigure);
+//    } else if (Platform.isAndroid) {
+//      oneKeyLoginManager
+//          .setOneKeyLoginListener((OneKeyLoginEvent oneKeyLoginEvent) {
+//        Map map = oneKeyLoginEvent.toMap();
+//        setState(() {
+//          _code = map[shanyan_code];
+//          _result = map[shanyan_result];
+//          _content = " code===" + _code.toString() + "\n result===" + _result;
+//          if (1000 == map[shanyan_code]) {
+//            oneKeyLoginManager.setLoadingVisibility(false);
+//            //oneKeyLoginManager.finishAuthControllerCompletion();
+//            _toast("一键登录 获取token成功");
+//          } else if (1011 == map[shanyan_code]) {
+//            //取消
+//          } else {
+//            //失败
+//
+//            //关闭授权页
+//            oneKeyLoginManager.finishAuthControllerCompletion();
+//          }
+//        });
+//      });
+//
+//    }
   }
 
   Future<void> startAuthenticationState() async {
@@ -213,523 +227,590 @@ class _MyAppState extends State<MyApp> {
 //      _toast("请输入正确的手机号");
 //      return;
 //    }
-    //闪验SDK 本机认证获取token
-    oneKeyLoginManager.startAuthentication().then((map) {
-      setState(() {
-        _code = map[shanyan_code];
-        _result = map[shanyan_result];
-        _content = " code===" + _code.toString() + "\n result===" + _result;
-      });
-      if (2000 == map[shanyan_code]) {
-        //本机认证获取token成功
-      }
-    });
+
+//    //闪验SDK 本机认证获取token
+//    oneKeyLoginManager.startAuthentication().then((map) {
+//      setState(() {
+//        _code = map[shanyan_code];
+//        _result = map[shanyan_result];
+//        _content = " code===" + _code.toString() + "\n result===" + _result;
+//      });
+//      if (2000 == map[shanyan_code]) {
+//        //本机认证获取token成功
+//      }
+//    });
   }
 
   void setAuthThemeConfig() {
+
+    double screenWidthPortrait = window.physicalSize.width / window.devicePixelRatio; //竖屏宽
+
+    ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
+
+    /*iOS 页面样式设置*/
+    ShanYanUIConfigIOS uiConfig_ios = ShanYanUIConfigIOS();
+    /*iOS 基本控件 竖屏布局*/
+    ClOrientationLayOutIOS layOut_portrait_ios = ClOrientationLayOutIOS();
+//    /*iOS 基本控件 横屏布局，可选，不需横屏可以不设置*/
+//    ClOrientationLayOutIOS layOut_landscape_ios = ClOrientationLayOutIOS();
+    uiConfig_ios.layOut_portrait = layOut_portrait_ios;
+//    uiConfig_ios.layOut_landscape = layOut_landscape_ios;//横屏可选，不需横屏可以不设置
+
+    /*Android 页面样式设置 竖屏*/
+    ShanYanUIConfigAndroid uiConfig_portrait_android = ShanYanUIConfigAndroid();
+//    /*Android 页面样式设置 横屏，可选，不需横屏可以不设置*/
+//    ShanYanUIConfigAndroid uiConfig_landscape_android = ShanYanUIConfigAndroid();
+
+    shanYanUIConfig.ios = uiConfig_ios;
+    shanYanUIConfig.android_portrait = uiConfig_portrait_android;
+//    shanYanUIConfig.android_landscape = uiConfig_landscape_android;//横屏可选，不需横屏可以不设置
+
+
+    /*iOS 页面样式设置*/
+    shanYanUIConfig.ios.isFinish = false;
+    shanYanUIConfig.ios.navigationBackgroundClear = true;
+    shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+
+    shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+
+    //logo
+    layOut_portrait_ios.setLogoTop = 60;
+    layOut_portrait_ios.setLogoWidth = 60;
+    layOut_portrait_ios.setLogoHeight = 60;
+    layOut_portrait_ios.setLogoCenterX = 0;
+
+    //NumField （手机号控件）
+    layOut_portrait_ios.setNumFieldCenterY = -20;
+    layOut_portrait_ios.setNumFieldCenterX = 0;
+    layOut_portrait_ios.setNumFieldHeight = 20;
+    layOut_portrait_ios.setNumFieldWidth = 150;
+
+    //NumField （手机号控件）
+    layOut_portrait_ios.setLogBtnCenterY =  -20 + 10  + 20  + 15;
+    layOut_portrait_ios.setLogBtnCenterX = 0;
+    layOut_portrait_ios.setLogBtnHeight = 40;
+    layOut_portrait_ios.setLogBtnWidth = 50;
+
+
+    /*Android 页面样式具体设置*/
+    uiConfig_portrait_android.isFinish = false;
+    uiConfig_portrait_android.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+
+    uiConfig_portrait_android.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+    uiConfig_portrait_android.setLogoOffsetY = layOut_portrait_ios.setLogoTop - 50;
+    uiConfig_portrait_android.setLogoOffsetX = layOut_portrait_ios.setLogoLeft;
+    uiConfig_portrait_android.setLogoWidth = layOut_portrait_ios.setLogoWidth;
+    uiConfig_portrait_android.setLogoHeight = layOut_portrait_ios.setLogoHeight;
+
+
+
+
+    oneKeyLoginManager.setAuthThemeConfig(
+          uiConfig: shanYanUIConfig);
+    
     if (Platform.isIOS) {
       //iOS 全屏模式
+//
+//      double screenWidthPortrait =
+//          window.physicalSize.width / window.devicePixelRatio; //竖屏宽
+//
+//      var screenScale = screenWidthPortrait / 375.0; //相对iphone6屏幕
+//      if (screenScale > 1) {
+//        screenScale = 1; //大屏的无需放大
+//      }
+//
+//      //竖屏
+//      double clLayoutLogoTop_Portrait = screenScale * 60;
+//      double clLayoutLogoWidth_Portrait = 60 * screenScale;
+//      double clLayoutLogoHeight_Portrait = 60 * screenScale;
+//      double clLayoutLogoCenterX_Portrait = 0;
+//
+//      double clLayoutPhoneCenterY_Portrait = -20 * screenScale;
+//      double clLayoutPhoneLeft_Portrait = 50 * screenScale;
+//      double clLayoutPhoneRight_Portrait = -50 * screenScale;
+//      double clLayoutPhoneHeight_Portrait = 20 * screenScale;
+//
+//      double clLayoutLoginBtnCenterY_Portrait = clLayoutPhoneCenterY_Portrait +
+//          clLayoutPhoneHeight_Portrait * 0.5 * screenScale +
+//          20 * screenScale +
+//          15 * screenScale;
+//      double clLayoutLoginBtnHeight_Portrait = 30 * screenScale;
+//      double clLayoutLoginBtnLeft_Portrait = 70 * screenScale;
+//      double clLayoutLoginBtnRight_Portrait = -70 * screenScale;
+//
+//      double clLayoutAppPrivacyLeft_Portrait = 40 * screenScale;
+//      double clLayoutAppPrivacyRight_Portrait = -40 * screenScale;
+//      double clLayoutAppPrivacyBottom_Portrait = 0 * screenScale;
+//      double clLayoutAppPrivacyHeight_Portrait = 45 * screenScale;
+//
+//      double clLayoutSloganLeft_Portrait = 0;
+//      double clLayoutSloganRight_Portrait = 0;
+//      double clLayoutSloganHeight_Portrait = 15 * screenScale;
+//      double clLayoutSloganBottom_Portrait =
+//          clLayoutAppPrivacyBottom_Portrait - clLayoutAppPrivacyHeight_Portrait;
+//
+//      //横屏 （如app本身不支持横屏，可不需设置横屏下UI配置）
+//
+//      double clLayoutLogoWidth_Landscape = 60 * screenScale;
+//      double clLayoutLogoHeight_Landscape = 60 * screenScale;
+//      double clLayoutLogoCenterX_Landscape = 0;
+//      double clLayoutLogoTop_Landscape = 25 * screenScale;
+//
+//      double clLayoutPhoneCenterY_Landscape = -20 * screenScale;
+//      double clLayoutPhoneLeft_Landscape = 50 * screenScale;
+//      double clLayoutPhoneRight_Landscape = -50 * screenScale;
+//      double clLayoutPhoneHeight_Landscape = 20 * screenScale;
+//
+//      double clLayoutLoginBtnCenterY_Landscape =
+//          clLayoutPhoneCenterY_Landscape +
+//              clLayoutPhoneHeight_Landscape * 0.5 * screenScale +
+//              20 * screenScale +
+//              15 * screenScale;
+//      double clLayoutLoginBtnHeight_Landscape = 30 * screenScale;
+//      double clLayoutLoginBtnLeft_Landscape = 70 * screenScale;
+//      double clLayoutLoginBtnRight_Landscape = -70 * screenScale;
+//
+//      double clLayoutAppPrivacyLeft_Landscape = 40 * screenScale;
+//      double clLayoutAppPrivacyRight_Landscape = -40 * screenScale;
+//      double clLayoutAppPrivacyBottom_Landscape = 0 * screenScale;
+//      double clLayoutAppPrivacyHeight_Landscape = 45 * screenScale;
+//
+//      double clLayoutSloganLeft_Landscape = 0;
+//      double clLayoutSloganRight_Landscape = 0;
+//      double clLayoutSloganHeight_Landscape = 15 * screenScale;
+//      double clLayoutSloganBottom_Landscape =
+//          clLayoutAppPrivacyBottom_Landscape -
+//              clLayoutAppPrivacyHeight_Landscape;
+//
+//      this.ios_uiConfigure = {
+//        "clBackgroundImg": "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg",
+//
+//        "shouldAutorotate": true,
+//        /**支持方向
+//         * 如支持横竖屏，需同时设置 clOrientationLayOutPortrait 和 clOrientationLayOutLandscape
+//         * 0:UIInterfaceOrientationMaskPortrait
+//         * 1:UIInterfaceOrientationMaskLandscapeLeft
+//         * 2:UIInterfaceOrientationMaskLandscapeRight
+//         * 3:UIInterfaceOrientationMaskPortraitUpsideDown
+//         * 4:UIInterfaceOrientationMaskLandscape
+//         * 5:UIInterfaceOrientationMaskAll
+//         * 6:UIInterfaceOrientationMaskAllButUpsideDown
+//         * */
+//        "supportedInterfaceOrientations": 5,
+//
+//        /**偏好方向
+//         * -1:UIInterfaceOrientationUnknown
+//         * 0:UIInterfaceOrientationPortrait
+//         * 1:UIInterfaceOrientationPortraitUpsideDown
+//         * 2:UIInterfaceOrientationLandscapeLeft
+//         * 3:UIInterfaceOrientationLandscapeRight
+//         * */
+//        //偏好方向默认Portrait preferredInterfaceOrientationForPresentation: Number(5),
+//
+//        "clNavigationBackgroundClear": true,
+//        //导航栏透明
+//        "clNavigationBackBtnImage": "assets/Img/close-white.png",
+//        //返回按钮图片
+//        "clNavBackBtnAlimentRight": false,
+//        //返回按钮居右,设置自定义导航栏返回按钮时，以自定义为准
+//
+//        "clLogoImage": "assets/Img/logo_shanyan_text.png",
+//        //logo图片
+//
+//        "clLoginBtnText": "本机号一键登录",
+//        //一键登录按钮文字
+//        "clLoginBtnTextColor": [1, 1, 1, 1.0],
+//        //rgba
+//        "clLoginBtnBgColor": [0.2, 0.8, 0.2, 1.0],
+//        //rgba
+//        "clLoginBtnTextFont": 15 * screenScale,
+//        "clLoginBtnCornerRadius": 10,
+//        "clLoginBtnBorderWidth": 0.5,
+//        "clLoginBtnBorderColor": [0.1, 0.8, 0.1, 1.0],
+//        //rgba
+//
+//        "clPhoneNumberFont": 20.0 * screenScale,
+//
+//        "clAppPrivacyColor": [
+//          [0.6, 0.6, 0.6, 1.0],
+//          [0, 1, 0, 1.0]
+//        ],
+//        //2 item,commomTextColor and appPrivacyTextColor
+//        "clAppPrivacyTextFont": 11 * screenScale,
+//        "clAppPrivacyTextAlignment": 0,
+//        //0: center 1: left 2: right
+//        "clAppPrivacyFirst": ["测试连接A", "https://www.baidu.com"],
+//        // 2 item, name and url
+//        "clAppPrivacySecond": ["测试连接X", "https://www.sina.com"],
+//        // 2 item, name and url
+////        "clAppPrivacyThird": ["测试连接C", "https://www.sina.com"], // 2 item, name and url
+//
+//        "clAppPrivacyNormalDesTextFirst": "A",
+//        "clAppPrivacyNormalDesTextSecond": "B",
+//        "clAppPrivacyNormalDesTextThird": "-",
+//        "clAppPrivacyNormalDesTextFourth": "D",
+//        "clAppPrivacyNormalDesTextLast": " ",
+//
+//        "clCheckBoxVerticalAlignmentToAppPrivacyCenterY": true,
+//        "clCheckBoxSize": [30 * screenScale, 30 * screenScale],
+//        //2 item, width and height
+//        "clCheckBoxImageEdgeInsets": [
+//          2 * screenScale,
+//          10 * screenScale,
+//          13 * screenScale,
+//          5 * screenScale
+//        ],
+//        //4 item, top left bottom right
+//        "clCheckBoxUncheckedImage": "assets/Img/checkBoxNor.png",
+//        "clCheckBoxCheckedImage": "assets/Img/checkBoxSEL.png",
+//
+//        "clLoadingSize": [50, 50],
+//        //2 item, width and height
+//        "clLoadingTintColor": [0.2, 0.8, 0.2, 1],
+//        "clLoadingBackgroundColor": [1, 1, 1, 1],
+//        "clLoadingCornerRadius": 5,
+//
+//        //竖屏布局对象
+//        "clOrientationLayOutPortrait": {
+//          //控件
+//          "clLayoutLogoWidth": clLayoutLogoWidth_Portrait,
+//          "clLayoutLogoHeight": clLayoutLogoHeight_Portrait,
+//          "clLayoutLogoCenterX": clLayoutLogoCenterX_Portrait,
+//          "clLayoutLogoTop": clLayoutLogoTop_Portrait,
+//
+//          "clLayoutPhoneCenterY": clLayoutPhoneCenterY_Portrait,
+//          "clLayoutPhoneHeight": clLayoutPhoneHeight_Portrait,
+//          "clLayoutPhoneLeft": clLayoutPhoneLeft_Portrait,
+//          "clLayoutPhoneRight": clLayoutPhoneRight_Portrait,
+//
+//          "clLayoutLoginBtnCenterY": clLayoutLoginBtnCenterY_Portrait,
+//          "clLayoutLoginBtnHeight": clLayoutLoginBtnHeight_Portrait,
+//          "clLayoutLoginBtnLeft": clLayoutLoginBtnLeft_Portrait,
+//          "clLayoutLoginBtnRight": clLayoutLoginBtnRight_Portrait,
+//
+//          "clLayoutAppPrivacyLeft": clLayoutAppPrivacyLeft_Portrait,
+//          "clLayoutAppPrivacyRight": clLayoutAppPrivacyRight_Portrait,
+//          "clLayoutAppPrivacyBottom": clLayoutAppPrivacyBottom_Portrait,
+//          "clLayoutAppPrivacyHeight": clLayoutAppPrivacyHeight_Portrait,
+//
+//          "clLayoutSloganLeft": clLayoutSloganLeft_Portrait,
+//          "clLayoutSloganRight": clLayoutSloganRight_Portrait,
+//          "clLayoutSloganHeight": clLayoutSloganHeight_Portrait,
+//          "clLayoutSloganBottom": clLayoutSloganBottom_Portrait,
+//        },
+//        //横屏布局对象 （如app本身不支持横屏，可不需设置横屏下UI配置对象）
+//        "clOrientationLayOutLandscape": {
+//          //控件
+//          "clLayoutLogoWidth": clLayoutLogoWidth_Landscape,
+//          "clLayoutLogoHeight": clLayoutLogoHeight_Landscape,
+//          "clLayoutLogoCenterX": clLayoutLogoCenterX_Landscape,
+//          "clLayoutLogoTop": clLayoutLogoTop_Landscape,
+//
+//          "clLayoutPhoneCenterY": clLayoutPhoneCenterY_Landscape,
+//          "clLayoutPhoneHeight": clLayoutPhoneHeight_Landscape,
+//          "clLayoutPhoneLeft": clLayoutPhoneLeft_Landscape,
+//          "clLayoutPhoneRight": clLayoutPhoneRight_Landscape,
+//
+//          "clLayoutLoginBtnCenterY": clLayoutLoginBtnCenterY_Landscape,
+//          "clLayoutLoginBtnHeight": clLayoutLoginBtnHeight_Landscape,
+//          "clLayoutLoginBtnLeft": clLayoutLoginBtnLeft_Landscape,
+//          "clLayoutLoginBtnRight": clLayoutLoginBtnRight_Landscape,
+//
+//          "clLayoutAppPrivacyLeft": clLayoutAppPrivacyLeft_Landscape,
+//          "clLayoutAppPrivacyRight": clLayoutAppPrivacyRight_Landscape,
+//          "clLayoutAppPrivacyBottom": clLayoutAppPrivacyBottom_Landscape,
+//          "clLayoutAppPrivacyHeight": clLayoutAppPrivacyHeight_Landscape,
+//
+//          "clLayoutSloganLeft": clLayoutSloganLeft_Landscape,
+//          "clLayoutSloganRight": clLayoutSloganRight_Landscape,
+//          "clLayoutSloganHeight": clLayoutSloganHeight_Landscape,
+//          "clLayoutSloganBottom": clLayoutSloganBottom_Landscape,
+//        },
+//        //自定义控件
+//        "widgets": {
+//          "widget0": {
+//            "widgetId": "customView_nav_left",
+//            //字符标记
+//            "type": "Button",
+//            // 类型：Button：按钮，ImageView:图片 TextView:文本
+//            "navPosition": "navleft",
+//            //按钮位置 navleft:导航栏左侧 ，navright:导航栏右侧（不设置默认添加到授权页上）,当设置为导航栏控件时，仅宽高可设置，位置固定
+//            "textContent": "自定义左侧返回按钮",
+//            //文字
+//            "textFont": 11,
+//            //字体
+//            "textColor": [1, 1, 0, 1],
+//            //文字颜色[r,g,b,a]
+//            // backgroundColor: [0,0,1,1],//控件背景色[r,g,b,a]
+//            "image": "assets/Img/close-black.png",
+//
+//            // cornerRadius: 10,//圆角，设置圆角时请设置masksToBounds:true
+//            // masksToBounds:true,//圆角相关
+//
+//            "isFinish": true,
+//            //点击销毁授权页,
+//
+//            // clLayoutLeft:12,
+//            // clLayoutTop:60,
+//            // clLayoutRight:-12,
+//            // clLayoutBottom:-80,
+//            "clLayoutWidth": 40,
+//            "clLayoutHeight": 40,
+//            // clLayoutCenterX:0,
+//            // clLayoutCenterY:0,
+//          },
+//          "widgetnavRight": {
+//            "widgetId": "customView_nav_right",
+//            //字符标记
+//            "type": "Button",
+//            // 类型：Button：按钮，ImageView:图片 TextView:文本
+//            "navPosition": "navright",
+//            //按钮位置 navleft:导航栏左侧 ，navright:导航栏右侧（不设置默认添加到授权页上）,当设置为导航栏控件时，仅宽高可设置，位置固定
+//            "textContent": "自定义控件1（点击销毁授权页）",
+//            //文字
+//            "textFont": 13,
+//            //字体
+//            "textColor": [0, 1, 0, 1],
+//            //文字颜色[r,g,b,a]
+//            "backgroundColor": [0, 0, 1, 1],
+//            //控件背景色[r,g,b,a]
+//            "image": "assets/Img/checkbox-multiple-ma.png",
+//
+//            "cornerRadius": 10,
+//            //圆角，设置圆角时请设置masksToBounds:true
+//            "masksToBounds": true,
+//            //圆角相关
+//
+//            "isFinish": true,
+//            //点击销毁授权页,
+//
+//            // clLayoutLeft:12,
+//            // clLayoutTop:60,
+//            // clLayoutRight:-12,
+//            // clLayoutBottom:-80,
+//            "clLayoutWidth": 60,
+//            "clLayoutHeight": 40,
+//            // clLayoutCenterX:0,
+//            // clLayoutCenterY:0,
+//          },
+//          "widget1": {
+//            "widgetId": "customView_one", //字符标记
+//            "type": "Button", // 类型：Button：按钮，ImageView:图片 TextView:文本
+//            "textContent": "自定义控件1（点击销毁授权页）", //文字
+//            "textFont": 13, //字体
+//            "textColor": [0, 1, 0, 1], //文字颜色[r,g,b,a]
+//            "backgroundColor": [0, 0, 1, 1], //控件背景色[r,g,b,a]
+//            "image": "assets/Img/logo_shanyan_text.png",
+//
+//            "cornerRadius": 10, //圆角，设置圆角时请设置masksToBounds:true
+//            "masksToBounds": true, //圆角相关
+//
+//            "isFinish": true, //点击销毁授权页,
+//
+//            // clLayoutLeft:12,
+//            // clLayoutTop:60,
+//            // clLayoutRight:-12,
+//            "clLayoutBottom": -50,
+//            "clLayoutWidth": 180,
+//            "clLayoutHeight": 50,
+//            "clLayoutCenterX": 0,
+//            // clLayoutCenterY:0,
+//          },
+//          "widget2": {
+//            "widgetId": "customView_two",
+//            //字符标记
+//            "type": "TextView",
+//            // 类型：Button：按钮，ImageView:图片 TextView:文本
+//            "textContent": "自定义控件文本自定义控件文本自定义控件文本自定义控件文本自定义控件文本自定义控件文本自定义控件文本",
+//            //文字
+//            "textFont": 10,
+//            //字体
+//            "textColor": [1, 0.5, 0.6, 1],
+//            //文字颜色[r,g,b,a]
+//            "backgroundColor": [0, 1, 0, 1],
+//            //控件背景色[r,g,b,a]
+//            "numberOfLines": 0,
+//            //行数：默认单行， 0:无限，自动换行，其他：指定行数
+//            "textAlignment": 2,
+//            //0: center 1: left 2: right //仅TextView有效
+//
+//            "clLayoutLeft": 80,
+//            // clLayoutTop:60,
+//            "clLayoutRight": -80,
+//            "clLayoutBottom": -120,
+//            // clLayoutWidth:150,
+//            "clLayoutHeight": 60,
+//            // clLayoutCenterX:0,
+//            // // clLayoutCenterY:0,
+//          },
+//          "widget3": {
+//            "widgetId": "customView_three_imageView", //字符标记
+//            "type": "ImageView", // 类型：Button：按钮，ImageView:图片 TextView:文本
+//            "image": "assets/Img/shanyanlogo1.png",
+//            "backgroundColor": [0, 1, 0, 1], //控件背景色[r,g,b,a]
+//
+//            "cornerRadius": 40, //圆角，设置圆角时请设置masksToBounds:true
+//            "masksToBounds": true, //圆角相关
+//
+//            "clLayoutLeft": 80,
+//            "clLayoutTop": 160,
+//            "clLayoutRight": -80,
+//            // clLayoutBottom:-280,
+//            // clLayoutWidth:150,
+//            "clLayoutHeight": 80,
+//            // clLayoutCenterX:0,
+//            // clLayoutCenterY:0,
+//          }
+//        }
+//      };
 
-      double screenWidthPortrait =
-          window.physicalSize.width / window.devicePixelRatio; //竖屏宽
-
-      var screenScale = screenWidthPortrait / 375.0; //相对iphone6屏幕
-      if (screenScale > 1) {
-        screenScale = 1; //大屏的无需放大
-      }
-
-      //竖屏
-      double clLayoutLogoTop_Portrait = screenScale * 60;
-      double clLayoutLogoWidth_Portrait = 60 * screenScale;
-      double clLayoutLogoHeight_Portrait = 60 * screenScale;
-      double clLayoutLogoCenterX_Portrait = 0;
-
-      double clLayoutPhoneCenterY_Portrait = -20 * screenScale;
-      double clLayoutPhoneLeft_Portrait = 50 * screenScale;
-      double clLayoutPhoneRight_Portrait = -50 * screenScale;
-      double clLayoutPhoneHeight_Portrait = 20 * screenScale;
-
-      double clLayoutLoginBtnCenterY_Portrait = clLayoutPhoneCenterY_Portrait +
-          clLayoutPhoneHeight_Portrait * 0.5 * screenScale +
-          20 * screenScale +
-          15 * screenScale;
-      double clLayoutLoginBtnHeight_Portrait = 30 * screenScale;
-      double clLayoutLoginBtnLeft_Portrait = 70 * screenScale;
-      double clLayoutLoginBtnRight_Portrait = -70 * screenScale;
-
-      double clLayoutAppPrivacyLeft_Portrait = 40 * screenScale;
-      double clLayoutAppPrivacyRight_Portrait = -40 * screenScale;
-      double clLayoutAppPrivacyBottom_Portrait = 0 * screenScale;
-      double clLayoutAppPrivacyHeight_Portrait = 45 * screenScale;
-
-      double clLayoutSloganLeft_Portrait = 0;
-      double clLayoutSloganRight_Portrait = 0;
-      double clLayoutSloganHeight_Portrait = 15 * screenScale;
-      double clLayoutSloganBottom_Portrait =
-          clLayoutAppPrivacyBottom_Portrait - clLayoutAppPrivacyHeight_Portrait;
-
-      //横屏 （如app本身不支持横屏，可不需设置横屏下UI配置）
-
-      double clLayoutLogoWidth_Landscape = 60 * screenScale;
-      double clLayoutLogoHeight_Landscape = 60 * screenScale;
-      double clLayoutLogoCenterX_Landscape = 0;
-      double clLayoutLogoTop_Landscape = 25 * screenScale;
-
-      double clLayoutPhoneCenterY_Landscape = -20 * screenScale;
-      double clLayoutPhoneLeft_Landscape = 50 * screenScale;
-      double clLayoutPhoneRight_Landscape = -50 * screenScale;
-      double clLayoutPhoneHeight_Landscape = 20 * screenScale;
-
-      double clLayoutLoginBtnCenterY_Landscape =
-          clLayoutPhoneCenterY_Landscape +
-              clLayoutPhoneHeight_Landscape * 0.5 * screenScale +
-              20 * screenScale +
-              15 * screenScale;
-      double clLayoutLoginBtnHeight_Landscape = 30 * screenScale;
-      double clLayoutLoginBtnLeft_Landscape = 70 * screenScale;
-      double clLayoutLoginBtnRight_Landscape = -70 * screenScale;
-
-      double clLayoutAppPrivacyLeft_Landscape = 40 * screenScale;
-      double clLayoutAppPrivacyRight_Landscape = -40 * screenScale;
-      double clLayoutAppPrivacyBottom_Landscape = 0 * screenScale;
-      double clLayoutAppPrivacyHeight_Landscape = 45 * screenScale;
-
-      double clLayoutSloganLeft_Landscape = 0;
-      double clLayoutSloganRight_Landscape = 0;
-      double clLayoutSloganHeight_Landscape = 15 * screenScale;
-      double clLayoutSloganBottom_Landscape =
-          clLayoutAppPrivacyBottom_Landscape -
-              clLayoutAppPrivacyHeight_Landscape;
-
-      this.ios_uiConfigure = {
-        "clBackgroundImg": "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg",
-
-        "shouldAutorotate": true,
-        /**支持方向
-         * 如支持横竖屏，需同时设置 clOrientationLayOutPortrait 和 clOrientationLayOutLandscape
-         * 0:UIInterfaceOrientationMaskPortrait
-         * 1:UIInterfaceOrientationMaskLandscapeLeft
-         * 2:UIInterfaceOrientationMaskLandscapeRight
-         * 3:UIInterfaceOrientationMaskPortraitUpsideDown
-         * 4:UIInterfaceOrientationMaskLandscape
-         * 5:UIInterfaceOrientationMaskAll
-         * 6:UIInterfaceOrientationMaskAllButUpsideDown
-         * */
-        "supportedInterfaceOrientations": 5,
-
-        /**偏好方向
-         * -1:UIInterfaceOrientationUnknown
-         * 0:UIInterfaceOrientationPortrait
-         * 1:UIInterfaceOrientationPortraitUpsideDown
-         * 2:UIInterfaceOrientationLandscapeLeft
-         * 3:UIInterfaceOrientationLandscapeRight
-         * */
-        //偏好方向默认Portrait preferredInterfaceOrientationForPresentation: Number(5),
-
-        "clNavigationBackgroundClear": true,
-        //导航栏透明
-        "clNavigationBackBtnImage": "assets/Img/close-white.png",
-        //返回按钮图片
-        "clNavBackBtnAlimentRight": false,
-        //返回按钮居右,设置自定义导航栏返回按钮时，以自定义为准
-
-        "clLogoImage": "assets/Img/logo_shanyan_text.png",
-        //logo图片
-
-        "clLoginBtnText": "本机号一键登录",
-        //一键登录按钮文字
-        "clLoginBtnTextColor": [1, 1, 1, 1.0],
-        //rgba
-        "clLoginBtnBgColor": [0.2, 0.8, 0.2, 1.0],
-        //rgba
-        "clLoginBtnTextFont": 15 * screenScale,
-        "clLoginBtnCornerRadius": 10,
-        "clLoginBtnBorderWidth": 0.5,
-        "clLoginBtnBorderColor": [0.1, 0.8, 0.1, 1.0],
-        //rgba
-
-        "clPhoneNumberFont": 20.0 * screenScale,
-
-        "clAppPrivacyColor": [
-          [0.6, 0.6, 0.6, 1.0],
-          [0, 1, 0, 1.0]
-        ],
-        //2 item,commomTextColor and appPrivacyTextColor
-        "clAppPrivacyTextFont": 11 * screenScale,
-        "clAppPrivacyTextAlignment": 0,
-        //0: center 1: left 2: right
-        "clAppPrivacyFirst": ["测试连接A", "https://www.baidu.com"],
-        // 2 item, name and url
-        "clAppPrivacySecond": ["测试连接X", "https://www.sina.com"],
-        // 2 item, name and url
-//        "clAppPrivacyThird": ["测试连接C", "https://www.sina.com"], // 2 item, name and url
-
-        "clAppPrivacyNormalDesTextFirst": "A",
-        "clAppPrivacyNormalDesTextSecond": "B",
-        "clAppPrivacyNormalDesTextThird": "-",
-        "clAppPrivacyNormalDesTextFourth": "D",
-        "clAppPrivacyNormalDesTextLast": " ",
-
-        "clCheckBoxVerticalAlignmentToAppPrivacyCenterY": true,
-        "clCheckBoxSize": [30 * screenScale, 30 * screenScale],
-        //2 item, width and height
-        "clCheckBoxImageEdgeInsets": [
-          2 * screenScale,
-          10 * screenScale,
-          13 * screenScale,
-          5 * screenScale
-        ],
-        //4 item, top left bottom right
-        "clCheckBoxUncheckedImage": "assets/Img/checkBoxNor.png",
-        "clCheckBoxCheckedImage": "assets/Img/checkBoxSEL.png",
-
-        "clLoadingSize": [50, 50],
-        //2 item, width and height
-        "clLoadingTintColor": [0.2, 0.8, 0.2, 1],
-        "clLoadingBackgroundColor": [1, 1, 1, 1],
-        "clLoadingCornerRadius": 5,
-
-        //竖屏布局对象
-        "clOrientationLayOutPortrait": {
-          //控件
-          "clLayoutLogoWidth": clLayoutLogoWidth_Portrait,
-          "clLayoutLogoHeight": clLayoutLogoHeight_Portrait,
-          "clLayoutLogoCenterX": clLayoutLogoCenterX_Portrait,
-          "clLayoutLogoTop": clLayoutLogoTop_Portrait,
-
-          "clLayoutPhoneCenterY": clLayoutPhoneCenterY_Portrait,
-          "clLayoutPhoneHeight": clLayoutPhoneHeight_Portrait,
-          "clLayoutPhoneLeft": clLayoutPhoneLeft_Portrait,
-          "clLayoutPhoneRight": clLayoutPhoneRight_Portrait,
-
-          "clLayoutLoginBtnCenterY": clLayoutLoginBtnCenterY_Portrait,
-          "clLayoutLoginBtnHeight": clLayoutLoginBtnHeight_Portrait,
-          "clLayoutLoginBtnLeft": clLayoutLoginBtnLeft_Portrait,
-          "clLayoutLoginBtnRight": clLayoutLoginBtnRight_Portrait,
-
-          "clLayoutAppPrivacyLeft": clLayoutAppPrivacyLeft_Portrait,
-          "clLayoutAppPrivacyRight": clLayoutAppPrivacyRight_Portrait,
-          "clLayoutAppPrivacyBottom": clLayoutAppPrivacyBottom_Portrait,
-          "clLayoutAppPrivacyHeight": clLayoutAppPrivacyHeight_Portrait,
-
-          "clLayoutSloganLeft": clLayoutSloganLeft_Portrait,
-          "clLayoutSloganRight": clLayoutSloganRight_Portrait,
-          "clLayoutSloganHeight": clLayoutSloganHeight_Portrait,
-          "clLayoutSloganBottom": clLayoutSloganBottom_Portrait,
-        },
-        //横屏布局对象 （如app本身不支持横屏，可不需设置横屏下UI配置对象）
-        "clOrientationLayOutLandscape": {
-          //控件
-          "clLayoutLogoWidth": clLayoutLogoWidth_Landscape,
-          "clLayoutLogoHeight": clLayoutLogoHeight_Landscape,
-          "clLayoutLogoCenterX": clLayoutLogoCenterX_Landscape,
-          "clLayoutLogoTop": clLayoutLogoTop_Landscape,
-
-          "clLayoutPhoneCenterY": clLayoutPhoneCenterY_Landscape,
-          "clLayoutPhoneHeight": clLayoutPhoneHeight_Landscape,
-          "clLayoutPhoneLeft": clLayoutPhoneLeft_Landscape,
-          "clLayoutPhoneRight": clLayoutPhoneRight_Landscape,
-
-          "clLayoutLoginBtnCenterY": clLayoutLoginBtnCenterY_Landscape,
-          "clLayoutLoginBtnHeight": clLayoutLoginBtnHeight_Landscape,
-          "clLayoutLoginBtnLeft": clLayoutLoginBtnLeft_Landscape,
-          "clLayoutLoginBtnRight": clLayoutLoginBtnRight_Landscape,
-
-          "clLayoutAppPrivacyLeft": clLayoutAppPrivacyLeft_Landscape,
-          "clLayoutAppPrivacyRight": clLayoutAppPrivacyRight_Landscape,
-          "clLayoutAppPrivacyBottom": clLayoutAppPrivacyBottom_Landscape,
-          "clLayoutAppPrivacyHeight": clLayoutAppPrivacyHeight_Landscape,
-
-          "clLayoutSloganLeft": clLayoutSloganLeft_Landscape,
-          "clLayoutSloganRight": clLayoutSloganRight_Landscape,
-          "clLayoutSloganHeight": clLayoutSloganHeight_Landscape,
-          "clLayoutSloganBottom": clLayoutSloganBottom_Landscape,
-        },
-        //自定义控件
-        "widgets": {
-          "widget0": {
-            "widgetId": "customView_nav_left",
-            //字符标记
-            "type": "Button",
-            // 类型：Button：按钮，ImageView:图片 TextView:文本
-            "navPosition": "navleft",
-            //按钮位置 navleft:导航栏左侧 ，navright:导航栏右侧（不设置默认添加到授权页上）,当设置为导航栏控件时，仅宽高可设置，位置固定
-            "textContent": "自定义左侧返回按钮",
-            //文字
-            "textFont": 11,
-            //字体
-            "textColor": [1, 1, 0, 1],
-            //文字颜色[r,g,b,a]
-            // backgroundColor: [0,0,1,1],//控件背景色[r,g,b,a]
-            "image": "assets/Img/close-black.png",
-
-            // cornerRadius: 10,//圆角，设置圆角时请设置masksToBounds:true
-            // masksToBounds:true,//圆角相关
-
-            "isFinish": true,
-            //点击销毁授权页,
-
-            // clLayoutLeft:12,
-            // clLayoutTop:60,
-            // clLayoutRight:-12,
-            // clLayoutBottom:-80,
-            "clLayoutWidth": 40,
-            "clLayoutHeight": 40,
-            // clLayoutCenterX:0,
-            // clLayoutCenterY:0,
-          },
-          "widgetnavRight": {
-            "widgetId": "customView_nav_right",
-            //字符标记
-            "type": "Button",
-            // 类型：Button：按钮，ImageView:图片 TextView:文本
-            "navPosition": "navright",
-            //按钮位置 navleft:导航栏左侧 ，navright:导航栏右侧（不设置默认添加到授权页上）,当设置为导航栏控件时，仅宽高可设置，位置固定
-            "textContent": "自定义控件1（点击销毁授权页）",
-            //文字
-            "textFont": 13,
-            //字体
-            "textColor": [0, 1, 0, 1],
-            //文字颜色[r,g,b,a]
-            "backgroundColor": [0, 0, 1, 1],
-            //控件背景色[r,g,b,a]
-            "image": "assets/Img/checkbox-multiple-ma.png",
-
-            "cornerRadius": 10,
-            //圆角，设置圆角时请设置masksToBounds:true
-            "masksToBounds": true,
-            //圆角相关
-
-            "isFinish": true,
-            //点击销毁授权页,
-
-            // clLayoutLeft:12,
-            // clLayoutTop:60,
-            // clLayoutRight:-12,
-            // clLayoutBottom:-80,
-            "clLayoutWidth": 60,
-            "clLayoutHeight": 40,
-            // clLayoutCenterX:0,
-            // clLayoutCenterY:0,
-          },
-          "widget1": {
-            "widgetId": "customView_one", //字符标记
-            "type": "Button", // 类型：Button：按钮，ImageView:图片 TextView:文本
-            "textContent": "自定义控件1（点击销毁授权页）", //文字
-            "textFont": 13, //字体
-            "textColor": [0, 1, 0, 1], //文字颜色[r,g,b,a]
-            "backgroundColor": [0, 0, 1, 1], //控件背景色[r,g,b,a]
-            "image": "assets/Img/logo_shanyan_text.png",
-
-            "cornerRadius": 10, //圆角，设置圆角时请设置masksToBounds:true
-            "masksToBounds": true, //圆角相关
-
-            "isFinish": true, //点击销毁授权页,
-
-            // clLayoutLeft:12,
-            // clLayoutTop:60,
-            // clLayoutRight:-12,
-            "clLayoutBottom": -50,
-            "clLayoutWidth": 180,
-            "clLayoutHeight": 50,
-            "clLayoutCenterX": 0,
-            // clLayoutCenterY:0,
-          },
-          "widget2": {
-            "widgetId": "customView_two",
-            //字符标记
-            "type": "TextView",
-            // 类型：Button：按钮，ImageView:图片 TextView:文本
-            "textContent": "自定义控件文本自定义控件文本自定义控件文本自定义控件文本自定义控件文本自定义控件文本自定义控件文本",
-            //文字
-            "textFont": 10,
-            //字体
-            "textColor": [1, 0.5, 0.6, 1],
-            //文字颜色[r,g,b,a]
-            "backgroundColor": [0, 1, 0, 1],
-            //控件背景色[r,g,b,a]
-            "numberOfLines": 0,
-            //行数：默认单行， 0:无限，自动换行，其他：指定行数
-            "textAlignment": 2,
-            //0: center 1: left 2: right //仅TextView有效
-
-            "clLayoutLeft": 80,
-            // clLayoutTop:60,
-            "clLayoutRight": -80,
-            "clLayoutBottom": -120,
-            // clLayoutWidth:150,
-            "clLayoutHeight": 60,
-            // clLayoutCenterX:0,
-            // // clLayoutCenterY:0,
-          },
-          "widget3": {
-            "widgetId": "customView_three_imageView", //字符标记
-            "type": "ImageView", // 类型：Button：按钮，ImageView:图片 TextView:文本
-            "image": "assets/Img/shanyanlogo1.png",
-            "backgroundColor": [0, 1, 0, 1], //控件背景色[r,g,b,a]
-
-            "cornerRadius": 40, //圆角，设置圆角时请设置masksToBounds:true
-            "masksToBounds": true, //圆角相关
-
-            "clLayoutLeft": 80,
-            "clLayoutTop": 160,
-            "clLayoutRight": -80,
-            // clLayoutBottom:-280,
-            // clLayoutWidth:150,
-            "clLayoutHeight": 80,
-            // clLayoutCenterX:0,
-            // clLayoutCenterY:0,
-          }
-        }
-      };
-
-      //设置自定义控件点击回调,返回信息带有widgetId
-      oneKeyLoginManager.setCustomInterface().then((map) {
-        setState(() {
-          _content = "自定义控件点击:" + map.toString();
-        });
-      });
+//      //设置自定义控件点击回调,返回信息带有widgetId
+//      oneKeyLoginManager.setCustomInterface().then((map) {
+//        setState(() {
+//          _content = "自定义控件点击:" + map.toString();
+//        });
+//      });
     } else if (Platform.isAndroid) {
-      ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
-      shanYanUIConfig.isFinish = true;
-      shanYanUIConfig.setLogBtnText = "免密登录";
-      shanYanUIConfig.setLogoImgPath = "shanyan_logo";
-      shanYanUIConfig.setAuthBGImgPath = "sy_login_test_bg";
-      //shanYanUIConfig.setAppPrivacyColor = [0xffffffff,0xff0085d0];
-      //shanYanUIConfig.setFullScreen = true;
-      shanYanUIConfig.setAppPrivacyOne = [
-        "闪验用户协议",
-        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html"
-      ];
-      shanYanUIConfig.setAppPrivacyTwo = [
-        "闪验隐私政策",
-        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
-      ];
-      shanYanUIConfig.setAppPrivacyThree = [
-        "用户服务条款",
-        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
-      ];
-      shanYanUIConfig.setAppPrivacyColor = ["#808080", "#00cc00"];
-      shanYanUIConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "并授权使用本机号码"];
-      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
-      List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
-      String layout_name = "relative_item_view";
-      ShanYanCustomWidgetLayout relativeLayoutWidget =
-          ShanYanCustomWidgetLayout(
-              layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
-      relativeLayoutWidget.top = 380;
-      relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
-      oneKeyLoginManager.addClikWidgetLayoutEventListener(
-          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
-        Map map = widgetLayoutOnClickEvent.toMap();
-        if ("weixin" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 微信");
-        } else if ("qq" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 QQ");
-        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 微博");
-        }
-      });
-
-      shanYanCustomWidgetLayout.add(relativeLayoutWidget);
-
-      List<ShanYanCustomWidget> shanyanCustomWidget = [];
-      final String btn_widgetId = "other_custom_button"; // 标识控件 id
-      ShanYanCustomWidget buttonWidget =
-          ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.TextView);
-      buttonWidget.textContent = "其他方式登录 >";
-      buttonWidget.top = 300;
-      buttonWidget.width = 150;
-      buttonWidget.height = 40;
-      buttonWidget.backgroundColor = "#330000";
-      buttonWidget.isFinish = false;
-      //buttonWidget.btnNormalImageName = "";
-      //buttonWidget.btnPressedImageName = "";
-      buttonWidget.textAlignment = ShanYanCustomWidgetGravityType.center;
-      // 添加点击事件监听
-      oneKeyLoginManager.addClikWidgetEventListener(btn_widgetId, (eventId) {
-        if ("other_custom_button" == eventId) {
-          _toast("点击其他方式登录");
-        }
-      });
-      shanyanCustomWidget.add(buttonWidget);
-      shanYanUIConfig.widgetLayout = shanYanCustomWidgetLayout;
-      shanYanUIConfig.widgets = shanyanCustomWidget;
-
-      ShanYanUIConfig landscapeConfig = ShanYanUIConfig();
-      landscapeConfig.isFinish = true;
-      landscapeConfig.setLogBtnText = "免密登录";
-      landscapeConfig.setLogoImgPath = "shanyan_logo";
-      landscapeConfig.setAuthBGImgPath = "sy_login_test_bg";
-      landscapeConfig.setLogoHeight = 36;
-      landscapeConfig.setLogoOffsetY = 14;
-      landscapeConfig.setNumFieldOffsetY = 65;
-      landscapeConfig.setSloganOffsetY = 100;
-      landscapeConfig.setLogBtnOffsetY = 120;
-      landscapeConfig.setAppPrivacyOne = [
-        "闪验用户协议",
-        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html"
-      ];
-      landscapeConfig.setAppPrivacyTwo = [
-        "闪验隐私政策",
-        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
-      ];
-      landscapeConfig.setAppPrivacyThree = [
-        "用户服务条款",
-        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
-      ];
-      landscapeConfig.setAppPrivacyColor = ["#808080", "#00cc00"];
-      landscapeConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "并授权使用本机号码"];
-      landscapeConfig.setPrivacyOffsetBottomY = 10;
-      landscapeConfig.setShanYanSloganHidden = true;
-      landscapeConfig.setCheckBoxMargin = [0, 3, 5, 0];
-      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
-      List<ShanYanCustomWidgetLayout> landscapeCustomWidgetLayout = [];
-      String landscape_layout_name = "relative_item_view";
-      ShanYanCustomWidgetLayout landscapeRelativeLayoutWidget =
-          ShanYanCustomWidgetLayout(landscape_layout_name,
-              ShanYanCustomWidgetLayoutType.RelativeLayout);
-      landscapeRelativeLayoutWidget.top = 170;
-      landscapeRelativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
-      oneKeyLoginManager.addClikWidgetLayoutEventListener(
-          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
-        Map map = widgetLayoutOnClickEvent.toMap();
-        if ("weixin" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 微信");
-        } else if ("qq" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 QQ");
-        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 微博");
-        }
-      });
-
-      landscapeCustomWidgetLayout.add(landscapeRelativeLayoutWidget);
-
-      List<ShanYanCustomWidget> landscapeCustomWidget = [];
-      final String landscape_btn_widgetId = "other_custom_button"; // 标识控件 id
-      ShanYanCustomWidget landscapeButtonWidget = ShanYanCustomWidget(
-          landscape_btn_widgetId, ShanYanCustomWidgetType.TextView);
-      landscapeButtonWidget.textContent = "其他方式登录 >";
-      landscapeButtonWidget.top = 10;
-      landscapeButtonWidget.width = 150;
-      landscapeButtonWidget.height = 40;
-      landscapeButtonWidget.backgroundColor = "#330000";
-      landscapeButtonWidget.isFinish = false;
-      //buttonWidget.btnNormalImageName = "";
-      //buttonWidget.btnPressedImageName = "";
-      landscapeButtonWidget.textAlignment =
-          ShanYanCustomWidgetGravityType.center;
-      // 添加点击事件监听
-      oneKeyLoginManager.addClikWidgetEventListener(landscape_btn_widgetId,
-          (eventId) {
-        if ("other_custom_button" == eventId) {
-          _toast("点击其他方式登录");
-        }
-      });
-      landscapeCustomWidget.add(landscapeButtonWidget);
-      landscapeConfig.widgetLayout = landscapeCustomWidgetLayout;
-      oneKeyLoginManager.setAuthThemeConfig(
-          uiConfig: shanYanUIConfig, landscapeConfig: landscapeConfig);
+//      ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
+//      shanYanUIConfig.isFinish = true;
+//      shanYanUIConfig.setLogBtnText = "免密登录";
+//      shanYanUIConfig.setLogoImgPath = "shanyan_logo";
+//      shanYanUIConfig.setAuthBGImgPath = "sy_login_test_bg";
+//      //shanYanUIConfig.setAppPrivacyColor = [0xffffffff,0xff0085d0];
+//      //shanYanUIConfig.setFullScreen = true;
+//      shanYanUIConfig.setAppPrivacyOne = [
+//        "闪验用户协议",
+//        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html"
+//      ];
+//      shanYanUIConfig.setAppPrivacyTwo = [
+//        "闪验隐私政策",
+//        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
+//      ];
+//      shanYanUIConfig.setAppPrivacyThree = [
+//        "用户服务条款",
+//        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
+//      ];
+//      shanYanUIConfig.setAppPrivacyColor = ["#808080", "#00cc00"];
+//      shanYanUIConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "并授权使用本机号码"];
+//      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
+//      List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
+//      String layout_name = "relative_item_view";
+//      ShanYanCustomWidgetLayout relativeLayoutWidget =
+//          ShanYanCustomWidgetLayout(
+//              layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+//      relativeLayoutWidget.top = 380;
+//      relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+//      oneKeyLoginManager.addClikWidgetLayoutEventListener(
+//          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
+//        Map map = widgetLayoutOnClickEvent.toMap();
+//        if ("weixin" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 微信");
+//        } else if ("qq" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 QQ");
+//        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 微博");
+//        }
+//      });
+//
+//      shanYanCustomWidgetLayout.add(relativeLayoutWidget);
+//
+//      List<ShanYanCustomWidget> shanyanCustomWidget = [];
+//      final String btn_widgetId = "other_custom_button"; // 标识控件 id
+//      ShanYanCustomWidget buttonWidget =
+//          ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.TextView);
+//      buttonWidget.textContent = "其他方式登录 >";
+//      buttonWidget.top = 300;
+//      buttonWidget.width = 150;
+//      buttonWidget.height = 40;
+//      buttonWidget.backgroundColor = "#330000";
+//      buttonWidget.isFinish = false;
+//      //buttonWidget.btnNormalImageName = "";
+//      //buttonWidget.btnPressedImageName = "";
+//      buttonWidget.textAlignment = ShanYanCustomWidgetGravityType.center;
+//      // 添加点击事件监听
+//      oneKeyLoginManager.addClikWidgetEventListener(btn_widgetId, (eventId) {
+//        if ("other_custom_button" == eventId) {
+//          _toast("点击其他方式登录");
+//        }
+//      });
+//      shanyanCustomWidget.add(buttonWidget);
+//      shanYanUIConfig.widgetLayout = shanYanCustomWidgetLayout;
+//      shanYanUIConfig.widgets = shanyanCustomWidget;
+//
+//      ShanYanUIConfig landscapeConfig = ShanYanUIConfig();
+//      landscapeConfig.isFinish = true;
+//      landscapeConfig.setLogBtnText = "免密登录";
+//      landscapeConfig.setLogoImgPath = "shanyan_logo";
+//      landscapeConfig.setAuthBGImgPath = "sy_login_test_bg";
+//      landscapeConfig.setLogoHeight = 36;
+//      landscapeConfig.setLogoOffsetY = 14;
+//      landscapeConfig.setNumFieldOffsetY = 65;
+//      landscapeConfig.setSloganOffsetY = 100;
+//      landscapeConfig.setLogBtnOffsetY = 120;
+//      landscapeConfig.setAppPrivacyOne = [
+//        "闪验用户协议",
+//        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html"
+//      ];
+//      landscapeConfig.setAppPrivacyTwo = [
+//        "闪验隐私政策",
+//        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
+//      ];
+//      landscapeConfig.setAppPrivacyThree = [
+//        "用户服务条款",
+//        "https://api.253.com/api_doc/yin-si-zheng-ce/ge-ren-xin-xi-bao-hu-sheng-ming.html"
+//      ];
+//      landscapeConfig.setAppPrivacyColor = ["#808080", "#00cc00"];
+//      landscapeConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "并授权使用本机号码"];
+//      landscapeConfig.setPrivacyOffsetBottomY = 10;
+//      landscapeConfig.setShanYanSloganHidden = true;
+//      landscapeConfig.setCheckBoxMargin = [0, 3, 5, 0];
+//      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
+//      List<ShanYanCustomWidgetLayout> landscapeCustomWidgetLayout = [];
+//      String landscape_layout_name = "relative_item_view";
+//      ShanYanCustomWidgetLayout landscapeRelativeLayoutWidget =
+//          ShanYanCustomWidgetLayout(landscape_layout_name,
+//              ShanYanCustomWidgetLayoutType.RelativeLayout);
+//      landscapeRelativeLayoutWidget.top = 170;
+//      landscapeRelativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+//      oneKeyLoginManager.addClikWidgetLayoutEventListener(
+//          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
+//        Map map = widgetLayoutOnClickEvent.toMap();
+//        if ("weixin" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 微信");
+//        } else if ("qq" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 QQ");
+//        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 微博");
+//        }
+//      });
+//
+//      landscapeCustomWidgetLayout.add(landscapeRelativeLayoutWidget);
+//
+//      List<ShanYanCustomWidget> landscapeCustomWidget = [];
+//      final String landscape_btn_widgetId = "other_custom_button"; // 标识控件 id
+//      ShanYanCustomWidget landscapeButtonWidget = ShanYanCustomWidget(
+//          landscape_btn_widgetId, ShanYanCustomWidgetType.TextView);
+//      landscapeButtonWidget.textContent = "其他方式登录 >";
+//      landscapeButtonWidget.top = 10;
+//      landscapeButtonWidget.width = 150;
+//      landscapeButtonWidget.height = 40;
+//      landscapeButtonWidget.backgroundColor = "#330000";
+//      landscapeButtonWidget.isFinish = false;
+//      //buttonWidget.btnNormalImageName = "";
+//      //buttonWidget.btnPressedImageName = "";
+//      landscapeButtonWidget.textAlignment =
+//          ShanYanCustomWidgetGravityType.center;
+//      // 添加点击事件监听
+//      oneKeyLoginManager.addClikWidgetEventListener(landscape_btn_widgetId,
+//          (eventId) {
+//        if ("other_custom_button" == eventId) {
+//          _toast("点击其他方式登录");
+//        }
+//      });
+//      landscapeCustomWidget.add(landscapeButtonWidget);
+//      landscapeConfig.widgetLayout = landscapeCustomWidgetLayout;
+//      oneKeyLoginManager.setAuthThemeConfig(
+//          uiConfig: shanYanUIConfig, landscapeConfig: landscapeConfig);
     }
 
     setState(() {
@@ -1005,50 +1086,50 @@ class _MyAppState extends State<MyApp> {
         },
       };
     } else if (Platform.isAndroid) {
-      ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
-      shanYanUIConfig.setLogBtnText = "免密登录";
-      //shanYanUIConfig.setAuthBgGifPath = "test";
-      //shanYanUIConfig.setFullScreen = true;
-      shanYanUIConfig.setAppPrivacyOne = ["协议1", "https://baidu.com/"];
-      shanYanUIConfig.setAppPrivacyTwo = ["协议2", "https://baidu.com/"];
-      shanYanUIConfig.setAppPrivacyThree = ["协议3", "https://baidu.com/"];
-      shanYanUIConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "授权"];
-      shanYanUIConfig.setDialogTheme = ["120", "150", "0", "0", "false"];
-      shanYanUIConfig.setLogoWidth = 108;
-      shanYanUIConfig.setLogoHeight = 45;
-      shanYanUIConfig.setLogoHidden = false;
-      shanYanUIConfig.setLogoOffsetY = 10;
-      shanYanUIConfig.setNumFieldOffsetY = 60;
-      shanYanUIConfig.setNumberSize = 18;
-      shanYanUIConfig.setLogBtnOffsetY = 120;
-      shanYanUIConfig.setLogBtnTextSize = 15;
-      shanYanUIConfig.setLogBtnWidth = 250;
-      shanYanUIConfig.setLogoHeight = 40;
-      shanYanUIConfig.setLogBtnOffsetY = 130;
-      shanYanUIConfig.setSloganHidden = true;
-
-      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
-      List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
-      String layout_name = "relative_item_view";
-      ShanYanCustomWidgetLayout relativeLayoutWidget =
-          ShanYanCustomWidgetLayout(
-              layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
-      relativeLayoutWidget.top = 200;
-      relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
-      oneKeyLoginManager.addClikWidgetLayoutEventListener(
-          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
-        Map map = widgetLayoutOnClickEvent.toMap();
-        if ("weixin" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 微信");
-        } else if ("qq" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 QQ");
-        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
-          _toast("点击 微博");
-        }
-      });
-
-      shanYanCustomWidgetLayout.add(relativeLayoutWidget);
-      oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
+//      ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
+//      shanYanUIConfig.setLogBtnText = "免密登录";
+//      //shanYanUIConfig.setAuthBgGifPath = "test";
+//      //shanYanUIConfig.setFullScreen = true;
+//      shanYanUIConfig.setAppPrivacyOne = ["协议1", "https://baidu.com/"];
+//      shanYanUIConfig.setAppPrivacyTwo = ["协议2", "https://baidu.com/"];
+//      shanYanUIConfig.setAppPrivacyThree = ["协议3", "https://baidu.com/"];
+//      shanYanUIConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "授权"];
+//      shanYanUIConfig.setDialogTheme = ["120", "150", "0", "0", "false"];
+//      shanYanUIConfig.setLogoWidth = 108;
+//      shanYanUIConfig.setLogoHeight = 45;
+//      shanYanUIConfig.setLogoHidden = false;
+//      shanYanUIConfig.setLogoOffsetY = 10;
+//      shanYanUIConfig.setNumFieldOffsetY = 60;
+//      shanYanUIConfig.setNumberSize = 18;
+//      shanYanUIConfig.setLogBtnOffsetY = 120;
+//      shanYanUIConfig.setLogBtnTextSize = 15;
+//      shanYanUIConfig.setLogBtnWidth = 250;
+//      shanYanUIConfig.setLogoHeight = 40;
+//      shanYanUIConfig.setLogBtnOffsetY = 130;
+//      shanYanUIConfig.setSloganHidden = true;
+//
+//      //shanYanUIConfig.setLoadingView = "custom_loading_dialog";
+//      List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
+//      String layout_name = "relative_item_view";
+//      ShanYanCustomWidgetLayout relativeLayoutWidget =
+//          ShanYanCustomWidgetLayout(
+//              layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+//      relativeLayoutWidget.top = 200;
+//      relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+//      oneKeyLoginManager.addClikWidgetLayoutEventListener(
+//          (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
+//        Map map = widgetLayoutOnClickEvent.toMap();
+//        if ("weixin" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 微信");
+//        } else if ("qq" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 QQ");
+//        } else if ("weibo" == map[shanyan_widgetLayoutId]) {
+//          _toast("点击 微博");
+//        }
+//      });
+//
+//      shanYanCustomWidgetLayout.add(relativeLayoutWidget);
+//      oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     }
     setState(() {
       _content = "界面配置成功";

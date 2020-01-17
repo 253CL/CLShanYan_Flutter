@@ -6,10 +6,11 @@
 
 @interface ShanyanPlugin ()
 @property (nonatomic,strong)id notifObserver;
-@property (nonatomic,copy)FlutterResult openLoginAuthListener;
-@property (nonatomic,copy)FlutterResult oneKeyLoginListener;
+
 @property (nonatomic,copy)FlutterResult customInterface ;
 @property(nonatomic,strong)NSObject<FlutterPluginRegistrar>*registrar;
+
+@property(nonatomic,strong)FlutterMethodChannel* channel;
 @end
 
 @implementation ShanyanPlugin
@@ -28,6 +29,7 @@
       methodChannelWithName:@"shanyan"
             binaryMessenger:[registrar messenger]];
     ShanyanPlugin* instance = [[ShanyanPlugin alloc] init];
+    instance.channel = channel;
     instance.registrar = registrar;
     [registrar addMethodCallDelegate:instance channel:channel];
 }
@@ -39,54 +41,46 @@
       [self init:call complete:result];
   }else if ([@"getPhoneInfo" isEqualToString:call.method]){
       [self preGetPhonenumber:result];
-  }else if ([@"setCustomInterface" isEqualToString:call.method]){
-      [self setCustomInterface:result];
-  }else if ([@"openLoginAuthListener" isEqualToString:call.method]){
-      [self openLoginAuthListener:result];
-  }else if ([@"oneKeyLoginListener" isEqualToString:call.method]){
-      [self oneKeyLoginListener:result];
-  }else if ([@"quickAuthLoginWithConfigure" isEqualToString:call.method]){
-      [self quickAuthLoginWithConfigure:call.arguments];
-  }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
-      [self finishAuthControllerCompletion:result];
-  }else if ([@"startAuthentication" isEqualToString:call.method]){
-      [self startAuthentication:result];
+  }else if ([@"openLoginAuth" isEqualToString:call.method]){
+      [self quickAuthLoginWithConfigure:call.arguments complete:result];
   } else {
     result(FlutterMethodNotImplemented);
   }
+    
+//    else if ([@"setCustomInterface" isEqualToString:call.method]){
+//        [self setCustomInterface:result];
+//    }else if ([@"openLoginAuthListener" isEqualToString:call.method]){
+//        [self openLoginAuthListener:result];
+//    }else if ([@"oneKeyLoginListener" isEqualToString:call.method]){
+//        [self oneKeyLoginListener:result];
+//    }else if ([@"quickAuthLoginWithConfigure" isEqualToString:call.method]){
+//        [self quickAuthLoginWithConfigure:call.arguments];
+//    }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
+//        [self finishAuthControllerCompletion:result];
+//    }else if ([@"startAuthentication" isEqualToString:call.method]){
+//        [self startAuthentication:result];
+//    }
 }
 
 - (void)init:(FlutterMethodCall*)call complete:(FlutterResult)complete{
     
     NSDictionary * argv = call.arguments;
     if (argv == nil || ![argv isKindOfClass:[NSDictionary class]]) {
+        if (complete) {
+            NSMutableDictionary * result = [NSMutableDictionary new];
+            result[@"code"] = @(1001);
+            result[@"message"] = @"请设置参数";
+            complete(result);
+        }
         return;
     }
     
     NSString * appId = argv[@"appId"];
-    NSString * appKey = argv[@"appkey"];
 
-    [CLShanYanSDKManager initWithAppId:appId AppKey:appKey complete:^(CLCompleteResult * _Nonnull completeResult) {
+    [CLShanYanSDKManager initWithAppId:appId complete:^(CLCompleteResult * _Nonnull completeResult) {
         
         if (complete) {
-            
-            NSMutableDictionary * result = [NSMutableDictionary new];
-            
-            
-            if (completeResult.error) {
-                result[@"code"] = @(completeResult.error.code);
-                if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                    result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
-                }else if (completeResult.error.domain != nil){
-                    result[@"result"] = completeResult.error.domain;
-                }else{
-                    result[@"result"] = completeResult.message;
-                }
-            }else{
-                result[@"code"] = @(1000);
-                result[@"result"] = completeResult.message;
-            }
-            complete(result);
+            complete([ShanyanPlugin completeResultToJson:completeResult]);
         }
     }];
 }
@@ -98,106 +92,35 @@
         NSLog(@"%@",completeResult.message);
         
         if (complete) {
-            
-            NSMutableDictionary * result = [NSMutableDictionary new];
-                       
-                       
-                       if (completeResult.error) {
-                           result[@"code"] = @(completeResult.error.code);
-                           if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                               result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
-
-                           }else if (completeResult.error.domain != nil){
-                               result[@"result"] = completeResult.error.domain;
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }else{
-                           result[@"code"] = @(1022);
-                           result[@"result"] = completeResult.message;
-                       }
-                       complete(result);
+            complete([ShanyanPlugin completeResultToJson:completeResult]);
         }
     }];
 }
 
--(void)openLoginAuthListener:(FlutterResult)openLoginAuthListener{
-    self.oneKeyLoginListener = nil;
-    self.openLoginAuthListener = openLoginAuthListener;
-}
--(void)oneKeyLoginListener:(FlutterResult)oneKeyLoginListener{
-    self.oneKeyLoginListener = nil;
-    self.oneKeyLoginListener = oneKeyLoginListener;
-}
-
--(void)quickAuthLoginWithConfigure:(NSDictionary *)clUIConfigure{
-
-    @try {
- 
-    } @catch (NSException *exception) {
-        
-    } @finally {
-
-    }
+-(void)quickAuthLoginWithConfigure:(NSDictionary *)clUIConfigure complete:(FlutterResult)complete{
     
     CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
      baseUIConfigure.viewController = [self findVisibleVC];;
      baseUIConfigure.manualDismiss = @(YES);
-     
+    
+    __weak typeof(self) weakSelf = self;
+    
      [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
          
-             NSLog(@"%@",completeResult.message);
+        NSLog(@"%@",completeResult.message);
+         
+        if (complete) {
+            complete([ShanyanPlugin completeResultToJson:completeResult]);
+        }
 
-             NSMutableDictionary * result = [NSMutableDictionary new];
-
-             if (completeResult.error) {
-                result[@"code"] = @(completeResult.error.code);
-                if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                    result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
-
-                }else if (completeResult.error.domain != nil){
-                    result[@"result"] = completeResult.error.domain;
-                }else{
-                    result[@"result"] = completeResult.message;
-                }
-             }else{
-                result[@"code"] = @(1000);
-                if (completeResult.data != nil  && completeResult.data.count > 0) {
-                    result[@"result"] = [ShanyanPlugin dictToJson:completeResult.data];
-                }else{
-                    result[@"result"] = completeResult.message;
-                }
-             }
-             if (self.openLoginAuthListener) {
-                 self.openLoginAuthListener(result);
-             }
      } oneKeyLoginListener:^(CLCompleteResult * _Nonnull completeResult) {
-             NSMutableDictionary * result = [NSMutableDictionary new];
-                        
-                        
-                        if (completeResult.error) {
-                            result[@"code"] = @(completeResult.error.code);
-                            if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                                result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
-                            }else if (completeResult.error.domain != nil){
-                                result[@"result"] = completeResult.error.domain;
-                            }else{
-                                result[@"result"] = completeResult.message;
-                            }
-                        }else{
-                            result[@"code"] = @(1000);
-                            if (completeResult.data != nil  && completeResult.data.count > 0) {
+         
+        __strong typeof(weakSelf) strongSelf = weakSelf;
 
-                                result[@"result"] = [ShanyanPlugin dictToJson:completeResult.data];
-
-                            
-                            }else{
-                                result[@"result"] = completeResult.message;
-                            }
-                        }
-             if (self.oneKeyLoginListener) {
-                 self.oneKeyLoginListener(result);
-             }
+         //一键登录回调
+         if (strongSelf.channel) {
+             [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
+         }
      }];
 }
 
@@ -232,6 +155,41 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     return jsonString;
 
+}
+
+
+/**
+ *int code; //返回码
+ String message; //描述
+ String innerCode; //内层返回码
+ String innerDesc; //内层事件描述
+ String token; //token
+ */
++(NSDictionary *)completeResultToJson:(CLCompleteResult *)completeResult{
+    NSMutableDictionary * result = [NSMutableDictionary new];
+    if (completeResult.error != nil) {
+        result[@"code"] = @(completeResult.code);
+        result[@"message"] = completeResult.message;
+        if (completeResult.innerCode != 0) {
+            result[@"innerCode"] = @(completeResult.innerCode);
+        }
+        if ([completeResult.innerDesc isKindOfClass:NSString.class] && completeResult.innerDesc.length > 0) {
+            result[@"innerDesc"] = completeResult.innerDesc;
+        }
+    }else{
+        result[@"code"] = @(1000);
+        result[@"message"] = completeResult.message;
+        if (completeResult.innerCode != 0) {
+            result[@"innerCode"] = @(completeResult.innerCode);
+        }
+        if ([completeResult.innerDesc isKindOfClass:NSString.class] && completeResult.innerDesc.length > 0) {
+            result[@"innerDesc"] = completeResult.innerDesc;
+        }
+        if ([completeResult.data isKindOfClass:NSDictionary.class] && completeResult.data.count > 0) {
+            result[@"token"] = completeResult.data[@"token"];
+        }
+    }
+    return result;
 }
 
 -(NSString * )assetPathWithConfig:(NSString *)configureDicPath{
