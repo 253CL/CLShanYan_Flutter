@@ -12,10 +12,10 @@ class ShanYanUIConfig {
 
   ShanYanUIConfig({this.ios,this.android_portrait,this.android_landscape});
 
-  ShanYanUIConfigIOS ios; //iOS
+  final ShanYanUIConfigIOS ios = new ShanYanUIConfigIOS(); //iOS
 
-  ShanYanUIConfigAndroid android_portrait; //Android竖屏
-  ShanYanUIConfigAndroid android_landscape; //Android横屏
+  final ShanYanUIConfigAndroid android_portrait = new ShanYanUIConfigAndroid(); //Android竖屏
+  final ShanYanUIConfigAndroid android_landscape = new ShanYanUIConfigAndroid(); //Android横屏
 
   //反序列化
   factory ShanYanUIConfig.fromJson(Map<String, dynamic> json) => _$ShanYanUIConfigFromJson(json);
@@ -207,7 +207,7 @@ class ShanYanUIConfig {
 @JsonSerializable(explicitToJson: true)
 class ShanYanUIConfigIOS {
 
-  ShanYanUIConfigIOS({this.isFinish});
+  ShanYanUIConfigIOS();
 
   bool isFinish; //是否自动销毁
 
@@ -230,8 +230,8 @@ class ShanYanUIConfigIOS {
   double phoneNumberFont;//手机号字体大小
 
   //布局设置
-  ClOrientationLayOutIOS layOut_portrait;//横屏下使用的布局
-  ClOrientationLayOutIOS layOut_landscape;//竖屏下使用的布局(不需要则不设置)
+  final ClOrientationLayOutIOS layOut_portrait = new ClOrientationLayOutIOS();//横屏下使用的布局
+  final ClOrientationLayOutIOS layOut_landscape = new ClOrientationLayOutIOS();//竖屏下使用的布局(不需要则不设置)
 
 //反序列化
   factory ShanYanUIConfigIOS.fromJson(Map<String, dynamic> json) => _$ShanYanUIConfigIOSFromJson(json);
@@ -242,7 +242,9 @@ class ShanYanUIConfigIOS {
 /*iOS布局(横竖需屏分别设置)*/
 @JsonSerializable()
 class ClOrientationLayOutIOS{
-  ClOrientationLayOutIOS({this.setLogBtnWidth});
+
+  ClOrientationLayOutIOS();
+
   //logo
   int setLogoWidth;
   int setLogoHeight;

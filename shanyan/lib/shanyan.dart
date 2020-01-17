@@ -104,7 +104,7 @@ class OneKeyLoginManager {
     if (Platform.isIOS) {
       return await _channel.invokeMethod("finishAuthControllerCompletion");
     } else if (Platform.isAndroid) {
-      _channel.invokeMethod("finishAuthActivity");
+      return await _channel.invokeMethod("finishAuthActivity");;
     }
   }
 

@@ -121,7 +121,28 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> openLoginAuthPlatformState() async {
 
-    //闪验SDK 拉起授权页
+    ///闪验SDK 设置授权页一键登录回调（“一键登录按钮”、返回按钮（包括物理返回键））
+    oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
+      setState(() {
+        _code = shanYanResult.code;
+        _result = shanYanResult.message;
+        _content = shanYanResult.toJson().toString();
+      });
+
+      if (1000 == shanYanResult.code) {
+        ///一键登录获取token成功
+      } else if (1011 == shanYanResult.code){
+        ///点击返回/取消 （强制自动销毁）
+      }else{
+        ///一键登录获取token失败
+
+        //关闭授权页
+        oneKeyLoginManager.finishAuthControllerCompletion();
+
+      }
+    });
+
+    ///闪验SDK 拉起授权页
     oneKeyLoginManager.openLoginAuth().then((ShanYanResult shanYanResult) {
       setState(() {
         _code = shanYanResult.code;
@@ -248,59 +269,35 @@ class _MyAppState extends State<MyApp> {
     ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
 
     /*iOS 页面样式设置*/
-    ShanYanUIConfigIOS uiConfig_ios = ShanYanUIConfigIOS();
-    /*iOS 基本控件 竖屏布局*/
-    ClOrientationLayOutIOS layOut_portrait_ios = ClOrientationLayOutIOS();
-//    /*iOS 基本控件 横屏布局，可选，不需横屏可以不设置*/
-//    ClOrientationLayOutIOS layOut_landscape_ios = ClOrientationLayOutIOS();
-    uiConfig_ios.layOut_portrait = layOut_portrait_ios;
-//    uiConfig_ios.layOut_landscape = layOut_landscape_ios;//横屏可选，不需横屏可以不设置
-
-    /*Android 页面样式设置 竖屏*/
-    ShanYanUIConfigAndroid uiConfig_portrait_android = ShanYanUIConfigAndroid();
-//    /*Android 页面样式设置 横屏，可选，不需横屏可以不设置*/
-//    ShanYanUIConfigAndroid uiConfig_landscape_android = ShanYanUIConfigAndroid();
-
-    shanYanUIConfig.ios = uiConfig_ios;
-    shanYanUIConfig.android_portrait = uiConfig_portrait_android;
-//    shanYanUIConfig.android_landscape = uiConfig_landscape_android;//横屏可选，不需横屏可以不设置
-
-
-    /*iOS 页面样式设置*/
     shanYanUIConfig.ios.isFinish = false;
     shanYanUIConfig.ios.navigationBackgroundClear = true;
     shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
-
     shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
-
     //logo
-    layOut_portrait_ios.setLogoTop = 60;
-    layOut_portrait_ios.setLogoWidth = 60;
-    layOut_portrait_ios.setLogoHeight = 60;
-    layOut_portrait_ios.setLogoCenterX = 0;
-
+    shanYanUIConfig.ios.layOut_portrait.setLogoTop = 60;
+    shanYanUIConfig.ios.layOut_portrait.setLogoWidth = 60;
+    shanYanUIConfig.ios.layOut_portrait.setLogoHeight = 60;
+    shanYanUIConfig.ios.layOut_portrait.setLogoCenterX = 0;
     //NumField （手机号控件）
-    layOut_portrait_ios.setNumFieldCenterY = -20;
-    layOut_portrait_ios.setNumFieldCenterX = 0;
-    layOut_portrait_ios.setNumFieldHeight = 20;
-    layOut_portrait_ios.setNumFieldWidth = 150;
-
+    shanYanUIConfig.ios.layOut_portrait.setNumFieldCenterY = -20;
+    shanYanUIConfig.ios.layOut_portrait.setNumFieldCenterX = 0;
+    shanYanUIConfig.ios.layOut_portrait.setNumFieldHeight = 20;
+    shanYanUIConfig.ios.layOut_portrait.setNumFieldWidth = 150;
     //NumField （手机号控件）
-    layOut_portrait_ios.setLogBtnCenterY =  -20 + 10  + 20  + 15;
-    layOut_portrait_ios.setLogBtnCenterX = 0;
-    layOut_portrait_ios.setLogBtnHeight = 40;
-    layOut_portrait_ios.setLogBtnWidth = 50;
+    shanYanUIConfig.ios.layOut_portrait.setLogBtnCenterY =  -20 + 10  + 20  + 15;
+    shanYanUIConfig.ios.layOut_portrait.setLogBtnCenterX = 0;
+    shanYanUIConfig.ios.layOut_portrait.setLogBtnHeight = 40;
+    shanYanUIConfig.ios.layOut_portrait.setLogBtnWidth = 50;
 
 
     /*Android 页面样式具体设置*/
-    uiConfig_portrait_android.isFinish = false;
-    uiConfig_portrait_android.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
-
-    uiConfig_portrait_android.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
-    uiConfig_portrait_android.setLogoOffsetY = layOut_portrait_ios.setLogoTop - 50;
-    uiConfig_portrait_android.setLogoOffsetX = layOut_portrait_ios.setLogoLeft;
-    uiConfig_portrait_android.setLogoWidth = layOut_portrait_ios.setLogoWidth;
-    uiConfig_portrait_android.setLogoHeight = layOut_portrait_ios.setLogoHeight;
+    shanYanUIConfig.android_portrait.isFinish = false;
+    shanYanUIConfig.android_portrait.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+    shanYanUIConfig.android_portrait.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+    shanYanUIConfig.android_portrait.setLogoOffsetY = shanYanUIConfig.ios.layOut_portrait.setLogoTop - 50;
+    shanYanUIConfig.android_portrait.setLogoOffsetX = ((screenWidthPortrait - shanYanUIConfig.ios.layOut_portrait.setLogoWidth)*0.5) as int;
+    shanYanUIConfig.android_portrait.setLogoWidth = shanYanUIConfig.ios.layOut_portrait.setLogoWidth;
+    shanYanUIConfig.android_portrait.setLogoHeight = shanYanUIConfig.ios.layOut_portrait.setLogoHeight;
 
 
 
