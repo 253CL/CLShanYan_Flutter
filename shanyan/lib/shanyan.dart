@@ -91,7 +91,7 @@ class OneKeyLoginManager {
     } else if (Platform.isIOS){
 
       Map iosConfigure = this.shanYanUIConfig.ios.toJson();
-      Map<dynamic, dynamic> result = await _channel.invokeMethod("openLoginAuth",iosConfigure);
+      Map<dynamic, dynamic> result = await _channel.invokeMethod("openLoginAuth",this.shanYanUIConfig.ios);
       Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
       return ShanYanResult.fromJson(newResult);
 
@@ -134,6 +134,7 @@ class OneKeyLoginManager {
     print("uiConfig====" + uiConfig_json.toString());
 
     if (Platform.isAndroid) {
+      //    _channel.invokeMethod("setAuthThemeConfig", para);
 
       //    print("uiConfig====" + uiConfig.toJsonMap().toString());
 //

@@ -270,9 +270,9 @@ class _MyAppState extends State<MyApp> {
 
     /*iOS 页面样式设置*/
     shanYanUIConfig.ios.isFinish = false;
-    shanYanUIConfig.ios.navigationBackgroundClear = true;
-    shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
-    shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+//    shanYanUIConfig.ios.navigationBackgroundClear = true;
+//    shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+//    shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
     //logo
     shanYanUIConfig.ios.layOut_portrait.setLogoTop = 60;
     shanYanUIConfig.ios.layOut_portrait.setLogoWidth = 60;
@@ -291,15 +291,13 @@ class _MyAppState extends State<MyApp> {
 
 
     /*Android 页面样式具体设置*/
-    shanYanUIConfig.android_portrait.isFinish = false;
-    shanYanUIConfig.android_portrait.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
-    shanYanUIConfig.android_portrait.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
-    shanYanUIConfig.android_portrait.setLogoOffsetY = shanYanUIConfig.ios.layOut_portrait.setLogoTop - 50;
-    shanYanUIConfig.android_portrait.setLogoOffsetX = ((screenWidthPortrait - shanYanUIConfig.ios.layOut_portrait.setLogoWidth)*0.5) as int;
-    shanYanUIConfig.android_portrait.setLogoWidth = shanYanUIConfig.ios.layOut_portrait.setLogoWidth;
-    shanYanUIConfig.android_portrait.setLogoHeight = shanYanUIConfig.ios.layOut_portrait.setLogoHeight;
-
-
+    shanYanUIConfig.androidPortrait.isFinish = false;
+    shanYanUIConfig.androidPortrait.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+    shanYanUIConfig.androidPortrait.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+    shanYanUIConfig.androidPortrait.setLogoOffsetY = shanYanUIConfig.ios.layOut_portrait.setLogoTop - 50;
+    shanYanUIConfig.androidPortrait.setLogoOffsetX = ((screenWidthPortrait - shanYanUIConfig.ios.layOut_portrait.setLogoWidth)*0.5).toInt();
+    shanYanUIConfig.androidPortrait.setLogoWidth = shanYanUIConfig.ios.layOut_portrait.setLogoWidth;
+    shanYanUIConfig.androidPortrait.setLogoHeight = shanYanUIConfig.ios.layOut_portrait.setLogoHeight;
 
 
     oneKeyLoginManager.setAuthThemeConfig(

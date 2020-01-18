@@ -7,127 +7,343 @@ part of 'shanYanUIConfig.dart';
 // **************************************************************************
 
 ShanYanUIConfig _$ShanYanUIConfigFromJson(Map<String, dynamic> json) {
-  return ShanYanUIConfig(
-    ios: json['ios'] == null
+  return ShanYanUIConfig()
+    ..ios = json['ios'] == null
         ? null
-        : ShanYanUIConfigIOS.fromJson(json['ios'] as Map<String, dynamic>),
-    android_portrait: json['android_portrait'] == null
-        ? null
-        : ShanYanUIConfigAndroid.fromJson(
-            json['android_portrait'] as Map<String, dynamic>),
-    android_landscape: json['android_landscape'] == null
+        : ShanYanUIConfigIOS.fromJson(json['ios'] as Map<String, dynamic>)
+    ..androidPortrait = json['androidPortrait'] == null
         ? null
         : ShanYanUIConfigAndroid.fromJson(
-            json['android_landscape'] as Map<String, dynamic>),
-  );
+            json['androidPortrait'] as Map<String, dynamic>)
+    ..androidLandscape = json['androidLandscape'] == null
+        ? null
+        : ShanYanUIConfigAndroid.fromJson(
+            json['androidLandscape'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$ShanYanUIConfigToJson(ShanYanUIConfig instance) =>
     <String, dynamic>{
       'ios': instance.ios?.toJson(),
-      'android_portrait': instance.android_portrait?.toJson(),
-      'android_landscape': instance.android_landscape?.toJson(),
+      'androidPortrait': instance.androidPortrait?.toJson(),
+      'androidLandscape': instance.androidLandscape?.toJson(),
     };
 
 ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
-  return ShanYanUIConfigIOS(
-    isFinish: json['isFinish'] as bool,
-  )
+  return ShanYanUIConfigIOS()
+    ..isFinish = json['isFinish'] as bool
     ..setAuthBGImgPath = json['setAuthBGImgPath'] as String
+    ..setPreferredStatusBarStyle = _$enumDecodeNullable(
+        _$iOSStatusBarStyleEnumMap, json['setPreferredStatusBarStyle'])
     ..setStatusBarHidden = json['setStatusBarHidden'] as bool
-    ..navigationBackgroundClear = json['navigationBackgroundClear'] as bool
-    ..navigationBackBtnImage = json['navigationBackBtnImage'] as String
+    ..setAuthNavHidden = json['setAuthNavHidden'] as bool
+    ..clNavigationBarStyle =
+        _$enumDecodeNullable(_$iOSBarStyleEnumMap, json['clNavigationBarStyle'])
+    ..setAuthNavTransparent = json['setAuthNavTransparent'] as bool
+    ..setNavText = json['setNavText'] as String
+    ..setNavTextColor = json['setNavTextColor'] as String
+    ..setNavTextSize = json['setNavTextSize'] as int
+    ..setNavReturnImgPath = json['setNavReturnImgPath'] as String
+    ..setNavReturnImgHidden = json['setNavReturnImgHidden'] as bool
+    ..setNavBackBtnAlimentRight = json['setNavBackBtnAlimentRight'] as bool
+    ..setNavigationBottomLineHidden =
+        json['setNavigationBottomLineHidden'] as bool
+    ..setNavigationTintColor = json['setNavigationTintColor'] as String
+    ..setNavigationBarTintColor = json['setNavigationBarTintColor'] as String
+    ..setNavigationBackgroundImage =
+        json['setNavigationBackgroundImage'] as String
+    ..setNavigationShadowImage = json['setNavigationShadowImage'] as String
     ..setLogoImgPath = json['setLogoImgPath'] as String
-    ..loginBtnText = json['loginBtnText'] as String
-    ..loginBtnTextColor = json['loginBtnTextColor'] as String
-    ..loginBtnBgColor = json['loginBtnBgColor'] as String
-    ..loginBtnTextFont = (json['loginBtnTextFont'] as num)?.toDouble()
-    ..loginBtnCornerRadius = (json['loginBtnCornerRadius'] as num)?.toDouble()
-    ..loginBtnBorderWidth = (json['loginBtnBorderWidth'] as num)?.toDouble()
-    ..loginBtnBorderColor = json['loginBtnBorderColor'] as String
-    ..phoneNumberFont = (json['phoneNumberFont'] as num)?.toDouble()
-    ..layOut_portrait = json['layOut_portrait'] == null
-        ? null
-        : ClOrientationLayOutIOS.fromJson(
-            json['layOut_portrait'] as Map<String, dynamic>)
-    ..layOut_landscape = json['layOut_landscape'] == null
-        ? null
-        : ClOrientationLayOutIOS.fromJson(
-            json['layOut_landscape'] as Map<String, dynamic>);
+    ..setLogoCornerRadius = json['setLogoCornerRadius'] as num
+    ..setLogoHidden = json['setLogoHidden'] as bool
+    ..setNumberColor = json['setNumberColor'] as String
+    ..setNumberSize = json['setNumberSize'] as num
+    ..setNumberBold = json['setNumberBold'] as bool
+    ..setPhoneNumberTextAlignment = _$enumDecodeNullable(
+        _$iOSTextAlignmentEnumMap, json['setPhoneNumberTextAlignment'])
+    ..setLogBtnText = json['setLogBtnText'] as String
+    ..setLogBtnTextColor = json['setLogBtnTextColor'] as String
+    ..setLoginBtnTextSize = json['setLoginBtnTextSize'] as num
+    ..setLoginBtnTextBold = json['setLoginBtnTextBold'] as bool
+    ..setLoginBtnBgColor = json['setLoginBtnBgColor'] as String
+    ..setLoginBtnNormalBgImage = json['setLoginBtnNormalBgImage'] as String
+    ..setLoginBtnHightLightBgImage =
+        json['setLoginBtnHightLightBgImage'] as String
+    ..setLoginBtnDisabledBgImage = json['setLoginBtnDisabledBgImage'] as String
+    ..setLoginBtnBorderColor = json['setLoginBtnBorderColor'] as String
+    ..setLoginBtnCornerRadius = json['setLoginBtnCornerRadius'] as num
+    ..setLoginBtnBorderWidth = json['setLoginBtnBorderWidth'] as num
+    ..setPrivacyTextSize = json['setPrivacyTextSize'] as num
+    ..setPrivacyTextBold = json['setPrivacyTextBold'] as bool
+    ..setAppPrivacyTextAlignment = _$enumDecodeNullable(
+        _$iOSTextAlignmentEnumMap, json['setAppPrivacyTextAlignment'])
+    ..setPrivacySmhHidden = json['setPrivacySmhHidden'] as bool
+    ..setAppPrivacyLineSpacing = json['setAppPrivacyLineSpacing'] as num
+    ..setAppPrivacyNeedSizeToFit = json['setAppPrivacyNeedSizeToFit'] as bool
+    ..clAppPrivacyLineFragmentPadding =
+        json['clAppPrivacyLineFragmentPadding'] as num
+    ..setAppPrivacyAbbreviatedName =
+        json['setAppPrivacyAbbreviatedName'] as String
+    ..setAppPrivacyNormalDesTextFirst =
+        json['setAppPrivacyNormalDesTextFirst'] as String
+    ..setAppPrivacyNormalDesTextSecond =
+        json['setAppPrivacyNormalDesTextSecond'] as String
+    ..setAppPrivacyNormalDesTextThird =
+        json['setAppPrivacyNormalDesTextThird'] as String
+    ..setAppPrivacyNormalDesTextFourth =
+        json['setAppPrivacyNormalDesTextFourth'] as String
+    ..setAppPrivacyNormalDesTextLast =
+        json['setAppPrivacyNormalDesTextLast'] as String
+    ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool
+    ..setPrivacyNavText = json['setPrivacyNavText'] as String
+    ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as String
+    ..setPrivacyNavTextBold = json['setPrivacyNavTextBold'] as bool
+    ..setPrivacyNavReturnImgPath = json['setPrivacyNavReturnImgPath'] as String
+    ..setAppPrivacyWebPreferredStatusBarStyle = _$enumDecodeNullable(
+        _$iOSStatusBarStyleEnumMap,
+        json['setAppPrivacyWebPreferredStatusBarStyle'])
+    ..setAppPrivacyWebNavigationBarStyle = _$enumDecodeNullable(
+        _$iOSBarStyleEnumMap, json['setAppPrivacyWebNavigationBarStyle'])
+    ..setAppPrivacyWebNavigationTintColor =
+        json['setAppPrivacyWebNavigationTintColor'] as String
+    ..setAppPrivacyWebNavigationBarTintColor =
+        json['setAppPrivacyWebNavigationBarTintColor'] as String
+    ..setAppPrivacyWebNavigationBackgroundImage =
+        json['setAppPrivacyWebNavigationBackgroundImage'] as String
+    ..setAppPrivacyWebNavigationShadowImage =
+        json['setAppPrivacyWebNavigationShadowImage'] as String
+    ..setSloganTextSize = json['setSloganTextSize'] as num
+    ..setSloganTextBold = json['setSloganTextBold'] as bool
+    ..setSloganTextColor = json['setSloganTextColor'] as String
+    ..setSlogaTextAlignment = _$enumDecodeNullable(
+        _$iOSTextAlignmentEnumMap, json['setSlogaTextAlignment'])
+    ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as num
+    ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool
+    ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String
+    ..setShanYanSlogaTextAlignment =
+        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSlogaTextAlignment'])
+    ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool
+    ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool
+    ..setPrivacyState = json['setPrivacyState'] as bool
+    ..clCheckBoxVerticalAlignmentToAppPrivacyTop = json['clCheckBoxVerticalAlignmentToAppPrivacyTop'] as bool
+    ..clCheckBoxVerticalAlignmentToAppPrivacyCenterY = json['clCheckBoxVerticalAlignmentToAppPrivacyCenterY'] as bool
+    ..setUncheckedImgPath = json['setUncheckedImgPath'] as String
+    ..setCheckedImgPath = json['setCheckedImgPath'] as String
+    ..clLoadingCornerRadius = json['clLoadingCornerRadius'] as num
+    ..clLoadingBackgroundColor = json['clLoadingBackgroundColor'] as String
+    ..clLoadingTintColor = json['clLoadingTintColor'] as String
+    ..shouldAutorotate = json['shouldAutorotate'] as bool
+    ..clAuthTypeUseWindow = json['clAuthTypeUseWindow'] as bool
+    ..clAuthWindowCornerRadius = json['clAuthWindowCornerRadius'] as num
+    ..clAuthWindowPresentingAnimate = json['clAuthWindowPresentingAnimate'] as bool;
 }
 
 Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
     <String, dynamic>{
       'isFinish': instance.isFinish,
       'setAuthBGImgPath': instance.setAuthBGImgPath,
+      'setPreferredStatusBarStyle':
+          _$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle],
       'setStatusBarHidden': instance.setStatusBarHidden,
-      'navigationBackgroundClear': instance.navigationBackgroundClear,
-      'navigationBackBtnImage': instance.navigationBackBtnImage,
+      'setAuthNavHidden': instance.setAuthNavHidden,
+      'clNavigationBarStyle':
+          _$iOSBarStyleEnumMap[instance.clNavigationBarStyle],
+      'setAuthNavTransparent': instance.setAuthNavTransparent,
+      'setNavText': instance.setNavText,
+      'setNavTextColor': instance.setNavTextColor,
+      'setNavTextSize': instance.setNavTextSize,
+      'setNavReturnImgPath': instance.setNavReturnImgPath,
+      'setNavReturnImgHidden': instance.setNavReturnImgHidden,
+      'setNavBackBtnAlimentRight': instance.setNavBackBtnAlimentRight,
+      'setNavigationBottomLineHidden': instance.setNavigationBottomLineHidden,
+      'setNavigationTintColor': instance.setNavigationTintColor,
+      'setNavigationBarTintColor': instance.setNavigationBarTintColor,
+      'setNavigationBackgroundImage': instance.setNavigationBackgroundImage,
+      'setNavigationShadowImage': instance.setNavigationShadowImage,
       'setLogoImgPath': instance.setLogoImgPath,
-      'loginBtnText': instance.loginBtnText,
-      'loginBtnTextColor': instance.loginBtnTextColor,
-      'loginBtnBgColor': instance.loginBtnBgColor,
-      'loginBtnTextFont': instance.loginBtnTextFont,
-      'loginBtnCornerRadius': instance.loginBtnCornerRadius,
-      'loginBtnBorderWidth': instance.loginBtnBorderWidth,
-      'loginBtnBorderColor': instance.loginBtnBorderColor,
-      'phoneNumberFont': instance.phoneNumberFont,
-      'layOut_portrait': instance.layOut_portrait?.toJson(),
-      'layOut_landscape': instance.layOut_landscape?.toJson(),
+      'setLogoCornerRadius': instance.setLogoCornerRadius,
+      'setLogoHidden': instance.setLogoHidden,
+      'setNumberColor': instance.setNumberColor,
+      'setNumberSize': instance.setNumberSize,
+      'setNumberBold': instance.setNumberBold,
+      'setPhoneNumberTextAlignment':
+          _$iOSTextAlignmentEnumMap[instance.setPhoneNumberTextAlignment],
+      'setLogBtnText': instance.setLogBtnText,
+      'setLogBtnTextColor': instance.setLogBtnTextColor,
+      'setLoginBtnTextSize': instance.setLoginBtnTextSize,
+      'setLoginBtnTextBold': instance.setLoginBtnTextBold,
+      'setLoginBtnBgColor': instance.setLoginBtnBgColor,
+      'setLoginBtnNormalBgImage': instance.setLoginBtnNormalBgImage,
+      'setLoginBtnHightLightBgImage': instance.setLoginBtnHightLightBgImage,
+      'setLoginBtnDisabledBgImage': instance.setLoginBtnDisabledBgImage,
+      'setLoginBtnBorderColor': instance.setLoginBtnBorderColor,
+      'setLoginBtnCornerRadius': instance.setLoginBtnCornerRadius,
+      'setLoginBtnBorderWidth': instance.setLoginBtnBorderWidth,
+      'setPrivacyTextSize': instance.setPrivacyTextSize,
+      'setPrivacyTextBold': instance.setPrivacyTextBold,
+      'setAppPrivacyTextAlignment':
+          _$iOSTextAlignmentEnumMap[instance.setAppPrivacyTextAlignment],
+      'setPrivacySmhHidden': instance.setPrivacySmhHidden,
+      'setAppPrivacyLineSpacing': instance.setAppPrivacyLineSpacing,
+      'setAppPrivacyNeedSizeToFit': instance.setAppPrivacyNeedSizeToFit,
+      'clAppPrivacyLineFragmentPadding':
+          instance.clAppPrivacyLineFragmentPadding,
+      'setAppPrivacyAbbreviatedName': instance.setAppPrivacyAbbreviatedName,
+      'setAppPrivacyNormalDesTextFirst':
+          instance.setAppPrivacyNormalDesTextFirst,
+      'setAppPrivacyNormalDesTextSecond':
+          instance.setAppPrivacyNormalDesTextSecond,
+      'setAppPrivacyNormalDesTextThird':
+          instance.setAppPrivacyNormalDesTextThird,
+      'setAppPrivacyNormalDesTextFourth':
+          instance.setAppPrivacyNormalDesTextFourth,
+      'setAppPrivacyNormalDesTextLast': instance.setAppPrivacyNormalDesTextLast,
+      'setOperatorPrivacyAtLast': instance.setOperatorPrivacyAtLast,
+      'setPrivacyNavText': instance.setPrivacyNavText,
+      'setPrivacyNavTextColor': instance.setPrivacyNavTextColor,
+      'setPrivacyNavTextBold': instance.setPrivacyNavTextBold,
+      'setPrivacyNavReturnImgPath': instance.setPrivacyNavReturnImgPath,
+      'setAppPrivacyWebPreferredStatusBarStyle': _$iOSStatusBarStyleEnumMap[
+          instance.setAppPrivacyWebPreferredStatusBarStyle],
+      'setAppPrivacyWebNavigationBarStyle':
+          _$iOSBarStyleEnumMap[instance.setAppPrivacyWebNavigationBarStyle],
+      'setAppPrivacyWebNavigationTintColor':
+          instance.setAppPrivacyWebNavigationTintColor,
+      'setAppPrivacyWebNavigationBarTintColor':
+          instance.setAppPrivacyWebNavigationBarTintColor,
+      'setAppPrivacyWebNavigationBackgroundImage':
+          instance.setAppPrivacyWebNavigationBackgroundImage,
+      'setAppPrivacyWebNavigationShadowImage':
+          instance.setAppPrivacyWebNavigationShadowImage,
+      'setSloganTextSize': instance.setSloganTextSize,
+      'setSloganTextBold': instance.setSloganTextBold,
+      'setSloganTextColor': instance.setSloganTextColor,
+      'setSlogaTextAlignment':
+          _$iOSTextAlignmentEnumMap[instance.setSlogaTextAlignment],
+      'setShanYanSloganTextSize': instance.setShanYanSloganTextSize,
+      'setShanYanSloganTextBold': instance.setShanYanSloganTextBold,
+      'setShanYanSloganTextColor': instance.setShanYanSloganTextColor,
+      'setShanYanSlogaTextAlignment':
+          _$iOSTextAlignmentEnumMap[instance.setShanYanSlogaTextAlignment],
+      'setShanYanSloganHidden': instance.setShanYanSloganHidden,
+      'setCheckBoxHidden': instance.setCheckBoxHidden,
+      'setPrivacyState': instance.setPrivacyState,
+      'clCheckBoxVerticalAlignmentToAppPrivacyTop':
+          instance.clCheckBoxVerticalAlignmentToAppPrivacyTop,
+      'clCheckBoxVerticalAlignmentToAppPrivacyCenterY':
+          instance.clCheckBoxVerticalAlignmentToAppPrivacyCenterY,
+      'setUncheckedImgPath': instance.setUncheckedImgPath,
+      'setCheckedImgPath': instance.setCheckedImgPath,
+      'clLoadingCornerRadius': instance.clLoadingCornerRadius,
+      'clLoadingBackgroundColor': instance.clLoadingBackgroundColor,
+      'clLoadingTintColor': instance.clLoadingTintColor,
+      'shouldAutorotate': instance.shouldAutorotate,
+      'clAuthTypeUseWindow': instance.clAuthTypeUseWindow,
+      'clAuthWindowCornerRadius': instance.clAuthWindowCornerRadius,
+      'clAuthWindowPresentingAnimate': instance.clAuthWindowPresentingAnimate,
     };
+
+T _$enumDecode<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
+
+  if (value == null && unknownValue == null) {
+    throw ArgumentError('`$source` is not one of the supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return value ?? unknownValue;
+}
+
+T _$enumDecodeNullable<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$iOSStatusBarStyleEnumMap = {
+  iOSStatusBarStyle.styleDefault: 'styleDefault',
+  iOSStatusBarStyle.styleLightContent: 'styleLightContent',
+  iOSStatusBarStyle.styleDarkContent: 'styleDarkContent',
+};
+
+const _$iOSBarStyleEnumMap = {
+  iOSBarStyle.styleDefault: 'styleDefault',
+  iOSBarStyle.styleBlack: 'styleBlack',
+};
+
+const _$iOSTextAlignmentEnumMap = {
+  iOSTextAlignment.left: 'left',
+  iOSTextAlignment.center: 'center',
+  iOSTextAlignment.right: 'right',
+  iOSTextAlignment.justified: 'justified',
+  iOSTextAlignment.natural: 'natural',
+};
 
 ClOrientationLayOutIOS _$ClOrientationLayOutIOSFromJson(
     Map<String, dynamic> json) {
-  return ClOrientationLayOutIOS(
-    setLogBtnWidth: json['setLogBtnWidth'] as int,
-  )
-    ..setLogoWidth = json['setLogoWidth'] as int
-    ..setLogoHeight = json['setLogoHeight'] as int
-    ..setLogoLeft = json['setLogoLeft'] as int
-    ..setLogoRight = json['setLogoRight'] as int
-    ..setLogoTop = json['setLogoTop'] as int
-    ..setLogoBottom = json['setLogoBottom'] as int
-    ..setLogoCenterX = json['setLogoCenterX'] as int
-    ..setLogoCenterY = json['setLogoCenterY'] as int
-    ..setNumFieldWidth = json['setNumFieldWidth'] as int
-    ..setNumFieldHeight = json['setNumFieldHeight'] as int
-    ..setNumFieldLeft = json['setNumFieldLeft'] as int
-    ..setNumFieldRight = json['setNumFieldRight'] as int
-    ..setNumFieldTop = json['setNumFieldTop'] as int
-    ..setNumFieldBottom = json['setNumFieldBottom'] as int
-    ..setNumFieldCenterX = json['setNumFieldCenterX'] as int
-    ..setNumFieldCenterY = json['setNumFieldCenterY'] as int
-    ..setLogBtnHeight = json['setLogBtnHeight'] as int
-    ..setLogBtnLeft = json['setLogBtnLeft'] as int
-    ..setLogBtnRight = json['setLogBtnRight'] as int
-    ..setLogBtnTop = json['setLogBtnTop'] as int
-    ..setLogBtnBottom = json['setLogBtnBottom'] as int
-    ..setLogBtnCenterX = json['setLogBtnCenterX'] as int
-    ..setLogBtnCenterY = json['setLogBtnCenterY'] as int
-    ..setPrivacyHeight = json['setPrivacyHeight'] as int
-    ..setPrivacyWidth = json['setPrivacyWidth'] as int
-    ..setPrivacyLeft = json['setPrivacyLeft'] as int
-    ..setPrivacyRight = json['setPrivacyRight'] as int
-    ..setPrivacyTop = json['setPrivacyTop'] as int
-    ..setPrivacyBottom = json['setPrivacyBottom'] as int
-    ..setPrivacyCenterX = json['setPrivacyCenterX'] as int
-    ..setPrivacyCenterY = json['setPrivacyCenterY'] as int
-    ..setSloganHeight = json['setSloganHeight'] as int
-    ..setSloganWidth = json['setSloganWidth'] as int
-    ..setSloganLeft = json['setSloganLeft'] as int
-    ..setSloganRight = json['setSloganRight'] as int
-    ..setSloganTop = json['setSloganTop'] as int
-    ..setSloganBottom = json['setSloganBottom'] as int
-    ..setSloganCenterX = json['setSloganCenterX'] as int
-    ..setSloganCenterY = json['setSloganCenterY'] as int
-    ..setShanYanSloganHeight = json['setShanYanSloganHeight'] as int
-    ..setShanYanSloganWidth = json['setShanYanSloganWidth'] as int
-    ..setShanYanSloganLeft = json['setShanYanSloganLeft'] as int
-    ..setShanYanSloganRight = json['setShanYanSloganRight'] as int
-    ..setShanYanSloganTop = json['setShanYanSloganTop'] as int
-    ..setShanYanSloganBottom = json['setShanYanSloganBottom'] as int
-    ..setShanYanSloganCenterX = json['setShanYanSloganCenterX'] as int
-    ..setShanYanSloganCenterY = json['setShanYanSloganCenterY'] as int;
+  return ClOrientationLayOutIOS()
+    ..setLogoWidth = json['setLogoWidth'] as num
+    ..setLogoHeight = json['setLogoHeight'] as num
+    ..setLogoLeft = json['setLogoLeft'] as num
+    ..setLogoRight = json['setLogoRight'] as num
+    ..setLogoTop = json['setLogoTop'] as num
+    ..setLogoBottom = json['setLogoBottom'] as num
+    ..setLogoCenterX = json['setLogoCenterX'] as num
+    ..setLogoCenterY = json['setLogoCenterY'] as num
+    ..setNumFieldWidth = json['setNumFieldWidth'] as num
+    ..setNumFieldHeight = json['setNumFieldHeight'] as num
+    ..setNumFieldLeft = json['setNumFieldLeft'] as num
+    ..setNumFieldRight = json['setNumFieldRight'] as num
+    ..setNumFieldTop = json['setNumFieldTop'] as num
+    ..setNumFieldBottom = json['setNumFieldBottom'] as num
+    ..setNumFieldCenterX = json['setNumFieldCenterX'] as num
+    ..setNumFieldCenterY = json['setNumFieldCenterY'] as num
+    ..setLogBtnHeight = json['setLogBtnHeight'] as num
+    ..setLogBtnWidth = json['setLogBtnWidth'] as num
+    ..setLogBtnLeft = json['setLogBtnLeft'] as num
+    ..setLogBtnRight = json['setLogBtnRight'] as num
+    ..setLogBtnTop = json['setLogBtnTop'] as num
+    ..setLogBtnBottom = json['setLogBtnBottom'] as num
+    ..setLogBtnCenterX = json['setLogBtnCenterX'] as num
+    ..setLogBtnCenterY = json['setLogBtnCenterY'] as num
+    ..setPrivacyHeight = json['setPrivacyHeight'] as num
+    ..setPrivacyWidth = json['setPrivacyWidth'] as num
+    ..setPrivacyLeft = json['setPrivacyLeft'] as num
+    ..setPrivacyRight = json['setPrivacyRight'] as num
+    ..setPrivacyTop = json['setPrivacyTop'] as num
+    ..setPrivacyBottom = json['setPrivacyBottom'] as num
+    ..setPrivacyCenterX = json['setPrivacyCenterX'] as num
+    ..setPrivacyCenterY = json['setPrivacyCenterY'] as num
+    ..setSloganHeight = json['setSloganHeight'] as num
+    ..setSloganWidth = json['setSloganWidth'] as num
+    ..setSloganLeft = json['setSloganLeft'] as num
+    ..setSloganRight = json['setSloganRight'] as num
+    ..setSloganTop = json['setSloganTop'] as num
+    ..setSloganBottom = json['setSloganBottom'] as num
+    ..setSloganCenterX = json['setSloganCenterX'] as num
+    ..setSloganCenterY = json['setSloganCenterY'] as num
+    ..setShanYanSloganHeight = json['setShanYanSloganHeight'] as num
+    ..setShanYanSloganWidth = json['setShanYanSloganWidth'] as num
+    ..setShanYanSloganLeft = json['setShanYanSloganLeft'] as num
+    ..setShanYanSloganRight = json['setShanYanSloganRight'] as num
+    ..setShanYanSloganTop = json['setShanYanSloganTop'] as num
+    ..setShanYanSloganBottom = json['setShanYanSloganBottom'] as num
+    ..setShanYanSloganCenterX = json['setShanYanSloganCenterX'] as num
+    ..setShanYanSloganCenterY = json['setShanYanSloganCenterY'] as num;
 }
 
 Map<String, dynamic> _$ClOrientationLayOutIOSToJson(
