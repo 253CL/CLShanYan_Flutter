@@ -270,38 +270,170 @@ class _MyAppState extends State<MyApp> {
 
     /*iOS 页面样式设置*/
     shanYanUIConfig.ios.isFinish = false;
-//    shanYanUIConfig.ios.navigationBackgroundClear = true;
-//    shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
-//    shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+    shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+
+    shanYanUIConfig.ios.setPreferredStatusBarStyle = iOSStatusBarStyle.styleLightContent;
+    shanYanUIConfig.ios.setStatusBarHidden = false;
+    shanYanUIConfig.ios.setAuthNavHidden = false;
+    shanYanUIConfig.ios.setNavigationBarStyle = iOSBarStyle.styleBlack;
+    shanYanUIConfig.ios.setAuthNavTransparent = true;
+
+    shanYanUIConfig.ios.setNavText = "测试";
+    shanYanUIConfig.ios.setNavTextColor = "#80ADFF";
+    shanYanUIConfig.ios.setNavTextSize = 18;
+
+    shanYanUIConfig.ios.setNavReturnImgPath = "assets/Img/close-black.png";
+    shanYanUIConfig.ios.setNavReturnImgHidden = false;
+
+    shanYanUIConfig.ios.setNavBackBtnAlimentRight = true;
+
+    shanYanUIConfig.ios.setNavigationBottomLineHidden = false;
+
+    shanYanUIConfig.ios.setNavigationTintColor = "#FF6659";
+    shanYanUIConfig.ios.setNavigationBarTintColor = "#BAFF8C";
+    shanYanUIConfig.ios.setNavigationBackgroundImage = "assets/Img/圆角矩形 2 拷贝@2x.png";
+
+//    shanYanUIConfig.ios.setNavigationShadowImage =
+
+    shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+    shanYanUIConfig.ios.setLogoCornerRadius = 30;
+    shanYanUIConfig.ios.setLogoHidden = false;
+
+    shanYanUIConfig.ios.setNumberColor = "#499191";
+    shanYanUIConfig.ios.setNumberSize = 15;
+    shanYanUIConfig.ios.setNumberBold = true;
+    shanYanUIConfig.ios.setNumberTextAlignment = iOSTextAlignment.right;
+
+    shanYanUIConfig.ios.setLogBtnText = "测试一键登录";
+    shanYanUIConfig.ios.setLogBtnTextColor = "#FCFF4F";
+    shanYanUIConfig.ios.setLoginBtnTextSize = 16;
+    shanYanUIConfig.ios.setLoginBtnTextBold = false;
+    shanYanUIConfig.ios.setLoginBtnBgColor =  "#B97BFF";
+
+    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "assets/Img/2-0btn_15@2x.png";
+    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "assets/Img/圆角矩形 2 拷贝@2x.png";
+    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "assets/Img/login_btn_normal.png";
+
+    shanYanUIConfig.ios.setLoginBtnBorderColor = "#FF7666";
+    shanYanUIConfig.ios.setLoginBtnCornerRadius = 20;
+    shanYanUIConfig.ios.setLoginBtnBorderWidth = 2;
+
+    shanYanUIConfig.ios.setPrivacyTextSize = 10;
+    shanYanUIConfig.ios.setPrivacyTextBold = false;
+
+    shanYanUIConfig.ios.setAppPrivacyTextAlignment = iOSTextAlignment.left;
+    shanYanUIConfig.ios.setPrivacySmhHidden = true;
+    shanYanUIConfig.ios.setAppPrivacyLineSpacing = 0;
+    shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
+    shanYanUIConfig.ios.clAppPrivacyLineFragmentPadding = 0;
+    shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
+
+    shanYanUIConfig.ios.setAppPrivacyNormalDesTextFirst = "Accept";
+//    shanYanUIConfig.ios.setAppPrivacyTelecom = "中国移动服务协议";
+    shanYanUIConfig.ios.setAppPrivacyNormalDesTextSecond = "and";
+    shanYanUIConfig.ios.setAppPrivacyFirst = ["测试连接A", "https://www.baidu.com"];
+    shanYanUIConfig.ios.setAppPrivacyNormalDesTextThird = "&";
+    shanYanUIConfig.ios.setAppPrivacySecond = ["测试连接X", "https://www.sina.com"];
+    shanYanUIConfig.ios.setAppPrivacyNormalDesTextFourth = "、";
+    shanYanUIConfig.ios.setAppPrivacyThird = ["测试连接C", "https://www.sina.com"];
+    shanYanUIConfig.ios.setAppPrivacyNormalDesTextLast = "to login";
+
+    shanYanUIConfig.ios.setOperatorPrivacyAtLast = true;
+    shanYanUIConfig.ios.setPrivacyNavText = "闪验运营商协议";
+    shanYanUIConfig.ios.setPrivacyNavTextColor = "#7BC1E8";
+    shanYanUIConfig.ios.setPrivacyNavTextSize = 15;
+
+    shanYanUIConfig.ios.setPrivacyNavReturnImgPath = "assets/Img/setting@2x.png";
+
+    shanYanUIConfig.ios.setAppPrivacyWebPreferredStatusBarStyle = iOSStatusBarStyle.styleDefault;
+    shanYanUIConfig.ios.setAppPrivacyWebNavigationBarStyle = iOSBarStyle.styleDefault;
+
+//运营商品牌标签("中国**提供认证服务")，不得隐藏
+    shanYanUIConfig.ios.setSloganTextSize = 11;
+    shanYanUIConfig.ios.setSloganTextBold = false;
+    shanYanUIConfig.ios.setSloganTextColor = "#CEBFFF";
+    shanYanUIConfig.ios.setSlogaTextAlignment = iOSTextAlignment.left;
+
+//供应商品牌标签("创蓝253提供认技术支持")
+    shanYanUIConfig.ios.setShanYanSloganTextSize = 11;
+    shanYanUIConfig.ios.setShanYanSloganTextBold = true;
+    shanYanUIConfig.ios.setShanYanSloganTextColor = "#7BC1E8";
+    shanYanUIConfig.ios.setShanYanSlogaTextAlignment = iOSTextAlignment.right;
+    shanYanUIConfig.ios.setShanYanSloganHidden = true;
+
+    shanYanUIConfig.ios.setCheckBoxHidden = false;
+    shanYanUIConfig.ios.setPrivacyState = false;
+//    shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyTop = true;
+    shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyCenterY = true;
+    shanYanUIConfig.ios.setUncheckedImgPath = "assets/Img/checkBoxNor.png";
+    shanYanUIConfig.ios.setCheckedImgPath =  "assets/Img/checkBoxSEL.png";
+
+    shanYanUIConfig.ios.setLoadingCornerRadius = 10;
+    shanYanUIConfig.ios.setLoadingBackgroundColor = "#E68147";
+    shanYanUIConfig.ios.setLoadingTintColor = "#1C7EFF";
+
+    shanYanUIConfig.ios.setShouldAutorotate = false;
+    shanYanUIConfig.ios.supportedInterfaceOrientations = iOSInterfaceOrientationMask.all;
+    shanYanUIConfig.ios.preferredInterfaceOrientationForPresentation = iOSInterfaceOrientation.portrait;
+
+    shanYanUIConfig.ios.setAuthTypeUseWindow = false;
+//    shanYanUIConfig.ios.setAuthWindowCornerRadius = 10;
+
+    shanYanUIConfig.ios.setAuthWindowModalTransitionStyle = iOSModalTransitionStyle.flipHorizontal;
+    shanYanUIConfig.ios.setAuthWindowModalPresentationStyle = iOSModalPresentationStyle.fullScreen;
+    shanYanUIConfig.ios.setAppPrivacyWebModalPresentationStyle = iOSModalPresentationStyle.fullScreen;
+    shanYanUIConfig.ios.setAuthWindowOverrideUserInterfaceStyle = iOSUserInterfaceStyle.unspecified;
+
+    shanYanUIConfig.ios.setAuthWindowPresentingAnimate = true;
+
     //logo
-    shanYanUIConfig.ios.layOut_portrait.setLogoTop = 60;
-    shanYanUIConfig.ios.layOut_portrait.setLogoWidth = 60;
-    shanYanUIConfig.ios.layOut_portrait.setLogoHeight = 60;
-    shanYanUIConfig.ios.layOut_portrait.setLogoCenterX = 0;
-    //NumField （手机号控件）
-    shanYanUIConfig.ios.layOut_portrait.setNumFieldCenterY = -20;
-    shanYanUIConfig.ios.layOut_portrait.setNumFieldCenterX = 0;
-    shanYanUIConfig.ios.layOut_portrait.setNumFieldHeight = 20;
-    shanYanUIConfig.ios.layOut_portrait.setNumFieldWidth = 150;
-    //NumField （手机号控件）
-    shanYanUIConfig.ios.layOut_portrait.setLogBtnCenterY =  -20 + 10  + 20  + 15;
-    shanYanUIConfig.ios.layOut_portrait.setLogBtnCenterX = 0;
-    shanYanUIConfig.ios.layOut_portrait.setLogBtnHeight = 40;
-    shanYanUIConfig.ios.layOut_portrait.setLogBtnWidth = 50;
+    shanYanUIConfig.ios.layOutPortrait.setLogoTop = 60;
+    shanYanUIConfig.ios.layOutPortrait.setLogoWidth = 60;
+    shanYanUIConfig.ios.layOutPortrait.setLogoHeight = 60;
+    shanYanUIConfig.ios.layOutPortrait.setLogoCenterX = 0;
+    //手机号控件
+    shanYanUIConfig.ios.layOutPortrait.setNumFieldCenterY = -20;
+    shanYanUIConfig.ios.layOutPortrait.setNumFieldCenterX = 0;
+    shanYanUIConfig.ios.layOutPortrait.setNumFieldHeight = 20;
+    shanYanUIConfig.ios.layOutPortrait.setNumFieldWidth = 150;
+    //一键登录按钮
+    shanYanUIConfig.ios.layOutPortrait.setLogBtnCenterY =  -20 + 10  + 20  + 15;
+    shanYanUIConfig.ios.layOutPortrait.setLogBtnCenterX = 0;
+    shanYanUIConfig.ios.layOutPortrait.setLogBtnHeight = 40;
+    shanYanUIConfig.ios.layOutPortrait.setLogBtnWidth = 50;
+
+    //授权页 创蓝slogan（创蓝253提供认证服务）
+    shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight = 15;
+    shanYanUIConfig.ios.layOutPortrait.setShanYanSloganLeft = 0;
+    shanYanUIConfig.ios.layOutPortrait.setShanYanSloganRight = 0;
+    shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom = -15;
+
+    //授权页 slogan（***提供认证服务）
+    shanYanUIConfig.ios.layOutPortrait.setSloganHeight = 15;
+    shanYanUIConfig.ios.layOutPortrait.setSloganLeft = 0;
+    shanYanUIConfig.ios.layOutPortrait.setSloganRight = 0;
+    shanYanUIConfig.ios.layOutPortrait.setSloganBottom = shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom
+        - shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight;
+
+    //隐私协议
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 60;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 0;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom
+    - shanYanUIConfig.ios.layOutPortrait.setSloganRight;
 
 
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = false;
     shanYanUIConfig.androidPortrait.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
     shanYanUIConfig.androidPortrait.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
-    shanYanUIConfig.androidPortrait.setLogoOffsetY = shanYanUIConfig.ios.layOut_portrait.setLogoTop - 50;
-    shanYanUIConfig.androidPortrait.setLogoOffsetX = ((screenWidthPortrait - shanYanUIConfig.ios.layOut_portrait.setLogoWidth)*0.5).toInt();
-    shanYanUIConfig.androidPortrait.setLogoWidth = shanYanUIConfig.ios.layOut_portrait.setLogoWidth;
-    shanYanUIConfig.androidPortrait.setLogoHeight = shanYanUIConfig.ios.layOut_portrait.setLogoHeight;
+    shanYanUIConfig.androidPortrait.setLogoOffsetY = shanYanUIConfig.ios.layOutPortrait.setLogoTop - 50;
+    shanYanUIConfig.androidPortrait.setLogoOffsetX = ((screenWidthPortrait - shanYanUIConfig.ios.layOutPortrait.setLogoWidth)*0.5).toInt();
+    shanYanUIConfig.androidPortrait.setLogoWidth = shanYanUIConfig.ios.layOutPortrait.setLogoWidth;
+    shanYanUIConfig.androidPortrait.setLogoHeight = shanYanUIConfig.ios.layOutPortrait.setLogoHeight;
 
 
-    oneKeyLoginManager.setAuthThemeConfig(
-          uiConfig: shanYanUIConfig);
+    oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     
     if (Platform.isIOS) {
       //iOS 全屏模式

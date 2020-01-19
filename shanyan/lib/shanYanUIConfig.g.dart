@@ -36,8 +36,8 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
         _$iOSStatusBarStyleEnumMap, json['setPreferredStatusBarStyle'])
     ..setStatusBarHidden = json['setStatusBarHidden'] as bool
     ..setAuthNavHidden = json['setAuthNavHidden'] as bool
-    ..clNavigationBarStyle =
-        _$enumDecodeNullable(_$iOSBarStyleEnumMap, json['clNavigationBarStyle'])
+    ..setNavigationBarStyle = _$enumDecodeNullable(
+        _$iOSBarStyleEnumMap, json['setNavigationBarStyle'])
     ..setAuthNavTransparent = json['setAuthNavTransparent'] as bool
     ..setNavText = json['setNavText'] as String
     ..setNavTextColor = json['setNavTextColor'] as String
@@ -58,8 +58,8 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setNumberColor = json['setNumberColor'] as String
     ..setNumberSize = json['setNumberSize'] as num
     ..setNumberBold = json['setNumberBold'] as bool
-    ..setPhoneNumberTextAlignment = _$enumDecodeNullable(
-        _$iOSTextAlignmentEnumMap, json['setPhoneNumberTextAlignment'])
+    ..setNumberTextAlignment = _$enumDecodeNullable(
+        _$iOSTextAlignmentEnumMap, json['setNumberTextAlignment'])
     ..setLogBtnText = json['setLogBtnText'] as String
     ..setLogBtnTextColor = json['setLogBtnTextColor'] as String
     ..setLoginBtnTextSize = json['setLoginBtnTextSize'] as num
@@ -72,6 +72,8 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setLoginBtnBorderColor = json['setLoginBtnBorderColor'] as String
     ..setLoginBtnCornerRadius = json['setLoginBtnCornerRadius'] as num
     ..setLoginBtnBorderWidth = json['setLoginBtnBorderWidth'] as num
+    ..setAppPrivacyColor =
+        (json['setAppPrivacyColor'] as List)?.map((e) => e as String)?.toList()
     ..setPrivacyTextSize = json['setPrivacyTextSize'] as num
     ..setPrivacyTextBold = json['setPrivacyTextBold'] as bool
     ..setAppPrivacyTextAlignment = _$enumDecodeNullable(
@@ -79,10 +81,16 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setPrivacySmhHidden = json['setPrivacySmhHidden'] as bool
     ..setAppPrivacyLineSpacing = json['setAppPrivacyLineSpacing'] as num
     ..setAppPrivacyNeedSizeToFit = json['setAppPrivacyNeedSizeToFit'] as bool
-    ..clAppPrivacyLineFragmentPadding =
-        json['clAppPrivacyLineFragmentPadding'] as num
+    ..setAppPrivacyLineFragmentPadding =
+        json['setAppPrivacyLineFragmentPadding'] as num
     ..setAppPrivacyAbbreviatedName =
         json['setAppPrivacyAbbreviatedName'] as String
+    ..setAppPrivacyFirst =
+        (json['setAppPrivacyFirst'] as List)?.map((e) => e as String)?.toList()
+    ..setAppPrivacySecond =
+        (json['setAppPrivacySecond'] as List)?.map((e) => e as String)?.toList()
+    ..setAppPrivacyThird =
+        (json['setAppPrivacyThird'] as List)?.map((e) => e as String)?.toList()
     ..setAppPrivacyNormalDesTextFirst =
         json['setAppPrivacyNormalDesTextFirst'] as String
     ..setAppPrivacyNormalDesTextSecond =
@@ -94,9 +102,8 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setAppPrivacyNormalDesTextLast =
         json['setAppPrivacyNormalDesTextLast'] as String
     ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool
-    ..setPrivacyNavText = json['setPrivacyNavText'] as String
     ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as String
-    ..setPrivacyNavTextBold = json['setPrivacyNavTextBold'] as bool
+    ..setPrivacyNavTextSize = json['setPrivacyNavTextSize'] as num
     ..setPrivacyNavReturnImgPath = json['setPrivacyNavReturnImgPath'] as String
     ..setAppPrivacyWebPreferredStatusBarStyle = _$enumDecodeNullable(
         _$iOSStatusBarStyleEnumMap,
@@ -114,27 +121,34 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setSloganTextSize = json['setSloganTextSize'] as num
     ..setSloganTextBold = json['setSloganTextBold'] as bool
     ..setSloganTextColor = json['setSloganTextColor'] as String
-    ..setSlogaTextAlignment = _$enumDecodeNullable(
-        _$iOSTextAlignmentEnumMap, json['setSlogaTextAlignment'])
+    ..setSlogaTextAlignment =
+        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setSlogaTextAlignment'])
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as num
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool
     ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String
-    ..setShanYanSlogaTextAlignment =
-        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSlogaTextAlignment'])
+    ..setShanYanSlogaTextAlignment = _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSlogaTextAlignment'])
     ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool
     ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool
     ..setPrivacyState = json['setPrivacyState'] as bool
-    ..clCheckBoxVerticalAlignmentToAppPrivacyTop = json['clCheckBoxVerticalAlignmentToAppPrivacyTop'] as bool
-    ..clCheckBoxVerticalAlignmentToAppPrivacyCenterY = json['clCheckBoxVerticalAlignmentToAppPrivacyCenterY'] as bool
+    ..setCheckBoxWH = (json['setCheckBoxWH'] as List)?.map((e) => e as num)?.toList()
+    ..setCheckBoxImageEdgeInsets = (json['setCheckBoxImageEdgeInsets'] as List)?.map((e) => e as num)?.toList()
+    ..setCheckBoxVerticalAlignmentToAppPrivacyTop = json['setCheckBoxVerticalAlignmentToAppPrivacyTop'] as bool
+    ..setCheckBoxVerticalAlignmentToAppPrivacyCenterY = json['setCheckBoxVerticalAlignmentToAppPrivacyCenterY'] as bool
     ..setUncheckedImgPath = json['setUncheckedImgPath'] as String
     ..setCheckedImgPath = json['setCheckedImgPath'] as String
-    ..clLoadingCornerRadius = json['clLoadingCornerRadius'] as num
-    ..clLoadingBackgroundColor = json['clLoadingBackgroundColor'] as String
-    ..clLoadingTintColor = json['clLoadingTintColor'] as String
-    ..shouldAutorotate = json['shouldAutorotate'] as bool
-    ..clAuthTypeUseWindow = json['clAuthTypeUseWindow'] as bool
-    ..clAuthWindowCornerRadius = json['clAuthWindowCornerRadius'] as num
-    ..clAuthWindowPresentingAnimate = json['clAuthWindowPresentingAnimate'] as bool;
+    ..setLoadingCornerRadius = json['setLoadingCornerRadius'] as num
+    ..setLoadingBackgroundColor = json['setLoadingBackgroundColor'] as String
+    ..setLoadingTintColor = json['setLoadingTintColor'] as String
+    ..setShouldAutorotate = json['setShouldAutorotate'] as bool
+    ..supportedInterfaceOrientations = _$enumDecodeNullable(_$iOSInterfaceOrientationMaskEnumMap, json['supportedInterfaceOrientations'])
+    ..preferredInterfaceOrientationForPresentation = _$enumDecodeNullable(_$iOSInterfaceOrientationEnumMap, json['preferredInterfaceOrientationForPresentation'])
+    ..setAuthTypeUseWindow = json['setAuthTypeUseWindow'] as bool
+    ..setAuthWindowCornerRadius = json['setAuthWindowCornerRadius'] as num
+    ..setAuthWindowModalTransitionStyle = _$enumDecodeNullable(_$iOSModalTransitionStyleEnumMap, json['setAuthWindowModalTransitionStyle'])
+    ..setAuthWindowModalPresentationStyle = _$enumDecodeNullable(_$iOSModalPresentationStyleEnumMap, json['setAuthWindowModalPresentationStyle'])
+    ..setAppPrivacyWebModalPresentationStyle = _$enumDecodeNullable(_$iOSModalPresentationStyleEnumMap, json['setAppPrivacyWebModalPresentationStyle'])
+    ..setAuthWindowOverrideUserInterfaceStyle = _$enumDecodeNullable(_$iOSUserInterfaceStyleEnumMap, json['setAuthWindowOverrideUserInterfaceStyle'])
+    ..setAuthWindowPresentingAnimate = json['setAuthWindowPresentingAnimate'] as bool;
 }
 
 Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
@@ -145,8 +159,8 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
           _$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle],
       'setStatusBarHidden': instance.setStatusBarHidden,
       'setAuthNavHidden': instance.setAuthNavHidden,
-      'clNavigationBarStyle':
-          _$iOSBarStyleEnumMap[instance.clNavigationBarStyle],
+      'setNavigationBarStyle':
+          _$iOSBarStyleEnumMap[instance.setNavigationBarStyle],
       'setAuthNavTransparent': instance.setAuthNavTransparent,
       'setNavText': instance.setNavText,
       'setNavTextColor': instance.setNavTextColor,
@@ -165,8 +179,8 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
       'setNumberColor': instance.setNumberColor,
       'setNumberSize': instance.setNumberSize,
       'setNumberBold': instance.setNumberBold,
-      'setPhoneNumberTextAlignment':
-          _$iOSTextAlignmentEnumMap[instance.setPhoneNumberTextAlignment],
+      'setNumberTextAlignment':
+          _$iOSTextAlignmentEnumMap[instance.setNumberTextAlignment],
       'setLogBtnText': instance.setLogBtnText,
       'setLogBtnTextColor': instance.setLogBtnTextColor,
       'setLoginBtnTextSize': instance.setLoginBtnTextSize,
@@ -178,6 +192,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
       'setLoginBtnBorderColor': instance.setLoginBtnBorderColor,
       'setLoginBtnCornerRadius': instance.setLoginBtnCornerRadius,
       'setLoginBtnBorderWidth': instance.setLoginBtnBorderWidth,
+      'setAppPrivacyColor': instance.setAppPrivacyColor,
       'setPrivacyTextSize': instance.setPrivacyTextSize,
       'setPrivacyTextBold': instance.setPrivacyTextBold,
       'setAppPrivacyTextAlignment':
@@ -185,9 +200,12 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
       'setPrivacySmhHidden': instance.setPrivacySmhHidden,
       'setAppPrivacyLineSpacing': instance.setAppPrivacyLineSpacing,
       'setAppPrivacyNeedSizeToFit': instance.setAppPrivacyNeedSizeToFit,
-      'clAppPrivacyLineFragmentPadding':
-          instance.clAppPrivacyLineFragmentPadding,
+      'setAppPrivacyLineFragmentPadding':
+          instance.setAppPrivacyLineFragmentPadding,
       'setAppPrivacyAbbreviatedName': instance.setAppPrivacyAbbreviatedName,
+      'setAppPrivacyFirst': instance.setAppPrivacyFirst,
+      'setAppPrivacySecond': instance.setAppPrivacySecond,
+      'setAppPrivacyThird': instance.setAppPrivacyThird,
       'setAppPrivacyNormalDesTextFirst':
           instance.setAppPrivacyNormalDesTextFirst,
       'setAppPrivacyNormalDesTextSecond':
@@ -198,9 +216,8 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
           instance.setAppPrivacyNormalDesTextFourth,
       'setAppPrivacyNormalDesTextLast': instance.setAppPrivacyNormalDesTextLast,
       'setOperatorPrivacyAtLast': instance.setOperatorPrivacyAtLast,
-      'setPrivacyNavText': instance.setPrivacyNavText,
       'setPrivacyNavTextColor': instance.setPrivacyNavTextColor,
-      'setPrivacyNavTextBold': instance.setPrivacyNavTextBold,
+      'setPrivacyNavTextSize': instance.setPrivacyNavTextSize,
       'setPrivacyNavReturnImgPath': instance.setPrivacyNavReturnImgPath,
       'setAppPrivacyWebPreferredStatusBarStyle': _$iOSStatusBarStyleEnumMap[
           instance.setAppPrivacyWebPreferredStatusBarStyle],
@@ -227,19 +244,35 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
       'setShanYanSloganHidden': instance.setShanYanSloganHidden,
       'setCheckBoxHidden': instance.setCheckBoxHidden,
       'setPrivacyState': instance.setPrivacyState,
-      'clCheckBoxVerticalAlignmentToAppPrivacyTop':
-          instance.clCheckBoxVerticalAlignmentToAppPrivacyTop,
-      'clCheckBoxVerticalAlignmentToAppPrivacyCenterY':
-          instance.clCheckBoxVerticalAlignmentToAppPrivacyCenterY,
+      'setCheckBoxWH': instance.setCheckBoxWH,
+      'setCheckBoxImageEdgeInsets': instance.setCheckBoxImageEdgeInsets,
+      'setCheckBoxVerticalAlignmentToAppPrivacyTop':
+          instance.setCheckBoxVerticalAlignmentToAppPrivacyTop,
+      'setCheckBoxVerticalAlignmentToAppPrivacyCenterY':
+          instance.setCheckBoxVerticalAlignmentToAppPrivacyCenterY,
       'setUncheckedImgPath': instance.setUncheckedImgPath,
       'setCheckedImgPath': instance.setCheckedImgPath,
-      'clLoadingCornerRadius': instance.clLoadingCornerRadius,
-      'clLoadingBackgroundColor': instance.clLoadingBackgroundColor,
-      'clLoadingTintColor': instance.clLoadingTintColor,
-      'shouldAutorotate': instance.shouldAutorotate,
-      'clAuthTypeUseWindow': instance.clAuthTypeUseWindow,
-      'clAuthWindowCornerRadius': instance.clAuthWindowCornerRadius,
-      'clAuthWindowPresentingAnimate': instance.clAuthWindowPresentingAnimate,
+      'setLoadingCornerRadius': instance.setLoadingCornerRadius,
+      'setLoadingBackgroundColor': instance.setLoadingBackgroundColor,
+      'setLoadingTintColor': instance.setLoadingTintColor,
+      'setShouldAutorotate': instance.setShouldAutorotate,
+      'supportedInterfaceOrientations': _$iOSInterfaceOrientationMaskEnumMap[
+          instance.supportedInterfaceOrientations],
+      'preferredInterfaceOrientationForPresentation':
+          _$iOSInterfaceOrientationEnumMap[
+              instance.preferredInterfaceOrientationForPresentation],
+      'setAuthTypeUseWindow': instance.setAuthTypeUseWindow,
+      'setAuthWindowCornerRadius': instance.setAuthWindowCornerRadius,
+      'setAuthWindowModalTransitionStyle': _$iOSModalTransitionStyleEnumMap[
+          instance.setAuthWindowModalTransitionStyle],
+      'setAuthWindowModalPresentationStyle': _$iOSModalPresentationStyleEnumMap[
+          instance.setAuthWindowModalPresentationStyle],
+      'setAppPrivacyWebModalPresentationStyle':
+          _$iOSModalPresentationStyleEnumMap[
+              instance.setAppPrivacyWebModalPresentationStyle],
+      'setAuthWindowOverrideUserInterfaceStyle': _$iOSUserInterfaceStyleEnumMap[
+          instance.setAuthWindowOverrideUserInterfaceStyle],
+      'setAuthWindowPresentingAnimate': instance.setAuthWindowPresentingAnimate,
     };
 
 T _$enumDecode<T>(
@@ -286,11 +319,47 @@ const _$iOSBarStyleEnumMap = {
 };
 
 const _$iOSTextAlignmentEnumMap = {
-  iOSTextAlignment.left: 'left',
   iOSTextAlignment.center: 'center',
+  iOSTextAlignment.left: 'left',
   iOSTextAlignment.right: 'right',
   iOSTextAlignment.justified: 'justified',
   iOSTextAlignment.natural: 'natural',
+};
+
+const _$iOSInterfaceOrientationMaskEnumMap = {
+  iOSInterfaceOrientationMask.portrait: 'portrait',
+  iOSInterfaceOrientationMask.landscapeLeft: 'landscapeLeft',
+  iOSInterfaceOrientationMask.landscapeRight: 'landscapeRight',
+  iOSInterfaceOrientationMask.portraitUpsideDown: 'portraitUpsideDown',
+  iOSInterfaceOrientationMask.landscape: 'landscape',
+  iOSInterfaceOrientationMask.all: 'all',
+  iOSInterfaceOrientationMask.allButUpsideDown: 'allButUpsideDown',
+};
+
+const _$iOSInterfaceOrientationEnumMap = {
+  iOSInterfaceOrientation.portrait: 'portrait',
+  iOSInterfaceOrientation.portraitUpsideDown: 'portraitUpsideDown',
+  iOSInterfaceOrientation.landscapeLeft: 'landscapeLeft',
+  iOSInterfaceOrientation.landscapeRight: 'landscapeRight',
+  iOSInterfaceOrientation.unknown: 'unknown',
+};
+
+const _$iOSModalTransitionStyleEnumMap = {
+  iOSModalTransitionStyle.coverVertical: 'coverVertical',
+  iOSModalTransitionStyle.flipHorizontal: 'flipHorizontal',
+  iOSModalTransitionStyle.crossDissolve: 'crossDissolve',
+};
+
+const _$iOSModalPresentationStyleEnumMap = {
+  iOSModalPresentationStyle.fullScreen: 'fullScreen',
+  iOSModalPresentationStyle.overFullScreen: 'overFullScreen',
+  iOSModalPresentationStyle.automatic: 'automatic',
+};
+
+const _$iOSUserInterfaceStyleEnumMap = {
+  iOSUserInterfaceStyle.unspecified: 'unspecified',
+  iOSUserInterfaceStyle.light: 'light',
+  iOSUserInterfaceStyle.dark: 'dark',
 };
 
 ClOrientationLayOutIOS _$ClOrientationLayOutIOSFromJson(

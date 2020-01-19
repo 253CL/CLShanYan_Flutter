@@ -185,32 +185,23 @@ class ShanYanUIConfig {
 @JsonSerializable(explicitToJson: true)
 class ShanYanUIConfigIOS {
 
-  ShanYanUIConfigIOS();
+  bool isFinish;            ///外部手动管理关闭界面 BOOL,default is NO
 
-  ///外部手动管理关闭界面
-  ///BOOL,default is NO
-  bool isFinish;
+  String setAuthBGImgPath;                        /// /// 授权页-背景图片
 
-  /// 授权页-背景图片*/
-  String setAuthBGImgPath;
+  iOSStatusBarStyle setPreferredStatusBarStyle;   /// 状态栏样式
 
-  /// 状态栏样式
-  iOSStatusBarStyle setPreferredStatusBarStyle;
-  ///*状态栏隐藏
-  bool setStatusBarHidden;
+  bool setStatusBarHidden;            ///状态栏隐藏
 
   //导航栏
-  /// 导航栏 是否隐藏 BOOL default is NO
-  bool setAuthNavHidden;
-  /// 导航栏样式
-  iOSBarStyle clNavigationBarStyle;
 
-  /// 导航栏 背景透明 BOOL
-  bool setAuthNavTransparent;
+  bool setAuthNavHidden;              /// 导航栏 是否隐藏 BOOL default is NO
+
+  iOSBarStyle setNavigationBarStyle;   /// 导航栏样式
+
+  bool setAuthNavTransparent;         /// 导航栏 背景透明 BOOL
 
   /// 导航栏标题*/
-//  @property (nonatomic,strong)NSAttributedString * clNavigationAttributesTitleText;
-
   String setNavText; //设置导航栏标题文字
   String setNavTextColor; //设置导航栏标题文字颜色
   int setNavTextSize; //设置导航栏标题文字大小
@@ -221,16 +212,13 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,strong)UIBarButtonItem * clNavigationLeftControl;
 
 // 返回按钮
-  /// 导航栏左侧返回按钮图片*/
-  String setNavReturnImgPath;
-  /// 导航栏自带返回按钮隐藏，默认显示 BOOL*/
-  bool setNavReturnImgHidden;
+  String setNavReturnImgPath;           /// 导航栏左侧返回按钮图片
+  bool setNavReturnImgHidden;           /// 导航栏自带返回按钮隐藏，默认显示 BOOL
 
   /// 返回按钮图片缩进 btn.imageInsets = UIEdgeInsetsMake(0, 0, 20, 20)*/
 //  @property (nonatomic,strong)NSValue * clNavBackBtnImageInsets;
 
-  /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示*/
-  bool setNavBackBtnAlimentRight;
+  bool setNavBackBtnAlimentRight;       /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示
 
 
   /// 导航栏分割线 是否隐藏
@@ -238,21 +226,17 @@ class ShanYanUIConfigIOS {
   /// BOOL, default is NO
   /// eg.@(YES)
   bool setNavigationBottomLineHidden;
-  /// 导航栏 渲染色*/
-  String setNavigationTintColor;
-  /// 导航栏 背景色 default is white*/
-  String setNavigationBarTintColor;
-  /// 导航栏 背景图片*/
-  String setNavigationBackgroundImage;
+
+  String setNavigationTintColor;          /// 导航栏 渲染色*/
+
+  String setNavigationBarTintColor;      /// 导航栏 背景色 default is white*/
+
+  String setNavigationBackgroundImage; /// 导航栏 背景图片
 
   /**导航栏 配合背景图片设置，用来控制在不同状态下导航栏的显示(横竖屏是否显示) UIBarMetrics eg.@(UIBarMetricsCompact)*/
-//  @property (nonatomic,strong)NSNumber * clNavigationBarMetrics;
+//  @property (nonatomic,strong)NSNumber * setNavigationBarMetrics;
 
-  /// 导航栏 导航栏底部分割线（图片）*/
-  String setNavigationShadowImage;
-
-
-
+  String setNavigationShadowImage;    /// /// 导航栏 导航栏底部分割线（图片）
 
 //LOGO图片
 
@@ -267,7 +251,7 @@ class ShanYanUIConfigIOS {
   num     setNumberSize;    /// 号码栏字体
   bool    setNumberBold;    /// 号码栏字体是否加粗（true：加粗；false：不加粗）
 
-  iOSTextAlignment setPhoneNumberTextAlignment; /// 手机号对齐方式
+  iOSTextAlignment setNumberTextAlignment; /// 手机号对齐方式
 
 //一键登录按钮 !不得隐藏
   String  setLogBtnText;          /// 按钮文字
@@ -287,8 +271,7 @@ class ShanYanUIConfigIOS {
  注： 运营商隐私条款 不得隐藏
  用户条款不限制
  **/
-  /**隐私条款名称颜色：@[基础文字颜色UIColor*,条款颜色UIColor*] eg.@[[UIColor lightGrayColor],[UIColor greenColor]]*/
-//  @property (nonatomic,strong) NSArray<UIColor*> *clAppPrivacyColor;
+  List<String> setAppPrivacyColor; ///设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色,eg. ["#FFD13D","#CAACE1"]
 
   /**隐私条款文字字体*/
   num setPrivacyTextSize;   /// 设置隐私栏字体大小
@@ -300,52 +283,37 @@ class ShanYanUIConfigIOS {
   bool setAppPrivacyNeedSizeToFit;               /// 是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑
   /**UITextView.textContainerInset 文字与TextView控件内边距 UIEdgeInset  eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyTextContainerInset;
-  num clAppPrivacyLineFragmentPadding;          /// 文字与TextView控件左右内边距
+  num setAppPrivacyLineFragmentPadding;          /// 文字与TextView控件左右内边距
   /**UITextView.contentInset UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyContentInset;
+
   String setAppPrivacyAbbreviatedName;           /// 隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效
-/*
- *隐私条款Y一:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
- *@[NSSting,NSURL];
- */
-//  @property (nonatomic,strong)NSArray * clAppPrivacyFirst;
-/*
- *隐私条款二:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
- *@[NSSting,NSURL];
- */
-//  @property (nonatomic,strong)NSArray * clAppPrivacySecond;
-/*
- *隐私条款三:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
- *@[NSSting,NSURL];
- */
-//  @property (nonatomic,strong)NSArray * clAppPrivacyThird;
+
+  List<String> setAppPrivacyFirst;              /// 隐私条款一:需同时设置Name和UrlString
+  List<String> setAppPrivacySecond;             /// 隐私条款二:需同时设置Name和UrlString
+  List<String> setAppPrivacyThird;              /// 隐私条款三:需同时设置Name和UrlString
+
 /*
  隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth+隐私条款三+DesTextLast
  **/
-  /**描述文本 首部 default:"同意"*/
-  String setAppPrivacyNormalDesTextFirst;
-  /**描述文本二 default:"和"*/
-  String setAppPrivacyNormalDesTextSecond;
-  /**描述文本三 default:"、"*/
-  String setAppPrivacyNormalDesTextThird;
-  /**描述文本四 default:"、"*/
-  String setAppPrivacyNormalDesTextFourth;
-  /**描述文本 尾部 default: "并授权AppName使用认证服务"*/
-  String setAppPrivacyNormalDesTextLast;
+  String setAppPrivacyNormalDesTextFirst;       /// 描述文本 首部 default:"同意"
+  String setAppPrivacyNormalDesTextSecond;      /// 描述文本二 default:"和"
+  String setAppPrivacyNormalDesTextThird;       /// 描述文本三 default:"、"
+  String setAppPrivacyNormalDesTextFourth;      /// 描述文本四 default:"、"
+  String setAppPrivacyNormalDesTextLast;        /// 描述文本 尾部 default: "并授权AppName使用认证服务"
 
   bool setOperatorPrivacyAtLast;  /// 运营商协议后置
 
-  String setPrivacyNavText;       /// 协议页导航栏统一标题，默认显示条款名称
-  String setPrivacyNavTextColor;  /// 协议页导航栏标题文字颜色
-  bool setPrivacyNavTextBold;     /// 协议页标题文字是否加粗
+//  String setPrivacyNavText;         /// 协议页导航栏统一标题，默认显示条款名称
+  String setPrivacyNavTextColor;    /// 协议页导航栏标题文字颜色
+  num setPrivacyNavTextSize;        /// 协议页标题文字大小
 
-  /**隐私协议WEB页面导航返回按钮图片*/
-  String setPrivacyNavReturnImgPath;
+  String setPrivacyNavReturnImgPath;  /// 隐私协议WEB页面导航返回按钮图片
 
   iOSStatusBarStyle setAppPrivacyWebPreferredStatusBarStyle;  /// 协议页状态栏样式
   iOSBarStyle setAppPrivacyWebNavigationBarStyle;             /// 协议页导航栏样式
 
-  ///导航栏其他属性
+  ///协议页导航栏其他属性
   String setAppPrivacyWebNavigationTintColor;
   String setAppPrivacyWebNavigationBarTintColor;
   String setAppPrivacyWebNavigationBackgroundImage;
@@ -372,22 +340,17 @@ class ShanYanUIConfigIOS {
  *可在sdk_oauth.bundle中替换checkBox_unSelected、checkBox_selected图片
  *也可以通过属性设置选中和未选择图片
  **/
-  /**协议勾选框（默认显示,放置在协议之前）BOOL eg.@(YES)*/
-  bool setCheckBoxHidden;
-  /**协议勾选框默认值（默认选中）BOOL eg.@(YES)*/
-  bool setPrivacyState;
-  /**协议勾选框 尺寸 NSValue->CGSize eg.[NSValue valueWithCGSize:CGSizeMake(25, 25)]*/
-//  @property (nonatomic,strong) NSValue *clCheckBoxSize;
-  /**协议勾选框 UIButton.image图片缩进 UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
-//  @property (nonatomic,strong) NSValue *clCheckBoxImageEdgeInsets;
-  /**协议勾选框 设置CheckBox顶部与隐私协议控件顶部对齐 YES或大于0生效 eg.@(YES)*/
-  bool clCheckBoxVerticalAlignmentToAppPrivacyTop;
-  /**协议勾选框 设置CheckBox顶部与隐私协议控件竖向中心对齐 YES或大于0生效 eg.@(YES)*/
-  bool clCheckBoxVerticalAlignmentToAppPrivacyCenterY;
-  /**协议勾选框 非选中状态图片*/
-  String setUncheckedImgPath;
-  /**协议勾选框 选中状态图片*/
-  String setCheckedImgPath;
+  bool setCheckBoxHidden;       /// 协议勾选框（默认显示,放置在协议之前）BOOL
+  bool setPrivacyState;         /// 协议勾选框默认值（默认选中）BOOL
+
+  List<num> setCheckBoxWH;      /// 协议勾选框 宽高 eg. [40,40]
+  List<num> setCheckBoxImageEdgeInsets;         /// 协议勾选框 UIButton.image图片缩进,eg. [2, 2, 2, 2]
+
+  bool setCheckBoxVerticalAlignmentToAppPrivacyTop;     /// 设置是否CheckBox顶部与隐私协议控件顶部对齐
+  bool setCheckBoxVerticalAlignmentToAppPrivacyCenterY; /// 设置是否CheckBox顶部与隐私协议控件竖向中心对齐，!!!与setCheckBoxVerticalAlignmentToAppPrivacyTop 同时只需设置一个
+
+  String setUncheckedImgPath;   /// 协议勾选框 非选中状态图片
+  String setCheckedImgPath;     /// 协议勾选框 选中状态图片
 
   /**授权页自定义 "请勾选协议"提示框
       - containerView为loading的全屏蒙版view
@@ -399,14 +362,15 @@ class ShanYanUIConfigIOS {
 /*Loading*/
   /**Loading 大小 CGSize eg.[NSValue valueWithCGSize:CGSizeMake(50, 50)]*/
 //  @property (nonatomic,strong) NSValue *clLoadingSize;
-  /**Loading 圆角 float eg.@(5) */
-  num clLoadingCornerRadius;
-  /**Loading 背景色 UIColor eg.[UIColor colorWithRed:0.8 green:0.5 blue:0.8 alpha:0.8]; */
-  String clLoadingBackgroundColor;
+
+  num setLoadingCornerRadius;       /// Loading 圆角
+  String setLoadingBackgroundColor; /// Loading 背景色
+
   /**UIActivityIndicatorViewStyle eg.@(UIActivityIndicatorViewStyleWhiteLarge)*/
 //  @property (nonatomic,strong) NSNumber *clLoadingIndicatorStyle;
-  /**Loading Indicator渲染色 UIColor eg.[UIColor greenColor]; */
-  String clLoadingTintColor;
+
+  String setLoadingTintColor; /// Loading Indicator渲染色
+
   /**授权页自定义Loading
       - containerView为loading的全屏蒙版view
       - 请自行在containerView添加自定义loading
@@ -420,31 +384,22 @@ class ShanYanUIConfigIOS {
   /**设置隐私协议弹窗*/
 //  @property (nonatomic,copy)void(^customPrivacyAlertView)(UIViewController * authPageVC);
 
-  /**横竖屏*/
-/*是否支持自动旋转 BOOL*/
-  bool shouldAutorotate;
-/*支持方向 UIInterfaceOrientationMask
- - 如果设置只支持竖屏，只需设置clOrientationLayOutPortrait竖屏布局对象
- - 如果设置只支持横屏，只需设置clOrientationLayOutLandscape横屏布局对象
- - 横竖屏均支持，需同时设置clOrientationLayOutPortrait和clOrientationLayOutLandscape
+//横竖屏
+  bool setShouldAutorotate;  /// 是否支持自动旋转
+
+/*支持方向
+ - 如果设置只支持竖屏，只需配置竖屏布局layOutPortrait
+ - 如果设置只支持横屏，只需设置横屏布局layOutLandscape
+ - 横竖屏均支持，需同时设置竖屏布局layOutPortrait和横屏布局layOutLandscape
  */
-//  @property (nonatomic,strong) NSNumber * supportedInterfaceOrientations;
-/*默认方向 UIInterfaceOrientation*/
-//  @property (nonatomic,strong) NSNumber * preferrednumerfaceOrientationForPresentation;
+  iOSInterfaceOrientationMask supportedInterfaceOrientations;
 
-  /**以窗口方式显示授权页
-   */
-  /**以窗口方式显示 BOOL, default is NO */
-  bool clAuthTypeUseWindow;
-  /**窗口圆角 float*/
-  num clAuthWindowCornerRadius;
+  iOSInterfaceOrientation preferredInterfaceOrientationForPresentation; /// 默认方向
 
-  /**clAuthWindowModalTransitionStyle系统自带的弹出方式 仅支持以下三种
-      UIModalTransitionStyleCoverVertical 底部弹出
-      UIModalTransitionStyleCrossDissolve 淡入
-      UIModalTransitionStyleFlipHorizontal 翻转显示
-   */
-//  @property (nonatomic,strong) NSNumber * clAuthWindowModalTransitionStyle;
+  bool setAuthTypeUseWindow;      /// 以窗口方式显示
+  num setAuthWindowCornerRadius;  /// 窗口圆角
+
+  iOSModalTransitionStyle setAuthWindowModalTransitionStyle;  /// 系统自带的弹出动画
 
 /* UIModalPresentationStyle
  * 若使用窗口模式，请设置为UIModalPresentationOverFullScreen 或不设置
@@ -453,10 +408,9 @@ class ShanYanUIConfigIOS {
  * 默认UIModalPresentationFullScreen
  * eg. @(UIModalPresentationOverFullScreen)
  */
-/*授权页 ModalPresentationStyle*/
-//  @property (nonatomic,strong) NSNumber * clAuthWindowModalPresentationStyle;
-/*协议页 ModalPresentationStyle （授权页使用窗口模式时，协议页强制使用模态弹出）*/
-//  @property (nonatomic,strong) NSNumber * clAppPrivacyWebModalPresentationStyle;
+
+  iOSModalPresentationStyle setAuthWindowModalPresentationStyle; /// 授权页弹出样式
+  iOSModalPresentationStyle setAppPrivacyWebModalPresentationStyle; /// 协议页弹出样式。当授权页使用窗口模式时，协议页强制使用模态弹出，此时此属性有效
 
 /* UIUserInterfaceStyle
  * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
@@ -464,20 +418,20 @@ class ShanYanUIConfigIOS {
  * UIUserInterfaceStyleDark,       - 暗黑 仅对iOS13+系统有效
  */
 /*授权页 UIUserInterfaceStyle,默认:UIUserInterfaceStyleLight,eg. @(UIUserInterfaceStyleLight)*/
-//  @property (nonatomic,strong) NSNumber * clAuthWindowOverrideUserInterfaceStyle;
+  iOSUserInterfaceStyle setAuthWindowOverrideUserInterfaceStyle;
 
-  /**
-   * 授权页面present弹出时animate动画设置，默认带动画，eg. @(YES)
-   */
-  bool clAuthWindowPresentingAnimate;
+  bool setAuthWindowPresentingAnimate;      /// 授权页面present弹出时animate动画设置，默认带动画
 
   /**弹窗的MaskLayer，用于自定义窗口形状*/
 //  @property (nonatomic,strong) CALayer * clAuthWindowMaskLayer;
 
 
   //布局设置
-  final ClOrientationLayOutIOS layOut_portrait = new ClOrientationLayOutIOS();//横屏下使用的布局
-  final ClOrientationLayOutIOS layOut_landscape = new ClOrientationLayOutIOS();//竖屏下使用的布局(不需要则不设置)
+  final ClOrientationLayOutIOS layOutPortrait = new ClOrientationLayOutIOS();//横屏下使用的布局
+  final ClOrientationLayOutIOS layOutLandscape = new ClOrientationLayOutIOS();//竖屏下使用的布局(不需要则不设置)
+
+
+  ShanYanUIConfigIOS();
 
 //反序列化
   factory ShanYanUIConfigIOS.fromJson(Map<String, dynamic> json) => _$ShanYanUIConfigIOSFromJson(json);
@@ -720,9 +674,8 @@ class ShanYanUIConfigAndroid {
 
 ///iOS 文字对齐方式
 enum iOSTextAlignment  {
-
-  left, // Visually left aligned 居左
   center, // Visually centered 居中
+  left, // Visually left aligned 居左
   right, // Visually right aligned 居右
 
 /* !TARGET_ABI_USES_IOS_VALUES */
@@ -745,4 +698,53 @@ enum iOSStatusBarStyle{
 enum iOSBarStyle{
   styleDefault, // 状态栏显示 黑
   styleBlack    // 状态栏显示 白
+}
+
+// iOS 支持的横竖屏方向
+enum iOSInterfaceOrientationMask{
+  portrait,           //竖屏
+  landscapeLeft,      //横屏：左
+  landscapeRight,     //横屏：右
+  portraitUpsideDown, //上下倒置
+  landscape,          //横屏：左+右
+  all,                //全部方向
+  allButUpsideDown    //全部方向，除了上下倒置
+}
+
+// iOS 屏幕方向
+enum iOSInterfaceOrientation{
+  portrait,           //竖屏
+  portraitUpsideDown, //上下倒置
+  landscapeLeft,      //横屏：左
+  landscapeRight,     //横屏：右
+  unknown,
+}
+
+// iOS 系统自带的弹出方式
+enum iOSModalTransitionStyle {
+ coverVertical,       // 底部弹出
+ flipHorizontal,      // 淡入
+ crossDissolve        // 翻转显示
+}
+
+/* UIModalPresentationStyle
+ * 若使用窗口模式，请设置为UIModalPresentationOverFullScreen 或不设置
+ * iOS13强制全屏，请设置为UIModalPresentationFullScreen
+ * UIModalPresentationAutomatic API_AVAILABLE(ios(13.0)) = -2
+ * 默认UIModalPresentationFullScreen
+ * eg. @(UIModalPresentationOverFullScreen)
+ */
+
+// iOS 系统的弹出样式
+enum iOSModalPresentationStyle{
+  fullScreen,       // 弹出全屏
+  overFullScreen,   // 在原页面弹出，可透视原页面
+  automatic         // 自动
+}
+
+// iOS 主题模式
+enum iOSUserInterfaceStyle {
+  unspecified,  //跟随系统
+  light,        //亮
+  dark          //暗黑 API_AVAILABLE(ios(13.0))
 }

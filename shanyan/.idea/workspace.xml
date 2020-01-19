@@ -6,11 +6,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feabf20f-43cd-44f1-b2ca-94a00111ce74" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/assets/img/2-0btn_15@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/loginBtn_disable.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/login_btn_normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/logo@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/logo@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/setting@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/圆角矩形 2 拷贝@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/圆角矩形 2 拷贝@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/您的新一代验证解决方案@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/您的新一代验证解决方案@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/矩形 2@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/矩形 2@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/矩形 3@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/img/矩形 3@3x.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shanYanUIConfig.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shanYanUIConfig.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/shanYanUIConfig.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shanYanUIConfig.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shanyan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shanyan.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -33,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8818">
-              <caret line="300" selection-start-line="300" selection-end-line="300" />
+            <state relative-caret-position="207">
+              <caret line="272" column="93" selection-start-line="272" selection-start-column="93" selection-end-line="272" selection-end-column="93" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -63,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-106">
-              <caret line="133" column="41" selection-start-line="133" selection-start-column="41" selection-end-line="133" selection-end-column="41" />
+            <state relative-caret-position="-165">
+              <caret line="132" selection-start-line="132" selection-end-line="132" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -81,20 +95,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documents/flutter/packages/flutter/lib/src/services/platform_channel.dart">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="311" column="12" selection-start-line="311" selection-start-column="12" selection-end-line="311" selection-end-column="12" />
+            <state relative-caret-position="358">
+              <caret line="345" column="25" selection-start-line="345" selection-start-column="12" selection-end-line="345" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.dart">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="393" column="32" lean-forward="true" selection-start-line="393" selection-start-column="32" selection-end-line="393" selection-end-column="32" />
+            <state relative-caret-position="160">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
             </state>
           </provider>
         </entry>
@@ -117,11 +140,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pubspec.lock">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -133,7 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>widgets</find>
       <find>2.3.0.</find>
       <find>AuthPageOnClickEvent</find>
       <find>setLoadingVisibility</find>
@@ -163,6 +180,7 @@
       <find>flutter_log</find>
       <find>android_portrait</find>
       <find>int</find>
+      <find>shanYanCustomWidgetLayout</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -183,14 +201,15 @@
         <option value="$PROJECT_DIR$/ios/shanyan.podspec" />
         <option value="$PROJECT_DIR$/lib/shanYanResult.dart" />
         <option value="$PROJECT_DIR$/lib/shanyan.dart" />
-        <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/shanyanEnum.dart" />
+        <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/shanYanUIConfig.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1645" />
+    <option name="x" value="25" />
+    <option name="width" value="1505" />
     <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -294,26 +313,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1645" height="1080" extended-state="0" />
+    <frame x="-131" y="0" width="1220" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7236126" visible="true" weight="0.1603244" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.72348994" visible="true" weight="0.21816638" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="Resources Explorer" order="5" />
       <window_info id="Capture Tool" order="6" />
-      <window_info active="true" id="Build Variants" order="7" sideWeight="0.27638736" side_tool="true" visible="true" weight="0.1603244" />
+      <window_info active="true" id="Build Variants" order="7" sideWeight="0.27651006" side_tool="true" visible="true" weight="0.21816638" />
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" sideWeight="0.49964514" weight="0.27327934" />
       <window_info anchor="bottom" id="Run" order="1" sideWeight="0.49946696" weight="0.22267206" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3299595" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" sideWeight="0.4989339" weight="0.40182185" />
-      <window_info anchor="bottom" id="Debug" order="5" visible="true" weight="0.069838054" />
-      <window_info anchor="bottom" id="Terminal" order="6" weight="0.13663967" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003549" side_tool="true" weight="0.27327934" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.4988864" weight="0.30566803" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.49830222" visible="true" weight="0.24595141" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5016978" side_tool="true" visible="true" weight="0.24595141" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.41194332" />
@@ -332,13 +351,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>302</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/shanyan.dart</url>
-          <line>133</line>
-          <option name="timeStamp" value="4" />
+          <line>435</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -377,13 +391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -464,13 +471,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/c_l_shan_yan_u_i_configure_entity.dart" />
     <entry file="file://$PROJECT_DIR$/lib/shanyan.g.dart" />
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/flutter/packages/flutter/lib/src/material/ink_well.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10170">
@@ -530,35 +530,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.g.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="124" column="43" selection-start-line="124" selection-start-column="43" selection-end-line="124" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8818">
-          <caret line="300" selection-start-line="300" selection-end-line="300" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/shanyanEnum.dart">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-106">
-          <caret line="133" column="41" selection-start-line="133" selection-start-column="41" selection-end-line="133" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.flutter-io.cn/json_annotation-3.0.1/lib/src/json_serializable.dart">
       <provider selected="true" editor-type-id="text-editor">
@@ -567,10 +540,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.g.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="124" column="43" selection-start-line="124" selection-start-column="43" selection-end-line="124" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-165">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="272" column="93" selection-start-line="272" selection-start-column="93" selection-end-line="272" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="393" column="32" lean-forward="true" selection-start-line="393" selection-start-column="32" selection-end-line="393" selection-end-column="32" />
+        <state relative-caret-position="358">
+          <caret line="345" column="25" selection-start-line="345" selection-start-column="12" selection-end-line="345" selection-end-column="25" />
         </state>
       </provider>
     </entry>
