@@ -502,9 +502,9 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     isFinish: json['isFinish'] as bool,
   )
     ..setAuthBGImgPath = json['setAuthBGImgPath'] as String
-    ..setStatusBarHidden = json['setStatusBarHidden'] as bool
     ..setAuthBgGifPath = json['setAuthBgGifPath'] as String
     ..setAuthBgVideoPath = json['setAuthBgVideoPath'] as String
+    ..setStatusBarHidden = json['setStatusBarHidden'] as bool
     ..setStatusBarColor = json['setStatusBarColor'] as String
     ..setLightColor = json['setLightColor'] as bool
     ..setVirtualKeyTransparent = json['setVirtualKeyTransparent'] as bool
@@ -514,6 +514,15 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setNavReturnBtnOffsetRightX = json['setNavReturnBtnOffsetRightX'] as int
     ..setNavReturnBtnOffsetX = json['setNavReturnBtnOffsetX'] as int
     ..setNavReturnBtnOffsetY = json['setNavReturnBtnOffsetY'] as int
+    ..setNavColor = json['setNavColor'] as String
+    ..setNavText = json['setNavText'] as String
+    ..setNavTextColor = json['setNavTextColor'] as String
+    ..setNavTextSize = json['setNavTextSize'] as int
+    ..setNavReturnImgPath = json['setNavReturnImgPath'] as String
+    ..setNavReturnImgHidden = json['setNavReturnImgHidden'] as bool
+    ..setAuthNavHidden = json['setAuthNavHidden'] as bool
+    ..setAuthNavTransparent = json['setAuthNavTransparent'] as bool
+    ..setNavTextBold = json['setNavTextBold'] as bool
     ..setLogoImgPath = json['setLogoImgPath'] as String
     ..setLogoHidden = json['setLogoHidden'] as bool
     ..setLogoOffsetY = json['setLogoOffsetY'] as int
@@ -527,22 +536,87 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setNumFieldOffsetX = json['setNumFieldOffsetX'] as int
     ..setNumFieldWidth = json['setNumFieldWidth'] as int
     ..setNumFieldHeight = json['setNumFieldHeight'] as int
+    ..setNumberColor = json['setNumberColor'] as String
+    ..setNumberBold = json['setNumberBold'] as bool
     ..setLogBtnOffsetY = json['setLogBtnOffsetY'] as int
     ..setLogBtnOffsetBottomY = json['setLogBtnOffsetBottomY'] as int
     ..setLogBtnTextSize = json['setLogBtnTextSize'] as int
     ..setLogBtnOffsetX = json['setLogBtnOffsetX'] as int
     ..setLogBtnHeight = json['setLogBtnHeight'] as int
     ..setLogBtnWidth = json['setLogBtnWidth'] as int
+    ..setLogBtnText = json['setLogBtnText'] as String
+    ..setLogBtnTextColor = json['setLogBtnTextColor'] as String
+    ..setLogBtnImgPath = json['setLogBtnImgPath'] as String
+    ..setLogBtnTextBold = json['setLogBtnTextBold'] as bool
     ..setPrivacyOffsetBottomY = json['setPrivacyOffsetBottomY'] as int
     ..setPrivacyOffsetY = json['setPrivacyOffsetY'] as int
     ..setPrivacyOffsetX = json['setPrivacyOffsetX'] as int
+    ..setAppPrivacyOne =
+        (json['setAppPrivacyOne'] as List)?.map((e) => e as String)?.toList()
+    ..setAppPrivacyTwo =
+        (json['setAppPrivacyTwo'] as List)?.map((e) => e as String)?.toList()
+    ..setAppPrivacyThree =
+        (json['setAppPrivacyThree'] as List)?.map((e) => e as String)?.toList()
+    ..setPrivacySmhHidden = json['setPrivacySmhHidden'] as bool
+    ..setPrivacyTextSize = json['setPrivacyTextSize'] as int
+    ..setAppPrivacyColor =
+        (json['setAppPrivacyColor'] as List)?.map((e) => e as String)?.toList()
+    ..setPrivacyOffsetGravityLeft = json['setPrivacyOffsetGravityLeft'] as bool
+    ..setPrivacyState = json['setPrivacyState'] as bool
+    ..setUncheckedImgPath = json['setUncheckedImgPath'] as String
+    ..setCheckedImgPath = json['setCheckedImgPath'] as String
+    ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool
+    ..setCheckBoxWH =
+        (json['setCheckBoxWH'] as List)?.map((e) => e as int)?.toList()
+    ..setCheckBoxMargin =
+        (json['setCheckBoxMargin'] as List)?.map((e) => e as int)?.toList()
+    ..setPrivacyText =
+        (json['setPrivacyText'] as List)?.map((e) => e as String)?.toList()
+    ..setPrivacyTextBold = json['setPrivacyTextBold'] as bool
     ..setSloganOffsetY = json['setSloganOffsetY'] as int
     ..setSloganOffsetBottomY = json['setSloganOffsetBottomY'] as int
     ..setSloganOffsetX = json['setSloganOffsetX'] as int
+    ..setSloganTextColor = json['setSloganTextColor'] as String
+    ..setSloganTextSize = json['setSloganTextSize'] as int
+    ..setSloganHidden = json['setSloganHidden'] as bool
+    ..setSloganTextBold = json['setSloganTextBold'] as bool
     ..setShanYanSloganOffsetY = json['setShanYanSloganOffsetY'] as int
     ..setShanYanSloganOffsetBottomY =
         json['setShanYanSloganOffsetBottomY'] as int
-    ..setShanYanSloganOffsetX = json['setShanYanSloganOffsetX'] as int;
+    ..setShanYanSloganOffsetX = json['setShanYanSloganOffsetX'] as int
+    ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as int
+    ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as int
+    ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool
+    ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool
+    ..setPrivacyNavColor = json['setPrivacyNavColor'] as int
+    ..setPrivacyNavTextBold = json['setPrivacyNavTextBold'] as bool
+    ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as int
+    ..setPrivacyNavTextSize = json['setPrivacyNavTextSize'] as int
+    ..setPrivacyNavReturnImgPath = json['setPrivacyNavReturnImgPath'] as String
+    ..setPrivacyNavReturnImgHidden =
+        json['setPrivacyNavReturnImgHidden'] as bool
+    ..setPrivacyNavReturnBtnWidth = json['setPrivacyNavReturnBtnWidth'] as int
+    ..setPrivacyNavReturnBtnHeight = json['setPrivacyNavReturnBtnHeight'] as int
+    ..setPrivacyNavReturnBtnOffsetRightX =
+        json['setPrivacyNavReturnBtnOffsetRightX'] as int
+    ..setPrivacyNavReturnBtnOffsetX =
+        json['setPrivacyNavReturnBtnOffsetX'] as int
+    ..setPrivacyNavReturnBtnOffsetY =
+        json['setPrivacyNavReturnBtnOffsetY'] as int
+    ..addCustomPrivacyAlertView = json['addCustomPrivacyAlertView'] as String
+    ..setLoadingView = json['setLoadingView'] as String
+    ..setDialogTheme =
+        (json['setDialogTheme'] as List)?.map((e) => e as String)?.toList()
+    ..widgetLayouts = (json['widgetLayouts'] as List)
+        ?.map((e) => e == null
+            ? null
+            : ShanYanCustomWidgetLayout.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..widgets = (json['widgets'] as List)
+        ?.map((e) => e == null
+            ? null
+            : ShanYanCustomWidget.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
@@ -550,9 +624,9 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
     <String, dynamic>{
       'isFinish': instance.isFinish,
       'setAuthBGImgPath': instance.setAuthBGImgPath,
-      'setStatusBarHidden': instance.setStatusBarHidden,
       'setAuthBgGifPath': instance.setAuthBgGifPath,
       'setAuthBgVideoPath': instance.setAuthBgVideoPath,
+      'setStatusBarHidden': instance.setStatusBarHidden,
       'setStatusBarColor': instance.setStatusBarColor,
       'setLightColor': instance.setLightColor,
       'setVirtualKeyTransparent': instance.setVirtualKeyTransparent,
@@ -562,6 +636,15 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
       'setNavReturnBtnOffsetRightX': instance.setNavReturnBtnOffsetRightX,
       'setNavReturnBtnOffsetX': instance.setNavReturnBtnOffsetX,
       'setNavReturnBtnOffsetY': instance.setNavReturnBtnOffsetY,
+      'setNavColor': instance.setNavColor,
+      'setNavText': instance.setNavText,
+      'setNavTextColor': instance.setNavTextColor,
+      'setNavTextSize': instance.setNavTextSize,
+      'setNavReturnImgPath': instance.setNavReturnImgPath,
+      'setNavReturnImgHidden': instance.setNavReturnImgHidden,
+      'setAuthNavHidden': instance.setAuthNavHidden,
+      'setAuthNavTransparent': instance.setAuthNavTransparent,
+      'setNavTextBold': instance.setNavTextBold,
       'setLogoImgPath': instance.setLogoImgPath,
       'setLogoHidden': instance.setLogoHidden,
       'setLogoOffsetY': instance.setLogoOffsetY,
@@ -575,19 +658,153 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
       'setNumFieldOffsetX': instance.setNumFieldOffsetX,
       'setNumFieldWidth': instance.setNumFieldWidth,
       'setNumFieldHeight': instance.setNumFieldHeight,
+      'setNumberColor': instance.setNumberColor,
+      'setNumberBold': instance.setNumberBold,
       'setLogBtnOffsetY': instance.setLogBtnOffsetY,
       'setLogBtnOffsetBottomY': instance.setLogBtnOffsetBottomY,
       'setLogBtnTextSize': instance.setLogBtnTextSize,
       'setLogBtnOffsetX': instance.setLogBtnOffsetX,
       'setLogBtnHeight': instance.setLogBtnHeight,
       'setLogBtnWidth': instance.setLogBtnWidth,
+      'setLogBtnText': instance.setLogBtnText,
+      'setLogBtnTextColor': instance.setLogBtnTextColor,
+      'setLogBtnImgPath': instance.setLogBtnImgPath,
+      'setLogBtnTextBold': instance.setLogBtnTextBold,
       'setPrivacyOffsetBottomY': instance.setPrivacyOffsetBottomY,
       'setPrivacyOffsetY': instance.setPrivacyOffsetY,
       'setPrivacyOffsetX': instance.setPrivacyOffsetX,
+      'setAppPrivacyOne': instance.setAppPrivacyOne,
+      'setAppPrivacyTwo': instance.setAppPrivacyTwo,
+      'setAppPrivacyThree': instance.setAppPrivacyThree,
+      'setPrivacySmhHidden': instance.setPrivacySmhHidden,
+      'setPrivacyTextSize': instance.setPrivacyTextSize,
+      'setAppPrivacyColor': instance.setAppPrivacyColor,
+      'setPrivacyOffsetGravityLeft': instance.setPrivacyOffsetGravityLeft,
+      'setPrivacyState': instance.setPrivacyState,
+      'setUncheckedImgPath': instance.setUncheckedImgPath,
+      'setCheckedImgPath': instance.setCheckedImgPath,
+      'setCheckBoxHidden': instance.setCheckBoxHidden,
+      'setCheckBoxWH': instance.setCheckBoxWH,
+      'setCheckBoxMargin': instance.setCheckBoxMargin,
+      'setPrivacyText': instance.setPrivacyText,
+      'setPrivacyTextBold': instance.setPrivacyTextBold,
       'setSloganOffsetY': instance.setSloganOffsetY,
       'setSloganOffsetBottomY': instance.setSloganOffsetBottomY,
       'setSloganOffsetX': instance.setSloganOffsetX,
+      'setSloganTextColor': instance.setSloganTextColor,
+      'setSloganTextSize': instance.setSloganTextSize,
+      'setSloganHidden': instance.setSloganHidden,
+      'setSloganTextBold': instance.setSloganTextBold,
       'setShanYanSloganOffsetY': instance.setShanYanSloganOffsetY,
       'setShanYanSloganOffsetBottomY': instance.setShanYanSloganOffsetBottomY,
       'setShanYanSloganOffsetX': instance.setShanYanSloganOffsetX,
+      'setShanYanSloganTextColor': instance.setShanYanSloganTextColor,
+      'setShanYanSloganTextSize': instance.setShanYanSloganTextSize,
+      'setShanYanSloganHidden': instance.setShanYanSloganHidden,
+      'setShanYanSloganTextBold': instance.setShanYanSloganTextBold,
+      'setPrivacyNavColor': instance.setPrivacyNavColor,
+      'setPrivacyNavTextBold': instance.setPrivacyNavTextBold,
+      'setPrivacyNavTextColor': instance.setPrivacyNavTextColor,
+      'setPrivacyNavTextSize': instance.setPrivacyNavTextSize,
+      'setPrivacyNavReturnImgPath': instance.setPrivacyNavReturnImgPath,
+      'setPrivacyNavReturnImgHidden': instance.setPrivacyNavReturnImgHidden,
+      'setPrivacyNavReturnBtnWidth': instance.setPrivacyNavReturnBtnWidth,
+      'setPrivacyNavReturnBtnHeight': instance.setPrivacyNavReturnBtnHeight,
+      'setPrivacyNavReturnBtnOffsetRightX':
+          instance.setPrivacyNavReturnBtnOffsetRightX,
+      'setPrivacyNavReturnBtnOffsetX': instance.setPrivacyNavReturnBtnOffsetX,
+      'setPrivacyNavReturnBtnOffsetY': instance.setPrivacyNavReturnBtnOffsetY,
+      'addCustomPrivacyAlertView': instance.addCustomPrivacyAlertView,
+      'setLoadingView': instance.setLoadingView,
+      'setDialogTheme': instance.setDialogTheme,
+      'widgetLayouts':
+          instance.widgetLayouts?.map((e) => e?.toJson())?.toList(),
+      'widgets': instance.widgets?.map((e) => e?.toJson())?.toList(),
     };
+
+ShanYanCustomWidgetLayout _$ShanYanCustomWidgetLayoutFromJson(
+    Map<String, dynamic> json) {
+  return ShanYanCustomWidgetLayout(
+    json['widgetLayoutName'] as String,
+    _$enumDecodeNullable(_$ShanYanCustomWidgetLayoutTypeEnumMap, json['type']),
+  )
+    ..widgetLayoutId =
+        (json['widgetLayoutId'] as List)?.map((e) => e as String)?.toList()
+    ..left = json['left'] as int
+    ..top = json['top'] as int
+    ..right = json['right'] as int
+    ..bottom = json['bottom'] as int
+    ..width = json['width'] as int
+    ..height = json['height'] as int;
+}
+
+Map<String, dynamic> _$ShanYanCustomWidgetLayoutToJson(
+        ShanYanCustomWidgetLayout instance) =>
+    <String, dynamic>{
+      'widgetLayoutName': instance.widgetLayoutName,
+      'widgetLayoutId': instance.widgetLayoutId,
+      'left': instance.left,
+      'top': instance.top,
+      'right': instance.right,
+      'bottom': instance.bottom,
+      'width': instance.width,
+      'height': instance.height,
+      'type': _$ShanYanCustomWidgetLayoutTypeEnumMap[instance.type],
+    };
+
+const _$ShanYanCustomWidgetLayoutTypeEnumMap = {
+  ShanYanCustomWidgetLayoutType.RelativeLayout: 'RelativeLayout',
+};
+
+ShanYanCustomWidget _$ShanYanCustomWidgetFromJson(Map<String, dynamic> json) {
+  return ShanYanCustomWidget(
+    json['widgetId'] as String,
+    _$enumDecodeNullable(_$ShanYanCustomWidgetTypeEnumMap, json['type']),
+  )
+    ..left = json['left'] as int
+    ..top = json['top'] as int
+    ..right = json['right'] as int
+    ..bottom = json['bottom'] as int
+    ..width = json['width'] as int
+    ..height = json['height'] as int
+    ..textContent = json['textContent'] as String
+    ..textFont = (json['textFont'] as num)?.toDouble()
+    ..textColor = json['textColor'] as String
+    ..backgroundColor = json['backgroundColor'] as String
+    ..backgroundImgPath = json['backgroundImgPath'] as String
+    ..textAlignment = _$enumDecodeNullable(
+        _$ShanYanCustomWidgetGravityTypeEnumMap, json['textAlignment'])
+    ..isFinish = json['isFinish'] as bool;
+}
+
+Map<String, dynamic> _$ShanYanCustomWidgetToJson(
+        ShanYanCustomWidget instance) =>
+    <String, dynamic>{
+      'widgetId': instance.widgetId,
+      'left': instance.left,
+      'top': instance.top,
+      'right': instance.right,
+      'bottom': instance.bottom,
+      'width': instance.width,
+      'height': instance.height,
+      'textContent': instance.textContent,
+      'textFont': instance.textFont,
+      'textColor': instance.textColor,
+      'backgroundColor': instance.backgroundColor,
+      'backgroundImgPath': instance.backgroundImgPath,
+      'textAlignment':
+          _$ShanYanCustomWidgetGravityTypeEnumMap[instance.textAlignment],
+      'type': _$ShanYanCustomWidgetTypeEnumMap[instance.type],
+      'isFinish': instance.isFinish,
+    };
+
+const _$ShanYanCustomWidgetTypeEnumMap = {
+  ShanYanCustomWidgetType.TextView: 'TextView',
+  ShanYanCustomWidgetType.Button: 'Button',
+};
+
+const _$ShanYanCustomWidgetGravityTypeEnumMap = {
+  ShanYanCustomWidgetGravityType.left: 'left',
+  ShanYanCustomWidgetGravityType.right: 'right',
+  ShanYanCustomWidgetGravityType.center: 'center',
+};
