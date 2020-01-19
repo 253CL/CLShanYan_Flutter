@@ -136,6 +136,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setCheckBoxVerticalAlignmentToAppPrivacyCenterY = json['setCheckBoxVerticalAlignmentToAppPrivacyCenterY'] as bool
     ..setUncheckedImgPath = json['setUncheckedImgPath'] as String
     ..setCheckedImgPath = json['setCheckedImgPath'] as String
+    ..setLoadingSize = (json['setLoadingSize'] as List)?.map((e) => e as num)?.toList()
     ..setLoadingCornerRadius = json['setLoadingCornerRadius'] as num
     ..setLoadingBackgroundColor = json['setLoadingBackgroundColor'] as String
     ..setLoadingTintColor = json['setLoadingTintColor'] as String
@@ -148,7 +149,9 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setAuthWindowModalPresentationStyle = _$enumDecodeNullable(_$iOSModalPresentationStyleEnumMap, json['setAuthWindowModalPresentationStyle'])
     ..setAppPrivacyWebModalPresentationStyle = _$enumDecodeNullable(_$iOSModalPresentationStyleEnumMap, json['setAppPrivacyWebModalPresentationStyle'])
     ..setAuthWindowOverrideUserInterfaceStyle = _$enumDecodeNullable(_$iOSUserInterfaceStyleEnumMap, json['setAuthWindowOverrideUserInterfaceStyle'])
-    ..setAuthWindowPresentingAnimate = json['setAuthWindowPresentingAnimate'] as bool;
+    ..setAuthWindowPresentingAnimate = json['setAuthWindowPresentingAnimate'] as bool
+    ..layOutPortrait = json['layOutPortrait'] == null ? null : ClOrientationLayOutIOS.fromJson(json['layOutPortrait'] as Map<String, dynamic>)
+    ..layOutLandscape = json['layOutLandscape'] == null ? null : ClOrientationLayOutIOS.fromJson(json['layOutLandscape'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
@@ -252,6 +255,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
           instance.setCheckBoxVerticalAlignmentToAppPrivacyCenterY,
       'setUncheckedImgPath': instance.setUncheckedImgPath,
       'setCheckedImgPath': instance.setCheckedImgPath,
+      'setLoadingSize': instance.setLoadingSize,
       'setLoadingCornerRadius': instance.setLoadingCornerRadius,
       'setLoadingBackgroundColor': instance.setLoadingBackgroundColor,
       'setLoadingTintColor': instance.setLoadingTintColor,
@@ -273,6 +277,8 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
       'setAuthWindowOverrideUserInterfaceStyle': _$iOSUserInterfaceStyleEnumMap[
           instance.setAuthWindowOverrideUserInterfaceStyle],
       'setAuthWindowPresentingAnimate': instance.setAuthWindowPresentingAnimate,
+      'layOutPortrait': instance.layOutPortrait?.toJson(),
+      'layOutLandscape': instance.layOutLandscape?.toJson(),
     };
 
 T _$enumDecode<T>(
@@ -412,7 +418,19 @@ ClOrientationLayOutIOS _$ClOrientationLayOutIOSFromJson(
     ..setShanYanSloganTop = json['setShanYanSloganTop'] as num
     ..setShanYanSloganBottom = json['setShanYanSloganBottom'] as num
     ..setShanYanSloganCenterX = json['setShanYanSloganCenterX'] as num
-    ..setShanYanSloganCenterY = json['setShanYanSloganCenterY'] as num;
+    ..setShanYanSloganCenterY = json['setShanYanSloganCenterY'] as num
+    ..setAuthWindowOrientationCenterX =
+        json['setAuthWindowOrientationCenterX'] as num
+    ..setAuthWindowOrientationCenterY =
+        json['setAuthWindowOrientationCenterY'] as num
+    ..setAuthWindowOrientationOriginX =
+        json['setAuthWindowOrientationOriginX'] as num
+    ..setAuthWindowOrientationOriginY =
+        json['setAuthWindowOrientationOriginY'] as num
+    ..setAuthWindowOrientationWidth =
+        json['setAuthWindowOrientationWidth'] as num
+    ..setAuthWindowOrientationHeight =
+        json['setAuthWindowOrientationHeight'] as num;
 }
 
 Map<String, dynamic> _$ClOrientationLayOutIOSToJson(
@@ -466,6 +484,16 @@ Map<String, dynamic> _$ClOrientationLayOutIOSToJson(
       'setShanYanSloganBottom': instance.setShanYanSloganBottom,
       'setShanYanSloganCenterX': instance.setShanYanSloganCenterX,
       'setShanYanSloganCenterY': instance.setShanYanSloganCenterY,
+      'setAuthWindowOrientationCenterX':
+          instance.setAuthWindowOrientationCenterX,
+      'setAuthWindowOrientationCenterY':
+          instance.setAuthWindowOrientationCenterY,
+      'setAuthWindowOrientationOriginX':
+          instance.setAuthWindowOrientationOriginX,
+      'setAuthWindowOrientationOriginY':
+          instance.setAuthWindowOrientationOriginY,
+      'setAuthWindowOrientationWidth': instance.setAuthWindowOrientationWidth,
+      'setAuthWindowOrientationHeight': instance.setAuthWindowOrientationHeight,
     };
 
 ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(

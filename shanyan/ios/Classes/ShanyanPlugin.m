@@ -101,7 +101,6 @@
     
     CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
      baseUIConfigure.viewController = [self findVisibleVC];;
-     baseUIConfigure.manualDismiss = @(YES);
     
     __weak typeof(self) weakSelf = self;
     
@@ -157,6 +156,77 @@
 
 }
 
++ (UIFont *)fontWithSize:(NSNumber *)size blod:(NSNumber *)isBlod name:(NSString *)name{
+    if (size == nil) {
+        return nil;
+    }
+//    NSString * fontName = @"PingFang-SC-Medium";
+//    if (name) {
+//        fontName = fontName;
+//    }
+    BOOL blod = isBlod ? isBlod.boolValue : false;
+    if (blod) {
+        return [UIFont boldSystemFontOfSize:size.floatValue];
+    }else{
+        return [UIFont systemFontOfSize:size.floatValue];
+    }
+}
+
++ (UIColor *)colorWithHexStr:(NSString *)hexString {
+    if (hexString == nil) {
+        return nil;
+    }
+    if (![hexString isKindOfClass:NSString.class]) {
+        return nil;
+    }
+    if (hexString.length == 0) {
+        return nil;
+    }
+    @try {
+        NSString *colorString = [[hexString stringByReplacingOccurrencesOfString:@"#" withString:@""] uppercaseString];
+         CGFloat alpha, red, blue, green;
+         switch ([colorString length]) {
+             case 3: // #RGB
+                 alpha = 1.0f;
+                 red   = [self colorComponentFrom: colorString start: 0 length: 1];
+                 green = [self colorComponentFrom: colorString start: 1 length: 1];
+                 blue  = [self colorComponentFrom: colorString start: 2 length: 1];
+                 break;
+            case 4: // #ARGB
+                alpha = [self colorComponentFrom: colorString start: 0 length: 1];
+                red   = [self colorComponentFrom: colorString start: 1 length: 1];
+                green = [self colorComponentFrom: colorString start: 2 length: 1];
+                blue  = [self colorComponentFrom: colorString start: 3 length: 1];
+                break;
+            case 6: // #RRGGBB
+                alpha = 1.0f;
+                red   = [self colorComponentFrom: colorString start: 0 length: 2];
+                green = [self colorComponentFrom: colorString start: 2 length: 2];
+                blue  = [self colorComponentFrom: colorString start: 4 length: 2];
+                break;
+            case 8: // #AARRGGBB
+                alpha = [self colorComponentFrom: colorString start: 0 length: 2];
+                red   = [self colorComponentFrom: colorString start: 2 length: 2];
+                green = [self colorComponentFrom: colorString start: 4 length: 2];
+                blue  = [self colorComponentFrom: colorString start: 6 length: 2];
+                break;
+            default:
+                return nil;
+                break;
+        }
+        return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    } @catch (NSException *exception) {
+        return UIColor.whiteColor;
+    }
+}
+
++ (CGFloat)colorComponentFrom:(NSString *)string start:(NSUInteger)start length:(NSUInteger)length {
+    NSString *substring = [string substringWithRange: NSMakeRange(start, length)];
+    NSString *fullHex = length == 2 ? substring : [NSString stringWithFormat: @"%@%@", substring, substring];
+    unsigned hexComponent;
+    [[NSScanner scannerWithString: fullHex] scanHexInt: &hexComponent];
+    return hexComponent / 255.0;
+}
 
 /**
  *int code; //返回码
@@ -208,108 +278,157 @@
     CLUIConfigure * baseConfigure = [CLUIConfigure new];
 
     @try {
-    
-        NSString * clBackgroundImg = configureDic[@"clBackgroundImg"];
+        NSNumber * isFinish = configureDic[@"isFinish"];
+        {
+            baseConfigure.manualDismiss = isFinish;
+        }
+        
+        NSString * clBackgroundImg = configureDic[@"setAuthBGImgPath"];
         {
 
             NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clBackgroundImg]]];
             UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
             baseConfigure.clBackgroundImg = clBackgroundImg_value;
         }
-        
-        NSNumber * clNavigationBarHidden = configureDic[@"clNavigationBarHidden"];
+        NSNumber * setPreferredStatusBarStyle = configureDic[@"setPreferredStatusBarStyle"];
         {
-            baseConfigure.clNavigationBarHidden = clNavigationBarHidden;
-        }
-        NSNumber * clNavigationBackgroundClear = configureDic[@"clNavigationBackgroundClear"];
+            if (setPreferredStatusBarStyle) {
+                switch (setPreferredStatusBarStyle.intValue) {
+                    case 0: default:
+                        baseConfigure.clPreferredStatusBarStyle = @(UIStatusBarStyleDefault);
+                        break;
+                    case 1:
+                        baseConfigure.clPreferredStatusBarStyle = @(UIStatusBarStyleLightContent);
+                        break;
+                    case 2:
+                        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                            baseConfigure.clPreferredStatusBarStyle = @(UIStatusBarStyleDarkContent);
+                        }
+                    break;
+                }
+            }
+        };
+        NSNumber * setStatusBarHidden = configureDic[@"setStatusBarHidden"];
         {
-            baseConfigure.clNavigationBackgroundClear = clNavigationBackgroundClear;
+            baseConfigure.clPrefersStatusBarHidden = setStatusBarHidden;
+        }
+        NSNumber * setAuthNavHidden = configureDic[@"setAuthNavHidden"];
+        {
+            baseConfigure.clNavigationBarHidden = setAuthNavHidden;
+        }
+        NSNumber * setNavigationBarStyle = configureDic[@"setNavigationBarStyle"];
+        {
+            if (setNavigationBarStyle) {
+                switch (setNavigationBarStyle.intValue) {
+                    case 0: default:
+                        baseConfigure.clNavigationBarStyle = @(UIBarStyleDefault);
+                        break;
+                    case 1:
+                        baseConfigure.clNavigationBarStyle = @(UIBarStyleBlack);
+                        break;
+                }
+            }
+        };
+        
+        NSNumber * setAuthNavTransparent = configureDic[@"setAuthNavTransparent"];
+        {
+            baseConfigure.clNavigationBackgroundClear = setAuthNavTransparent;
         }
         
-        NSAttributedString * clNavigationAttributesTitleText;
+        NSString * setNavText = configureDic[@"setNavText"];
+        NSString * setNavTextColor = configureDic[@"setNavTextColor"];
+        NSNumber * setNavTextSize = configureDic[@"setNavTextSize"];
+        if (setNavText) {
+            NSMutableDictionary * attributes = [NSMutableDictionary dictionary];
+            if (setNavTextColor != nil) {
+                attributes[NSForegroundColorAttributeName] = [ShanyanPlugin colorWithHexStr:setNavTextColor];
+            }
+            if (setNavTextSize != nil) {
+                attributes[NSFontAttributeName] = [UIFont systemFontOfSize:setNavTextSize.floatValue];
+            }
+            baseConfigure.clNavigationAttributesTitleText = [[NSAttributedString alloc]initWithString:setNavText attributes:attributes];
+        }
+        
         UIBarButtonItem * clNavigationRightControl;
         UIBarButtonItem * clNavigationLeftControl;
         
-        NSString   * clNavigationBackBtnImage = configureDic[@"clNavigationBackBtnImage"];
+        NSString   * clNavigationBackBtnImage = configureDic[@"setNavReturnImgPath"];
         {
             NSData * clNavigationBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationBackBtnImage]]];
             UIImage * clNavigationBackBtnImage_value = [UIImage imageWithData:clNavigationBackBtnImageData];
             baseConfigure.clNavigationBackBtnImage = clNavigationBackBtnImage_value;
         }
         
-        NSNumber  * clNavigationBackBtnHidden = configureDic[@"clNavigationBackBtnHidden"];
+        NSNumber  * clNavigationBackBtnHidden = configureDic[@"setNavReturnImgHidden"];
         {
             baseConfigure.clNavigationBackBtnHidden = clNavigationBackBtnHidden;
         }
         NSValue * clNavBackBtnImageInsets;
-        NSNumber * clNavBackBtnAlimentRight = configureDic[@"clNavBackBtnAlimentRight"];
+        NSNumber * clNavBackBtnAlimentRight = configureDic[@"setNavBackBtnAlimentRight"];
         {
             baseConfigure.clNavBackBtnAlimentRight = clNavBackBtnAlimentRight;
         };;
-        NSNumber * clNavigationBottomLineHidden = configureDic[@"clNavigationBottomLineHidden"];
+        NSNumber * clNavigationBottomLineHidden = configureDic[@"setNavigationBottomLineHidden"];
         {
             baseConfigure.clNavigationBottomLineHidden = clNavigationBottomLineHidden;
         }
-        NSArray  * clNavigationTintColor  = configureDic[@"clNavigationTintColor"];;
+        NSString  * clNavigationTintColor  = configureDic[@"setNavigationTintColor"];;
         {
-            if (clNavigationTintColor && clNavigationTintColor.count == 4) {
-                baseConfigure.clNavigationTintColor = [UIColor colorWithRed:[clNavigationTintColor[0] floatValue] green:[clNavigationTintColor[1] floatValue] blue:[clNavigationTintColor[2] floatValue] alpha:[clNavigationTintColor[3] floatValue]];
+            if (clNavigationTintColor ){ baseConfigure.clNavigationTintColor = [ShanyanPlugin colorWithHexStr:clNavigationTintColor];
             }
         };
-        NSArray  * clNavigationBarTintColor = configureDic[@"clNavigationBarTintColor"];;
+        NSString  * clNavigationBarTintColor = configureDic[@"setNavigationBarTintColor"];;
         {
-            if (clNavigationBarTintColor && clNavigationBarTintColor.count == 4) {
-                baseConfigure.clNavigationBarTintColor = [UIColor colorWithRed:[clNavigationBarTintColor[0] floatValue] green:[clNavigationBarTintColor[1] floatValue] blue:[clNavigationBarTintColor[2] floatValue] alpha:[clNavigationBarTintColor[3] floatValue]];
+            if (clNavigationBarTintColor) {
+                baseConfigure.clNavigationBarTintColor = [ShanyanPlugin colorWithHexStr:clNavigationBarTintColor];
             }
         };
-        NSString  * clNavigationBackgroundImage = configureDic[@"clNavigationBackgroundImage"];
+        NSString  * clNavigationBackgroundImage = configureDic[@"setNavigationBackgroundImage"];
         {
             NSData * clNavigationBackgroundImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationBackgroundImage]]];
             UIImage * clNavigationBackgroundImage_value = [UIImage imageWithData:clNavigationBackgroundImageData];
             baseConfigure.clNavigationBackgroundImage = clNavigationBackgroundImage_value;
         };
-        NSNumber * clNavigationBarMetrics = configureDic[@"clNavigationBarMetrics"];
+        NSNumber * clNavigationBarMetrics = configureDic[@"setNavigationBarMetrics"];
         {
             baseConfigure.clNavigationBarMetrics = clNavigationBarMetrics;
         };
-        NSString  * clNavigationShadowImage = configureDic[@"clNavigationShadowImage"];
+        NSString  * clNavigationShadowImage = configureDic[@"setNavigationShadowImage"];
         {
             NSData * clNavigationShadowImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationShadowImage]]];
             UIImage * clNavigationShadowImage_value = [UIImage imageWithData:clNavigationShadowImageData];
             baseConfigure.clNavigationShadowImage = clNavigationShadowImage_value;
         };
-        NSNumber * clNavigationBarStyle = configureDic[@"clNavigationBarStyle"];
-        {
-            baseConfigure.clNavigationBarStyle = clNavigationBarStyle;
-        };
+
         
         /**Logo*/
-        NSString * clLogoImage = configureDic[@"clLogoImage"];
+        NSString * clLogoImage = configureDic[@"setLogoImgPath"];
         {
             NSData * clLogoImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLogoImage]]];
             UIImage * clLogoImage_value = [UIImage imageWithData:clLogoImageData];
             baseConfigure.clLogoImage = clLogoImage_value;
         }
-        NSNumber * clLogoCornerRadius = configureDic[@"clLogoCornerRadius"];
+        NSNumber * clLogoCornerRadius = configureDic[@"setLogoCornerRadius"];
         {
             baseConfigure.clLogoCornerRadius = clLogoCornerRadius;
         };
-        NSNumber * clLogoHiden  = configureDic[@"clLogoHiden"];
+        NSNumber * clLogoHiden  = configureDic[@"setLogoHidden"];
         {
             baseConfigure.clLogoHiden = clLogoHiden;
         };
         
-        NSArray  * clPhoneNumberColor  = configureDic[@"clPhoneNumberColor"];;
+        NSString  * clPhoneNumberColor  = configureDic[@"setNumberColor"];;
         {
-            if (clPhoneNumberColor && clPhoneNumberColor.count == 4) {
-                baseConfigure.clPhoneNumberColor = [UIColor colorWithRed:[clPhoneNumberColor[0] floatValue] green:[clPhoneNumberColor[1] floatValue] blue:[clPhoneNumberColor[2] floatValue] alpha:[clPhoneNumberColor[3] floatValue]];
+            if (clPhoneNumberColor) {
+                baseConfigure.clPhoneNumberColor = [ShanyanPlugin colorWithHexStr:clPhoneNumberColor];
             }
         };
         
-        NSNumber   * clPhoneNumberFont = configureDic[@"clPhoneNumberFont"];
+        NSNumber   * clPhoneNumberFont = configureDic[@"setNumberSize"];
+        NSNumber * setNumberBold = configureDic[@"setNumberBold"];
         {
             if (clPhoneNumberFont) {
-                baseConfigure.clPhoneNumberFont = [UIFont systemFontOfSize:clPhoneNumberFont.floatValue];
+                baseConfigure.clPhoneNumberFont = [ShanyanPlugin fontWithSize:clPhoneNumberFont blod:setNumberBold name:nil];
             }
         };
         NSNumber * clPhoneNumberTextAlignment = configureDic[@"clPhoneNumberTextAlignment"];
@@ -317,7 +436,7 @@
             //0: center 1: left 2: right
             if (clPhoneNumberTextAlignment) {
                 switch (clPhoneNumberTextAlignment.integerValue) {
-                    case 0:
+                    case 0:default:
                         baseConfigure.clPhoneNumberTextAlignment = @(NSTextAlignmentCenter);
                         break;
                     case 1:
@@ -326,67 +445,65 @@
                     case 2:
                         baseConfigure.clPhoneNumberTextAlignment = @(NSTextAlignmentRight);
                         break;
-                    default:
-                        break;
                 }
             }
         };
         
         /**按钮文字*/
-        NSString   * clLoginBtnText = configureDic[@"clLoginBtnText"];
+        NSString   * clLoginBtnText = configureDic[@"setLogBtnText"];
         {
             baseConfigure.clLoginBtnText = clLoginBtnText;
         }
         /**按钮文字颜色*/
-        NSArray  * clLoginBtnTextColor = configureDic[@"clLoginBtnTextColor"];;
+        NSString  * clLoginBtnTextColor = configureDic[@"setLogBtnTextColor"];;
         {
-            if (clLoginBtnTextColor && clLoginBtnTextColor.count == 4) {
-                baseConfigure.clLoginBtnTextColor = [UIColor colorWithRed:[clLoginBtnTextColor[0] floatValue] green:[clLoginBtnTextColor[1] floatValue] blue:[clLoginBtnTextColor[2] floatValue] alpha:[clLoginBtnTextColor[3] floatValue]];
+            if (clLoginBtnTextColor) {
+                baseConfigure.clLoginBtnTextColor = [ShanyanPlugin colorWithHexStr:clLoginBtnTextColor];
+            }
+        }
+        NSNumber   * setLoginBtnTextSize = configureDic[@"setLoginBtnTextSize"];
+        NSNumber * setLoginBtnTextBold = configureDic[@"setLoginBtnTextBold"];
+        {
+            if (setLoginBtnTextSize) {
+                baseConfigure.clPhoneNumberFont = [ShanyanPlugin fontWithSize:setLoginBtnTextSize blod:setLoginBtnTextBold name:nil];
             }
         }
         /**按钮背景颜色*/
-        NSArray  * clLoginBtnBgColor = configureDic[@"clLoginBtnBgColor"];;
+        NSString  * clLoginBtnBgColor = configureDic[@"setLoginBtnBgColor"];;
         {
-            if (clLoginBtnBgColor && clLoginBtnBgColor.count == 4) {
-                baseConfigure.clLoginBtnBgColor = [UIColor colorWithRed:[clLoginBtnBgColor[0] floatValue] green:[clLoginBtnBgColor[1] floatValue] blue:[clLoginBtnBgColor[2] floatValue] alpha:[clLoginBtnBgColor[3] floatValue]];
+            if (clLoginBtnBgColor) {
+                baseConfigure.clLoginBtnBgColor = [ShanyanPlugin colorWithHexStr:clLoginBtnBgColor];
             }
         }
-        /**按钮文字字体*/
-        NSNumber   * clLoginBtnTextFont = configureDic[@"clLoginBtnTextFont"];
-        {
-            if (clLoginBtnTextFont) {
-                baseConfigure.clLoginBtnTextFont = [UIFont systemFontOfSize:clLoginBtnTextFont.floatValue];
-            }
-        }
-        
+
         /**按钮背景图片*/
-        NSString  * clLoginBtnNormalBgImage = configureDic[@"clLoginBtnNormalBgImage"];
+        NSString  * clLoginBtnNormalBgImage = configureDic[@"setLoginBtnNormalBgImage"];
         {
             NSData * clLoginBtnNormalBgImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLoginBtnNormalBgImage]]];
             UIImage * clLoginBtnNormalBgImage_value = [UIImage imageWithData:clLoginBtnNormalBgImageData];
             baseConfigure.clLoginBtnNormalBgImage = clLoginBtnNormalBgImage_value;
         };
         /**按钮背景高亮图片*/
-        NSString  * clLoginBtnHightLightBgImage = configureDic[@"clLoginBtnHightLightBgImage"];
+        NSString  * clLoginBtnHightLightBgImage = configureDic[@"setLoginBtnHightLightBgImage"];
         {
             NSData * clLoginBtnHightLightBgImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLoginBtnHightLightBgImage]]];
             UIImage * clLoginBtnHightLightBgImage_value = [UIImage imageWithData:clLoginBtnHightLightBgImageData];
-            baseConfigure.clLoginBtnHightLightBgImage = clLoginBtnHightLightBgImage_value;
+            baseConfigure.clLoginBtnDisabledBgImage = clLoginBtnHightLightBgImage_value;
         };
         /**按钮边框颜色*/
-        NSArray  * clLoginBtnBorderColor = configureDic[@"clLoginBtnBorderColor"];;
+        NSString  * clLoginBtnBorderColor = configureDic[@"setLoginBtnBorderColor"];;
         {
-            if (clLoginBtnBorderColor && clLoginBtnBorderColor.count == 4) {
-                baseConfigure.clLoginBtnBgColor = [UIColor colorWithRed:[clLoginBtnBorderColor[0] floatValue] green:[clLoginBtnBorderColor[1] floatValue] blue:[clLoginBtnBorderColor[2] floatValue] alpha:[clLoginBtnBorderColor[3] floatValue]];
+            if (clLoginBtnBorderColor) {
+                baseConfigure.clLoginBtnBgColor = [ShanyanPlugin colorWithHexStr:clLoginBtnBorderColor];
             }
         };
         /**按钮圆角 CGFloat eg.@(5)*/
-        NSNumber * clLoginBtnCornerRadius = configureDic[@"clLoginBtnCornerRadius"];
+        NSNumber * clLoginBtnCornerRadius = configureDic[@"setLoginBtnCornerRadius"];
         {
             baseConfigure.clLoginBtnCornerRadius = clLoginBtnCornerRadius;
         }
         /**按钮边框 CGFloat eg.@(2.0)*/
-        NSNumber * clLoginBtnBorderWidth = configureDic[@"clLoginBtnBorderWidth"];;
+        NSNumber * clLoginBtnBorderWidth = configureDic[@"setLoginBtnBorderWidth"];;
         {
             baseConfigure.clLoginBtnBorderWidth = clLoginBtnBorderWidth;
         }
@@ -395,15 +512,15 @@
          用户条款不限制
          **/
         /**隐私条款名称颜色：@[基础文字颜色UIColor*,条款颜色UIColor*] eg.@[[UIColor lightGrayColor],[UIColor greenColor]]*/
-        NSArray<NSArray*> *clAppPrivacyColor = configureDic[@"clAppPrivacyColor"];
+        NSArray<NSString*> *clAppPrivacyColor = configureDic[@"setAppPrivacyColor"];
         {
             if (clAppPrivacyColor && clAppPrivacyColor.count == 2) {
-                NSArray * commomTextColors = clAppPrivacyColor.firstObject;
-                NSArray * appPrivacyColors = clAppPrivacyColor.lastObject;
+                NSString * commomTextColors = clAppPrivacyColor.firstObject;
+                NSString * appPrivacyColors = clAppPrivacyColor.lastObject;
                 
-                if (commomTextColors && commomTextColors.count == 4 && appPrivacyColors && appPrivacyColors.count == 4) {
-                    UIColor * commomTextColor = [UIColor colorWithRed:[commomTextColors[0] floatValue] green:[commomTextColors[1] floatValue] blue:[commomTextColors[2] floatValue] alpha:[commomTextColors[3] floatValue]];
-                    UIColor * appPrivacyColor = [UIColor colorWithRed:[appPrivacyColors[0] floatValue] green:[appPrivacyColors[1] floatValue] blue:[appPrivacyColors[2] floatValue] alpha:[appPrivacyColors[3] floatValue]];
+                if (commomTextColors && appPrivacyColors) {
+                    UIColor * commomTextColor = [ShanyanPlugin colorWithHexStr:commomTextColors];
+                    UIColor * appPrivacyColor = [ShanyanPlugin colorWithHexStr:appPrivacyColors];
                     if (commomTextColor && appPrivacyColor) {
                         baseConfigure.clAppPrivacyColor = @[commomTextColor,appPrivacyColor];
                     }
@@ -411,19 +528,20 @@
             }
         }
         /**隐私条款文字字体*/
-        NSNumber  * clAppPrivacyTextFont = configureDic[@"clAppPrivacyTextFont"];
+        NSNumber   * setPrivacyTextSize = configureDic[@"setPrivacyTextSize"];
+        NSNumber * setPrivacyTextBold = configureDic[@"setPrivacyTextBold"];
         {
-            if (clAppPrivacyTextFont) {
-                baseConfigure.clAppPrivacyTextFont = [UIFont systemFontOfSize:clAppPrivacyTextFont.floatValue];
+            if (setPrivacyTextSize) {
+                baseConfigure.clAppPrivacyTextFont = [ShanyanPlugin fontWithSize:setPrivacyTextSize blod:setPrivacyTextBold name:nil];
             }
         };
         /**隐私条款文字对齐方式 NSTextAlignment eg.@(NSTextAlignmentCenter)*/
-        NSNumber * clAppPrivacyTextAlignment = configureDic[@"clAppPrivacyTextAlignment"];;
+        NSNumber * clAppPrivacyTextAlignment = configureDic[@"setAppPrivacyTextAlignment"];;
         {
             //0: center 1: left 2: right
             if (clAppPrivacyTextAlignment) {
                 switch (clAppPrivacyTextAlignment.integerValue) {
-                    case 0:
+                    case 0:default:
                         baseConfigure.clAppPrivacyTextAlignment = @(NSTextAlignmentCenter);
                         break;
                     case 1:
@@ -432,29 +550,33 @@
                     case 2:
                         baseConfigure.clAppPrivacyTextAlignment = @(NSTextAlignmentRight);
                         break;
-                    default:
-                        break;
                 }
             }
             
         };
         /**运营商隐私条款书名号 默认NO 不显示 BOOL eg.@(YES)*/
-        NSNumber * clAppPrivacyPunctuationMarks = configureDic[@"clAppPrivacyPunctuationMarks"];;
+        NSNumber * clAppPrivacyPunctuationMarks = configureDic[@"setPrivacySmhHidden"];;
         {
             baseConfigure.clAppPrivacyPunctuationMarks = clAppPrivacyPunctuationMarks;
         };
         /**多行时行距 CGFloat eg.@(2.0)*/
-        NSNumber* clAppPrivacyLineSpacing = configureDic[@"clAppPrivacyLineSpacing"];;
+        NSNumber* clAppPrivacyLineSpacing = configureDic[@"setAppPrivacyLineSpacing"];;
         {
             baseConfigure.clAppPrivacyLineSpacing = clAppPrivacyLineSpacing;
         };
+        NSNumber* clAppPrivacyLineFragmentPadding = configureDic[@"setAppPrivacyLineFragmentPadding"];
+        {
+            if (clAppPrivacyLineFragmentPadding) {
+                baseConfigure.clAppPrivacyLineFragmentPadding = clAppPrivacyLineFragmentPadding;
+            }
+        }
         /**是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑 BOOL eg.@(YES)*/
-        NSNumber* clAppPrivacyNeedSizeToFit = configureDic[@"clAppPrivacyNeedSizeToFit"];;
+        NSNumber* clAppPrivacyNeedSizeToFit = configureDic[@"setAppPrivacyNeedSizeToFit"];;
         {
             baseConfigure.clAppPrivacyNeedSizeToFit = clAppPrivacyNeedSizeToFit;
         };
         /**隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效*/
-        NSString  * clAppPrivacyAbbreviatedName = configureDic[@"clAppPrivacyAbbreviatedName"];;
+        NSString  * clAppPrivacyAbbreviatedName = configureDic[@"setAppPrivacyAbbreviatedName"];;
         {
             baseConfigure.clAppPrivacyAbbreviatedName = clAppPrivacyAbbreviatedName;
         };
@@ -462,7 +584,7 @@
          *隐私条款Y一:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
          *@[NSSting,NSURL];
          */
-        NSArray * clAppPrivacyFirst = configureDic[@"clAppPrivacyFirst"];
+        NSArray * clAppPrivacyFirst = configureDic[@"setAppPrivacyFirst"];
         {
             if (clAppPrivacyFirst && clAppPrivacyFirst.count == 2) {
                 NSString * name = clAppPrivacyFirst.firstObject;
@@ -474,7 +596,7 @@
          *隐私条款二:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
          *@[NSSting,NSURL];
          */
-        NSArray * clAppPrivacySecond = configureDic[@"clAppPrivacySecond"];
+        NSArray * clAppPrivacySecond = configureDic[@"setAppPrivacySecond"];
         {
             if (clAppPrivacySecond && clAppPrivacySecond.count == 2) {
                 baseConfigure.clAppPrivacySecond = clAppPrivacySecond;
@@ -484,7 +606,7 @@
         *隐私条款三:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
         *@[NSSting,NSURL];
         */
-        NSArray * clAppPrivacyThird = configureDic[@"clAppPrivacyThird"];
+        NSArray * clAppPrivacyThird = configureDic[@"setAppPrivacyThird"];
         {
             if (clAppPrivacyThird && clAppPrivacyThird.count == 2) {
                 baseConfigure.clAppPrivacyThird = clAppPrivacyThird;
@@ -496,67 +618,155 @@
          隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth
          **/
         /**描述文本一 default:"同意"*/
-        NSString *clAppPrivacyNormalDesTextFirst = configureDic[@"clAppPrivacyNormalDesTextFirst"];;
+        NSString *clAppPrivacyNormalDesTextFirst = configureDic[@"setAppPrivacyNormalDesTextFirst"];;
         {
             baseConfigure.clAppPrivacyNormalDesTextFirst = clAppPrivacyNormalDesTextFirst;
         };;
         /**描述文本二 default:"和"*/
-        NSString *clAppPrivacyNormalDesTextSecond = configureDic[@"clAppPrivacyNormalDesTextSecond"];;
+        NSString *clAppPrivacyNormalDesTextSecond = configureDic[@"setAppPrivacyNormalDesTextSecond"];;
         {
             baseConfigure.clAppPrivacyNormalDesTextSecond = clAppPrivacyNormalDesTextSecond;
         };;
         /**描述文本三 default:"、"*/
-        NSString *clAppPrivacyNormalDesTextThird = configureDic[@"clAppPrivacyNormalDesTextThird"];;
+        NSString *clAppPrivacyNormalDesTextThird = configureDic[@"setAppPrivacyNormalDesTextThird"];;
         {
             baseConfigure.clAppPrivacyNormalDesTextThird = clAppPrivacyNormalDesTextThird;
         };;
         /**描述文本四 default: "并授权AppName使用认证服务"*/
-        NSString *clAppPrivacyNormalDesTextFourth = configureDic[@"clAppPrivacyNormalDesTextFourth"];;
+        NSString *clAppPrivacyNormalDesTextFourth = configureDic[@"setAppPrivacyNormalDesTextFourth"];;
         {
             baseConfigure.clAppPrivacyNormalDesTextFourth = clAppPrivacyNormalDesTextFourth;
         };
         
-        NSString *clAppPrivacyNormalDesTextLast = configureDic[@"clAppPrivacyNormalDesTextLast"];;
+        NSString *clAppPrivacyNormalDesTextLast = configureDic[@"setAppPrivacyNormalDesTextLast"];;
         {
             baseConfigure.clAppPrivacyNormalDesTextLast = clAppPrivacyNormalDesTextLast;
         };
+        
+        NSNumber * setOperatorPrivacyAtLast = configureDic[@"setOperatorPrivacyAtLast"];
+        {
+            if (setOperatorPrivacyAtLast) {
+                baseConfigure.clOperatorPrivacyAtLast = setOperatorPrivacyAtLast;
+            }
+        }
         
         /**用户隐私协议WEB页面导航栏标题 默认显示用户条款名称*/
         NSAttributedString * clAppPrivacyWebAttributesTitle;
         /**运营商隐私协议WEB页面导航栏标题 默认显示运营商条款名称*/
         NSAttributedString * clAppPrivacyWebNormalAttributesTitle;
+        
+//        NSString * setPrivacyNavText = configureDic[@"setPrivacyNavText"];
+        NSString * setPrivacyNavTextColor = configureDic[@"setPrivacyNavTextColor"];
+        NSNumber * setPrivacyNavTextSize = configureDic[@"setPrivacyNavTextSize"];
+        {
+            NSMutableDictionary * attributes = [NSMutableDictionary dictionary];
+            if (setPrivacyNavTextColor != nil) {
+                attributes[NSForegroundColorAttributeName] = [ShanyanPlugin colorWithHexStr:setPrivacyNavTextColor];
+            }
+            if (setPrivacyNavTextSize != nil) {
+                attributes[NSFontAttributeName] = [UIFont systemFontOfSize:setPrivacyNavTextSize.floatValue];
+            }
+            baseConfigure.clAppPrivacyWebAttributes = attributes;
+        }
+        
+        
         /**隐私协议WEB页面导航返回按钮图片*/
-        NSString * clAppPrivacyWebBackBtnImage = configureDic[@"clAppPrivacyWebBackBtnImage"];;;
+        NSString * clAppPrivacyWebBackBtnImage = configureDic[@"setPrivacyNavReturnImgPath"];
         {
             NSData * clAppPrivacyWebBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clAppPrivacyWebBackBtnImage]]];
             UIImage * clAppPrivacyWebBackBtnImage_value = [UIImage imageWithData:clAppPrivacyWebBackBtnImageData];
             baseConfigure.clAppPrivacyWebBackBtnImage = clAppPrivacyWebBackBtnImage_value;
         }
         
+        NSNumber * setAppPrivacyWebPreferredStatusBarStyle = configureDic[@"setAppPrivacyWebPreferredStatusBarStyle"];
+        {
+            if (setAppPrivacyWebPreferredStatusBarStyle) {
+                if (setPreferredStatusBarStyle) {
+                    switch (setPreferredStatusBarStyle.intValue) {
+                        case 0: default:
+                            baseConfigure.clAppPrivacyWebPreferredStatusBarStyle = @(UIStatusBarStyleDefault);
+                            break;
+                        case 1:
+                            baseConfigure.clAppPrivacyWebPreferredStatusBarStyle = @(UIStatusBarStyleLightContent);
+                            break;
+                        case 2:
+                            if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                                baseConfigure.clAppPrivacyWebPreferredStatusBarStyle = @(UIStatusBarStyleDarkContent);
+                            }
+                        break;
+                    }
+                }
+            }
+        }
+        
+        NSNumber * setAppPrivacyWebNavigationBarStyle = configureDic[@"setAppPrivacyWebNavigationBarStyle"];
+        {
+            if (setAppPrivacyWebNavigationBarStyle) {
+                switch (setAppPrivacyWebNavigationBarStyle.intValue) {
+                    case 0: default:
+                        baseConfigure.clAppPrivacyWebNavigationBarStyle = @(UIBarStyleDefault);
+                        break;
+                    case 1:
+                        baseConfigure.clAppPrivacyWebNavigationBarStyle = @(UIBarStyleBlack);
+                        break;
+                }
+            }
+        }
+
+        NSString * setAppPrivacyWebNavigationTintColor = configureDic[@"setAppPrivacyWebNavigationTintColor"];
+        {
+            if (setAppPrivacyWebNavigationTintColor) {
+                baseConfigure.clAppPrivacyWebNavigationTintColor = [ShanyanPlugin colorWithHexStr:setAppPrivacyWebNavigationTintColor];
+            }
+        }
+        NSString * setAppPrivacyWebNavigationBarTintColor = configureDic[@"setAppPrivacyWebNavigationBarTintColor"];
+        {
+            if (setAppPrivacyWebNavigationBarTintColor) {
+                baseConfigure.clAppPrivacyWebNavigationBarTintColor = [ShanyanPlugin colorWithHexStr:setAppPrivacyWebNavigationBarTintColor];
+            }
+        }
+        NSString * setAppPrivacyWebNavigationBackgroundImage = configureDic[@"setAppPrivacyWebNavigationBackgroundImage"];
+        {
+            if (setAppPrivacyWebNavigationBackgroundImage) {
+                NSData * clAppPrivacyWebNavigationBackgroundImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:setAppPrivacyWebNavigationBackgroundImage]]];
+                UIImage * clAppPrivacyWebNavigationBackgroundImageData_value = [UIImage imageWithData:clAppPrivacyWebNavigationBackgroundImageData];
+                baseConfigure.clAppPrivacyWebNavigationBackgroundImage = clAppPrivacyWebNavigationBackgroundImageData_value;
+            }
+        }
+        NSString * setAppPrivacyWebNavigationShadowImage = configureDic[@"setAppPrivacyWebNavigationShadowImage"];
+        {
+            if (setAppPrivacyWebNavigationShadowImage) {
+                NSData * setAppPrivacyWebNavigationShadowImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:setAppPrivacyWebNavigationShadowImage]]];
+                UIImage * setAppPrivacyWebNavigationShadowImageData_value = [UIImage imageWithData:setAppPrivacyWebNavigationShadowImageData];
+                baseConfigure.clAppPrivacyWebNavigationShadowImage = setAppPrivacyWebNavigationShadowImageData_value;
+            }
+        }
+        
         /*SLOGAN
          注： 运营商品牌标签("中国**提供认证服务")，不得隐藏
          **/
         /**slogan文字字体*/
-        NSNumber   * clSloganTextFont = configureDic[@"clSloganTextFont"];
+        NSNumber   * setSloganTextSize = configureDic[@"setSloganTextSize"];
+        NSNumber * setSloganTextBold = configureDic[@"setSloganTextBold"];
         {
-            if (clSloganTextFont) {
-                baseConfigure.clSloganTextFont = [UIFont systemFontOfSize:clSloganTextFont.floatValue];
+            if (setSloganTextSize) {
+                baseConfigure.clSloganTextFont = [ShanyanPlugin fontWithSize:setSloganTextSize blod:setSloganTextBold name:nil];
             }
         };;
         /**slogan文字颜色*/
-        NSArray  * clSloganTextColor = configureDic[@"clSloganTextColor"];;
+        NSString * clSloganTextColor = configureDic[@"setSloganTextColor"];;
         {
-            if (clSloganTextColor && clSloganTextColor.count == 4) {
-                baseConfigure.clSloganTextColor = [UIColor colorWithRed:[clSloganTextColor[0] floatValue] green:[clSloganTextColor[1] floatValue] blue:[clSloganTextColor[2] floatValue] alpha:[clSloganTextColor[3] floatValue]];
+            if (clSloganTextColor) {
+                baseConfigure.clSloganTextColor = [ShanyanPlugin colorWithHexStr:clSloganTextColor];
             }
         };
         /**slogan文字对齐方式 NSTextAlignment eg.@(NSTextAlignmentCenter)*/
-        NSNumber * clSlogaTextAlignment = configureDic[@"clSlogaTextAlignment"];;
+        NSNumber * clSlogaTextAlignment = configureDic[@"setSlogaTextAlignment"];;
         {
             //0: center 1: left 2: right
             if (clSlogaTextAlignment) {
                 switch (clSlogaTextAlignment.integerValue) {
-                    case 0:
+                    case 0:default:
                         baseConfigure.clSlogaTextAlignment = @(NSTextAlignmentCenter);
                         break;
                     case 1:
@@ -565,12 +775,53 @@
                     case 2:
                         baseConfigure.clSlogaTextAlignment = @(NSTextAlignmentRight);
                         break;
-                    default:
+                }
+            }
+        };
+        
+        /*ShanyanSLOGAN
+         注： 运营商品牌标签("创蓝253提供认证服务")，不得隐藏
+         **/
+        /**slogan文字字体*/
+        NSNumber   * setShanYanSloganTextSize = configureDic[@"setShanYanSloganTextSize"];
+        NSNumber * setShanYanSloganTextBold = configureDic[@"setShanYanSloganTextBold"];
+        {
+            if (setShanYanSloganTextSize) {
+                baseConfigure.clShanYanSloganTextFont = [ShanyanPlugin fontWithSize:setShanYanSloganTextSize blod:setShanYanSloganTextBold name:nil];
+            }
+        };;
+        /**slogan文字颜色*/
+        NSString * setShanYanSloganTextColor = configureDic[@"setShanYanSloganTextColor"];
+        {
+            if (setShanYanSloganTextColor) {
+                baseConfigure.clShanYanSloganTextColor = [ShanyanPlugin colorWithHexStr:clSloganTextColor];
+            }
+        };
+        /**slogan文字对齐方式 NSTextAlignment eg.@(NSTextAlignmentCenter)*/
+        NSNumber * setShanYanSlogaTextAlignment = configureDic[@"setSlogaTextAlignment"];;
+        {
+            //0: center 1: left 2: right
+            if (setShanYanSlogaTextAlignment) {
+                switch (setShanYanSlogaTextAlignment.integerValue) {
+                    case 0:default:
+                        baseConfigure.clShanYanSloganTextAlignment = @(NSTextAlignmentCenter);
+                        break;
+                    case 1:
+                        baseConfigure.clShanYanSloganTextAlignment = @(NSTextAlignmentLeft);
+                        break;
+                    case 2:
+                        baseConfigure.clShanYanSloganTextAlignment = @(NSTextAlignmentRight);
                         break;
                 }
             }
         };
         
+        NSNumber * setShanYanSloganHidden = configureDic[@"setShanYanSloganHidden"];
+        {
+            if (setShanYanSloganHidden) {
+                baseConfigure.clShanYanSloganHidden = setShanYanSloganHidden;
+            }
+        }
         
         /*CheckBox
          *协议勾选框，默认选中且在协议前显示
@@ -578,17 +829,17 @@
          *也可以通过属性设置选中和未选择图片
          **/
         /**协议勾选框（默认显示,放置在协议之前）BOOL eg.@(YES)*/
-        NSNumber *clCheckBoxHidden = configureDic[@"clCheckBoxHidden"];;
+        NSNumber *clCheckBoxHidden = configureDic[@"setCheckBoxHidden"];;
         {
             baseConfigure.clCheckBoxHidden = clCheckBoxHidden;
         };
         /**协议勾选框默认值（默认不选中）BOOL eg.@(YES)*/
-        NSNumber *clCheckBoxValue = configureDic[@"clCheckBoxValue"];;
+        NSNumber *clCheckBoxValue = configureDic[@"setPrivacyState"];;
         {
             baseConfigure.clCheckBoxValue = clCheckBoxValue;
         };
         /**协议勾选框 尺寸 NSValue->CGSize eg.[NSValue valueWithCGSize:CGSizeMake(25, 25)]*/
-        NSArray *clCheckBoxSize = configureDic[@"clCheckBoxSize"];
+        NSArray *clCheckBoxSize = configureDic[@"setCheckBoxWH"];
         {
             if (clCheckBoxSize && clCheckBoxSize.count == 2) {
                 CGFloat width = [clCheckBoxSize.firstObject floatValue];
@@ -597,7 +848,7 @@
             }
         }
         /**协议勾选框 UIButton.image图片缩进 UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
-        NSArray *clCheckBoxImageEdgeInsets = configureDic[@"clCheckBoxImageEdgeInsets"];
+        NSArray *clCheckBoxImageEdgeInsets = configureDic[@"setCheckBoxImageEdgeInsets"];
         {
             if (clCheckBoxImageEdgeInsets && clCheckBoxImageEdgeInsets.count == 4) {
                 CGFloat top = [clCheckBoxImageEdgeInsets[0] floatValue];
@@ -608,24 +859,24 @@
             }
         }
         /**协议勾选框 设置CheckBox顶部与隐私协议控件顶部对齐 YES或大于0生效 eg.@(YES)*/
-        NSNumber *clCheckBoxVerticalAlignmentToAppPrivacyTop = configureDic[@"clCheckBoxVerticalAlignmentToAppPrivacyTop"];;
+        NSNumber *clCheckBoxVerticalAlignmentToAppPrivacyTop = configureDic[@"setCheckBoxVerticalAlignmentToAppPrivacyTop"];;
         {
             baseConfigure.clCheckBoxVerticalAlignmentToAppPrivacyTop = clCheckBoxVerticalAlignmentToAppPrivacyTop;
         };
         /**协议勾选框 设置CheckBox顶部与隐私协议控件竖向中心对齐 YES或大于0生效 eg.@(YES)*/
-        NSNumber *clCheckBoxVerticalAlignmentToAppPrivacyCenterY = configureDic[@"clCheckBoxVerticalAlignmentToAppPrivacyCenterY"];
+        NSNumber *clCheckBoxVerticalAlignmentToAppPrivacyCenterY = configureDic[@"setCheckBoxVerticalAlignmentToAppPrivacyCenterY"];
         {
             baseConfigure.clCheckBoxVerticalAlignmentToAppPrivacyCenterY = clCheckBoxVerticalAlignmentToAppPrivacyCenterY;
         };
         /**协议勾选框 非选中状态图片*/
-        NSString  *clCheckBoxUncheckedImage = configureDic[@"clCheckBoxUncheckedImage"];
+        NSString  *clCheckBoxUncheckedImage = configureDic[@"setUncheckedImgPath"];
         {
             NSData * clCheckBoxUncheckedImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clCheckBoxUncheckedImage]]];
             UIImage * clCheckBoxUncheckedImage_value = [UIImage imageWithData:clCheckBoxUncheckedImageData];
             baseConfigure.clCheckBoxUncheckedImage = clCheckBoxUncheckedImage_value;
         };
         /**协议勾选框 选中状态图片*/
-        NSString  *clCheckBoxCheckedImage = configureDic[@"clCheckBoxCheckedImage"];
+        NSString  *clCheckBoxCheckedImage = configureDic[@"setCheckedImgPath"];
         {
             NSData * clCheckBoxCheckedImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clCheckBoxCheckedImage]]];
             UIImage * clCheckBoxCheckedImage_value = [UIImage imageWithData:clCheckBoxCheckedImageData];
@@ -634,7 +885,7 @@
         
         /*Loading*/
         /**Loading 大小 CGSize eg.[NSValue valueWithCGSize:CGSizeMake(50, 50)]*/
-        NSArray *clLoadingSize = configureDic[@"clLoadingSize"];
+        NSArray *clLoadingSize = configureDic[@"setLoadingSize"];
         {
             if (clLoadingSize && clLoadingSize.count == 2) {
                 CGFloat width = [clLoadingSize.firstObject floatValue];
@@ -643,12 +894,12 @@
             }
         };
         /**Loading 圆角 float eg.@(5) */
-        NSNumber *clLoadingCornerRadius = configureDic[@"clLoadingCornerRadius"];
+        NSNumber *clLoadingCornerRadius = configureDic[@"setLoadingCornerRadius"];
         {
             baseConfigure.clLoadingCornerRadius = clLoadingCornerRadius;
         };
         /**Loading 背景色 UIColor eg.[UIColor colorWithRed:0.8 green:0.5 blue:0.8 alpha:0.8]; */
-        NSArray *clLoadingBackgroundColor = configureDic[@"clLoadingBackgroundColor"];;
+        NSArray *clLoadingBackgroundColor = configureDic[@"setLoadingBackgroundColor"];
         {
             if (clLoadingBackgroundColor && clLoadingBackgroundColor.count == 4) {
                 baseConfigure.clLoadingBackgroundColor = [UIColor colorWithRed:[clLoadingBackgroundColor[0] floatValue] green:[clLoadingBackgroundColor[1] floatValue] blue:[clLoadingBackgroundColor[2] floatValue] alpha:[clLoadingBackgroundColor[3] floatValue]];
@@ -662,7 +913,7 @@
         baseConfigure.clLoadingIndicatorStyle = @(UIActivityIndicatorViewStyleWhite);
         
         /**Loading Indicator渲染色 UIColor eg.[UIColor greenColor]; */
-        NSArray *clLoadingTintColor = configureDic[@"clLoadingTintColor"];;
+        NSArray *clLoadingTintColor = configureDic[@"setLoadingTintColor"];;
         {
             if (clLoadingTintColor && clLoadingTintColor.count == 4) {
                 baseConfigure.clLoadingTintColor = [UIColor colorWithRed:[clLoadingTintColor[0] floatValue] green:[clLoadingTintColor[1] floatValue] blue:[clLoadingTintColor[2] floatValue] alpha:[clLoadingTintColor[3] floatValue]];
@@ -671,7 +922,7 @@
         
         /**横竖屏*/
         /*是否支持自动旋转 BOOL*/
-        NSNumber * shouldAutorotate = configureDic[@"shouldAutorotate"];
+        NSNumber * shouldAutorotate = configureDic[@"setShouldAutorotate"];
         {
             baseConfigure.shouldAutorotate = shouldAutorotate;
         };
@@ -732,9 +983,6 @@
             //偏好方向默认Portrait preferredInterfaceOrientationForPresentation: Number(5),
             if (preferredInterfaceOrientationForPresentation) {
                 switch (preferredInterfaceOrientationForPresentation.integerValue) {
-                    case -1:
-                        baseConfigure.preferredInterfaceOrientationForPresentation = @(UIInterfaceOrientationUnknown);
-                        break;
                     case 0:
                         baseConfigure.preferredInterfaceOrientationForPresentation = @(UIInterfaceOrientationPortrait);
                         break;
@@ -748,6 +996,7 @@
                         baseConfigure.preferredInterfaceOrientationForPresentation = @(UIInterfaceOrientationLandscapeRight);
                         break;
                     default:
+                        baseConfigure.preferredInterfaceOrientationForPresentation = @(UIInterfaceOrientationUnknown);
                         break;
                 }
             }
@@ -756,12 +1005,12 @@
         /**以窗口方式显示授权页
          */
         /**以窗口方式显示 BOOL, default is NO */
-        NSNumber * clAuthTypeUseWindow  = configureDic[@"clAuthTypeUseWindow"];
+        NSNumber * clAuthTypeUseWindow  = configureDic[@"setAuthTypeUseWindow"];
         {
             baseConfigure.clAuthTypeUseWindow = clAuthTypeUseWindow;
         };
         /**窗口圆角 float*/
-        NSNumber * clAuthWindowCornerRadius = configureDic[@"clAuthWindowCornerRadius"];
+        NSNumber * clAuthWindowCornerRadius = configureDic[@"setAuthWindowCornerRadius"];
         {
             baseConfigure.clAuthWindowCornerRadius = clAuthWindowCornerRadius;
         };
@@ -771,16 +1020,91 @@
          UIModalTransitionStyleCrossDissolve 淡入
          UIModalTransitionStyleFlipHorizontal 翻转显示
          */
-        NSNumber * clAuthWindowModalTransitionStyle = configureDic[@"clAuthWindowModalTransitionStyle"];
+        NSNumber * clAuthWindowModalTransitionStyle = configureDic[@"setAuthWindowModalTransitionStyle"];
         {
-            baseConfigure.clAuthWindowModalTransitionStyle = clAuthWindowModalTransitionStyle;
+            if (clAuthWindowModalTransitionStyle) {
+                switch (clAuthWindowModalTransitionStyle.intValue) {
+                    case 0: default:
+                        baseConfigure.clAuthWindowModalTransitionStyle = @(UIModalTransitionStyleCoverVertical);
+                        break;
+                    case 1:
+                        baseConfigure.clAuthWindowModalTransitionStyle = @(UIModalTransitionStyleFlipHorizontal);
+                        break;
+                    case 2:
+                        baseConfigure.clAuthWindowModalTransitionStyle = @(UIModalTransitionStyleCrossDissolve);
+                        break;
+                }
+            }
         };
+        
+        NSNumber * setAuthWindowModalPresentationStyle = configureDic[@"setAuthWindowModalPresentationStyle"];
+        {
+            if (setAuthWindowModalPresentationStyle) {
+                switch (setAuthWindowModalPresentationStyle.intValue) {
+                    case 0: default:
+                        baseConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationFullScreen);
+                        break;
+                    case 1:
+                        baseConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationOverFullScreen);
+                        break;
+                    case 2:
+                        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                            baseConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationAutomatic);
+                        }
+                        break;
+                }
+            }
+        };
+        NSNumber * setAppPrivacyWebModalPresentationStyle = configureDic[@"setAppPrivacyWebModalPresentationStyle"];
+        {
+            if (setAppPrivacyWebModalPresentationStyle) {
+                switch (setAppPrivacyWebModalPresentationStyle.intValue) {
+                    case 0: default:
+                        baseConfigure.clAppPrivacyWebModalPresentationStyle = @(UIModalPresentationFullScreen);
+                        break;
+                    case 1:
+                        baseConfigure.clAppPrivacyWebModalPresentationStyle = @(UIModalPresentationOverFullScreen);
+                        break;
+                    case 2:
+                        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                            baseConfigure.clAppPrivacyWebModalPresentationStyle = @(UIModalPresentationAutomatic);
+                        }
+                        break;
+                }
+            }
+        };
+        
+        NSNumber * setAuthWindowOverrideUserInterfaceStyle = configureDic[@"setAuthWindowOverrideUserInterfaceStyle"];
+        {
+            if (setAuthWindowOverrideUserInterfaceStyle) {
+                if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                    switch (setAuthWindowOverrideUserInterfaceStyle.integerValue) {
+                        case 0: default:
+                            baseConfigure.clAuthWindowOverrideUserInterfaceStyle = @(UIUserInterfaceStyleUnspecified);
+                            break;
+                        case 1:
+                            baseConfigure.clAuthWindowOverrideUserInterfaceStyle = @(UIUserInterfaceStyleLight);
+                            break;
+                        case 2:
+                            baseConfigure.clAuthWindowOverrideUserInterfaceStyle = @(UIUserInterfaceStyleDark);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        NSNumber * setAuthWindowPresentingAnimate = configureDic[@"setAuthWindowPresentingAnimate"];
+        {
+            if (setAuthWindowPresentingAnimate) {
+                baseConfigure.clAuthWindowPresentingAnimate = setAuthWindowPresentingAnimate;
+            }
+        }
         
         /**弹窗的MaskLayer，用于自定义窗口形状*/
         CALayer * clAuthWindowMaskLayer;
         
-        NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"clOrientationLayOutPortrait"];
-        NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"clOrientationLayOutLandscape"];
+        NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"layOutPortrait"];
+        NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"layOutLandscape"];
 
         CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
         
@@ -1101,14 +1425,14 @@
     
     CLOrientationLayOut * clOrientationLayOutPortrait = [CLOrientationLayOut new];
     
-    NSNumber * clLayoutLogoLeft     = layOutPortraitDict[@"clLayoutLogoLeft"];
-    NSNumber * clLayoutLogoTop      = layOutPortraitDict[@"clLayoutLogoTop"];
-    NSNumber * clLayoutLogoRight    = layOutPortraitDict[@"clLayoutLogoRight"];
-    NSNumber * clLayoutLogoBottom   = layOutPortraitDict[@"clLayoutLogoBottom"];
-    NSNumber * clLayoutLogoWidth    = layOutPortraitDict[@"clLayoutLogoWidth"];
-    NSNumber * clLayoutLogoHeight   = layOutPortraitDict[@"clLayoutLogoHeight"];
-    NSNumber * clLayoutLogoCenterX  = layOutPortraitDict[@"clLayoutLogoCenterX"];
-    NSNumber * clLayoutLogoCenterY  = layOutPortraitDict[@"clLayoutLogoCenterY"];
+    NSNumber * clLayoutLogoLeft     = layOutPortraitDict[@"setLogoLeft"];
+    NSNumber * clLayoutLogoTop      = layOutPortraitDict[@"setLogoTop"];
+    NSNumber * clLayoutLogoRight    = layOutPortraitDict[@"setLogoRight"];
+    NSNumber * clLayoutLogoBottom   = layOutPortraitDict[@"setLogoBottom"];
+    NSNumber * clLayoutLogoWidth    = layOutPortraitDict[@"setLogoWidth"];
+    NSNumber * clLayoutLogoHeight   = layOutPortraitDict[@"setLogoHeight"];
+    NSNumber * clLayoutLogoCenterX  = layOutPortraitDict[@"setLogoCenterX"];
+    NSNumber * clLayoutLogoCenterY  = layOutPortraitDict[@"setLogoCenterY"];
     
     clOrientationLayOutPortrait.clLayoutLogoLeft = clLayoutLogoLeft;
     clOrientationLayOutPortrait.clLayoutLogoTop = clLayoutLogoTop;
@@ -1121,14 +1445,14 @@
 
     /**手机号显示控件*/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutPhoneLeft    = layOutPortraitDict[@"clLayoutPhoneLeft"];;
-    NSNumber * clLayoutPhoneTop     = layOutPortraitDict[@"clLayoutPhoneTop"];;
-    NSNumber * clLayoutPhoneRight   = layOutPortraitDict[@"clLayoutPhoneRight"];;
-    NSNumber * clLayoutPhoneBottom  = layOutPortraitDict[@"clLayoutPhoneBottom"];;
-    NSNumber * clLayoutPhoneWidth   = layOutPortraitDict[@"clLayoutPhoneWidth"];;
-    NSNumber * clLayoutPhoneHeight  = layOutPortraitDict[@"clLayoutPhoneHeight"];;
-    NSNumber * clLayoutPhoneCenterX = layOutPortraitDict[@"clLayoutPhoneCenterX"];;
-    NSNumber * clLayoutPhoneCenterY = layOutPortraitDict[@"clLayoutPhoneCenterY"];;
+    NSNumber * clLayoutPhoneLeft    = layOutPortraitDict[@"setNumFieldLeft"];;
+    NSNumber * clLayoutPhoneTop     = layOutPortraitDict[@"setNumFieldTop"];;
+    NSNumber * clLayoutPhoneRight   = layOutPortraitDict[@"setNumFieldRight"];;
+    NSNumber * clLayoutPhoneBottom  = layOutPortraitDict[@"setNumFieldBottom"];;
+    NSNumber * clLayoutPhoneWidth   = layOutPortraitDict[@"setNumFieldWidth"];;
+    NSNumber * clLayoutPhoneHeight  = layOutPortraitDict[@"setNumFieldHeight"];;
+    NSNumber * clLayoutPhoneCenterX = layOutPortraitDict[@"setNumFieldCenterX"];;
+    NSNumber * clLayoutPhoneCenterY = layOutPortraitDict[@"setNumFieldCenterY"];;
     clOrientationLayOutPortrait.clLayoutPhoneLeft = clLayoutPhoneLeft;
     clOrientationLayOutPortrait.clLayoutPhoneTop = clLayoutPhoneTop;
     clOrientationLayOutPortrait.clLayoutPhoneRight = clLayoutPhoneRight;
@@ -1141,14 +1465,14 @@
      注： 一键登录授权按钮 不得隐藏
      **/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutLoginBtnLeft     = layOutPortraitDict[@"clLayoutLoginBtnLeft"];
-    NSNumber * clLayoutLoginBtnTop      = layOutPortraitDict[@"clLayoutLoginBtnTop"];
-    NSNumber * clLayoutLoginBtnRight    = layOutPortraitDict[@"clLayoutLoginBtnRight"];
-    NSNumber * clLayoutLoginBtnBottom   = layOutPortraitDict[@"clLayoutLoginBtnBottom"];
-    NSNumber * clLayoutLoginBtnWidth    = layOutPortraitDict[@"clLayoutLoginBtnWidth"];
-    NSNumber * clLayoutLoginBtnHeight   = layOutPortraitDict[@"clLayoutLoginBtnHeight"];
-    NSNumber * clLayoutLoginBtnCenterX  = layOutPortraitDict[@"clLayoutLoginBtnCenterX"];
-    NSNumber * clLayoutLoginBtnCenterY  = layOutPortraitDict[@"clLayoutLoginBtnCenterY"];
+    NSNumber * clLayoutLoginBtnLeft     = layOutPortraitDict[@"setLogBtnLeft"];
+    NSNumber * clLayoutLoginBtnTop      = layOutPortraitDict[@"setLogBtnTop"];
+    NSNumber * clLayoutLoginBtnRight    = layOutPortraitDict[@"setLogBtnRight"];
+    NSNumber * clLayoutLoginBtnBottom   = layOutPortraitDict[@"setLogBtnBottom"];
+    NSNumber * clLayoutLoginBtnWidth    = layOutPortraitDict[@"setLogBtnWidth"];
+    NSNumber * clLayoutLoginBtnHeight   = layOutPortraitDict[@"setLogBtnHeight"];
+    NSNumber * clLayoutLoginBtnCenterX  = layOutPortraitDict[@"setLogBtnCenterX"];
+    NSNumber * clLayoutLoginBtnCenterY  = layOutPortraitDict[@"setLogBtnCenterY"];
     clOrientationLayOutPortrait.clLayoutLoginBtnLeft = clLayoutLoginBtnLeft;
     clOrientationLayOutPortrait.clLayoutLoginBtnTop = clLayoutLoginBtnTop;
     clOrientationLayOutPortrait.clLayoutLoginBtnRight = clLayoutLoginBtnRight;
@@ -1161,14 +1485,14 @@
      注： 运营商隐私条款 不得隐藏， 用户条款不限制
      **/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutAppPrivacyLeft   = layOutPortraitDict[@"clLayoutAppPrivacyLeft"];
-    NSNumber * clLayoutAppPrivacyTop    = layOutPortraitDict[@"clLayoutAppPrivacyTop"];
-    NSNumber * clLayoutAppPrivacyRight  = layOutPortraitDict[@"clLayoutAppPrivacyRight"];
-    NSNumber * clLayoutAppPrivacyBottom = layOutPortraitDict[@"clLayoutAppPrivacyBottom"];
-    NSNumber * clLayoutAppPrivacyWidth  = layOutPortraitDict[@"clLayoutAppPrivacyWidth"];
-    NSNumber * clLayoutAppPrivacyHeight = layOutPortraitDict[@"clLayoutAppPrivacyHeight"];
-    NSNumber * clLayoutAppPrivacyCenterX= layOutPortraitDict[@"clLayoutAppPrivacyCenterX"];
-    NSNumber * clLayoutAppPrivacyCenterY= layOutPortraitDict[@"clLayoutAppPrivacyCenterY"];
+    NSNumber * clLayoutAppPrivacyLeft   = layOutPortraitDict[@"setPrivacyLeft"];
+    NSNumber * clLayoutAppPrivacyTop    = layOutPortraitDict[@"setPrivacyTop"];
+    NSNumber * clLayoutAppPrivacyRight  = layOutPortraitDict[@"setPrivacyRight"];
+    NSNumber * clLayoutAppPrivacyBottom = layOutPortraitDict[@"setPrivacyBottom"];
+    NSNumber * clLayoutAppPrivacyWidth  = layOutPortraitDict[@"setPrivacyWidth"];
+    NSNumber * clLayoutAppPrivacyHeight = layOutPortraitDict[@"setPrivacyHeight"];
+    NSNumber * clLayoutAppPrivacyCenterX= layOutPortraitDict[@"setPrivacyCenterX"];
+    NSNumber * clLayoutAppPrivacyCenterY= layOutPortraitDict[@"setPrivacyCenterY"];
     clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = clLayoutAppPrivacyLeft;
     clOrientationLayOutPortrait.clLayoutAppPrivacyTop = clLayoutAppPrivacyTop;
     clOrientationLayOutPortrait.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight;
@@ -1181,14 +1505,14 @@
      注： 运营商品牌标签，不得隐藏
      **/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutSloganLeft   = layOutPortraitDict[@"clLayoutSloganLeft"];
-    NSNumber * clLayoutSloganTop    = layOutPortraitDict[@"clLayoutSloganTop"];
-    NSNumber * clLayoutSloganRight  = layOutPortraitDict[@"clLayoutSloganRight"];
-    NSNumber * clLayoutSloganBottom = layOutPortraitDict[@"clLayoutSloganBottom"];
-    NSNumber * clLayoutSloganWidth  = layOutPortraitDict[@"clLayoutSloganWidth"];
-    NSNumber * clLayoutSloganHeight = layOutPortraitDict[@"clLayoutSloganHeight"];
-    NSNumber * clLayoutSloganCenterX= layOutPortraitDict[@"clLayoutSloganCenterX"];
-    NSNumber * clLayoutSloganCenterY= layOutPortraitDict[@"clLayoutSloganCenterY"];
+    NSNumber * clLayoutSloganLeft   = layOutPortraitDict[@"setSloganLeft"];
+    NSNumber * clLayoutSloganTop    = layOutPortraitDict[@"setSloganTop"];
+    NSNumber * clLayoutSloganRight  = layOutPortraitDict[@"setSloganRight"];
+    NSNumber * clLayoutSloganBottom = layOutPortraitDict[@"setSloganBottom"];
+    NSNumber * clLayoutSloganWidth  = layOutPortraitDict[@"setSloganWidth"];
+    NSNumber * clLayoutSloganHeight = layOutPortraitDict[@"setSloganHeight"];
+    NSNumber * clLayoutSloganCenterX= layOutPortraitDict[@"setSloganCenterX"];
+    NSNumber * clLayoutSloganCenterY= layOutPortraitDict[@"setSloganCenterY"];
     clOrientationLayOutPortrait.clLayoutSloganLeft = clLayoutSloganLeft;
     clOrientationLayOutPortrait.clLayoutSloganTop = clLayoutSloganTop;
     clOrientationLayOutPortrait.clLayoutSloganRight = clLayoutSloganRight;
@@ -1197,27 +1521,49 @@
     clOrientationLayOutPortrait.clLayoutSloganHeight = clLayoutSloganHeight;
     clOrientationLayOutPortrait.clLayoutSloganCenterX = clLayoutSloganCenterX;
     clOrientationLayOutPortrait.clLayoutSloganCenterY = clLayoutSloganCenterY;
+    
+    /*ShanYanSlogan 运营商品牌标签："认证服务由中国移动/联通/电信提供" label
+     注： 运营商品牌标签，不得隐藏
+     **/
+    //layout 约束均相对vc.view
+    NSNumber * clLayoutShanYanSloganLeft   = layOutPortraitDict[@"setShanYanSloganLeft"];
+    NSNumber * clLayoutShanYanSloganTop    = layOutPortraitDict[@"setShanYanSloganTop"];
+    NSNumber * clLayoutShanYanSloganRight  = layOutPortraitDict[@"setShanYanSloganRight"];
+    NSNumber * clLayoutShanYanSloganBottom = layOutPortraitDict[@"setShanYanSloganBottom"];
+    NSNumber * clLayoutShanYanSloganWidth  = layOutPortraitDict[@"setShanYanSloganWidth"];
+    NSNumber * clLayoutShanYanSloganHeight = layOutPortraitDict[@"setShanYanSloganHeight"];
+    NSNumber * clLayoutShanYanSloganCenterX= layOutPortraitDict[@"setShanYanSloganCenterX"];
+    NSNumber * clLayoutShanYanSloganCenterY= layOutPortraitDict[@"setShanYanSloganCenterY"];
+    clOrientationLayOutPortrait.clLayoutShanYanSloganLeft = clLayoutShanYanSloganLeft;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganTop = clLayoutShanYanSloganTop;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganRight = clLayoutShanYanSloganRight;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganBottom = clLayoutShanYanSloganBottom;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganWidth = clLayoutShanYanSloganWidth;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganHeight = clLayoutShanYanSloganHeight;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganCenterX = clLayoutShanYanSloganCenterX;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganCenterY = clLayoutShanYanSloganCenterY;
+    
     /**窗口模式*/
     /**窗口中心：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationCenterX = layOutPortraitDict[@"clAuthWindowOrientationCenterX"];
-    NSNumber * clAuthWindowOrientationCenterY = layOutPortraitDict[@"clAuthWindowOrientationCenterY"];
+    NSNumber * clAuthWindowOrientationCenterX = layOutPortraitDict[@"setAuthWindowOrientationCenterX"];
+    NSNumber * clAuthWindowOrientationCenterY = layOutPortraitDict[@"setAuthWindowOrientationCenterY"];
     if (clAuthWindowOrientationCenterX && clAuthWindowOrientationCenterY) {
         clOrientationLayOutPortrait.clAuthWindowOrientationCenter = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationCenterX.floatValue, clAuthWindowOrientationCenterY.floatValue)];
     }
     
     /**窗口左上角：frame.origin：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationOriginX = layOutPortraitDict[@"clAuthWindowOrientationOriginX"];
-    NSNumber * clAuthWindowOrientationOriginY = layOutPortraitDict[@"clAuthWindowOrientationOriginY"];
+    NSNumber * clAuthWindowOrientationOriginX = layOutPortraitDict[@"setAuthWindowOrientationOriginX"];
+    NSNumber * clAuthWindowOrientationOriginY = layOutPortraitDict[@"setAuthWindowOrientationOriginY"];
     if (clAuthWindowOrientationCenterX && clAuthWindowOrientationOriginY) {
         clOrientationLayOutPortrait.clAuthWindowOrientationOrigin = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationOriginX.floatValue, clAuthWindowOrientationOriginY.floatValue)];
     }
     /**窗口大小：宽 float */
-    NSNumber * clAuthWindowOrientationWidth = layOutPortraitDict[@"clAuthWindowOrientationWidth"];
+    NSNumber * clAuthWindowOrientationWidth = layOutPortraitDict[@"setAuthWindowOrientationWidth"];
     {
         clOrientationLayOutPortrait.clAuthWindowOrientationWidth = clAuthWindowOrientationWidth;
     }
     /**窗口大小：高 float */
-    NSNumber * clAuthWindowOrientationHeight= layOutPortraitDict[@"clAuthWindowOrientationHeight"];
+    NSNumber * clAuthWindowOrientationHeight= layOutPortraitDict[@"setAuthWindowOrientationHeight"];
     {
         clOrientationLayOutPortrait.clAuthWindowOrientationHeight = clAuthWindowOrientationHeight;
     }

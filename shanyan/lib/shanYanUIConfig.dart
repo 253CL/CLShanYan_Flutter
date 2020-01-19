@@ -7,7 +7,7 @@ part 'shanYanUIConfig.g.dart';
 
 /// 修改UI属性后，需删除shanyan.g.dart,再执行`flutter packages pub run build_runner build`，会生成新的 shanyan.g.dart; 运行 ` flutter packages pub run build_runner clean ` 清空文件
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true , includeIfNull: false)
 class ShanYanUIConfig {
 
   ShanYanUIConfigIOS _ios; //iOS
@@ -182,7 +182,7 @@ class ShanYanUIConfig {
 
 
 ///*iOS独有*/
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true , includeIfNull: false)
 class ShanYanUIConfigIOS {
 
   bool isFinish;            ///外部手动管理关闭界面 BOOL,default is NO
@@ -360,8 +360,7 @@ class ShanYanUIConfigIOS {
 
 
 /*Loading*/
-  /**Loading 大小 CGSize eg.[NSValue valueWithCGSize:CGSizeMake(50, 50)]*/
-//  @property (nonatomic,strong) NSValue *clLoadingSize;
+  List<num> setLoadingSize;         /// Loading 大小
 
   num setLoadingCornerRadius;       /// Loading 圆角
   String setLoadingBackgroundColor; /// Loading 背景色
@@ -427,9 +426,28 @@ class ShanYanUIConfigIOS {
 
 
   //布局设置
-  final ClOrientationLayOutIOS layOutPortrait = new ClOrientationLayOutIOS();//横屏下使用的布局
-  final ClOrientationLayOutIOS layOutLandscape = new ClOrientationLayOutIOS();//竖屏下使用的布局(不需要则不设置)
+  ClOrientationLayOutIOS _layOutPortrait ;  /// 横屏下使用的布局
+  ClOrientationLayOutIOS _layOutLandscape ; /// 竖屏下使用的布局(不需要则不设置)
 
+  // ignore: unnecessary_getters_setters,
+  set layOutPortrait(ClOrientationLayOutIOS layOutPortrait) => _layOutPortrait;
+  // ignore: unnecessary_getters_setters
+  ClOrientationLayOutIOS get layOutPortrait {
+    if (_layOutPortrait == null) {
+      _layOutPortrait = new ClOrientationLayOutIOS();
+    }
+    return _layOutPortrait;
+  }
+
+  // ignore: unnecessary_getters_setters
+  set layOutLandscape(ClOrientationLayOutIOS layOutLandscape) => _layOutLandscape;
+  // ignore: unnecessary_getters_setters
+  ClOrientationLayOutIOS get layOutLandscape {
+    if (_layOutLandscape == null) {
+      _layOutLandscape = new ClOrientationLayOutIOS();
+    }
+    return _layOutLandscape;
+  }
 
   ShanYanUIConfigIOS();
 
@@ -440,7 +458,7 @@ class ShanYanUIConfigIOS {
 }
 
 /*iOS布局(横竖需屏分别设置)*/
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class ClOrientationLayOutIOS{
 
   ClOrientationLayOutIOS();
@@ -505,6 +523,13 @@ class ClOrientationLayOutIOS{
   num setShanYanSloganCenterX;
   num setShanYanSloganCenterY;
 
+  num setAuthWindowOrientationCenterX;
+  num setAuthWindowOrientationCenterY;
+  num setAuthWindowOrientationOriginX;
+  num setAuthWindowOrientationOriginY;
+  num setAuthWindowOrientationWidth;
+  num setAuthWindowOrientationHeight;
+
   //反序列化
   factory ClOrientationLayOutIOS.fromJson(Map<String, dynamic> json) => _$ClOrientationLayOutIOSFromJson(json);
   //序列化
@@ -513,7 +538,7 @@ class ClOrientationLayOutIOS{
 
 
 /*Android独有布局*/
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class ShanYanUIConfigAndroid {
 
   ShanYanUIConfigAndroid({this.isFinish});

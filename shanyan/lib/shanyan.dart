@@ -91,7 +91,8 @@ class OneKeyLoginManager {
     } else if (Platform.isIOS){
 
       Map iosConfigure = this.shanYanUIConfig.ios.toJson();
-      Map<dynamic, dynamic> result = await _channel.invokeMethod("openLoginAuth",this.shanYanUIConfig.ios);
+
+      Map<dynamic, dynamic> result = await _channel.invokeMethod("openLoginAuth",iosConfigure);
       Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
       return ShanYanResult.fromJson(newResult);
 

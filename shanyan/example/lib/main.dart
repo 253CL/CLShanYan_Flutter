@@ -325,7 +325,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacySmhHidden = true;
     shanYanUIConfig.ios.setAppPrivacyLineSpacing = 0;
     shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
-    shanYanUIConfig.ios.clAppPrivacyLineFragmentPadding = 0;
+    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 0;
     shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
 
     shanYanUIConfig.ios.setAppPrivacyNormalDesTextFirst = "Accept";
@@ -339,7 +339,6 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAppPrivacyNormalDesTextLast = "to login";
 
     shanYanUIConfig.ios.setOperatorPrivacyAtLast = true;
-    shanYanUIConfig.ios.setPrivacyNavText = "闪验运营商协议";
     shanYanUIConfig.ios.setPrivacyNavTextColor = "#7BC1E8";
     shanYanUIConfig.ios.setPrivacyNavTextSize = 15;
 
@@ -420,7 +419,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 60;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 0;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom
-    - shanYanUIConfig.ios.layOutPortrait.setSloganRight;
+      - shanYanUIConfig.ios.layOutPortrait.setSloganRight;
 
 
     /*Android 页面样式具体设置*/
