@@ -539,11 +539,7 @@ class ClOrientationLayOutIOS{
 
 
 /*Android独有布局*/
-<<<<<<< HEAD
-@JsonSerializable(includeIfNull: false)
-=======
-@JsonSerializable(explicitToJson: true)
->>>>>>> 58f40c7b5ca08b28d1a094dca03e2d404c0795a9
+@JsonSerializable(explicitToJson: true , includeIfNull: false)
 class ShanYanUIConfigAndroid {
 
   ShanYanUIConfigAndroid({this.isFinish});

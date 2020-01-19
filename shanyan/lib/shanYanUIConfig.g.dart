@@ -21,12 +21,20 @@ ShanYanUIConfig _$ShanYanUIConfigFromJson(Map<String, dynamic> json) {
             json['androidLandscape'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$ShanYanUIConfigToJson(ShanYanUIConfig instance) =>
-    <String, dynamic>{
-      'ios': instance.ios?.toJson(),
-      'androidPortrait': instance.androidPortrait?.toJson(),
-      'androidLandscape': instance.androidLandscape?.toJson(),
-    };
+Map<String, dynamic> _$ShanYanUIConfigToJson(ShanYanUIConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('ios', instance.ios?.toJson());
+  writeNotNull('androidPortrait', instance.androidPortrait?.toJson());
+  writeNotNull('androidLandscape', instance.androidLandscape?.toJson());
+  return val;
+}
 
 ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
   return ShanYanUIConfigIOS()
@@ -154,132 +162,162 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..layOutLandscape = json['layOutLandscape'] == null ? null : ClOrientationLayOutIOS.fromJson(json['layOutLandscape'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
-    <String, dynamic>{
-      'isFinish': instance.isFinish,
-      'setAuthBGImgPath': instance.setAuthBGImgPath,
-      'setPreferredStatusBarStyle':
-          _$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle],
-      'setStatusBarHidden': instance.setStatusBarHidden,
-      'setAuthNavHidden': instance.setAuthNavHidden,
-      'setNavigationBarStyle':
-          _$iOSBarStyleEnumMap[instance.setNavigationBarStyle],
-      'setAuthNavTransparent': instance.setAuthNavTransparent,
-      'setNavText': instance.setNavText,
-      'setNavTextColor': instance.setNavTextColor,
-      'setNavTextSize': instance.setNavTextSize,
-      'setNavReturnImgPath': instance.setNavReturnImgPath,
-      'setNavReturnImgHidden': instance.setNavReturnImgHidden,
-      'setNavBackBtnAlimentRight': instance.setNavBackBtnAlimentRight,
-      'setNavigationBottomLineHidden': instance.setNavigationBottomLineHidden,
-      'setNavigationTintColor': instance.setNavigationTintColor,
-      'setNavigationBarTintColor': instance.setNavigationBarTintColor,
-      'setNavigationBackgroundImage': instance.setNavigationBackgroundImage,
-      'setNavigationShadowImage': instance.setNavigationShadowImage,
-      'setLogoImgPath': instance.setLogoImgPath,
-      'setLogoCornerRadius': instance.setLogoCornerRadius,
-      'setLogoHidden': instance.setLogoHidden,
-      'setNumberColor': instance.setNumberColor,
-      'setNumberSize': instance.setNumberSize,
-      'setNumberBold': instance.setNumberBold,
-      'setNumberTextAlignment':
-          _$iOSTextAlignmentEnumMap[instance.setNumberTextAlignment],
-      'setLogBtnText': instance.setLogBtnText,
-      'setLogBtnTextColor': instance.setLogBtnTextColor,
-      'setLoginBtnTextSize': instance.setLoginBtnTextSize,
-      'setLoginBtnTextBold': instance.setLoginBtnTextBold,
-      'setLoginBtnBgColor': instance.setLoginBtnBgColor,
-      'setLoginBtnNormalBgImage': instance.setLoginBtnNormalBgImage,
-      'setLoginBtnHightLightBgImage': instance.setLoginBtnHightLightBgImage,
-      'setLoginBtnDisabledBgImage': instance.setLoginBtnDisabledBgImage,
-      'setLoginBtnBorderColor': instance.setLoginBtnBorderColor,
-      'setLoginBtnCornerRadius': instance.setLoginBtnCornerRadius,
-      'setLoginBtnBorderWidth': instance.setLoginBtnBorderWidth,
-      'setAppPrivacyColor': instance.setAppPrivacyColor,
-      'setPrivacyTextSize': instance.setPrivacyTextSize,
-      'setPrivacyTextBold': instance.setPrivacyTextBold,
-      'setAppPrivacyTextAlignment':
-          _$iOSTextAlignmentEnumMap[instance.setAppPrivacyTextAlignment],
-      'setPrivacySmhHidden': instance.setPrivacySmhHidden,
-      'setAppPrivacyLineSpacing': instance.setAppPrivacyLineSpacing,
-      'setAppPrivacyNeedSizeToFit': instance.setAppPrivacyNeedSizeToFit,
-      'setAppPrivacyLineFragmentPadding':
-          instance.setAppPrivacyLineFragmentPadding,
-      'setAppPrivacyAbbreviatedName': instance.setAppPrivacyAbbreviatedName,
-      'setAppPrivacyFirst': instance.setAppPrivacyFirst,
-      'setAppPrivacySecond': instance.setAppPrivacySecond,
-      'setAppPrivacyThird': instance.setAppPrivacyThird,
-      'setAppPrivacyNormalDesTextFirst':
-          instance.setAppPrivacyNormalDesTextFirst,
-      'setAppPrivacyNormalDesTextSecond':
-          instance.setAppPrivacyNormalDesTextSecond,
-      'setAppPrivacyNormalDesTextThird':
-          instance.setAppPrivacyNormalDesTextThird,
-      'setAppPrivacyNormalDesTextFourth':
-          instance.setAppPrivacyNormalDesTextFourth,
-      'setAppPrivacyNormalDesTextLast': instance.setAppPrivacyNormalDesTextLast,
-      'setOperatorPrivacyAtLast': instance.setOperatorPrivacyAtLast,
-      'setPrivacyNavTextColor': instance.setPrivacyNavTextColor,
-      'setPrivacyNavTextSize': instance.setPrivacyNavTextSize,
-      'setPrivacyNavReturnImgPath': instance.setPrivacyNavReturnImgPath,
-      'setAppPrivacyWebPreferredStatusBarStyle': _$iOSStatusBarStyleEnumMap[
-          instance.setAppPrivacyWebPreferredStatusBarStyle],
-      'setAppPrivacyWebNavigationBarStyle':
-          _$iOSBarStyleEnumMap[instance.setAppPrivacyWebNavigationBarStyle],
-      'setAppPrivacyWebNavigationTintColor':
-          instance.setAppPrivacyWebNavigationTintColor,
-      'setAppPrivacyWebNavigationBarTintColor':
-          instance.setAppPrivacyWebNavigationBarTintColor,
-      'setAppPrivacyWebNavigationBackgroundImage':
-          instance.setAppPrivacyWebNavigationBackgroundImage,
-      'setAppPrivacyWebNavigationShadowImage':
-          instance.setAppPrivacyWebNavigationShadowImage,
-      'setSloganTextSize': instance.setSloganTextSize,
-      'setSloganTextBold': instance.setSloganTextBold,
-      'setSloganTextColor': instance.setSloganTextColor,
-      'setSlogaTextAlignment':
-          _$iOSTextAlignmentEnumMap[instance.setSlogaTextAlignment],
-      'setShanYanSloganTextSize': instance.setShanYanSloganTextSize,
-      'setShanYanSloganTextBold': instance.setShanYanSloganTextBold,
-      'setShanYanSloganTextColor': instance.setShanYanSloganTextColor,
-      'setShanYanSlogaTextAlignment':
-          _$iOSTextAlignmentEnumMap[instance.setShanYanSlogaTextAlignment],
-      'setShanYanSloganHidden': instance.setShanYanSloganHidden,
-      'setCheckBoxHidden': instance.setCheckBoxHidden,
-      'setPrivacyState': instance.setPrivacyState,
-      'setCheckBoxWH': instance.setCheckBoxWH,
-      'setCheckBoxImageEdgeInsets': instance.setCheckBoxImageEdgeInsets,
-      'setCheckBoxVerticalAlignmentToAppPrivacyTop':
-          instance.setCheckBoxVerticalAlignmentToAppPrivacyTop,
-      'setCheckBoxVerticalAlignmentToAppPrivacyCenterY':
-          instance.setCheckBoxVerticalAlignmentToAppPrivacyCenterY,
-      'setUncheckedImgPath': instance.setUncheckedImgPath,
-      'setCheckedImgPath': instance.setCheckedImgPath,
-      'setLoadingSize': instance.setLoadingSize,
-      'setLoadingCornerRadius': instance.setLoadingCornerRadius,
-      'setLoadingBackgroundColor': instance.setLoadingBackgroundColor,
-      'setLoadingTintColor': instance.setLoadingTintColor,
-      'setShouldAutorotate': instance.setShouldAutorotate,
-      'supportedInterfaceOrientations': _$iOSInterfaceOrientationMaskEnumMap[
-          instance.supportedInterfaceOrientations],
-      'preferredInterfaceOrientationForPresentation':
-          _$iOSInterfaceOrientationEnumMap[
-              instance.preferredInterfaceOrientationForPresentation],
-      'setAuthTypeUseWindow': instance.setAuthTypeUseWindow,
-      'setAuthWindowCornerRadius': instance.setAuthWindowCornerRadius,
-      'setAuthWindowModalTransitionStyle': _$iOSModalTransitionStyleEnumMap[
-          instance.setAuthWindowModalTransitionStyle],
-      'setAuthWindowModalPresentationStyle': _$iOSModalPresentationStyleEnumMap[
-          instance.setAuthWindowModalPresentationStyle],
-      'setAppPrivacyWebModalPresentationStyle':
-          _$iOSModalPresentationStyleEnumMap[
-              instance.setAppPrivacyWebModalPresentationStyle],
-      'setAuthWindowOverrideUserInterfaceStyle': _$iOSUserInterfaceStyleEnumMap[
-          instance.setAuthWindowOverrideUserInterfaceStyle],
-      'setAuthWindowPresentingAnimate': instance.setAuthWindowPresentingAnimate,
-      'layOutPortrait': instance.layOutPortrait?.toJson(),
-      'layOutLandscape': instance.layOutLandscape?.toJson(),
-    };
+Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('isFinish', instance.isFinish);
+  writeNotNull('setAuthBGImgPath', instance.setAuthBGImgPath);
+  writeNotNull('setPreferredStatusBarStyle',
+      _$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle]);
+  writeNotNull('setStatusBarHidden', instance.setStatusBarHidden);
+  writeNotNull('setAuthNavHidden', instance.setAuthNavHidden);
+  writeNotNull('setNavigationBarStyle',
+      _$iOSBarStyleEnumMap[instance.setNavigationBarStyle]);
+  writeNotNull('setAuthNavTransparent', instance.setAuthNavTransparent);
+  writeNotNull('setNavText', instance.setNavText);
+  writeNotNull('setNavTextColor', instance.setNavTextColor);
+  writeNotNull('setNavTextSize', instance.setNavTextSize);
+  writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
+  writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
+  writeNotNull('setNavBackBtnAlimentRight', instance.setNavBackBtnAlimentRight);
+  writeNotNull(
+      'setNavigationBottomLineHidden', instance.setNavigationBottomLineHidden);
+  writeNotNull('setNavigationTintColor', instance.setNavigationTintColor);
+  writeNotNull('setNavigationBarTintColor', instance.setNavigationBarTintColor);
+  writeNotNull(
+      'setNavigationBackgroundImage', instance.setNavigationBackgroundImage);
+  writeNotNull('setNavigationShadowImage', instance.setNavigationShadowImage);
+  writeNotNull('setLogoImgPath', instance.setLogoImgPath);
+  writeNotNull('setLogoCornerRadius', instance.setLogoCornerRadius);
+  writeNotNull('setLogoHidden', instance.setLogoHidden);
+  writeNotNull('setNumberColor', instance.setNumberColor);
+  writeNotNull('setNumberSize', instance.setNumberSize);
+  writeNotNull('setNumberBold', instance.setNumberBold);
+  writeNotNull('setNumberTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setNumberTextAlignment]);
+  writeNotNull('setLogBtnText', instance.setLogBtnText);
+  writeNotNull('setLogBtnTextColor', instance.setLogBtnTextColor);
+  writeNotNull('setLoginBtnTextSize', instance.setLoginBtnTextSize);
+  writeNotNull('setLoginBtnTextBold', instance.setLoginBtnTextBold);
+  writeNotNull('setLoginBtnBgColor', instance.setLoginBtnBgColor);
+  writeNotNull('setLoginBtnNormalBgImage', instance.setLoginBtnNormalBgImage);
+  writeNotNull(
+      'setLoginBtnHightLightBgImage', instance.setLoginBtnHightLightBgImage);
+  writeNotNull(
+      'setLoginBtnDisabledBgImage', instance.setLoginBtnDisabledBgImage);
+  writeNotNull('setLoginBtnBorderColor', instance.setLoginBtnBorderColor);
+  writeNotNull('setLoginBtnCornerRadius', instance.setLoginBtnCornerRadius);
+  writeNotNull('setLoginBtnBorderWidth', instance.setLoginBtnBorderWidth);
+  writeNotNull('setAppPrivacyColor', instance.setAppPrivacyColor);
+  writeNotNull('setPrivacyTextSize', instance.setPrivacyTextSize);
+  writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
+  writeNotNull('setAppPrivacyTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setAppPrivacyTextAlignment]);
+  writeNotNull('setPrivacySmhHidden', instance.setPrivacySmhHidden);
+  writeNotNull('setAppPrivacyLineSpacing', instance.setAppPrivacyLineSpacing);
+  writeNotNull(
+      'setAppPrivacyNeedSizeToFit', instance.setAppPrivacyNeedSizeToFit);
+  writeNotNull('setAppPrivacyLineFragmentPadding',
+      instance.setAppPrivacyLineFragmentPadding);
+  writeNotNull(
+      'setAppPrivacyAbbreviatedName', instance.setAppPrivacyAbbreviatedName);
+  writeNotNull('setAppPrivacyFirst', instance.setAppPrivacyFirst);
+  writeNotNull('setAppPrivacySecond', instance.setAppPrivacySecond);
+  writeNotNull('setAppPrivacyThird', instance.setAppPrivacyThird);
+  writeNotNull('setAppPrivacyNormalDesTextFirst',
+      instance.setAppPrivacyNormalDesTextFirst);
+  writeNotNull('setAppPrivacyNormalDesTextSecond',
+      instance.setAppPrivacyNormalDesTextSecond);
+  writeNotNull('setAppPrivacyNormalDesTextThird',
+      instance.setAppPrivacyNormalDesTextThird);
+  writeNotNull('setAppPrivacyNormalDesTextFourth',
+      instance.setAppPrivacyNormalDesTextFourth);
+  writeNotNull('setAppPrivacyNormalDesTextLast',
+      instance.setAppPrivacyNormalDesTextLast);
+  writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
+  writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
+  writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);
+  writeNotNull(
+      'setPrivacyNavReturnImgPath', instance.setPrivacyNavReturnImgPath);
+  writeNotNull(
+      'setAppPrivacyWebPreferredStatusBarStyle',
+      _$iOSStatusBarStyleEnumMap[
+          instance.setAppPrivacyWebPreferredStatusBarStyle]);
+  writeNotNull('setAppPrivacyWebNavigationBarStyle',
+      _$iOSBarStyleEnumMap[instance.setAppPrivacyWebNavigationBarStyle]);
+  writeNotNull('setAppPrivacyWebNavigationTintColor',
+      instance.setAppPrivacyWebNavigationTintColor);
+  writeNotNull('setAppPrivacyWebNavigationBarTintColor',
+      instance.setAppPrivacyWebNavigationBarTintColor);
+  writeNotNull('setAppPrivacyWebNavigationBackgroundImage',
+      instance.setAppPrivacyWebNavigationBackgroundImage);
+  writeNotNull('setAppPrivacyWebNavigationShadowImage',
+      instance.setAppPrivacyWebNavigationShadowImage);
+  writeNotNull('setSloganTextSize', instance.setSloganTextSize);
+  writeNotNull('setSloganTextBold', instance.setSloganTextBold);
+  writeNotNull('setSloganTextColor', instance.setSloganTextColor);
+  writeNotNull('setSlogaTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setSlogaTextAlignment]);
+  writeNotNull('setShanYanSloganTextSize', instance.setShanYanSloganTextSize);
+  writeNotNull('setShanYanSloganTextBold', instance.setShanYanSloganTextBold);
+  writeNotNull('setShanYanSloganTextColor', instance.setShanYanSloganTextColor);
+  writeNotNull('setShanYanSlogaTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setShanYanSlogaTextAlignment]);
+  writeNotNull('setShanYanSloganHidden', instance.setShanYanSloganHidden);
+  writeNotNull('setCheckBoxHidden', instance.setCheckBoxHidden);
+  writeNotNull('setPrivacyState', instance.setPrivacyState);
+  writeNotNull('setCheckBoxWH', instance.setCheckBoxWH);
+  writeNotNull(
+      'setCheckBoxImageEdgeInsets', instance.setCheckBoxImageEdgeInsets);
+  writeNotNull('setCheckBoxVerticalAlignmentToAppPrivacyTop',
+      instance.setCheckBoxVerticalAlignmentToAppPrivacyTop);
+  writeNotNull('setCheckBoxVerticalAlignmentToAppPrivacyCenterY',
+      instance.setCheckBoxVerticalAlignmentToAppPrivacyCenterY);
+  writeNotNull('setUncheckedImgPath', instance.setUncheckedImgPath);
+  writeNotNull('setCheckedImgPath', instance.setCheckedImgPath);
+  writeNotNull('setLoadingSize', instance.setLoadingSize);
+  writeNotNull('setLoadingCornerRadius', instance.setLoadingCornerRadius);
+  writeNotNull('setLoadingBackgroundColor', instance.setLoadingBackgroundColor);
+  writeNotNull('setLoadingTintColor', instance.setLoadingTintColor);
+  writeNotNull('setShouldAutorotate', instance.setShouldAutorotate);
+  writeNotNull(
+      'supportedInterfaceOrientations',
+      _$iOSInterfaceOrientationMaskEnumMap[
+          instance.supportedInterfaceOrientations]);
+  writeNotNull(
+      'preferredInterfaceOrientationForPresentation',
+      _$iOSInterfaceOrientationEnumMap[
+          instance.preferredInterfaceOrientationForPresentation]);
+  writeNotNull('setAuthTypeUseWindow', instance.setAuthTypeUseWindow);
+  writeNotNull('setAuthWindowCornerRadius', instance.setAuthWindowCornerRadius);
+  writeNotNull(
+      'setAuthWindowModalTransitionStyle',
+      _$iOSModalTransitionStyleEnumMap[
+          instance.setAuthWindowModalTransitionStyle]);
+  writeNotNull(
+      'setAuthWindowModalPresentationStyle',
+      _$iOSModalPresentationStyleEnumMap[
+          instance.setAuthWindowModalPresentationStyle]);
+  writeNotNull(
+      'setAppPrivacyWebModalPresentationStyle',
+      _$iOSModalPresentationStyleEnumMap[
+          instance.setAppPrivacyWebModalPresentationStyle]);
+  writeNotNull(
+      'setAuthWindowOverrideUserInterfaceStyle',
+      _$iOSUserInterfaceStyleEnumMap[
+          instance.setAuthWindowOverrideUserInterfaceStyle]);
+  writeNotNull('setAuthWindowPresentingAnimate',
+      instance.setAuthWindowPresentingAnimate);
+  writeNotNull('layOutPortrait', instance.layOutPortrait?.toJson());
+  writeNotNull('layOutLandscape', instance.layOutLandscape?.toJson());
+  return val;
+}
 
 T _$enumDecode<T>(
   Map<T, dynamic> enumValues,
@@ -434,67 +472,77 @@ ClOrientationLayOutIOS _$ClOrientationLayOutIOSFromJson(
 }
 
 Map<String, dynamic> _$ClOrientationLayOutIOSToJson(
-        ClOrientationLayOutIOS instance) =>
-    <String, dynamic>{
-      'setLogoWidth': instance.setLogoWidth,
-      'setLogoHeight': instance.setLogoHeight,
-      'setLogoLeft': instance.setLogoLeft,
-      'setLogoRight': instance.setLogoRight,
-      'setLogoTop': instance.setLogoTop,
-      'setLogoBottom': instance.setLogoBottom,
-      'setLogoCenterX': instance.setLogoCenterX,
-      'setLogoCenterY': instance.setLogoCenterY,
-      'setNumFieldWidth': instance.setNumFieldWidth,
-      'setNumFieldHeight': instance.setNumFieldHeight,
-      'setNumFieldLeft': instance.setNumFieldLeft,
-      'setNumFieldRight': instance.setNumFieldRight,
-      'setNumFieldTop': instance.setNumFieldTop,
-      'setNumFieldBottom': instance.setNumFieldBottom,
-      'setNumFieldCenterX': instance.setNumFieldCenterX,
-      'setNumFieldCenterY': instance.setNumFieldCenterY,
-      'setLogBtnHeight': instance.setLogBtnHeight,
-      'setLogBtnWidth': instance.setLogBtnWidth,
-      'setLogBtnLeft': instance.setLogBtnLeft,
-      'setLogBtnRight': instance.setLogBtnRight,
-      'setLogBtnTop': instance.setLogBtnTop,
-      'setLogBtnBottom': instance.setLogBtnBottom,
-      'setLogBtnCenterX': instance.setLogBtnCenterX,
-      'setLogBtnCenterY': instance.setLogBtnCenterY,
-      'setPrivacyHeight': instance.setPrivacyHeight,
-      'setPrivacyWidth': instance.setPrivacyWidth,
-      'setPrivacyLeft': instance.setPrivacyLeft,
-      'setPrivacyRight': instance.setPrivacyRight,
-      'setPrivacyTop': instance.setPrivacyTop,
-      'setPrivacyBottom': instance.setPrivacyBottom,
-      'setPrivacyCenterX': instance.setPrivacyCenterX,
-      'setPrivacyCenterY': instance.setPrivacyCenterY,
-      'setSloganHeight': instance.setSloganHeight,
-      'setSloganWidth': instance.setSloganWidth,
-      'setSloganLeft': instance.setSloganLeft,
-      'setSloganRight': instance.setSloganRight,
-      'setSloganTop': instance.setSloganTop,
-      'setSloganBottom': instance.setSloganBottom,
-      'setSloganCenterX': instance.setSloganCenterX,
-      'setSloganCenterY': instance.setSloganCenterY,
-      'setShanYanSloganHeight': instance.setShanYanSloganHeight,
-      'setShanYanSloganWidth': instance.setShanYanSloganWidth,
-      'setShanYanSloganLeft': instance.setShanYanSloganLeft,
-      'setShanYanSloganRight': instance.setShanYanSloganRight,
-      'setShanYanSloganTop': instance.setShanYanSloganTop,
-      'setShanYanSloganBottom': instance.setShanYanSloganBottom,
-      'setShanYanSloganCenterX': instance.setShanYanSloganCenterX,
-      'setShanYanSloganCenterY': instance.setShanYanSloganCenterY,
-      'setAuthWindowOrientationCenterX':
-          instance.setAuthWindowOrientationCenterX,
-      'setAuthWindowOrientationCenterY':
-          instance.setAuthWindowOrientationCenterY,
-      'setAuthWindowOrientationOriginX':
-          instance.setAuthWindowOrientationOriginX,
-      'setAuthWindowOrientationOriginY':
-          instance.setAuthWindowOrientationOriginY,
-      'setAuthWindowOrientationWidth': instance.setAuthWindowOrientationWidth,
-      'setAuthWindowOrientationHeight': instance.setAuthWindowOrientationHeight,
-    };
+    ClOrientationLayOutIOS instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('setLogoWidth', instance.setLogoWidth);
+  writeNotNull('setLogoHeight', instance.setLogoHeight);
+  writeNotNull('setLogoLeft', instance.setLogoLeft);
+  writeNotNull('setLogoRight', instance.setLogoRight);
+  writeNotNull('setLogoTop', instance.setLogoTop);
+  writeNotNull('setLogoBottom', instance.setLogoBottom);
+  writeNotNull('setLogoCenterX', instance.setLogoCenterX);
+  writeNotNull('setLogoCenterY', instance.setLogoCenterY);
+  writeNotNull('setNumFieldWidth', instance.setNumFieldWidth);
+  writeNotNull('setNumFieldHeight', instance.setNumFieldHeight);
+  writeNotNull('setNumFieldLeft', instance.setNumFieldLeft);
+  writeNotNull('setNumFieldRight', instance.setNumFieldRight);
+  writeNotNull('setNumFieldTop', instance.setNumFieldTop);
+  writeNotNull('setNumFieldBottom', instance.setNumFieldBottom);
+  writeNotNull('setNumFieldCenterX', instance.setNumFieldCenterX);
+  writeNotNull('setNumFieldCenterY', instance.setNumFieldCenterY);
+  writeNotNull('setLogBtnHeight', instance.setLogBtnHeight);
+  writeNotNull('setLogBtnWidth', instance.setLogBtnWidth);
+  writeNotNull('setLogBtnLeft', instance.setLogBtnLeft);
+  writeNotNull('setLogBtnRight', instance.setLogBtnRight);
+  writeNotNull('setLogBtnTop', instance.setLogBtnTop);
+  writeNotNull('setLogBtnBottom', instance.setLogBtnBottom);
+  writeNotNull('setLogBtnCenterX', instance.setLogBtnCenterX);
+  writeNotNull('setLogBtnCenterY', instance.setLogBtnCenterY);
+  writeNotNull('setPrivacyHeight', instance.setPrivacyHeight);
+  writeNotNull('setPrivacyWidth', instance.setPrivacyWidth);
+  writeNotNull('setPrivacyLeft', instance.setPrivacyLeft);
+  writeNotNull('setPrivacyRight', instance.setPrivacyRight);
+  writeNotNull('setPrivacyTop', instance.setPrivacyTop);
+  writeNotNull('setPrivacyBottom', instance.setPrivacyBottom);
+  writeNotNull('setPrivacyCenterX', instance.setPrivacyCenterX);
+  writeNotNull('setPrivacyCenterY', instance.setPrivacyCenterY);
+  writeNotNull('setSloganHeight', instance.setSloganHeight);
+  writeNotNull('setSloganWidth', instance.setSloganWidth);
+  writeNotNull('setSloganLeft', instance.setSloganLeft);
+  writeNotNull('setSloganRight', instance.setSloganRight);
+  writeNotNull('setSloganTop', instance.setSloganTop);
+  writeNotNull('setSloganBottom', instance.setSloganBottom);
+  writeNotNull('setSloganCenterX', instance.setSloganCenterX);
+  writeNotNull('setSloganCenterY', instance.setSloganCenterY);
+  writeNotNull('setShanYanSloganHeight', instance.setShanYanSloganHeight);
+  writeNotNull('setShanYanSloganWidth', instance.setShanYanSloganWidth);
+  writeNotNull('setShanYanSloganLeft', instance.setShanYanSloganLeft);
+  writeNotNull('setShanYanSloganRight', instance.setShanYanSloganRight);
+  writeNotNull('setShanYanSloganTop', instance.setShanYanSloganTop);
+  writeNotNull('setShanYanSloganBottom', instance.setShanYanSloganBottom);
+  writeNotNull('setShanYanSloganCenterX', instance.setShanYanSloganCenterX);
+  writeNotNull('setShanYanSloganCenterY', instance.setShanYanSloganCenterY);
+  writeNotNull('setAuthWindowOrientationCenterX',
+      instance.setAuthWindowOrientationCenterX);
+  writeNotNull('setAuthWindowOrientationCenterY',
+      instance.setAuthWindowOrientationCenterY);
+  writeNotNull('setAuthWindowOrientationOriginX',
+      instance.setAuthWindowOrientationOriginX);
+  writeNotNull('setAuthWindowOrientationOriginY',
+      instance.setAuthWindowOrientationOriginY);
+  writeNotNull(
+      'setAuthWindowOrientationWidth', instance.setAuthWindowOrientationWidth);
+  writeNotNull('setAuthWindowOrientationHeight',
+      instance.setAuthWindowOrientationHeight);
+  return val;
+}
 
 ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     Map<String, dynamic> json) {
@@ -620,107 +668,124 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
 }
 
 Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
-        ShanYanUIConfigAndroid instance) =>
-    <String, dynamic>{
-      'isFinish': instance.isFinish,
-      'setAuthBGImgPath': instance.setAuthBGImgPath,
-      'setAuthBgGifPath': instance.setAuthBgGifPath,
-      'setAuthBgVideoPath': instance.setAuthBgVideoPath,
-      'setStatusBarHidden': instance.setStatusBarHidden,
-      'setStatusBarColor': instance.setStatusBarColor,
-      'setLightColor': instance.setLightColor,
-      'setVirtualKeyTransparent': instance.setVirtualKeyTransparent,
-      'setFullScreen': instance.setFullScreen,
-      'setNavReturnBtnWidth': instance.setNavReturnBtnWidth,
-      'setNavReturnBtnHeight': instance.setNavReturnBtnHeight,
-      'setNavReturnBtnOffsetRightX': instance.setNavReturnBtnOffsetRightX,
-      'setNavReturnBtnOffsetX': instance.setNavReturnBtnOffsetX,
-      'setNavReturnBtnOffsetY': instance.setNavReturnBtnOffsetY,
-      'setNavColor': instance.setNavColor,
-      'setNavText': instance.setNavText,
-      'setNavTextColor': instance.setNavTextColor,
-      'setNavTextSize': instance.setNavTextSize,
-      'setNavReturnImgPath': instance.setNavReturnImgPath,
-      'setNavReturnImgHidden': instance.setNavReturnImgHidden,
-      'setAuthNavHidden': instance.setAuthNavHidden,
-      'setAuthNavTransparent': instance.setAuthNavTransparent,
-      'setNavTextBold': instance.setNavTextBold,
-      'setLogoImgPath': instance.setLogoImgPath,
-      'setLogoHidden': instance.setLogoHidden,
-      'setLogoOffsetY': instance.setLogoOffsetY,
-      'setLogoOffsetBottomY': instance.setLogoOffsetBottomY,
-      'setLogoOffsetX': instance.setLogoOffsetX,
-      'setLogoWidth': instance.setLogoWidth,
-      'setLogoHeight': instance.setLogoHeight,
-      'setNumFieldOffsetY': instance.setNumFieldOffsetY,
-      'setNumFieldOffsetBottomY': instance.setNumFieldOffsetBottomY,
-      'setNumberSize': instance.setNumberSize,
-      'setNumFieldOffsetX': instance.setNumFieldOffsetX,
-      'setNumFieldWidth': instance.setNumFieldWidth,
-      'setNumFieldHeight': instance.setNumFieldHeight,
-      'setNumberColor': instance.setNumberColor,
-      'setNumberBold': instance.setNumberBold,
-      'setLogBtnOffsetY': instance.setLogBtnOffsetY,
-      'setLogBtnOffsetBottomY': instance.setLogBtnOffsetBottomY,
-      'setLogBtnTextSize': instance.setLogBtnTextSize,
-      'setLogBtnOffsetX': instance.setLogBtnOffsetX,
-      'setLogBtnHeight': instance.setLogBtnHeight,
-      'setLogBtnWidth': instance.setLogBtnWidth,
-      'setLogBtnText': instance.setLogBtnText,
-      'setLogBtnTextColor': instance.setLogBtnTextColor,
-      'setLogBtnImgPath': instance.setLogBtnImgPath,
-      'setLogBtnTextBold': instance.setLogBtnTextBold,
-      'setPrivacyOffsetBottomY': instance.setPrivacyOffsetBottomY,
-      'setPrivacyOffsetY': instance.setPrivacyOffsetY,
-      'setPrivacyOffsetX': instance.setPrivacyOffsetX,
-      'setAppPrivacyOne': instance.setAppPrivacyOne,
-      'setAppPrivacyTwo': instance.setAppPrivacyTwo,
-      'setAppPrivacyThree': instance.setAppPrivacyThree,
-      'setPrivacySmhHidden': instance.setPrivacySmhHidden,
-      'setPrivacyTextSize': instance.setPrivacyTextSize,
-      'setAppPrivacyColor': instance.setAppPrivacyColor,
-      'setPrivacyOffsetGravityLeft': instance.setPrivacyOffsetGravityLeft,
-      'setPrivacyState': instance.setPrivacyState,
-      'setUncheckedImgPath': instance.setUncheckedImgPath,
-      'setCheckedImgPath': instance.setCheckedImgPath,
-      'setCheckBoxHidden': instance.setCheckBoxHidden,
-      'setCheckBoxWH': instance.setCheckBoxWH,
-      'setCheckBoxMargin': instance.setCheckBoxMargin,
-      'setPrivacyText': instance.setPrivacyText,
-      'setPrivacyTextBold': instance.setPrivacyTextBold,
-      'setSloganOffsetY': instance.setSloganOffsetY,
-      'setSloganOffsetBottomY': instance.setSloganOffsetBottomY,
-      'setSloganOffsetX': instance.setSloganOffsetX,
-      'setSloganTextColor': instance.setSloganTextColor,
-      'setSloganTextSize': instance.setSloganTextSize,
-      'setSloganHidden': instance.setSloganHidden,
-      'setSloganTextBold': instance.setSloganTextBold,
-      'setShanYanSloganOffsetY': instance.setShanYanSloganOffsetY,
-      'setShanYanSloganOffsetBottomY': instance.setShanYanSloganOffsetBottomY,
-      'setShanYanSloganOffsetX': instance.setShanYanSloganOffsetX,
-      'setShanYanSloganTextColor': instance.setShanYanSloganTextColor,
-      'setShanYanSloganTextSize': instance.setShanYanSloganTextSize,
-      'setShanYanSloganHidden': instance.setShanYanSloganHidden,
-      'setShanYanSloganTextBold': instance.setShanYanSloganTextBold,
-      'setPrivacyNavColor': instance.setPrivacyNavColor,
-      'setPrivacyNavTextBold': instance.setPrivacyNavTextBold,
-      'setPrivacyNavTextColor': instance.setPrivacyNavTextColor,
-      'setPrivacyNavTextSize': instance.setPrivacyNavTextSize,
-      'setPrivacyNavReturnImgPath': instance.setPrivacyNavReturnImgPath,
-      'setPrivacyNavReturnImgHidden': instance.setPrivacyNavReturnImgHidden,
-      'setPrivacyNavReturnBtnWidth': instance.setPrivacyNavReturnBtnWidth,
-      'setPrivacyNavReturnBtnHeight': instance.setPrivacyNavReturnBtnHeight,
-      'setPrivacyNavReturnBtnOffsetRightX':
-          instance.setPrivacyNavReturnBtnOffsetRightX,
-      'setPrivacyNavReturnBtnOffsetX': instance.setPrivacyNavReturnBtnOffsetX,
-      'setPrivacyNavReturnBtnOffsetY': instance.setPrivacyNavReturnBtnOffsetY,
-      'addCustomPrivacyAlertView': instance.addCustomPrivacyAlertView,
-      'setLoadingView': instance.setLoadingView,
-      'setDialogTheme': instance.setDialogTheme,
-      'widgetLayouts':
-          instance.widgetLayouts?.map((e) => e?.toJson())?.toList(),
-      'widgets': instance.widgets?.map((e) => e?.toJson())?.toList(),
-    };
+    ShanYanUIConfigAndroid instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('isFinish', instance.isFinish);
+  writeNotNull('setAuthBGImgPath', instance.setAuthBGImgPath);
+  writeNotNull('setAuthBgGifPath', instance.setAuthBgGifPath);
+  writeNotNull('setAuthBgVideoPath', instance.setAuthBgVideoPath);
+  writeNotNull('setStatusBarHidden', instance.setStatusBarHidden);
+  writeNotNull('setStatusBarColor', instance.setStatusBarColor);
+  writeNotNull('setLightColor', instance.setLightColor);
+  writeNotNull('setVirtualKeyTransparent', instance.setVirtualKeyTransparent);
+  writeNotNull('setFullScreen', instance.setFullScreen);
+  writeNotNull('setNavReturnBtnWidth', instance.setNavReturnBtnWidth);
+  writeNotNull('setNavReturnBtnHeight', instance.setNavReturnBtnHeight);
+  writeNotNull(
+      'setNavReturnBtnOffsetRightX', instance.setNavReturnBtnOffsetRightX);
+  writeNotNull('setNavReturnBtnOffsetX', instance.setNavReturnBtnOffsetX);
+  writeNotNull('setNavReturnBtnOffsetY', instance.setNavReturnBtnOffsetY);
+  writeNotNull('setNavColor', instance.setNavColor);
+  writeNotNull('setNavText', instance.setNavText);
+  writeNotNull('setNavTextColor', instance.setNavTextColor);
+  writeNotNull('setNavTextSize', instance.setNavTextSize);
+  writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
+  writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
+  writeNotNull('setAuthNavHidden', instance.setAuthNavHidden);
+  writeNotNull('setAuthNavTransparent', instance.setAuthNavTransparent);
+  writeNotNull('setNavTextBold', instance.setNavTextBold);
+  writeNotNull('setLogoImgPath', instance.setLogoImgPath);
+  writeNotNull('setLogoHidden', instance.setLogoHidden);
+  writeNotNull('setLogoOffsetY', instance.setLogoOffsetY);
+  writeNotNull('setLogoOffsetBottomY', instance.setLogoOffsetBottomY);
+  writeNotNull('setLogoOffsetX', instance.setLogoOffsetX);
+  writeNotNull('setLogoWidth', instance.setLogoWidth);
+  writeNotNull('setLogoHeight', instance.setLogoHeight);
+  writeNotNull('setNumFieldOffsetY', instance.setNumFieldOffsetY);
+  writeNotNull('setNumFieldOffsetBottomY', instance.setNumFieldOffsetBottomY);
+  writeNotNull('setNumberSize', instance.setNumberSize);
+  writeNotNull('setNumFieldOffsetX', instance.setNumFieldOffsetX);
+  writeNotNull('setNumFieldWidth', instance.setNumFieldWidth);
+  writeNotNull('setNumFieldHeight', instance.setNumFieldHeight);
+  writeNotNull('setNumberColor', instance.setNumberColor);
+  writeNotNull('setNumberBold', instance.setNumberBold);
+  writeNotNull('setLogBtnOffsetY', instance.setLogBtnOffsetY);
+  writeNotNull('setLogBtnOffsetBottomY', instance.setLogBtnOffsetBottomY);
+  writeNotNull('setLogBtnTextSize', instance.setLogBtnTextSize);
+  writeNotNull('setLogBtnOffsetX', instance.setLogBtnOffsetX);
+  writeNotNull('setLogBtnHeight', instance.setLogBtnHeight);
+  writeNotNull('setLogBtnWidth', instance.setLogBtnWidth);
+  writeNotNull('setLogBtnText', instance.setLogBtnText);
+  writeNotNull('setLogBtnTextColor', instance.setLogBtnTextColor);
+  writeNotNull('setLogBtnImgPath', instance.setLogBtnImgPath);
+  writeNotNull('setLogBtnTextBold', instance.setLogBtnTextBold);
+  writeNotNull('setPrivacyOffsetBottomY', instance.setPrivacyOffsetBottomY);
+  writeNotNull('setPrivacyOffsetY', instance.setPrivacyOffsetY);
+  writeNotNull('setPrivacyOffsetX', instance.setPrivacyOffsetX);
+  writeNotNull('setAppPrivacyOne', instance.setAppPrivacyOne);
+  writeNotNull('setAppPrivacyTwo', instance.setAppPrivacyTwo);
+  writeNotNull('setAppPrivacyThree', instance.setAppPrivacyThree);
+  writeNotNull('setPrivacySmhHidden', instance.setPrivacySmhHidden);
+  writeNotNull('setPrivacyTextSize', instance.setPrivacyTextSize);
+  writeNotNull('setAppPrivacyColor', instance.setAppPrivacyColor);
+  writeNotNull(
+      'setPrivacyOffsetGravityLeft', instance.setPrivacyOffsetGravityLeft);
+  writeNotNull('setPrivacyState', instance.setPrivacyState);
+  writeNotNull('setUncheckedImgPath', instance.setUncheckedImgPath);
+  writeNotNull('setCheckedImgPath', instance.setCheckedImgPath);
+  writeNotNull('setCheckBoxHidden', instance.setCheckBoxHidden);
+  writeNotNull('setCheckBoxWH', instance.setCheckBoxWH);
+  writeNotNull('setCheckBoxMargin', instance.setCheckBoxMargin);
+  writeNotNull('setPrivacyText', instance.setPrivacyText);
+  writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
+  writeNotNull('setSloganOffsetY', instance.setSloganOffsetY);
+  writeNotNull('setSloganOffsetBottomY', instance.setSloganOffsetBottomY);
+  writeNotNull('setSloganOffsetX', instance.setSloganOffsetX);
+  writeNotNull('setSloganTextColor', instance.setSloganTextColor);
+  writeNotNull('setSloganTextSize', instance.setSloganTextSize);
+  writeNotNull('setSloganHidden', instance.setSloganHidden);
+  writeNotNull('setSloganTextBold', instance.setSloganTextBold);
+  writeNotNull('setShanYanSloganOffsetY', instance.setShanYanSloganOffsetY);
+  writeNotNull(
+      'setShanYanSloganOffsetBottomY', instance.setShanYanSloganOffsetBottomY);
+  writeNotNull('setShanYanSloganOffsetX', instance.setShanYanSloganOffsetX);
+  writeNotNull('setShanYanSloganTextColor', instance.setShanYanSloganTextColor);
+  writeNotNull('setShanYanSloganTextSize', instance.setShanYanSloganTextSize);
+  writeNotNull('setShanYanSloganHidden', instance.setShanYanSloganHidden);
+  writeNotNull('setShanYanSloganTextBold', instance.setShanYanSloganTextBold);
+  writeNotNull('setPrivacyNavColor', instance.setPrivacyNavColor);
+  writeNotNull('setPrivacyNavTextBold', instance.setPrivacyNavTextBold);
+  writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
+  writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);
+  writeNotNull(
+      'setPrivacyNavReturnImgPath', instance.setPrivacyNavReturnImgPath);
+  writeNotNull(
+      'setPrivacyNavReturnImgHidden', instance.setPrivacyNavReturnImgHidden);
+  writeNotNull(
+      'setPrivacyNavReturnBtnWidth', instance.setPrivacyNavReturnBtnWidth);
+  writeNotNull(
+      'setPrivacyNavReturnBtnHeight', instance.setPrivacyNavReturnBtnHeight);
+  writeNotNull('setPrivacyNavReturnBtnOffsetRightX',
+      instance.setPrivacyNavReturnBtnOffsetRightX);
+  writeNotNull(
+      'setPrivacyNavReturnBtnOffsetX', instance.setPrivacyNavReturnBtnOffsetX);
+  writeNotNull(
+      'setPrivacyNavReturnBtnOffsetY', instance.setPrivacyNavReturnBtnOffsetY);
+  writeNotNull('addCustomPrivacyAlertView', instance.addCustomPrivacyAlertView);
+  writeNotNull('setLoadingView', instance.setLoadingView);
+  writeNotNull('setDialogTheme', instance.setDialogTheme);
+  writeNotNull('widgetLayouts',
+      instance.widgetLayouts?.map((e) => e?.toJson())?.toList());
+  writeNotNull('widgets', instance.widgets?.map((e) => e?.toJson())?.toList());
+  return val;
+}
 
 ShanYanCustomWidgetLayout _$ShanYanCustomWidgetLayoutFromJson(
     Map<String, dynamic> json) {
