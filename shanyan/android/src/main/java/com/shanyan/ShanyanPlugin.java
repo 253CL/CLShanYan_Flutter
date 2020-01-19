@@ -27,6 +27,9 @@ import com.chuanglan.shanyan_sdk.listener.OpenLoginAuthListener;
 import com.chuanglan.shanyan_sdk.listener.ShanYanCustomInterface;
 import com.chuanglan.shanyan_sdk.tool.ShanYanUIConfig;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,12 +50,14 @@ public class ShanyanPlugin implements MethodCallHandler {
 
     // 定义日志 TAG
     private static final String TAG = "|shanyan_flutter======|";
-    final String shanyan_code = "code";
+    final String shanyan_code = "code";//返回码
+    final String shanyan_message = "message";//描述
+    String shanyan_innerCode = "innerCode"; //内层返回码
+    String shanyan_innerDesc = "innerDesc"; //内层事件描述
+    String shanyan_token = "token"; //token
     final String shanyan_type = "type";
-    final String shanyan_message = "message";
     final String shanyan_result = "result";
     final String shanyan_operator = "operator";
-    final String shanyan_widgetLayoutId = "widgetLayoutId";
     final String shanyan_widgetId = "widgetId";
     private MethodChannel channel;
     /**
@@ -135,8 +140,23 @@ public class ShanyanPlugin implements MethodCallHandler {
             @Override
             public void authenticationRespond(int code, String msg) {
                 Map<String, Object> map = new HashMap<>();
-                map.put(shanyan_code, code);
-                map.put(shanyan_result, msg);
+                if (2000 == code) {
+                    map.put(shanyan_code, 1000);
+                } else {
+                    map.put(shanyan_code, code);
+                }
+                map.put(shanyan_message, msg);
+                try {
+                    JSONObject jsonObject = new JSONObject(msg);
+                    if (2000 == code) {
+                        map.put(shanyan_token, jsonObject.optString("token"));
+                    } else {
+                        map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
+                        map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 result.success(map);
             }
         });
@@ -150,7 +170,14 @@ public class ShanyanPlugin implements MethodCallHandler {
                 //授权页是否拉起成功回调
                 Map<String, Object> map = new HashMap<>();
                 map.put(shanyan_code, code);
-                map.put(shanyan_result, msg);
+                map.put(shanyan_message, msg);
+                try {
+                    JSONObject jsonObject = new JSONObject(msg);
+                    map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
+                    map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 result.success(map);
             }
         }, new OneKeyLoginListener() {
@@ -159,7 +186,18 @@ public class ShanyanPlugin implements MethodCallHandler {
                 //点击授权页“一键登录”按钮或者返回键（包括物理返回键）回调
                 Map<String, Object> map = new HashMap<>();
                 map.put(shanyan_code, code);
-                map.put(shanyan_result, msg);
+                map.put(shanyan_message, msg);
+                try {
+                    JSONObject jsonObject = new JSONObject(msg);
+                    if (1000 == code) {
+                        map.put(shanyan_token, jsonObject.optString("token"));
+                    } else {
+                        map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
+                        map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 channel.invokeMethod("onReceiveAuthPageEvent", map);
             }
         });
@@ -170,8 +208,19 @@ public class ShanyanPlugin implements MethodCallHandler {
             @Override
             public void getPhoneInfoStatus(int code, String msg) {
                 Map<String, Object> map = new HashMap<>();
-                map.put(shanyan_code, code);
-                map.put(shanyan_result, msg);
+                if (1022 == code) {
+                    map.put(shanyan_code, 1000);
+                } else {
+                    map.put(shanyan_code, code);
+                }
+                map.put(shanyan_message, msg);
+                try {
+                    JSONObject jsonObject = new JSONObject(msg);
+                    map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
+                    map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 result.success(map);
             }
         });
@@ -183,8 +232,19 @@ public class ShanyanPlugin implements MethodCallHandler {
             @Override
             public void getInitStatus(int code, String msg) {
                 Map<String, Object> map = new HashMap<>();
-                map.put(shanyan_code, code);
-                map.put(shanyan_result, msg);
+                if (1022 == code) {
+                    map.put(shanyan_code, 1000);
+                } else {
+                    map.put(shanyan_code, code);
+                }
+                map.put(shanyan_message, msg);
+                try {
+                    JSONObject jsonObject = new JSONObject(msg);
+                    map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
+                    map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 result.success(map);
             }
         });
@@ -197,9 +257,9 @@ public class ShanyanPlugin implements MethodCallHandler {
 
     private void setAuthThemeConfig(MethodCall call, Result result) {
         //竖屏设置
-        Map portraitConfig = call.argument("portraitConfig");
-        List<Map> portraitWidgets = call.argument("portraitWidgets");
-        List<Map> portraitWidgetLayout = call.argument("portraitWidgetLayout");
+        Map portraitConfig = call.argument("androidPortrait");
+        List<Map> portraitWidgets = (List<Map>) valueForKey(portraitConfig, "widgets");
+        List<Map> portraitWidgetLayout = (List<Map>) valueForKey(portraitConfig, "widgetLayouts");
         ShanYanUIConfig.Builder builder = new ShanYanUIConfig.Builder();
         if (null != portraitConfig) {
             setAuthLayoutView(portraitConfig, builder);
@@ -208,8 +268,10 @@ public class ShanyanPlugin implements MethodCallHandler {
             for (Map widgetMap : portraitWidgets) {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
-                if (type.equals("TextView")) {
+                if ("TextView".equals(type)) {
                     addCustomTextWidgets(widgetMap, builder);
+                } else if ("Button".equals(type)) {
+                    addCustomBtnWidgets(widgetMap, builder);
                 } else {
                     Log.e(TAG, "don't support widget");
                 }
@@ -228,9 +290,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
 
         //横屏设置
-        Map landscapeConfig = call.argument("landscapeConfig");
-        List<Map> landscapeWidgets = call.argument("landscapeWidgets");
-        List<Map> landscapeWidgetLayout = call.argument("landscapeWidgetLayout");
+        Map landscapeConfig = call.argument("androidLandscape");
+        List<Map> landscapeWidgets = (List<Map>) valueForKey(portraitConfig, "widgets");
+        List<Map> landscapeWidgetLayout = (List<Map>) valueForKey(portraitConfig, "widgetLayouts");
         ShanYanUIConfig.Builder landscapeBuilder = new ShanYanUIConfig.Builder();
         if (null != landscapeConfig) {
             setAuthLayoutView(landscapeConfig, landscapeBuilder);
@@ -239,9 +301,11 @@ public class ShanyanPlugin implements MethodCallHandler {
             for (Map widgetMap : landscapeWidgets) {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
-                if (type.equals("TextView")) {
-                    addCustomTextWidgets(widgetMap, landscapeBuilder);
-                } else {
+                if ("TextView".equals(type)) {
+                    addCustomTextWidgets(widgetMap, builder);
+                } else if ("Button".equals(type)) {
+                    addCustomBtnWidgets(widgetMap, builder);
+                }  else {
                     Log.e(TAG, "don't support widget");
                 }
             }
@@ -319,8 +383,8 @@ public class ShanyanPlugin implements MethodCallHandler {
                                     @Override
                                     public void onClick(View v) {
                                         final Map<String, Object> jsonMap = new HashMap<>();
-                                        jsonMap.put(shanyan_widgetLayoutId, widgetIdList.get(finalI));
-                                        channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap);
+                                        jsonMap.put(shanyan_widgetId, widgetIdList.get(finalI));
+                                        channel.invokeMethod("onReceiveClickWidgetEvent", jsonMap);
                                     }
                                 });
                             }
@@ -333,6 +397,81 @@ public class ShanyanPlugin implements MethodCallHandler {
         } else {
             Log.d(TAG, "layout【" + widgetLayoutName + "】 not found!");
         }
+    }
+
+    /**
+     * 添加自定义 TextView
+     */
+    private void addCustomBtnWidgets(Map para, ShanYanUIConfig.Builder builder) {
+        Log.d(TAG, "addCustomBtnView " + para);
+        String widgetId = (String) para.get("widgetId");
+        int left = (Integer) para.get("left");
+        int top = (Integer) para.get("top");
+        int right = (Integer) para.get("right");
+        int bottom = (Integer) para.get("bottom");
+        int width = (Integer) para.get("width");
+        int height = (Integer) para.get("height");
+        String textContent = (String) para.get("textContent");
+        Object font = para.get("textFont");
+        Object textColor = para.get("textColor");
+        Object backgroundColor = para.get("backgroundColor");
+        Object backgroundImgPath = para.get("backgroundImgPath");
+        Object alignmet = para.get("textAlignment");
+        boolean isFinish = (Boolean) para.get("isFinish");
+        Button customView = new Button(context);
+        customView.setText(textContent);
+        if (textColor != null) {
+            customView.setTextColor(Color.parseColor((String) textColor));
+        }
+        if (font != null) {
+            double titleFont = (double) font;
+            if (titleFont > 0) {
+                customView.setTextSize((float) titleFont);
+            }
+        }
+        if (backgroundColor != null) {
+            customView.setBackgroundColor(Color.parseColor((String) backgroundColor));
+        }
+        if (null != getDrawableByReflect(backgroundImgPath)) {
+            customView.setBackground(getDrawableByReflect(backgroundImgPath));
+        }
+        if (alignmet != null) {
+            String textAlignment = (String) alignmet;
+            int gravity = getAlignmentFromString(textAlignment);
+            customView.setGravity(gravity);
+        }
+        RelativeLayout.LayoutParams mLayoutParams1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mLayoutParams1.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        if (left > 0) {
+            mLayoutParams1.leftMargin = dp2Pix(context, (float) left);
+            mLayoutParams1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        }
+        if (top > 0) {
+            mLayoutParams1.topMargin = dp2Pix(context, (float) top);
+        }
+        if (right > 0) {
+            mLayoutParams1.rightMargin = dp2Pix(context, (float) right);
+            mLayoutParams1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        }
+        if (bottom > 0) {
+            mLayoutParams1.bottomMargin = dp2Pix(context, (float) bottom);
+            mLayoutParams1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        }
+        if (width > 0) {
+            mLayoutParams1.width = dp2Pix(context, (float) width);
+        }
+        if (height > 0) {
+            mLayoutParams1.height = dp2Pix(context, (float) height);
+        }
+        customView.setLayoutParams(mLayoutParams1);
+        final HashMap jsonMap = new HashMap();
+        jsonMap.put(shanyan_widgetId, widgetId);
+        builder.addCustomView(customView, isFinish, false, new ShanYanCustomInterface() {
+            @Override
+            public void onClick(Context context, View view) {
+                channel.invokeMethod("onReceiveClickWidgetEvent", jsonMap);
+            }
+        });
     }
 
     /**

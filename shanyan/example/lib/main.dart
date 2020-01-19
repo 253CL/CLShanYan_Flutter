@@ -250,16 +250,19 @@ class _MyAppState extends State<MyApp> {
 //    }
 
 //    //闪验SDK 本机认证获取token
-//    oneKeyLoginManager.startAuthentication().then((map) {
-//      setState(() {
-//        _code = map[shanyan_code];
-//        _result = map[shanyan_result];
-//        _content = " code===" + _code.toString() + "\n result===" + _result;
-//      });
-//      if (2000 == map[shanyan_code]) {
-//        //本机认证获取token成功
-//      }
-//    });
+    oneKeyLoginManager.startAuthentication().then((shanYanResult) {
+      setState(() {
+        _code = shanYanResult.code;
+        _result = shanYanResult.message;
+        _content = shanYanResult.toJson().toString();
+      });
+
+      if (1000 == shanYanResult.code) {
+        //初始化成功
+      } else {
+        //初始化失败
+      }
+    });
   }
 
   void setAuthThemeConfig() {
@@ -325,7 +328,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacySmhHidden = true;
     shanYanUIConfig.ios.setAppPrivacyLineSpacing = 0;
     shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
-    shanYanUIConfig.ios.clAppPrivacyLineFragmentPadding = 0;
+    //shanYanUIConfig.ios.clAppPrivacyLineFragmentPadding = 0;
     shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
 
     shanYanUIConfig.ios.setAppPrivacyNormalDesTextFirst = "Accept";
@@ -339,7 +342,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAppPrivacyNormalDesTextLast = "to login";
 
     shanYanUIConfig.ios.setOperatorPrivacyAtLast = true;
-    shanYanUIConfig.ios.setPrivacyNavText = "闪验运营商协议";
+    //shanYanUIConfig.ios.setPrivacyNavText = "闪验运营商协议";
     shanYanUIConfig.ios.setPrivacyNavTextColor = "#7BC1E8";
     shanYanUIConfig.ios.setPrivacyNavTextSize = 15;
 
@@ -425,16 +428,41 @@ class _MyAppState extends State<MyApp> {
 
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = false;
-    shanYanUIConfig.androidPortrait.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
-    shanYanUIConfig.androidPortrait.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
-    shanYanUIConfig.androidPortrait.setLogoOffsetY = shanYanUIConfig.ios.layOutPortrait.setLogoTop - 50;
-    shanYanUIConfig.androidPortrait.setLogoOffsetX = ((screenWidthPortrait - shanYanUIConfig.ios.layOutPortrait.setLogoWidth)*0.5).toInt();
-    shanYanUIConfig.androidPortrait.setLogoWidth = shanYanUIConfig.ios.layOutPortrait.setLogoWidth;
-    shanYanUIConfig.androidPortrait.setLogoHeight = shanYanUIConfig.ios.layOutPortrait.setLogoHeight;
+    shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sy_login_test_bg";
+    shanYanUIConfig.androidPortrait.setLogoImgPath = "shanyan_logo";
 
 
+    List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
+    String layout_name = "relative_item_view";
+    ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
+        layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+    relativeLayoutWidget.top = 380;
+    relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+    shanYanCustomWidgetLayout.add(relativeLayoutWidget);
+    List<ShanYanCustomWidget> shanyanCustomWidget = [];
+    final String btn_widgetId = "other_custom_button"; // 标识控件 id
+    ShanYanCustomWidget buttonWidget =
+        ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+    buttonWidget.textContent = "其他方式登录 >";
+    buttonWidget.top = 300;
+    buttonWidget.width = 150;
+    buttonWidget.height = 40;
+    buttonWidget.backgroundColor = "#330000";
+    buttonWidget.isFinish = true;
+    buttonWidget.textAlignment = ShanYanCustomWidgetGravityType.center;
+    shanyanCustomWidget.add(buttonWidget);
+    shanYanUIConfig.androidPortrait.widgetLayouts = shanYanCustomWidgetLayout;
+    shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidget;
     oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
-    
+    oneKeyLoginManager.addClikWidgetEventListener((eventId) {
+      _toast("点击了：" + eventId);
+    });
+    oneKeyLoginManager.setAuthPageActionListener((AuthPageActionEvent authPageActionEvent) {
+        Map map = authPageActionEvent.toMap();
+        print("setActionListener" + map.toString());
+        _toast("点击：${map.toString()}");
+      });
+
     if (Platform.isIOS) {
       //iOS 全屏模式
 //
