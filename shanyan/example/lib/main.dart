@@ -342,10 +342,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAppPrivacyNormalDesTextLast = "to login";
 
     shanYanUIConfig.ios.setOperatorPrivacyAtLast = true;
-<<<<<<< HEAD
-=======
     //shanYanUIConfig.ios.setPrivacyNavText = "闪验运营商协议";
->>>>>>> 58f40c7b5ca08b28d1a094dca03e2d404c0795a9
     shanYanUIConfig.ios.setPrivacyNavTextColor = "#7BC1E8";
     shanYanUIConfig.ios.setPrivacyNavTextSize = 15;
 
