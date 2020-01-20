@@ -798,7 +798,7 @@
             }
         };
         /**slogan文字对齐方式 NSTextAlignment eg.@(NSTextAlignmentCenter)*/
-        NSNumber * setShanYanSlogaTextAlignment = configureDic[@"setSloganTextAlignment"];;
+        NSNumber * setShanYanSlogaTextAlignment = configureDic[@"setShanYanSloganTextAlignment"];;
         {
             //0: center 1: left 2: right
             if (setShanYanSlogaTextAlignment) {

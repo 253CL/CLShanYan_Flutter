@@ -324,11 +324,11 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacyTextSize = 10;
     shanYanUIConfig.ios.setPrivacyTextBold = false;
 
-    shanYanUIConfig.ios.setAppPrivacyTextAlignment = iOSTextAlignment.left;
+    shanYanUIConfig.ios.setAppPrivacyTextAlignment = iOSTextAlignment.center;
     shanYanUIConfig.ios.setPrivacySmhHidden = true;
-    shanYanUIConfig.ios.setAppPrivacyLineSpacing = 0;
+    shanYanUIConfig.ios.setAppPrivacyLineSpacing = 5;
     shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
-    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 0;
+    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 10;
     shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
     shanYanUIConfig.ios.setAppPrivacyColor = ["#808080", "#00cc00"];
 
@@ -356,13 +356,13 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setSloganTextSize = 11;
     shanYanUIConfig.ios.setSloganTextBold = false;
     shanYanUIConfig.ios.setSloganTextColor = "#CEBFFF";
-    shanYanUIConfig.ios.setSloganTextAlignment = iOSTextAlignment.left;
+    shanYanUIConfig.ios.setSloganTextAlignment = iOSTextAlignment.center;
 
 //供应商品牌标签("创蓝253提供认技术支持")
     shanYanUIConfig.ios.setShanYanSloganTextSize = 11;
     shanYanUIConfig.ios.setShanYanSloganTextBold = true;
     shanYanUIConfig.ios.setShanYanSloganTextColor = "#7BC1E8";
-    shanYanUIConfig.ios.setShanYanSloganTextAlignment = iOSTextAlignment.right;
+    shanYanUIConfig.ios.setShanYanSloganTextAlignment = iOSTextAlignment.center;
     shanYanUIConfig.ios.setShanYanSloganHidden = false;
 
     shanYanUIConfig.ios.setCheckBoxHidden = false;
@@ -422,7 +422,7 @@ class _MyAppState extends State<MyApp> {
     //隐私协议
     shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 60;
-    shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 0;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = -60;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom
       - shanYanUIConfig.ios.layOutPortrait.setSloganRight;
 
