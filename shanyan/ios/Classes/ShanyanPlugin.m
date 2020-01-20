@@ -761,7 +761,7 @@
             }
         };
         /**slogan文字对齐方式 NSTextAlignment eg.@(NSTextAlignmentCenter)*/
-        NSNumber * clSlogaTextAlignment = configureDic[@"setSlogaTextAlignment"];;
+        NSNumber * clSlogaTextAlignment = configureDic[@"setSloganTextAlignment"];;
         {
             //0: center 1: left 2: right
             if (clSlogaTextAlignment) {
@@ -798,7 +798,7 @@
             }
         };
         /**slogan文字对齐方式 NSTextAlignment eg.@(NSTextAlignmentCenter)*/
-        NSNumber * setShanYanSlogaTextAlignment = configureDic[@"setSlogaTextAlignment"];;
+        NSNumber * setShanYanSlogaTextAlignment = configureDic[@"setSloganTextAlignment"];;
         {
             //0: center 1: left 2: right
             if (setShanYanSlogaTextAlignment) {
@@ -899,10 +899,10 @@
             baseConfigure.clLoadingCornerRadius = clLoadingCornerRadius;
         };
         /**Loading 背景色 UIColor eg.[UIColor colorWithRed:0.8 green:0.5 blue:0.8 alpha:0.8]; */
-        NSArray *clLoadingBackgroundColor = configureDic[@"setLoadingBackgroundColor"];
+        NSString *clLoadingBackgroundColor = configureDic[@"setLoadingBackgroundColor"];
         {
-            if (clLoadingBackgroundColor && clLoadingBackgroundColor.count == 4) {
-                baseConfigure.clLoadingBackgroundColor = [UIColor colorWithRed:[clLoadingBackgroundColor[0] floatValue] green:[clLoadingBackgroundColor[1] floatValue] blue:[clLoadingBackgroundColor[2] floatValue] alpha:[clLoadingBackgroundColor[3] floatValue]];
+            if (clLoadingBackgroundColor) {
+                baseConfigure.clLoadingBackgroundColor = [ShanyanPlugin colorWithHexStr:clLoadingBackgroundColor];;
             }
         };
         /**UIActivityIndicatorViewStyle eg.@(UIActivityIndicatorViewStyleWhiteLarge)*/
@@ -913,10 +913,10 @@
         baseConfigure.clLoadingIndicatorStyle = @(UIActivityIndicatorViewStyleWhite);
         
         /**Loading Indicator渲染色 UIColor eg.[UIColor greenColor]; */
-        NSArray *clLoadingTintColor = configureDic[@"setLoadingTintColor"];;
+        NSString *clLoadingTintColor = configureDic[@"setLoadingTintColor"];;
         {
-            if (clLoadingTintColor && clLoadingTintColor.count == 4) {
-                baseConfigure.clLoadingTintColor = [UIColor colorWithRed:[clLoadingTintColor[0] floatValue] green:[clLoadingTintColor[1] floatValue] blue:[clLoadingTintColor[2] floatValue] alpha:[clLoadingTintColor[3] floatValue]];
+            if (clLoadingTintColor) {
+                baseConfigure.clLoadingTintColor = [ShanyanPlugin colorWithHexStr:clLoadingTintColor];
             }
         };
         
@@ -1106,12 +1106,14 @@
         NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"layOutPortrait"];
         NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"layOutLandscape"];
 
-        CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
-        
-        CLOrientationLayOut * clOrientationLayOutLandscape = [self clOrientationLayOutLandscapeWithConfigure:clOrientationLayOutLandscapeDict];
-        
-        baseConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
-        baseConfigure.clOrientationLayOutLandscape = clOrientationLayOutLandscape;
+        if (clOrientationLayOutPortraitDict.count > 0) {
+            CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
+            baseConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
+        }
+        if (clOrientationLayOutLandscapeDict.count > 0) {
+            CLOrientationLayOut * clOrientationLayOutLandscape = [self clOrientationLayOutLandscapeWithConfigure:clOrientationLayOutLandscapeDict];
+            baseConfigure.clOrientationLayOutLandscape = clOrientationLayOutLandscape;
+        }
     
         //自定义控件
         NSDictionary * clCustomViewDicts = configureDic[@"widgets"];
@@ -1245,7 +1247,7 @@
             };
         }
     } @catch (NSException *exception) {
-        
+        NSLog(@"%@",exception.userInfo);
     }
     return baseConfigure;
 }

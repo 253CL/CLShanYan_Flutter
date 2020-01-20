@@ -129,12 +129,12 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setSloganTextSize = json['setSloganTextSize'] as num
     ..setSloganTextBold = json['setSloganTextBold'] as bool
     ..setSloganTextColor = json['setSloganTextColor'] as String
-    ..setSlogaTextAlignment =
-        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setSlogaTextAlignment'])
+    ..setSloganTextAlignment =
+        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setSloganTextAlignment'])
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as num
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool
     ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String
-    ..setShanYanSlogaTextAlignment = _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSlogaTextAlignment'])
+    ..setShanYanSloganTextAlignment = _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSloganTextAlignment'])
     ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool
     ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool
     ..setPrivacyState = json['setPrivacyState'] as bool
@@ -262,13 +262,13 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setSloganTextSize', instance.setSloganTextSize);
   writeNotNull('setSloganTextBold', instance.setSloganTextBold);
   writeNotNull('setSloganTextColor', instance.setSloganTextColor);
-  writeNotNull('setSlogaTextAlignment',
-      _$iOSTextAlignmentEnumMap[instance.setSlogaTextAlignment]);
+  writeNotNull('setSloganTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setSloganTextAlignment]);
   writeNotNull('setShanYanSloganTextSize', instance.setShanYanSloganTextSize);
   writeNotNull('setShanYanSloganTextBold', instance.setShanYanSloganTextBold);
   writeNotNull('setShanYanSloganTextColor', instance.setShanYanSloganTextColor);
-  writeNotNull('setShanYanSlogaTextAlignment',
-      _$iOSTextAlignmentEnumMap[instance.setShanYanSlogaTextAlignment]);
+  writeNotNull('setShanYanSloganTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setShanYanSloganTextAlignment]);
   writeNotNull('setShanYanSloganHidden', instance.setShanYanSloganHidden);
   writeNotNull('setCheckBoxHidden', instance.setCheckBoxHidden);
   writeNotNull('setPrivacyState', instance.setPrivacyState);
@@ -352,58 +352,58 @@ T _$enumDecodeNullable<T>(
 }
 
 const _$iOSStatusBarStyleEnumMap = {
-  iOSStatusBarStyle.styleDefault: 'styleDefault',
-  iOSStatusBarStyle.styleLightContent: 'styleLightContent',
-  iOSStatusBarStyle.styleDarkContent: 'styleDarkContent',
+  iOSStatusBarStyle.styleDefault: 0,
+  iOSStatusBarStyle.styleLightContent: 1,
+  iOSStatusBarStyle.styleDarkContent: 2,
 };
 
 const _$iOSBarStyleEnumMap = {
-  iOSBarStyle.styleDefault: 'styleDefault',
-  iOSBarStyle.styleBlack: 'styleBlack',
+  iOSBarStyle.styleDefault: 0,
+  iOSBarStyle.styleBlack: 1,
 };
 
 const _$iOSTextAlignmentEnumMap = {
-  iOSTextAlignment.center: 'center',
-  iOSTextAlignment.left: 'left',
-  iOSTextAlignment.right: 'right',
-  iOSTextAlignment.justified: 'justified',
-  iOSTextAlignment.natural: 'natural',
+  iOSTextAlignment.center: 0,
+  iOSTextAlignment.left: 1,
+  iOSTextAlignment.right: 2,
+  iOSTextAlignment.justified: 3,
+  iOSTextAlignment.natural: 4,
 };
 
 const _$iOSInterfaceOrientationMaskEnumMap = {
-  iOSInterfaceOrientationMask.portrait: 'portrait',
-  iOSInterfaceOrientationMask.landscapeLeft: 'landscapeLeft',
-  iOSInterfaceOrientationMask.landscapeRight: 'landscapeRight',
-  iOSInterfaceOrientationMask.portraitUpsideDown: 'portraitUpsideDown',
-  iOSInterfaceOrientationMask.landscape: 'landscape',
-  iOSInterfaceOrientationMask.all: 'all',
-  iOSInterfaceOrientationMask.allButUpsideDown: 'allButUpsideDown',
+  iOSInterfaceOrientationMask.portrait: 0,
+  iOSInterfaceOrientationMask.landscapeLeft: 1,
+  iOSInterfaceOrientationMask.landscapeRight: 2,
+  iOSInterfaceOrientationMask.portraitUpsideDown: 3,
+  iOSInterfaceOrientationMask.landscape: 4,
+  iOSInterfaceOrientationMask.all: 5,
+  iOSInterfaceOrientationMask.allButUpsideDown: 6,
 };
 
 const _$iOSInterfaceOrientationEnumMap = {
-  iOSInterfaceOrientation.portrait: 'portrait',
-  iOSInterfaceOrientation.portraitUpsideDown: 'portraitUpsideDown',
-  iOSInterfaceOrientation.landscapeLeft: 'landscapeLeft',
-  iOSInterfaceOrientation.landscapeRight: 'landscapeRight',
-  iOSInterfaceOrientation.unknown: 'unknown',
+  iOSInterfaceOrientation.portrait: 0,
+  iOSInterfaceOrientation.portraitUpsideDown: 1,
+  iOSInterfaceOrientation.landscapeLeft: 2,
+  iOSInterfaceOrientation.landscapeRight: 3,
+  iOSInterfaceOrientation.unknown: 4,
 };
 
 const _$iOSModalTransitionStyleEnumMap = {
-  iOSModalTransitionStyle.coverVertical: 'coverVertical',
-  iOSModalTransitionStyle.flipHorizontal: 'flipHorizontal',
-  iOSModalTransitionStyle.crossDissolve: 'crossDissolve',
+  iOSModalTransitionStyle.coverVertical: 0,
+  iOSModalTransitionStyle.flipHorizontal: 1,
+  iOSModalTransitionStyle.crossDissolve: 2,
 };
 
 const _$iOSModalPresentationStyleEnumMap = {
-  iOSModalPresentationStyle.fullScreen: 'fullScreen',
-  iOSModalPresentationStyle.overFullScreen: 'overFullScreen',
-  iOSModalPresentationStyle.automatic: 'automatic',
+  iOSModalPresentationStyle.fullScreen: 0,
+  iOSModalPresentationStyle.overFullScreen: 1,
+  iOSModalPresentationStyle.automatic: 2,
 };
 
 const _$iOSUserInterfaceStyleEnumMap = {
-  iOSUserInterfaceStyle.unspecified: 'unspecified',
-  iOSUserInterfaceStyle.light: 'light',
-  iOSUserInterfaceStyle.dark: 'dark',
+  iOSUserInterfaceStyle.unspecified: 0,
+  iOSUserInterfaceStyle.light: 1,
+  iOSUserInterfaceStyle.dark: 2,
 };
 
 ClOrientationLayOutIOS _$ClOrientationLayOutIOSFromJson(

@@ -2,6 +2,8 @@
 * 闪验SDK 授权页UI 配置类
 * */
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'shanYanUIConfig.g.dart';
@@ -326,13 +328,13 @@ class ShanYanUIConfigIOS {
   num setSloganTextSize;    /// slogan文字字体大小
   bool setSloganTextBold;   /// slogan文字字体是否加粗
   String setSloganTextColor; /// slogan文字颜色
-  iOSTextAlignment setSlogaTextAlignment;   /// slogan文字对齐方式
+  iOSTextAlignment setSloganTextAlignment;   /// slogan文字对齐方式
 
 //供应商品牌标签("创蓝253提供认技术支持")
   num setShanYanSloganTextSize;    /// slogan文字字体大小
   bool setShanYanSloganTextBold;   /// slogan文字字体是否加粗
   String setShanYanSloganTextColor; /// slogan文字颜色
-  iOSTextAlignment setShanYanSlogaTextAlignment;   /// slogan文字对齐方式
+  iOSTextAlignment setShanYanSloganTextAlignment;   /// slogan文字对齐方式
   bool setShanYanSloganHidden;                     /// slogan是否隐藏
 
 
@@ -742,56 +744,81 @@ String getStringFromEnum<T>(T) {
 
 ///iOS 文字对齐方式
 enum iOSTextAlignment  {
+  @JsonValue(0)
   center, // Visually centered 居中
+  @JsonValue(1)
   left, // Visually left aligned 居左
+  @JsonValue(2)
   right, // Visually right aligned 居右
 
 /* !TARGET_ABI_USES_IOS_VALUES */
 // Visually right aligned
 // Visually centered
+  @JsonValue(3)
   justified, // Fully-justified. The last line in a paragraph is natural-aligned. 自动
 
+  @JsonValue(4)
   natural, // Indicates the default alignment for script 自然段落
 }
 
 /// iOS 状态栏样式
 /// Xcode工程内的Info.plist文件配置需设置为YES，即运行单个页面自行管理状态栏: View controller-based status bar appearance = YES
 enum iOSStatusBarStyle{
+@JsonValue(0)
   styleDefault,        // 状态栏显示 黑
+@JsonValue(1)
   styleLightContent,   // 状态栏显示 白
+@JsonValue(2)
   styleDarkContent     // 状态栏显示 黑 API_AVAILABLE(ios(13.0)) = 3
 }
 
 /// iOS 导航栏样式，也可用于修改状态栏样式
 enum iOSBarStyle{
+@JsonValue(0)
   styleDefault, // 状态栏显示 黑
+@JsonValue(1)
   styleBlack    // 状态栏显示 白
 }
 
-// iOS 支持的横竖屏方向
+/// iOS 支持的横竖屏方向
 enum iOSInterfaceOrientationMask{
+@JsonValue(0)
   portrait,           //竖屏
+@JsonValue(1)
   landscapeLeft,      //横屏：左
+@JsonValue(2)
   landscapeRight,     //横屏：右
+@JsonValue(3)
   portraitUpsideDown, //上下倒置
+@JsonValue(4)
   landscape,          //横屏：左+右
+@JsonValue(5)
   all,                //全部方向
+@JsonValue(6)
   allButUpsideDown    //全部方向，除了上下倒置
 }
 
-// iOS 屏幕方向
+/// iOS 屏幕方向
 enum iOSInterfaceOrientation{
+@JsonValue(0)
   portrait,           //竖屏
+@JsonValue(1)
   portraitUpsideDown, //上下倒置
+@JsonValue(2)
   landscapeLeft,      //横屏：左
+@JsonValue(3)
   landscapeRight,     //横屏：右
+@JsonValue(4)
   unknown,
 }
 
-// iOS 系统自带的弹出方式
+/// iOS 系统自带的弹出方式
 enum iOSModalTransitionStyle {
+@JsonValue(0)
  coverVertical,       // 底部弹出
+@JsonValue(1)
  flipHorizontal,      // 淡入
+@JsonValue(2)
  crossDissolve        // 翻转显示
 }
 
@@ -803,16 +830,22 @@ enum iOSModalTransitionStyle {
  * eg. @(UIModalPresentationOverFullScreen)
  */
 
-// iOS 系统的弹出样式
+/// iOS 系统的弹出样式
 enum iOSModalPresentationStyle{
+@JsonValue(0)
   fullScreen,       // 弹出全屏
+@JsonValue(1)
   overFullScreen,   // 在原页面弹出，可透视原页面
+@JsonValue(2)
   automatic         // 自动
 }
 
-// iOS 主题模式
+/// iOS 主题模式
 enum iOSUserInterfaceStyle {
+@JsonValue(0)
   unspecified,  //跟随系统
+@JsonValue(1)
   light,        //亮
+@JsonValue(2)
   dark          //暗黑 API_AVAILABLE(ios(13.0))
 }

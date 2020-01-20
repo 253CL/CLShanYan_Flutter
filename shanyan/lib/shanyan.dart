@@ -112,9 +112,13 @@ class OneKeyLoginManager {
   ///闪验SDK 配置授权页 Android
   void setAuthThemeConfig({ShanYanUIConfig uiConfig}) {
     shanYanUIConfig = uiConfig;
-    Map<String, dynamic> uiConfig_json = uiConfig.toJson();
-    _channel.invokeMethod("setAuthThemeConfig", uiConfig_json);
-    print("uiConfig====" + uiConfig_json["androidPortrait"].toString());
+    if (Platform.isIOS) {
+      print("uiConfig====" + uiConfig.ios.toJson().toString());
+    } else if (Platform.isAndroid) {
+      Map<String, dynamic> uiConfig_json = uiConfig.toJson();
+      _channel.invokeMethod("setAuthThemeConfig", uiConfig_json);
+      print("uiConfig====" + uiConfig.androidLandscape.toJson().toString());
+    }
   }
 
   //Android

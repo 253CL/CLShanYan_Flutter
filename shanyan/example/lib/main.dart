@@ -330,6 +330,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
     shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 0;
     shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
+    shanYanUIConfig.ios.setAppPrivacyColor = ["#808080", "#00cc00"];
 
     shanYanUIConfig.ios.setAppPrivacyNormalDesTextFirst = "Accept";
 //    shanYanUIConfig.ios.setAppPrivacyTelecom = "中国移动服务协议";
@@ -355,14 +356,14 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setSloganTextSize = 11;
     shanYanUIConfig.ios.setSloganTextBold = false;
     shanYanUIConfig.ios.setSloganTextColor = "#CEBFFF";
-    shanYanUIConfig.ios.setSlogaTextAlignment = iOSTextAlignment.left;
+    shanYanUIConfig.ios.setSloganTextAlignment = iOSTextAlignment.left;
 
 //供应商品牌标签("创蓝253提供认技术支持")
     shanYanUIConfig.ios.setShanYanSloganTextSize = 11;
     shanYanUIConfig.ios.setShanYanSloganTextBold = true;
     shanYanUIConfig.ios.setShanYanSloganTextColor = "#7BC1E8";
-    shanYanUIConfig.ios.setShanYanSlogaTextAlignment = iOSTextAlignment.right;
-    shanYanUIConfig.ios.setShanYanSloganHidden = true;
+    shanYanUIConfig.ios.setShanYanSloganTextAlignment = iOSTextAlignment.right;
+    shanYanUIConfig.ios.setShanYanSloganHidden = false;
 
     shanYanUIConfig.ios.setCheckBoxHidden = false;
     shanYanUIConfig.ios.setPrivacyState = false;
@@ -390,20 +391,20 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAuthWindowPresentingAnimate = true;
 
     //logo
-    shanYanUIConfig.ios.layOutPortrait.setLogoTop = 60;
-    shanYanUIConfig.ios.layOutPortrait.setLogoWidth = 60;
-    shanYanUIConfig.ios.layOutPortrait.setLogoHeight = 60;
+    shanYanUIConfig.ios.layOutPortrait.setLogoTop = 100;
+    shanYanUIConfig.ios.layOutPortrait.setLogoWidth = 80;
+    shanYanUIConfig.ios.layOutPortrait.setLogoHeight = 80;
     shanYanUIConfig.ios.layOutPortrait.setLogoCenterX = 0;
     //手机号控件
     shanYanUIConfig.ios.layOutPortrait.setNumFieldCenterY = -20;
     shanYanUIConfig.ios.layOutPortrait.setNumFieldCenterX = 0;
-    shanYanUIConfig.ios.layOutPortrait.setNumFieldHeight = 20;
+    shanYanUIConfig.ios.layOutPortrait.setNumFieldHeight = 40;
     shanYanUIConfig.ios.layOutPortrait.setNumFieldWidth = 150;
     //一键登录按钮
-    shanYanUIConfig.ios.layOutPortrait.setLogBtnCenterY =  -20 + 10  + 20  + 15;
+    shanYanUIConfig.ios.layOutPortrait.setLogBtnCenterY =  -20 + 20  + 20  + 15;
     shanYanUIConfig.ios.layOutPortrait.setLogBtnCenterX = 0;
     shanYanUIConfig.ios.layOutPortrait.setLogBtnHeight = 40;
-    shanYanUIConfig.ios.layOutPortrait.setLogBtnWidth = 50;
+    shanYanUIConfig.ios.layOutPortrait.setLogBtnWidth = screenWidthPortrait*0.67;
 
     //授权页 创蓝slogan（创蓝253提供认证服务）
     shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight = 15;
