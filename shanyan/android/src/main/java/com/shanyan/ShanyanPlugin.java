@@ -267,6 +267,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != portraitWidgets) {
             for (Map widgetMap : portraitWidgets) {
                 /// 新增自定义的控件
+                Log.e("fff", "portraitWidgets="+widgetMap);
                 String type = (String) widgetMap.get("type");
                 if ("TextView".equals(type)) {
                     addCustomTextWidgets(widgetMap, builder);
@@ -280,6 +281,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != portraitWidgetLayout) {
             for (Map widgetMap : portraitWidgetLayout) {
                 /// 新增自定义的控件
+                Log.e("fff", "portraitWidgetLayout="+widgetMap);
                 String type = (String) widgetMap.get("type");
                 if (type.equals("RelativeLayout")) {
                     addCustomRelativeLayoutWidgets(widgetMap, builder);
@@ -291,8 +293,8 @@ public class ShanyanPlugin implements MethodCallHandler {
 
         //横屏设置
         Map landscapeConfig = call.argument("androidLandscape");
-        List<Map> landscapeWidgets = (List<Map>) valueForKey(portraitConfig, "widgets");
-        List<Map> landscapeWidgetLayout = (List<Map>) valueForKey(portraitConfig, "widgetLayouts");
+        List<Map> landscapeWidgets = (List<Map>) valueForKey(landscapeConfig, "widgets");
+        List<Map> landscapeWidgetLayout = (List<Map>) valueForKey(landscapeConfig, "widgetLayouts");
         ShanYanUIConfig.Builder landscapeBuilder = new ShanYanUIConfig.Builder();
         if (null != landscapeConfig) {
             setAuthLayoutView(landscapeConfig, landscapeBuilder);
@@ -302,9 +304,9 @@ public class ShanyanPlugin implements MethodCallHandler {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
                 if ("TextView".equals(type)) {
-                    addCustomTextWidgets(widgetMap, builder);
+                    addCustomTextWidgets(widgetMap, landscapeBuilder);
                 } else if ("Button".equals(type)) {
-                    addCustomBtnWidgets(widgetMap, builder);
+                    addCustomBtnWidgets(widgetMap, landscapeBuilder);
                 }  else {
                     Log.e(TAG, "don't support widget");
                 }
@@ -335,7 +337,7 @@ public class ShanyanPlugin implements MethodCallHandler {
      * 添加自定义xml布局文件
      */
     private void addCustomRelativeLayoutWidgets(Map para, ShanYanUIConfig.Builder builder) {
-        Log.d(TAG, "addCustomRelativeLayoutWidgets: para = " + para);
+        Log.d("fff", "addCustomRelativeLayoutWidgets: para = " + para);
         String widgetLayoutName = (String) para.get("widgetLayoutName");
         Object widgetId = para.get("widgetLayoutId");
         int left = (Integer) para.get("left");
@@ -400,7 +402,7 @@ public class ShanyanPlugin implements MethodCallHandler {
     }
 
     /**
-     * 添加自定义 TextView
+     * 添加自定义 Button
      */
     private void addCustomBtnWidgets(Map para, ShanYanUIConfig.Builder builder) {
         Log.d(TAG, "addCustomBtnView " + para);
@@ -551,7 +553,7 @@ public class ShanyanPlugin implements MethodCallHandler {
 
     private void setAuthLayoutView(Map shanYanUIConfig, ShanYanUIConfig.Builder builder) {
         Log.d(TAG, "shanYanUIConfig " + shanYanUIConfig);
-        Object isFinish = valueForKey(shanYanUIConfig, "shanYanUIConfig");
+        Object isFinish = valueForKey(shanYanUIConfig, "isFinish");
         Object setAuthBGImgPath = valueForKey(shanYanUIConfig, "setAuthBGImgPath");
         Object setAuthBgGifPath = valueForKey(shanYanUIConfig, "setAuthBgGifPath");
         Object setAuthBgVideoPath = valueForKey(shanYanUIConfig, "setAuthBgVideoPath");

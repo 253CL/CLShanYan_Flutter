@@ -428,10 +428,9 @@ class _MyAppState extends State<MyApp> {
 
 
     /*Android 页面样式具体设置*/
-    shanYanUIConfig.androidPortrait.isFinish = false;
+    shanYanUIConfig.androidPortrait.isFinish = true;
     shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sy_login_test_bg";
-    shanYanUIConfig.androidPortrait.setLogoImgPath = "shanyan_logo";
-
+    shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
 
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";
@@ -454,7 +453,7 @@ class _MyAppState extends State<MyApp> {
     shanyanCustomWidget.add(buttonWidget);
     shanYanUIConfig.androidPortrait.widgetLayouts = shanYanCustomWidgetLayout;
     shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidget;
-    oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
+    //oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     oneKeyLoginManager.addClikWidgetEventListener((eventId) {
       _toast("点击了：" + eventId);
     });
@@ -463,6 +462,31 @@ class _MyAppState extends State<MyApp> {
         print("setActionListener" + map.toString());
         _toast("点击：${map.toString()}");
       });
+
+    shanYanUIConfig.androidLandscape.isFinish = true;
+    shanYanUIConfig.androidLandscape.setAuthBGImgPath = "sy_login_test_bg";
+    shanYanUIConfig.androidLandscape.setLogoImgPath = "sy_logo";
+    shanYanUIConfig.androidLandscape.setAuthNavHidden =true;
+    shanYanUIConfig.androidLandscape.setLogoOffsetY = 14;
+    shanYanUIConfig.androidLandscape.setNumFieldOffsetY = 65;
+    shanYanUIConfig.androidLandscape.setSloganOffsetY = 100;
+    shanYanUIConfig.androidLandscape.setLogBtnOffsetY = 120;
+
+
+    List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout2 = [];
+    String layout_name2 = "relative_item_view";
+    ShanYanCustomWidgetLayout relativeLayoutWidget2 = ShanYanCustomWidgetLayout(
+        layout_name2, ShanYanCustomWidgetLayoutType.RelativeLayout);
+    relativeLayoutWidget2.top = 200;
+    relativeLayoutWidget2.widgetLayoutId = ["weixin", "qq", "weibo"];
+    shanYanCustomWidgetLayout2.add(relativeLayoutWidget2);
+
+    shanYanUIConfig.androidLandscape.widgetLayouts = shanYanCustomWidgetLayout2;
+    oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
+    oneKeyLoginManager.addClikWidgetEventListener((eventId) {
+      _toast("点击了：" + eventId);
+    });
+
 
     if (Platform.isIOS) {
       //iOS 全屏模式
@@ -1242,6 +1266,43 @@ class _MyAppState extends State<MyApp> {
         },
       };
     } else if (Platform.isAndroid) {
+
+      /*Android 页面样式具体设置*/
+     /* shanYanUIConfig.androidPortrait.isFinish = false;
+      shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sy_login_test_bg";
+      shanYanUIConfig.androidPortrait.setLogoImgPath = "shanyan_logo";
+
+
+      List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
+      String layout_name = "relative_item_view";
+      ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
+          layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+      relativeLayoutWidget.top = 380;
+      relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+      shanYanCustomWidgetLayout.add(relativeLayoutWidget);
+      List<ShanYanCustomWidget> shanyanCustomWidget = [];
+      final String btn_widgetId = "other_custom_button"; // 标识控件 id
+      ShanYanCustomWidget buttonWidget =
+      ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+      buttonWidget.textContent = "其他方式登录 >";
+      buttonWidget.top = 300;
+      buttonWidget.width = 150;
+      buttonWidget.height = 40;
+      buttonWidget.backgroundColor = "#330000";
+      buttonWidget.isFinish = true;
+      buttonWidget.textAlignment = ShanYanCustomWidgetGravityType.center;
+      shanyanCustomWidget.add(buttonWidget);
+      shanYanUIConfig.androidPortrait.widgetLayouts = shanYanCustomWidgetLayout;
+      shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidget;
+      oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
+      oneKeyLoginManager.addClikWidgetEventListener((eventId) {
+        _toast("点击了：" + eventId);
+      });
+      oneKeyLoginManager.setAuthPageActionListener((AuthPageActionEvent authPageActionEvent) {
+        Map map = authPageActionEvent.toMap();
+        print("setActionListener" + map.toString());
+        _toast("点击：${map.toString()}");
+      });*/
 //      ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
 //      shanYanUIConfig.setLogBtnText = "免密登录";
 //      //shanYanUIConfig.setAuthBgGifPath = "test";
