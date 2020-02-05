@@ -39,6 +39,10 @@ class OneKeyLoginManager {
 //    _channel.invokeMethod("setDebugMode", {"debug": debug});
 //  }
 //
+//  Future<String> getOperatorType()async{
+//    return await _channel.invokeMethod("getOperatorType");
+//  }
+
   ///闪验SDK 初始化(Android+iOS)
   Future<ShanYanResult> init({String appId}) async {
     Map result = await _channel.invokeMethod("init", {"appId": appId});

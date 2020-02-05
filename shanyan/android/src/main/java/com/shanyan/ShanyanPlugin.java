@@ -82,6 +82,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("setDebugMode")) {
             //闪验SDK 设置debug模式
             setDebug(call);
+        }else if (call.method.equals("getOperatorType")){
+            //闪验SDK 获取运营商类型
+            getOperatorType(call,result);
         } else if (call.method.equals("init")) {
             //闪验SDK 初始化
             init(call, result);
@@ -109,6 +112,11 @@ public class ShanyanPlugin implements MethodCallHandler {
             setActionListener(call, result);
         }
 
+    }
+
+    private void getOperatorType(MethodCall call, Result result) {
+       String operatorType = OneKeyLoginManager.getInstance().getOperatorType(context);
+        result.success(operatorType);
     }
 
     private void setActionListener(MethodCall call, Result result) {
@@ -267,7 +275,6 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != portraitWidgets) {
             for (Map widgetMap : portraitWidgets) {
                 /// 新增自定义的控件
-                Log.e("fff", "portraitWidgets="+widgetMap);
                 String type = (String) widgetMap.get("type");
                 if ("TextView".equals(type)) {
                     addCustomTextWidgets(widgetMap, builder);
@@ -281,7 +288,6 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != portraitWidgetLayout) {
             for (Map widgetMap : portraitWidgetLayout) {
                 /// 新增自定义的控件
-                Log.e("fff", "portraitWidgetLayout="+widgetMap);
                 String type = (String) widgetMap.get("type");
                 if (type.equals("RelativeLayout")) {
                     addCustomRelativeLayoutWidgets(widgetMap, builder);
@@ -337,7 +343,7 @@ public class ShanyanPlugin implements MethodCallHandler {
      * 添加自定义xml布局文件
      */
     private void addCustomRelativeLayoutWidgets(Map para, ShanYanUIConfig.Builder builder) {
-        Log.d("fff", "addCustomRelativeLayoutWidgets: para = " + para);
+        Log.d(TAG, "addCustomRelativeLayoutWidgets: para = " + para);
         String widgetLayoutName = (String) para.get("widgetLayoutName");
         Object widgetId = para.get("widgetLayoutId");
         int left = (Integer) para.get("left");
