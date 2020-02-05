@@ -3,11 +3,11 @@
 //Helpers
 #import "CLShanYanCustomViewHelper.h"
 #import "UIView+CLShanYanWidget.h"
+#import "NSNumber+shanyanCategory.h"
 
 @interface ShanyanPlugin ()
 @property (nonatomic,strong)id notifObserver;
 
-@property (nonatomic,copy)FlutterResult customInterface ;
 @property(nonatomic,strong)NSObject<FlutterPluginRegistrar>*registrar;
 
 @property(nonatomic,strong)FlutterMethodChannel* channel;
@@ -284,11 +284,8 @@
         }
         
         NSString * clBackgroundImg = configureDic[@"setAuthBGImgPath"];
-        {
-
-            NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clBackgroundImg]]];
-            UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
-            baseConfigure.clBackgroundImg = clBackgroundImg_value;
+        if (clBackgroundImg) {
+            baseConfigure.clBackgroundImg = [UIImage imageNamed:clBackgroundImg];
         }
         NSNumber * setPreferredStatusBarStyle = configureDic[@"setPreferredStatusBarStyle"];
         {
@@ -353,10 +350,8 @@
         UIBarButtonItem * clNavigationLeftControl;
         
         NSString   * clNavigationBackBtnImage = configureDic[@"setNavReturnImgPath"];
-        {
-            NSData * clNavigationBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationBackBtnImage]]];
-            UIImage * clNavigationBackBtnImage_value = [UIImage imageWithData:clNavigationBackBtnImageData];
-            baseConfigure.clNavigationBackBtnImage = clNavigationBackBtnImage_value;
+        if (clNavigationBackBtnImage) {
+            baseConfigure.clNavigationBackBtnImage = [UIImage imageNamed:clNavigationBackBtnImage];
         }
         
         NSNumber  * clNavigationBackBtnHidden = configureDic[@"setNavReturnImgHidden"];
@@ -384,29 +379,22 @@
             }
         };
         NSString  * clNavigationBackgroundImage = configureDic[@"setNavigationBackgroundImage"];
-        {
-            NSData * clNavigationBackgroundImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationBackgroundImage]]];
-            UIImage * clNavigationBackgroundImage_value = [UIImage imageWithData:clNavigationBackgroundImageData];
-            baseConfigure.clNavigationBackgroundImage = clNavigationBackgroundImage_value;
-        };
+        if (clNavigationBackgroundImage) {
+            baseConfigure.clNavigationBackgroundImage = [UIImage imageNamed:clNavigationBackgroundImage];
+        }
         NSNumber * clNavigationBarMetrics = configureDic[@"setNavigationBarMetrics"];
         {
             baseConfigure.clNavigationBarMetrics = clNavigationBarMetrics;
         };
         NSString  * clNavigationShadowImage = configureDic[@"setNavigationShadowImage"];
-        {
-            NSData * clNavigationShadowImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clNavigationShadowImage]]];
-            UIImage * clNavigationShadowImage_value = [UIImage imageWithData:clNavigationShadowImageData];
-            baseConfigure.clNavigationShadowImage = clNavigationShadowImage_value;
-        };
-
+        if (clNavigationShadowImage) {
+            baseConfigure.clNavigationShadowImage = [UIImage imageNamed:clNavigationShadowImage];
+        }
         
         /**Logo*/
         NSString * clLogoImage = configureDic[@"setLogoImgPath"];
-        {
-            NSData * clLogoImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLogoImage]]];
-            UIImage * clLogoImage_value = [UIImage imageWithData:clLogoImageData];
-            baseConfigure.clLogoImage = clLogoImage_value;
+        if (clLogoImage) {
+            baseConfigure.clLogoImage = [UIImage imageNamed:clLogoImage];
         }
         NSNumber * clLogoCornerRadius = configureDic[@"setLogoCornerRadius"];
         {
@@ -465,7 +453,7 @@
         NSNumber * setLoginBtnTextBold = configureDic[@"setLoginBtnTextBold"];
         {
             if (setLoginBtnTextSize) {
-                baseConfigure.clPhoneNumberFont = [ShanyanPlugin fontWithSize:setLoginBtnTextSize blod:setLoginBtnTextBold name:nil];
+                baseConfigure.clLoginBtnTextFont = [ShanyanPlugin fontWithSize:setLoginBtnTextSize blod:setLoginBtnTextBold name:nil];
             }
         }
         /**按钮背景颜色*/
@@ -478,18 +466,14 @@
 
         /**按钮背景图片*/
         NSString  * clLoginBtnNormalBgImage = configureDic[@"setLoginBtnNormalBgImage"];
-        {
-            NSData * clLoginBtnNormalBgImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLoginBtnNormalBgImage]]];
-            UIImage * clLoginBtnNormalBgImage_value = [UIImage imageWithData:clLoginBtnNormalBgImageData];
-            baseConfigure.clLoginBtnNormalBgImage = clLoginBtnNormalBgImage_value;
-        };
+        if (clLoginBtnNormalBgImage) {
+            baseConfigure.clLoginBtnNormalBgImage = [UIImage imageNamed:clLoginBtnNormalBgImage];
+        }
         /**按钮背景高亮图片*/
         NSString  * clLoginBtnHightLightBgImage = configureDic[@"setLoginBtnHightLightBgImage"];
-        {
-            NSData * clLoginBtnHightLightBgImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clLoginBtnHightLightBgImage]]];
-            UIImage * clLoginBtnHightLightBgImage_value = [UIImage imageWithData:clLoginBtnHightLightBgImageData];
-            baseConfigure.clLoginBtnDisabledBgImage = clLoginBtnHightLightBgImage_value;
-        };
+        if (clLoginBtnHightLightBgImage) {
+            baseConfigure.clLoginBtnDisabledBgImage = [UIImage imageNamed:clLoginBtnHightLightBgImage];
+        }
         /**按钮边框颜色*/
         NSString  * clLoginBtnBorderColor = configureDic[@"setLoginBtnBorderColor"];;
         {
@@ -672,10 +656,8 @@
         
         /**隐私协议WEB页面导航返回按钮图片*/
         NSString * clAppPrivacyWebBackBtnImage = configureDic[@"setPrivacyNavReturnImgPath"];
-        {
-            NSData * clAppPrivacyWebBackBtnImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clAppPrivacyWebBackBtnImage]]];
-            UIImage * clAppPrivacyWebBackBtnImage_value = [UIImage imageWithData:clAppPrivacyWebBackBtnImageData];
-            baseConfigure.clAppPrivacyWebBackBtnImage = clAppPrivacyWebBackBtnImage_value;
+        if (clAppPrivacyWebBackBtnImage) {
+            baseConfigure.clAppPrivacyWebBackBtnImage = [UIImage imageNamed:clAppPrivacyWebBackBtnImage];
         }
         
         NSNumber * setAppPrivacyWebPreferredStatusBarStyle = configureDic[@"setAppPrivacyWebPreferredStatusBarStyle"];
@@ -726,20 +708,12 @@
             }
         }
         NSString * setAppPrivacyWebNavigationBackgroundImage = configureDic[@"setAppPrivacyWebNavigationBackgroundImage"];
-        {
-            if (setAppPrivacyWebNavigationBackgroundImage) {
-                NSData * clAppPrivacyWebNavigationBackgroundImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:setAppPrivacyWebNavigationBackgroundImage]]];
-                UIImage * clAppPrivacyWebNavigationBackgroundImageData_value = [UIImage imageWithData:clAppPrivacyWebNavigationBackgroundImageData];
-                baseConfigure.clAppPrivacyWebNavigationBackgroundImage = clAppPrivacyWebNavigationBackgroundImageData_value;
-            }
+        if (setAppPrivacyWebNavigationBackgroundImage) {
+            baseConfigure.clAppPrivacyWebNavigationBackgroundImage = [UIImage imageNamed:setAppPrivacyWebNavigationBackgroundImage];
         }
         NSString * setAppPrivacyWebNavigationShadowImage = configureDic[@"setAppPrivacyWebNavigationShadowImage"];
-        {
-            if (setAppPrivacyWebNavigationShadowImage) {
-                NSData * setAppPrivacyWebNavigationShadowImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:setAppPrivacyWebNavigationShadowImage]]];
-                UIImage * setAppPrivacyWebNavigationShadowImageData_value = [UIImage imageWithData:setAppPrivacyWebNavigationShadowImageData];
-                baseConfigure.clAppPrivacyWebNavigationShadowImage = setAppPrivacyWebNavigationShadowImageData_value;
-            }
+        if (setAppPrivacyWebNavigationShadowImage) {
+            baseConfigure.clAppPrivacyWebNavigationShadowImage = [UIImage imageNamed:setAppPrivacyWebNavigationShadowImage];
         }
         
         /*SLOGAN
@@ -870,18 +844,14 @@
         };
         /**协议勾选框 非选中状态图片*/
         NSString  *clCheckBoxUncheckedImage = configureDic[@"setUncheckedImgPath"];
-        {
-            NSData * clCheckBoxUncheckedImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clCheckBoxUncheckedImage]]];
-            UIImage * clCheckBoxUncheckedImage_value = [UIImage imageWithData:clCheckBoxUncheckedImageData];
-            baseConfigure.clCheckBoxUncheckedImage = clCheckBoxUncheckedImage_value;
-        };
+        if (clCheckBoxUncheckedImage) {
+            baseConfigure.clCheckBoxUncheckedImage = [UIImage imageNamed:clCheckBoxUncheckedImage];
+        }
         /**协议勾选框 选中状态图片*/
         NSString  *clCheckBoxCheckedImage = configureDic[@"setCheckedImgPath"];
-        {
-            NSData * clCheckBoxCheckedImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clCheckBoxCheckedImage]]];
-            UIImage * clCheckBoxCheckedImage_value = [UIImage imageWithData:clCheckBoxCheckedImageData];
-            baseConfigure.clCheckBoxCheckedImage = clCheckBoxCheckedImage_value;
-        };
+        if (clCheckBoxCheckedImage) {
+            baseConfigure.clCheckBoxCheckedImage = [UIImage imageNamed:clCheckBoxCheckedImage];
+        }
         
         /*Loading*/
         /**Loading 大小 CGSize eg.[NSValue valueWithCGSize:CGSizeMake(50, 50)]*/
@@ -1116,12 +1086,12 @@
         }
     
         //自定义控件
-        NSDictionary * clCustomViewDicts = configureDic[@"widgets"];
-        if (clCustomViewDicts) {
+        NSArray * clCustomViewArray = configureDic[@"widgets"];
+        if (clCustomViewArray) {
             
             
             //导航栏控件
-            for (NSDictionary * clCustomDict in clCustomViewDicts.allValues) {
+            for (NSDictionary * clCustomDict in clCustomViewArray) {
                 NSString * type = clCustomDict[@"type"];
                 NSString * navPosition = clCustomDict[@"navPosition"];
                 if ([navPosition isEqualToString:@"navleft"] || [navPosition isEqualToString:@"navright"]) {
@@ -1140,8 +1110,8 @@
                         
                         customLabel.widgetId = widgetId;
 
-                        NSNumber * clLayoutWidth = clCustomDict[@"clLayoutWidth"];
-                        NSNumber * clLayoutHeight = clCustomDict[@"clLayoutHeight"];
+                        NSNumber * clLayoutWidth = clCustomDict[@"width"];
+                        NSNumber * clLayoutHeight = clCustomDict[@"height"];
                         
                         customLabel.frame = CGRectMake(0, 0, clLayoutWidth.floatValue, clLayoutHeight.floatValue);
                         
@@ -1153,8 +1123,8 @@
                         
                         customImageView.widgetId = widgetId;
 
-                        NSNumber * clLayoutWidth = clCustomDict[@"clLayoutWidth"];
-                        NSNumber * clLayoutHeight = clCustomDict[@"clLayoutHeight"];
+                        NSNumber * clLayoutWidth = clCustomDict[@"width"];
+                        NSNumber * clLayoutHeight = clCustomDict[@"height"];
                         
                         customImageView.frame = CGRectMake(0, 0, clLayoutWidth.floatValue, clLayoutHeight.floatValue);
                         
@@ -1169,8 +1139,8 @@
                         
                         [custonButton addTarget:self action:@selector(customButtonClicked:) forControlEvents:(UIControlEventTouchUpInside)];
                         
-                        NSNumber * clLayoutWidth = clCustomDict[@"clLayoutWidth"];
-                        NSNumber * clLayoutHeight = clCustomDict[@"clLayoutHeight"];
+                        NSNumber * clLayoutWidth = clCustomDict[@"width"];
+                        NSNumber * clLayoutHeight = clCustomDict[@"height"];
                         
                         custonButton.frame = CGRectMake(0, 0, clLayoutWidth.floatValue, clLayoutHeight.floatValue);
                         
@@ -1195,7 +1165,7 @@
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     __strong typeof(weakSelf) strongSelf = weakSelf;
-                    for (NSDictionary * clCustomDict in clCustomViewDicts.allValues) {
+                    for (NSDictionary * clCustomDict in clCustomViewArray) {
                                     
                         NSString * type = clCustomDict[@"type"];
                         NSString * navPosition = clCustomDict[@"navPosition"];
@@ -1253,18 +1223,16 @@
 }
 
 //自定义控件事件
--(void)setCustomInterface:(FlutterResult)customInterface{
-    _customInterface = customInterface;
-}
-
 -(void)customButtonClicked:(UIButton *)sender{
-    if (self.customInterface) {
-        NSMutableDictionary * result = [NSMutableDictionary new];
-        result[@"widgetId"] = sender.widgetId;
-        result[@"isFinish"] = @(sender.isFinish);
-        self.customInterface(result);
+    
+    NSMutableDictionary * result = [NSMutableDictionary new];
+    result[@"widgetId"] = sender.widgetId;
+    result[@"isFinish"] = @(sender.isFinish);
+    if (self.channel) {
+        [self.channel invokeMethod:@"onReceiveClickWidgetEvent" arguments:result];
     }
     
+
     if (sender.isFinish) {
         [CLShanYanSDKManager finishAuthControllerCompletion:nil];
     }
@@ -1289,7 +1257,7 @@
         //    }
             
             /**文字颜色*/
-            UIColor  * clTextColor = [CLShanYanCustomViewHelper rgbaToUIColor:clCustomDict[@"textColor"]];
+            UIColor  * clTextColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"textColor"]];
             if (clTextColor) {
                 customViewConfigure.button_textColor = clTextColor;
                 customViewConfigure.label_textColor = clTextColor;
@@ -1312,25 +1280,22 @@
             }
             
             NSString * clButtonImage = clCustomDict[@"image"];
-            {
-                NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clButtonImage]]];
-                UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
+            if (clButtonImage) {
                 //UIButton
-                customViewConfigure.button_image = clBackgroundImg_value;
+                customViewConfigure.button_image = [UIImage imageNamed:clButtonImage];
                 //UIImageView
-                customViewConfigure.imageView_image = clBackgroundImg_value;
+                customViewConfigure.imageView_image = [UIImage imageNamed:clButtonImage];
             }
             
             
-            NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImage"];
-            {
-                NSData * clBackgroundImgData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[self assetPathWithConfig:clButtonBackgroundImage]]];
-                UIImage * clBackgroundImg_value = [UIImage imageWithData:clBackgroundImgData];
-                customViewConfigure.button_backgroundImage = clBackgroundImg_value;
+            NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImgPath"];
+            if (clButtonBackgroundImage) {
+                customViewConfigure.button_backgroundImage = [UIImage imageNamed:clButtonBackgroundImage];
             }
+
             
             //UIView通用
-            UIColor * backgroundColor = [CLShanYanCustomViewHelper rgbaToUIColor: clCustomDict[@"backgroundColor"]];
+            UIColor * backgroundColor = [ShanyanPlugin colorWithHexStr: clCustomDict[@"backgroundColor"]];
             if (backgroundColor) {
                 customViewConfigure.backgroundColor = backgroundColor;
             }
@@ -1343,13 +1308,14 @@
         
             //CALayer通用
             NSNumber * cornerRadius = clCustomDict[@"cornerRadius"];
-            NSNumber * masksToBounds =  clCustomDict[@"masksToBounds"];
+//            NSNumber * masksToBounds =  clCustomDict[@"masksToBounds"];
             if (cornerRadius) {
                 customViewConfigure.layer_cornerRadius = cornerRadius;
+                customViewConfigure.layer_masksToBounds = @(YES);
             }
-            if (masksToBounds) {
-                customViewConfigure.layer_masksToBounds = masksToBounds;
-            }
+//            if (masksToBounds) {
+//                customViewConfigure.layer_masksToBounds = masksToBounds;
+//            }
             
             
             return customViewConfigure;
@@ -1362,14 +1328,14 @@
 +(void)setConstraint:(UIView * )superView targetView:(UIView *)subView contrains:(NSDictionary * )dict{
     
     @try {
-        NSNumber * clLayoutLeft = dict[@"clLayoutLeft"];
-        NSNumber * clLayoutTop = dict[@"clLayoutTop"];
-        NSNumber * clLayoutRight = dict[@"clLayoutRight"];
-        NSNumber * clLayoutBottom = dict[@"clLayoutBottom"];
-        NSNumber * clLayoutWidth = dict[@"clLayoutWidth"];
-        NSNumber * clLayoutHeight = dict[@"clLayoutHeight"];
-        NSNumber * clLayoutCenterX = dict[@"clLayoutCenterX"];
-        NSNumber * clLayoutCenterY = dict[@"clLayoutCenterY"];
+        NSNumber * clLayoutLeft = dict[@"left"];
+        NSNumber * clLayoutTop = dict[@"top"];
+        NSNumber * clLayoutRight = dict[@"right"];
+        NSNumber * clLayoutBottom = dict[@"bottom"];
+        NSNumber * clLayoutWidth = dict[@"width"];
+        NSNumber * clLayoutHeight = dict[@"height"];
+        NSNumber * clLayoutCenterX = dict[@"centerX"];
+        NSNumber * clLayoutCenterY = dict[@"centerY"];
         
         subView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -1394,12 +1360,12 @@
         }
         
         if (clLayoutRight != nil) {
-            NSLayoutConstraint * c = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeRight multiplier:1.0f constant:clLayoutRight.floatValue];
+            NSLayoutConstraint * c = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeRight multiplier:1.0f constant:clLayoutRight.clShanYanNegative.floatValue];
             c.active = YES;
         }
         
         if (clLayoutBottom != nil) {
-            NSLayoutConstraint * c = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:clLayoutBottom.floatValue];
+            NSLayoutConstraint * c = [NSLayoutConstraint constraintWithItem:subView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:clLayoutBottom.clShanYanNegative.floatValue];
             c.active = YES;
         }
         
@@ -1438,8 +1404,8 @@
     
     clOrientationLayOutPortrait.clLayoutLogoLeft = clLayoutLogoLeft;
     clOrientationLayOutPortrait.clLayoutLogoTop = clLayoutLogoTop;
-    clOrientationLayOutPortrait.clLayoutLogoRight = clLayoutLogoRight;
-    clOrientationLayOutPortrait.clLayoutLogoBottom = clLayoutLogoBottom;
+    clOrientationLayOutPortrait.clLayoutLogoRight = clLayoutLogoRight.clShanYanNegative;
+    clOrientationLayOutPortrait.clLayoutLogoBottom = clLayoutLogoBottom.clShanYanNegative;
     clOrientationLayOutPortrait.clLayoutLogoWidth = clLayoutLogoWidth;
     clOrientationLayOutPortrait.clLayoutLogoHeight = clLayoutLogoHeight;
     clOrientationLayOutPortrait.clLayoutLogoCenterX = clLayoutLogoCenterX;
@@ -1457,8 +1423,8 @@
     NSNumber * clLayoutPhoneCenterY = layOutPortraitDict[@"setNumFieldCenterY"];;
     clOrientationLayOutPortrait.clLayoutPhoneLeft = clLayoutPhoneLeft;
     clOrientationLayOutPortrait.clLayoutPhoneTop = clLayoutPhoneTop;
-    clOrientationLayOutPortrait.clLayoutPhoneRight = clLayoutPhoneRight;
-    clOrientationLayOutPortrait.clLayoutPhoneBottom = clLayoutPhoneBottom;
+    clOrientationLayOutPortrait.clLayoutPhoneRight = clLayoutPhoneRight.clShanYanNegative;
+    clOrientationLayOutPortrait.clLayoutPhoneBottom = clLayoutPhoneBottom.clShanYanNegative;
     clOrientationLayOutPortrait.clLayoutPhoneWidth = clLayoutPhoneWidth;
     clOrientationLayOutPortrait.clLayoutPhoneHeight = clLayoutPhoneHeight;
     clOrientationLayOutPortrait.clLayoutPhoneCenterX = clLayoutPhoneCenterX;
@@ -1477,8 +1443,8 @@
     NSNumber * clLayoutLoginBtnCenterY  = layOutPortraitDict[@"setLogBtnCenterY"];
     clOrientationLayOutPortrait.clLayoutLoginBtnLeft = clLayoutLoginBtnLeft;
     clOrientationLayOutPortrait.clLayoutLoginBtnTop = clLayoutLoginBtnTop;
-    clOrientationLayOutPortrait.clLayoutLoginBtnRight = clLayoutLoginBtnRight;
-    clOrientationLayOutPortrait.clLayoutLoginBtnBottom = clLayoutLoginBtnBottom;
+    clOrientationLayOutPortrait.clLayoutLoginBtnRight = clLayoutLoginBtnRight.clShanYanNegative;
+    clOrientationLayOutPortrait.clLayoutLoginBtnBottom = clLayoutLoginBtnBottom.clShanYanNegative;
     clOrientationLayOutPortrait.clLayoutLoginBtnWidth = clLayoutLoginBtnWidth;
     clOrientationLayOutPortrait.clLayoutLoginBtnHeight = clLayoutLoginBtnHeight;
     clOrientationLayOutPortrait.clLayoutLoginBtnCenterX = clLayoutLoginBtnCenterX;
@@ -1497,8 +1463,8 @@
     NSNumber * clLayoutAppPrivacyCenterY= layOutPortraitDict[@"setPrivacyCenterY"];
     clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = clLayoutAppPrivacyLeft;
     clOrientationLayOutPortrait.clLayoutAppPrivacyTop = clLayoutAppPrivacyTop;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyBottom = clLayoutAppPrivacyBottom;
+    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight.clShanYanNegative;
+    clOrientationLayOutPortrait.clLayoutAppPrivacyBottom = clLayoutAppPrivacyBottom.clShanYanNegative;
     clOrientationLayOutPortrait.clLayoutAppPrivacyWidth = clLayoutAppPrivacyWidth;
     clOrientationLayOutPortrait.clLayoutAppPrivacyHeight = clLayoutAppPrivacyHeight;
     clOrientationLayOutPortrait.clLayoutAppPrivacyCenterX = clLayoutAppPrivacyCenterX;
@@ -1517,8 +1483,8 @@
     NSNumber * clLayoutSloganCenterY= layOutPortraitDict[@"setSloganCenterY"];
     clOrientationLayOutPortrait.clLayoutSloganLeft = clLayoutSloganLeft;
     clOrientationLayOutPortrait.clLayoutSloganTop = clLayoutSloganTop;
-    clOrientationLayOutPortrait.clLayoutSloganRight = clLayoutSloganRight;
-    clOrientationLayOutPortrait.clLayoutSloganBottom = clLayoutSloganBottom;
+    clOrientationLayOutPortrait.clLayoutSloganRight = clLayoutSloganRight.clShanYanNegative;
+    clOrientationLayOutPortrait.clLayoutSloganBottom = clLayoutSloganBottom.clShanYanNegative;
     clOrientationLayOutPortrait.clLayoutSloganWidth = clLayoutSloganWidth;
     clOrientationLayOutPortrait.clLayoutSloganHeight = clLayoutSloganHeight;
     clOrientationLayOutPortrait.clLayoutSloganCenterX = clLayoutSloganCenterX;
@@ -1538,8 +1504,8 @@
     NSNumber * clLayoutShanYanSloganCenterY= layOutPortraitDict[@"setShanYanSloganCenterY"];
     clOrientationLayOutPortrait.clLayoutShanYanSloganLeft = clLayoutShanYanSloganLeft;
     clOrientationLayOutPortrait.clLayoutShanYanSloganTop = clLayoutShanYanSloganTop;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganRight = clLayoutShanYanSloganRight;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganBottom = clLayoutShanYanSloganBottom;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganRight = clLayoutShanYanSloganRight.clShanYanNegative;
+    clOrientationLayOutPortrait.clLayoutShanYanSloganBottom = clLayoutShanYanSloganBottom.clShanYanNegative;
     clOrientationLayOutPortrait.clLayoutShanYanSloganWidth = clLayoutShanYanSloganWidth;
     clOrientationLayOutPortrait.clLayoutShanYanSloganHeight = clLayoutShanYanSloganHeight;
     clOrientationLayOutPortrait.clLayoutShanYanSloganCenterX = clLayoutShanYanSloganCenterX;
@@ -1590,8 +1556,8 @@
     
     clOrientationLayOutLandscape.clLayoutLogoLeft = clLayoutLogoLeft;
     clOrientationLayOutLandscape.clLayoutLogoTop = clLayoutLogoTop;
-    clOrientationLayOutLandscape.clLayoutLogoRight = clLayoutLogoRight;
-    clOrientationLayOutLandscape.clLayoutLogoBottom = clLayoutLogoBottom;
+    clOrientationLayOutLandscape.clLayoutLogoRight = clLayoutLogoRight.clShanYanNegative;
+    clOrientationLayOutLandscape.clLayoutLogoBottom = clLayoutLogoBottom.clShanYanNegative;
     clOrientationLayOutLandscape.clLayoutLogoWidth = clLayoutLogoWidth;
     clOrientationLayOutLandscape.clLayoutLogoHeight = clLayoutLogoHeight;
     clOrientationLayOutLandscape.clLayoutLogoCenterX = clLayoutLogoCenterX;
@@ -1609,8 +1575,8 @@
     NSNumber * clLayoutPhoneCenterY = layOutLandscapeDict[@"clLayoutPhoneCenterY"];;
     clOrientationLayOutLandscape.clLayoutPhoneLeft = clLayoutPhoneLeft;
     clOrientationLayOutLandscape.clLayoutPhoneTop = clLayoutPhoneTop;
-    clOrientationLayOutLandscape.clLayoutPhoneRight = clLayoutPhoneRight;
-    clOrientationLayOutLandscape.clLayoutPhoneBottom = clLayoutPhoneBottom;
+    clOrientationLayOutLandscape.clLayoutPhoneRight = clLayoutPhoneRight.clShanYanNegative;
+    clOrientationLayOutLandscape.clLayoutPhoneBottom = clLayoutPhoneBottom.clShanYanNegative;
     clOrientationLayOutLandscape.clLayoutPhoneWidth = clLayoutPhoneWidth;
     clOrientationLayOutLandscape.clLayoutPhoneHeight = clLayoutPhoneHeight;
     clOrientationLayOutLandscape.clLayoutPhoneCenterX = clLayoutPhoneCenterX;
@@ -1629,8 +1595,8 @@
     NSNumber * clLayoutLoginBtnCenterY  = layOutLandscapeDict[@"clLayoutLoginBtnCenterY"];
     clOrientationLayOutLandscape.clLayoutLoginBtnLeft = clLayoutLoginBtnLeft;
     clOrientationLayOutLandscape.clLayoutLoginBtnTop = clLayoutLoginBtnTop;
-    clOrientationLayOutLandscape.clLayoutLoginBtnRight = clLayoutLoginBtnRight;
-    clOrientationLayOutLandscape.clLayoutLoginBtnBottom = clLayoutLoginBtnBottom;
+    clOrientationLayOutLandscape.clLayoutLoginBtnRight = clLayoutLoginBtnRight.clShanYanNegative;
+    clOrientationLayOutLandscape.clLayoutLoginBtnBottom = clLayoutLoginBtnBottom.clShanYanNegative;
     clOrientationLayOutLandscape.clLayoutLoginBtnWidth = clLayoutLoginBtnWidth;
     clOrientationLayOutLandscape.clLayoutLoginBtnHeight = clLayoutLoginBtnHeight;
     clOrientationLayOutLandscape.clLayoutLoginBtnCenterX = clLayoutLoginBtnCenterX;
@@ -1649,8 +1615,8 @@
     NSNumber * clLayoutAppPrivacyCenterY= layOutLandscapeDict[@"clLayoutAppPrivacyCenterY"];
     clOrientationLayOutLandscape.clLayoutAppPrivacyLeft = clLayoutAppPrivacyLeft;
     clOrientationLayOutLandscape.clLayoutAppPrivacyTop = clLayoutAppPrivacyTop;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyBottom = clLayoutAppPrivacyBottom;
+    clOrientationLayOutLandscape.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight.clShanYanNegative;
+    clOrientationLayOutLandscape.clLayoutAppPrivacyBottom = clLayoutAppPrivacyBottom.clShanYanNegative;
     clOrientationLayOutLandscape.clLayoutAppPrivacyWidth = clLayoutAppPrivacyWidth;
     clOrientationLayOutLandscape.clLayoutAppPrivacyHeight = clLayoutAppPrivacyHeight;
     clOrientationLayOutLandscape.clLayoutAppPrivacyCenterX = clLayoutAppPrivacyCenterX;
@@ -1669,8 +1635,8 @@
     NSNumber * clLayoutSloganCenterY= layOutLandscapeDict[@"clLayoutSloganCenterY"];
     clOrientationLayOutLandscape.clLayoutSloganLeft = clLayoutSloganLeft;
     clOrientationLayOutLandscape.clLayoutSloganTop = clLayoutSloganTop;
-    clOrientationLayOutLandscape.clLayoutSloganRight = clLayoutSloganRight;
-    clOrientationLayOutLandscape.clLayoutSloganBottom = clLayoutSloganBottom;
+    clOrientationLayOutLandscape.clLayoutSloganRight = clLayoutSloganRight.clShanYanNegative;
+    clOrientationLayOutLandscape.clLayoutSloganBottom = clLayoutSloganBottom.clShanYanNegative;
     clOrientationLayOutLandscape.clLayoutSloganWidth = clLayoutSloganWidth;
     clOrientationLayOutLandscape.clLayoutSloganHeight = clLayoutSloganHeight;
     clOrientationLayOutLandscape.clLayoutSloganCenterX = clLayoutSloganCenterX;

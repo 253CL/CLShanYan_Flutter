@@ -373,6 +373,8 @@ class ShanYanUIConfigIOS {
 
   String setLoadingTintColor; /// Loading Indicator渲染色
 
+  List<ShanYanCustomWidgetIOS> widgets;  ///自定义控件
+
   /**授权页自定义Loading
       - containerView为loading的全屏蒙版view
       - 请自行在containerView添加自定义loading
@@ -475,6 +477,7 @@ class ClOrientationLayOutIOS{
   num setLogoBottom;
   num setLogoCenterX;
   num setLogoCenterY;
+
 
   //脱敏手机号
   num setNumFieldWidth;
@@ -675,7 +678,7 @@ class ShanYanUIConfigAndroid {
 //添加自定义布局类型，目前支持RelativeLayout布局xml文件
 enum ShanYanCustomWidgetLayoutType { RelativeLayout }
 
-// 自定义控件
+// 自定义控件 (Only Android available)
 @JsonSerializable()
 class ShanYanCustomWidgetLayout {
   String widgetLayoutName;
@@ -700,13 +703,17 @@ class ShanYanCustomWidgetLayout {
 }
 
 //添加自定义控件类型，目前只支持 TextView
-enum ShanYanCustomWidgetType { TextView , Button}
+enum ShanYanCustomWidgetType {
+  TextView ,
+  Button  ,
+  ImageView //(Only iOS available)
+}
 
 // 文本对齐方式
 enum ShanYanCustomWidgetGravityType { left, right, center }
 
-// 自定义控件
-@JsonSerializable()
+// 自定义控件 (Android available)
+@JsonSerializable(explicitToJson: true , includeIfNull: false)
 class ShanYanCustomWidget {
   String widgetId; //自定义控件ID
   int left = 0; // 自定义控件距离屏幕左边缘偏移量，单位dp
@@ -719,8 +726,8 @@ class ShanYanCustomWidget {
   double textFont = 13.0; // 自定义控件文字大小，单位sp
   String textColor = "#aa0000"; // 自定义控件文字颜色
   String backgroundColor; // 自定义控件背景颜色
-  String backgroundImgPath; // 自定义控件背景图片
-  ShanYanCustomWidgetGravityType textAlignment; //自定义控件内容对齐方式
+  String backgroundImgPath; // 自定义控件背景图片(Only Android available)
+  ShanYanCustomWidgetGravityType textAlignment = ShanYanCustomWidgetGravityType.center; //自定义控件内容对齐方式 (Only Android available)
   ShanYanCustomWidgetType type; //自定义控件类型，目前只支持 textView,button
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 
@@ -732,6 +739,47 @@ class ShanYanCustomWidget {
   factory ShanYanCustomWidget.fromJson(Map<String, dynamic> json) => _$ShanYanCustomWidgetFromJson(json);
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanCustomWidgetToJson(this);
+}
+
+
+// 自定义控件 (iOS available)
+@JsonSerializable(explicitToJson: true , includeIfNull: false)
+class ShanYanCustomWidgetIOS {
+  String widgetId; //自定义控件ID
+  num left; // 自定义控件距离屏幕左边缘偏移量，单位dp
+  num top; // 自定义控件距离导航栏底部偏移量，单位dp
+  num right; // 自定义控件距离屏幕右边缘偏移量，单位dp
+  num bottom; // 自定义控件距离屏幕底部偏移量，单位dp
+  num width; // 自定义控件宽度，单位dp
+  num height; // 自定义控件高度，单位dp
+  num centerX;
+  num centerY;
+  num cornerRadius;
+  String textContent; // 自定义控件内容
+  double textFont = 13.0; // 自定义控件文字大小，单位sp
+  String textColor; // 自定义控件文字颜色
+  String backgroundColor; // 自定义控件背景颜色
+  String image; //按钮左侧图片 （Button available）
+  String backgroundImgPath; // 自定义控件背景图片(ImageView available)
+  iOSTextAlignment textAlignment = iOSTextAlignment.center; //自定义控件内容对齐方式 (Only Android available)
+  ShanYanCustomWidgetType type; //自定义控件类型，目前只支持 textView,button,ImageView
+  ShanYanCustomWidgetiOSNavPosition navPosition;//如需添加到导航栏，请设置控件位置（左或右，导航栏按钮仅支持自定义width、height）
+  bool isFinish = true; //点击自定义控件是否自动销毁授权页
+
+  ShanYanCustomWidgetIOS(@required this.widgetId, @required this.type) {
+    this.widgetId = widgetId;
+    this.type = type;
+  }
+//反序列化
+  factory ShanYanCustomWidgetIOS.fromJson(Map<String, dynamic> json) => _$ShanYanCustomWidgetIOSFromJson(json);
+  //序列化
+  Map<String, dynamic> toJson() => _$ShanYanCustomWidgetIOSToJson(this);
+}
+
+//iOS导航栏自定义控件位置
+enum ShanYanCustomWidgetiOSNavPosition {
+  navleft ,
+  navright
 }
 
 String getStringFromEnum<T>(T) {

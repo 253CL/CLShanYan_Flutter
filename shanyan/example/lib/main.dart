@@ -273,7 +273,7 @@ class _MyAppState extends State<MyApp> {
 
     /*iOS 页面样式设置*/
     shanYanUIConfig.ios.isFinish = false;
-    shanYanUIConfig.ios.setAuthBGImgPath = "assets/Img/eb9a0dae18491990a43fe02832d3cafa.jpg";
+    shanYanUIConfig.ios.setAuthBGImgPath = "sy_login_test_bg";
 
     shanYanUIConfig.ios.setPreferredStatusBarStyle = iOSStatusBarStyle.styleLightContent;
     shanYanUIConfig.ios.setStatusBarHidden = false;
@@ -285,7 +285,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setNavTextColor = "#80ADFF";
     shanYanUIConfig.ios.setNavTextSize = 18;
 
-    shanYanUIConfig.ios.setNavReturnImgPath = "assets/Img/close-black.png";
+    shanYanUIConfig.ios.setNavReturnImgPath = "close-black";
     shanYanUIConfig.ios.setNavReturnImgHidden = false;
 
     shanYanUIConfig.ios.setNavBackBtnAlimentRight = true;
@@ -294,16 +294,16 @@ class _MyAppState extends State<MyApp> {
 
     shanYanUIConfig.ios.setNavigationTintColor = "#FF6659";
     shanYanUIConfig.ios.setNavigationBarTintColor = "#BAFF8C";
-    shanYanUIConfig.ios.setNavigationBackgroundImage = "assets/Img/圆角矩形 2 拷贝@2x.png";
+    shanYanUIConfig.ios.setNavigationBackgroundImage = "圆角矩形 2 拷贝@2x";
 
 //    shanYanUIConfig.ios.setNavigationShadowImage =
 
-    shanYanUIConfig.ios.setLogoImgPath = "assets/Img/logo_shanyan_text.png";
+    shanYanUIConfig.ios.setLogoImgPath = "logo_shanyan_text";
     shanYanUIConfig.ios.setLogoCornerRadius = 30;
     shanYanUIConfig.ios.setLogoHidden = false;
 
     shanYanUIConfig.ios.setNumberColor = "#499191";
-    shanYanUIConfig.ios.setNumberSize = 15;
+    shanYanUIConfig.ios.setNumberSize = 20;
     shanYanUIConfig.ios.setNumberBold = true;
     shanYanUIConfig.ios.setNumberTextAlignment = iOSTextAlignment.right;
 
@@ -313,9 +313,9 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setLoginBtnTextBold = false;
     shanYanUIConfig.ios.setLoginBtnBgColor =  "#B97BFF";
 
-    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "assets/Img/2-0btn_15@2x.png";
-    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "assets/Img/圆角矩形 2 拷贝@2x.png";
-    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "assets/Img/login_btn_normal.png";
+    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
+    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
+    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "login_btn_normal";
 
     shanYanUIConfig.ios.setLoginBtnBorderColor = "#FF7666";
     shanYanUIConfig.ios.setLoginBtnCornerRadius = 20;
@@ -347,7 +347,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacyNavTextColor = "#7BC1E8";
     shanYanUIConfig.ios.setPrivacyNavTextSize = 15;
 
-    shanYanUIConfig.ios.setPrivacyNavReturnImgPath = "assets/Img/setting@2x.png";
+    shanYanUIConfig.ios.setPrivacyNavReturnImgPath = "setting";
 
     shanYanUIConfig.ios.setAppPrivacyWebPreferredStatusBarStyle = iOSStatusBarStyle.styleDefault;
     shanYanUIConfig.ios.setAppPrivacyWebNavigationBarStyle = iOSBarStyle.styleDefault;
@@ -369,8 +369,10 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacyState = false;
 //    shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyTop = true;
     shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyCenterY = true;
-    shanYanUIConfig.ios.setUncheckedImgPath = "assets/Img/checkBoxNor.png";
-    shanYanUIConfig.ios.setCheckedImgPath =  "assets/Img/checkBoxSEL.png";
+    shanYanUIConfig.ios.setUncheckedImgPath = "checkBoxNor";
+    shanYanUIConfig.ios.setCheckedImgPath =  "checkBoxNor";
+    shanYanUIConfig.ios.setCheckBoxWH = [40,40];
+//    shanYanUIConfig.ios.setCheckBoxImageEdgeInsets = [5,10,5,0];
 
     shanYanUIConfig.ios.setLoadingCornerRadius = 10;
     shanYanUIConfig.ios.setLoadingBackgroundColor = "#E68147";
@@ -391,9 +393,9 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAuthWindowPresentingAnimate = true;
 
     //logo
-    shanYanUIConfig.ios.layOutPortrait.setLogoTop = 100;
-    shanYanUIConfig.ios.layOutPortrait.setLogoWidth = 80;
-    shanYanUIConfig.ios.layOutPortrait.setLogoHeight = 80;
+    shanYanUIConfig.ios.layOutPortrait.setLogoTop = 120;
+    shanYanUIConfig.ios.layOutPortrait.setLogoWidth = 120;
+    shanYanUIConfig.ios.layOutPortrait.setLogoHeight = 120;
     shanYanUIConfig.ios.layOutPortrait.setLogoCenterX = 0;
     //手机号控件
     shanYanUIConfig.ios.layOutPortrait.setNumFieldCenterY = -20;
@@ -410,21 +412,39 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight = 15;
     shanYanUIConfig.ios.layOutPortrait.setShanYanSloganLeft = 0;
     shanYanUIConfig.ios.layOutPortrait.setShanYanSloganRight = 0;
-    shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom = -15;
+    shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom = 15;
 
     //授权页 slogan（***提供认证服务）
     shanYanUIConfig.ios.layOutPortrait.setSloganHeight = 15;
     shanYanUIConfig.ios.layOutPortrait.setSloganLeft = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganRight = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganBottom = shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom
-        - shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight;
+        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight;
 
     //隐私协议
-    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
+//    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 60;
-    shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = -60;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 60;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom
-      - shanYanUIConfig.ios.layOutPortrait.setSloganRight;
+      + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight + 5;
+
+    final String btn_widgetId = "other_custom_button"; // 标识控件 id
+    List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
+    ShanYanCustomWidgetIOS buttonWidgetiOS =
+    ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
+    buttonWidgetiOS.textContent = "其他方式登录 >";
+    buttonWidgetiOS.centerY = 100;
+    buttonWidgetiOS.centerX = 0 ;
+    buttonWidgetiOS.width = 150;
+//    buttonWidgetiOS.left = 50;
+//    buttonWidgetiOS.right = 50;
+    buttonWidgetiOS.height = 40;
+    buttonWidgetiOS.backgroundColor = "#330000";
+    buttonWidgetiOS.isFinish = true;
+    buttonWidgetiOS.textAlignment = iOSTextAlignment.center;
+    shanyanCustomWidgetIOS.add(buttonWidgetiOS);
+    shanYanUIConfig.ios.widgets = shanyanCustomWidgetIOS;
+
 
 
     /*Android 页面样式具体设置*/
@@ -439,20 +459,22 @@ class _MyAppState extends State<MyApp> {
     relativeLayoutWidget.top = 380;
     relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayout.add(relativeLayoutWidget);
-    List<ShanYanCustomWidget> shanyanCustomWidget = [];
-    final String btn_widgetId = "other_custom_button"; // 标识控件 id
-    ShanYanCustomWidget buttonWidget =
+    List<ShanYanCustomWidget> shanyanCustomWidgetAndroid = [];
+    ShanYanCustomWidget buttonWidgetAndroid =
         ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
-    buttonWidget.textContent = "其他方式登录 >";
-    buttonWidget.top = 300;
-    buttonWidget.width = 150;
-    buttonWidget.height = 40;
-    buttonWidget.backgroundColor = "#330000";
-    buttonWidget.isFinish = true;
-    buttonWidget.textAlignment = ShanYanCustomWidgetGravityType.center;
-    shanyanCustomWidget.add(buttonWidget);
+    buttonWidgetAndroid.textContent = "其他方式登录 >";
+    buttonWidgetAndroid.top = 300;
+    buttonWidgetAndroid.width = 150;
+//    buttonWidgetAndroid.left = 50;
+//    buttonWidgetAndroid.right = 50;
+    buttonWidgetAndroid.height = 40;
+    buttonWidgetAndroid.backgroundColor = "#330000";
+    buttonWidgetAndroid.isFinish = true;
+    buttonWidgetAndroid.textAlignment = ShanYanCustomWidgetGravityType.center;
+    shanyanCustomWidgetAndroid.add(buttonWidgetAndroid);
     shanYanUIConfig.androidPortrait.widgetLayouts = shanYanCustomWidgetLayout;
-    shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidget;
+    shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidgetAndroid;
+
     //oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     oneKeyLoginManager.addClikWidgetEventListener((eventId) {
       _toast("点击了：" + eventId);

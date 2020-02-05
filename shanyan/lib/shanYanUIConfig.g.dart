@@ -148,6 +148,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setLoadingCornerRadius = json['setLoadingCornerRadius'] as num
     ..setLoadingBackgroundColor = json['setLoadingBackgroundColor'] as String
     ..setLoadingTintColor = json['setLoadingTintColor'] as String
+    ..widgets = (json['widgets'] as List)?.map((e) => e == null ? null : ShanYanCustomWidgetIOS.fromJson(e as Map<String, dynamic>))?.toList()
     ..setShouldAutorotate = json['setShouldAutorotate'] as bool
     ..supportedInterfaceOrientations = _$enumDecodeNullable(_$iOSInterfaceOrientationMaskEnumMap, json['supportedInterfaceOrientations'])
     ..preferredInterfaceOrientationForPresentation = _$enumDecodeNullable(_$iOSInterfaceOrientationEnumMap, json['preferredInterfaceOrientationForPresentation'])
@@ -285,6 +286,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setLoadingCornerRadius', instance.setLoadingCornerRadius);
   writeNotNull('setLoadingBackgroundColor', instance.setLoadingBackgroundColor);
   writeNotNull('setLoadingTintColor', instance.setLoadingTintColor);
+  writeNotNull('widgets', instance.widgets?.map((e) => e?.toJson())?.toList());
   writeNotNull('setShouldAutorotate', instance.setShouldAutorotate);
   writeNotNull(
       'supportedInterfaceOrientations',
@@ -842,34 +844,110 @@ ShanYanCustomWidget _$ShanYanCustomWidgetFromJson(Map<String, dynamic> json) {
     ..isFinish = json['isFinish'] as bool;
 }
 
-Map<String, dynamic> _$ShanYanCustomWidgetToJson(
-        ShanYanCustomWidget instance) =>
-    <String, dynamic>{
-      'widgetId': instance.widgetId,
-      'left': instance.left,
-      'top': instance.top,
-      'right': instance.right,
-      'bottom': instance.bottom,
-      'width': instance.width,
-      'height': instance.height,
-      'textContent': instance.textContent,
-      'textFont': instance.textFont,
-      'textColor': instance.textColor,
-      'backgroundColor': instance.backgroundColor,
-      'backgroundImgPath': instance.backgroundImgPath,
-      'textAlignment':
-          _$ShanYanCustomWidgetGravityTypeEnumMap[instance.textAlignment],
-      'type': _$ShanYanCustomWidgetTypeEnumMap[instance.type],
-      'isFinish': instance.isFinish,
-    };
+Map<String, dynamic> _$ShanYanCustomWidgetToJson(ShanYanCustomWidget instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('widgetId', instance.widgetId);
+  writeNotNull('left', instance.left);
+  writeNotNull('top', instance.top);
+  writeNotNull('right', instance.right);
+  writeNotNull('bottom', instance.bottom);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('textContent', instance.textContent);
+  writeNotNull('textFont', instance.textFont);
+  writeNotNull('textColor', instance.textColor);
+  writeNotNull('backgroundColor', instance.backgroundColor);
+  writeNotNull('backgroundImgPath', instance.backgroundImgPath);
+  writeNotNull('textAlignment',
+      _$ShanYanCustomWidgetGravityTypeEnumMap[instance.textAlignment]);
+  writeNotNull('type', _$ShanYanCustomWidgetTypeEnumMap[instance.type]);
+  writeNotNull('isFinish', instance.isFinish);
+  return val;
+}
 
 const _$ShanYanCustomWidgetTypeEnumMap = {
   ShanYanCustomWidgetType.TextView: 'TextView',
   ShanYanCustomWidgetType.Button: 'Button',
+  ShanYanCustomWidgetType.ImageView: 'ImageView',
 };
 
 const _$ShanYanCustomWidgetGravityTypeEnumMap = {
   ShanYanCustomWidgetGravityType.left: 'left',
   ShanYanCustomWidgetGravityType.right: 'right',
   ShanYanCustomWidgetGravityType.center: 'center',
+};
+
+ShanYanCustomWidgetIOS _$ShanYanCustomWidgetIOSFromJson(
+    Map<String, dynamic> json) {
+  return ShanYanCustomWidgetIOS(
+    json['widgetId'] as String,
+    _$enumDecodeNullable(_$ShanYanCustomWidgetTypeEnumMap, json['type']),
+  )
+    ..left = json['left'] as num
+    ..top = json['top'] as num
+    ..right = json['right'] as num
+    ..bottom = json['bottom'] as num
+    ..width = json['width'] as num
+    ..height = json['height'] as num
+    ..centerX = json['centerX'] as num
+    ..centerY = json['centerY'] as num
+    ..cornerRadius = json['cornerRadius'] as num
+    ..textContent = json['textContent'] as String
+    ..textFont = (json['textFont'] as num)?.toDouble()
+    ..textColor = json['textColor'] as String
+    ..backgroundColor = json['backgroundColor'] as String
+    ..image = json['image'] as String
+    ..backgroundImgPath = json['backgroundImgPath'] as String
+    ..textAlignment =
+        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['textAlignment'])
+    ..navPosition = _$enumDecodeNullable(
+        _$ShanYanCustomWidgetiOSNavPositionEnumMap, json['navPosition'])
+    ..isFinish = json['isFinish'] as bool;
+}
+
+Map<String, dynamic> _$ShanYanCustomWidgetIOSToJson(
+    ShanYanCustomWidgetIOS instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('widgetId', instance.widgetId);
+  writeNotNull('left', instance.left);
+  writeNotNull('top', instance.top);
+  writeNotNull('right', instance.right);
+  writeNotNull('bottom', instance.bottom);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('centerX', instance.centerX);
+  writeNotNull('centerY', instance.centerY);
+  writeNotNull('cornerRadius', instance.cornerRadius);
+  writeNotNull('textContent', instance.textContent);
+  writeNotNull('textFont', instance.textFont);
+  writeNotNull('textColor', instance.textColor);
+  writeNotNull('backgroundColor', instance.backgroundColor);
+  writeNotNull('image', instance.image);
+  writeNotNull('backgroundImgPath', instance.backgroundImgPath);
+  writeNotNull(
+      'textAlignment', _$iOSTextAlignmentEnumMap[instance.textAlignment]);
+  writeNotNull('type', _$ShanYanCustomWidgetTypeEnumMap[instance.type]);
+  writeNotNull('navPosition',
+      _$ShanYanCustomWidgetiOSNavPositionEnumMap[instance.navPosition]);
+  writeNotNull('isFinish', instance.isFinish);
+  return val;
+}
+
+const _$ShanYanCustomWidgetiOSNavPositionEnumMap = {
+  ShanYanCustomWidgetiOSNavPosition.navleft: 'navleft',
+  ShanYanCustomWidgetiOSNavPosition.navright: 'navright',
 };

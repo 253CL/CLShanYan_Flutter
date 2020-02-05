@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/../../CLShanYan_Flutter/gen" />
+        <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/../../CLShanYan_Flutter/gen" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/../../CLShanYan_Flutter/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/../../CLShanYan_Flutter/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/../../CLShanYan_Flutter/assets" />
+        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/../../CLShanYan_Flutter/libs" />
+        <option name="PROGUARD_LOGS_FOLDER_RELATIVE_PATH" value="/../../CLShanYan_Flutter/proguard_logs" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/shanyan/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/shanyan/build" />
+      <excludeFolder url="file://$MODULE_DIR$/shanyan/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/shanyan/example/build" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
