@@ -45,6 +45,8 @@
       [self quickAuthLoginWithConfigure:call.arguments complete:result];
   }else if ([@"setActionListener" isEqualToString:call.method]){
       [self setActionListener];
+  }else if ([@"startAuthentication" isEqualToString:call.method]){
+      [self startAuthentication:result];
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -1699,27 +1701,7 @@
 -(void)startAuthentication:(FlutterResult)authenticationListener{
     [CLShanYanSDKManager mobileCheckWithLocalPhoneNumberComplete:^(CLCompleteResult * _Nonnull completeResult) {
         if (authenticationListener) {
-            NSMutableDictionary * result = [NSMutableDictionary new];
-                       
-                       
-                       if (completeResult.error) {
-                           result[@"code"] = @(completeResult.error.code);
-                           if (completeResult.error.userInfo != nil && completeResult.error.userInfo.count > 0) {
-                               result[@"result"] = [ShanyanPlugin dictToJson:completeResult.error.userInfo];
-                           }else if (completeResult.error.domain != nil){
-                               result[@"result"] = completeResult.error.domain;
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }else{
-                           result[@"code"] = @(2000);
-                           if (completeResult.data != nil  && completeResult.data.count > 0) {
-                               result[@"result"] = [ShanyanPlugin dictToJson:completeResult.data];
-                           }else{
-                               result[@"result"] = completeResult.message;
-                           }
-                       }
-            authenticationListener(result);
+            authenticationListener([ShanyanPlugin completeResultToJson:completeResult]);
         }
     }];
 }

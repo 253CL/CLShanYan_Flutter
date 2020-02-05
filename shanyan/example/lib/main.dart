@@ -201,7 +201,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setNavTextColor = "#80ADFF";
     shanYanUIConfig.ios.setNavTextSize = 18;
 
-    shanYanUIConfig.ios.setNavReturnImgPath = "close-black";
+    shanYanUIConfig.ios.setNavReturnImgPath = "nav_button_white";
     shanYanUIConfig.ios.setNavReturnImgHidden = false;
 
 //    shanYanUIConfig.ios.setNavBackBtnAlimentRight = true;
@@ -224,18 +224,18 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setNumberTextAlignment = iOSTextAlignment.right;
 
     shanYanUIConfig.ios.setLogBtnText = "测试一键登录";
-    shanYanUIConfig.ios.setLogBtnTextColor = "#FCFF4F";
+    shanYanUIConfig.ios.setLogBtnTextColor = "#ffffff";
     shanYanUIConfig.ios.setLoginBtnTextSize = 16;
     shanYanUIConfig.ios.setLoginBtnTextBold = false;
-    shanYanUIConfig.ios.setLoginBtnBgColor =  "#B97BFF";
+    shanYanUIConfig.ios.setLoginBtnBgColor =  "#0000ff";
 
-    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
-    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
-    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "login_btn_normal";
+//    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
+//    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
+//    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "login_btn_normal";
 
-    shanYanUIConfig.ios.setLoginBtnBorderColor = "#FF7666";
+//    shanYanUIConfig.ios.setLoginBtnBorderColor = "#FF7666";
     shanYanUIConfig.ios.setLoginBtnCornerRadius = 20;
-    shanYanUIConfig.ios.setLoginBtnBorderWidth = 2;
+//    shanYanUIConfig.ios.setLoginBtnBorderWidth = 2;
 
     shanYanUIConfig.ios.setPrivacyTextSize = 10;
     shanYanUIConfig.ios.setPrivacyTextBold = false;
@@ -464,7 +464,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setNavTextColor = "#80ADFF";
     shanYanUIConfig.ios.setNavTextSize = 18;
 
-    shanYanUIConfig.ios.setNavReturnImgPath = "close-black";
+    shanYanUIConfig.ios.setNavReturnImgPath = "nav_button_white";
     shanYanUIConfig.ios.setNavReturnImgHidden = false;
 
 //    shanYanUIConfig.ios.setNavBackBtnAlimentRight = true;
@@ -473,7 +473,7 @@ class _MyAppState extends State<MyApp> {
 
     shanYanUIConfig.ios.setNavigationTintColor = "#FF6659";
     shanYanUIConfig.ios.setNavigationBarTintColor = "#BAFF8C";
-    shanYanUIConfig.ios.setNavigationBackgroundImage = "圆角矩形 2 拷贝@2x";
+    shanYanUIConfig.ios.setNavigationBackgroundImage = "圆角矩形 2 拷贝";
 
 //    shanYanUIConfig.ios.setNavigationShadowImage =
 
@@ -487,18 +487,18 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setNumberTextAlignment = iOSTextAlignment.right;
 
     shanYanUIConfig.ios.setLogBtnText = "测试一键登录";
-    shanYanUIConfig.ios.setLogBtnTextColor = "#FCFF4F";
+    shanYanUIConfig.ios.setLogBtnTextColor = "#FFFFFF";
     shanYanUIConfig.ios.setLoginBtnTextSize = 16;
     shanYanUIConfig.ios.setLoginBtnTextBold = false;
-    shanYanUIConfig.ios.setLoginBtnBgColor =  "#B97BFF";
+    shanYanUIConfig.ios.setLoginBtnBgColor =  "#0000FF";
 
-    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
-    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
-    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "login_btn_normal";
+//    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
+//    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
+//    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "login_btn_normal";
 
-    shanYanUIConfig.ios.setLoginBtnBorderColor = "#FF7666";
+//    shanYanUIConfig.ios.setLoginBtnBorderColor = "#FF7666";
     shanYanUIConfig.ios.setLoginBtnCornerRadius = 20;
-    shanYanUIConfig.ios.setLoginBtnBorderWidth = 2;
+//    shanYanUIConfig.ios.setLoginBtnBorderWidth = 2;
 
     shanYanUIConfig.ios.setPrivacyTextSize = 10;
     shanYanUIConfig.ios.setPrivacyTextBold = false;

@@ -6,10 +6,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feabf20f-43cd-44f1-b2ca-94a00111ce74" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/nav_button_white.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/nav_button_white.imageset/nav_button_white@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/nav_button_white.imageset/nav_button_white@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ShanyanPlugin.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/shanyan.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shanyan.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -27,17 +30,14 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_24" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="8baa654f" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="994" column="11" lean-forward="true" selection-start-line="994" selection-start-column="11" selection-end-line="994" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="4786">
+              <caret line="473" column="59" lean-forward="true" selection-start-line="473" selection-start-column="59" selection-end-line="473" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -45,11 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1665">
+              <caret line="119" column="5" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -59,18 +56,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
               <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4350">
-              <caret line="535" column="35" selection-start-line="535" selection-start-column="6" selection-end-line="535" selection-end-column="35" />
-              <folding>
-                <element signature="e#27#49#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -115,7 +100,6 @@
     <findStrings>
       <find>authPageActionListener</find>
       <find>clickEventsMap</find>
-      <find>startAuthentication</find>
       <find>authPageEvents</find>
       <find>onReceiveAuthPageEvent</find>
       <find>onReceiveClickWidgetEvent</find>
@@ -143,6 +127,7 @@
       <find>assets/Img/</find>
       <find>addCustomPrivacyAlertView</find>
       <find>AuthPageActionEvent</find>
+      <find>startAuthentication</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,9 +154,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="140" />
-    <option name="y" value="94" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="33" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
@@ -184,6 +169,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -218,7 +204,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -229,7 +214,7 @@
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.30229884" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -276,26 +261,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="140" y="94" width="1280" height="777" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.70089287" visible="true" weight="0.23344104" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.69772726" visible="true" weight="0.23344104" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="Resources Explorer" order="5" />
       <window_info id="Capture Tool" order="6" />
-      <window_info id="Build Variants" order="7" sideWeight="0.29910713" side_tool="true" visible="true" weight="0.23344104" />
+      <window_info id="Build Variants" order="7" sideWeight="0.30227274" side_tool="true" visible="true" weight="0.23344104" />
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" sideWeight="0.4942623" weight="0.27190334" />
       <window_info anchor="bottom" id="Run" order="1" sideWeight="0.49725777" weight="0.15203762" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49836066" weight="0.32930514" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" sideWeight="0.49754098" weight="0.4018127" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.6171244" visible="true" weight="0.32326284" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.48606557" weight="0.24169184" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.3828756" side_tool="true" visible="true" weight="0.32326284" />
+      <window_info active="true" anchor="bottom" id="Debug" order="5" sideWeight="0.6155089" visible="true" weight="0.33534744" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.48546043" weight="0.24169184" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.38449112" side_tool="true" visible="true" weight="0.33534744" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49836066" weight="0.32930514" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4942623" weight="0.23564954" />
@@ -303,20 +288,11 @@
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
-      <window_info active="true" anchor="right" id="Flutter Inspector" order="3" visible="true" weight="0.11954766" />
+      <window_info anchor="right" id="Flutter Inspector" order="3" visible="true" weight="0.11954766" />
       <window_info anchor="right" id="Flutter Outline" order="4" weight="0.21258973" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Preview" order="6" weight="0.32942432" />
     </layout>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint type="dart-exception">
-          <properties />
-        </breakpoint>
-      </default-breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/android/app/src/main/java/com/shanyan_example/MainActivity.java">
@@ -451,6 +427,30 @@
         <state relative-caret-position="-50" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4335">
+          <caret line="534" column="35" selection-start-line="534" selection-start-column="35" selection-end-line="534" selection-end-column="35" />
+          <folding>
+            <element signature="e#27#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4786">
+          <caret line="473" column="59" lean-forward="true" selection-start-line="473" selection-start-column="59" selection-end-line="473" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1665">
+          <caret line="119" column="5" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/shanYanResult.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -465,13 +465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ios/shanyan.podspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -479,33 +472,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/shanyan.dart">
+    <entry file="file://$PROJECT_DIR$/ios/shanyan.podspec">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/shanYanUIConfig.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4350">
-          <caret line="535" column="35" selection-start-line="535" selection-start-column="6" selection-end-line="535" selection-end-column="35" />
-          <folding>
-            <element signature="e#27#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="994" column="11" lean-forward="true" selection-start-line="994" selection-start-column="11" selection-end-line="994" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="225">
+          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
         </state>
       </provider>
     </entry>
