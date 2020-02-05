@@ -93,6 +93,21 @@ class OneKeyLoginManager {
     }
   }
 
+
+//  Future<void> alertNativeIOS(String title,String message,String cancelButtonTitle,String okButtonTitle,String otherButtonTitle) async {
+//    Map alert = {
+//      "title":title,
+//      "message":message,
+//      "cancelButtonTitle":cancelButtonTitle,
+//      "okButtonTitle": okButtonTitle,
+//      "otherButtonTitle":otherButtonTitle
+//    };
+//
+//    Map<dynamic, dynamic> result = await _channel.invokeMethod("alertNative",alert);
+//    Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
+//    return ShanYanResult.fromJson(newResult);
+//  }
+
 //
 //  ///闪验SDK 设置复选框是否选中 Android+IOS
 //  void setCheckBoxValue(bool isChecked) {

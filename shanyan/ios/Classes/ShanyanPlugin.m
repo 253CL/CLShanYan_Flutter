@@ -5,7 +5,7 @@
 #import "UIView+CLShanYanWidget.h"
 #import "NSNumber+shanyanCategory.h"
 
-@interface ShanyanPlugin ()
+@interface ShanyanPlugin ()<CLShanYanSDKManagerDelegate>
 @property (nonatomic,strong)id notifObserver;
 
 @property(nonatomic,strong)NSObject<FlutterPluginRegistrar>*registrar;
@@ -43,6 +43,8 @@
       [self preGetPhonenumber:result];
   }else if ([@"openLoginAuth" isEqualToString:call.method]){
       [self quickAuthLoginWithConfigure:call.arguments complete:result];
+  }else if ([@"setActionListener" isEqualToString:call.method]){
+      [self setActionListener];
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -61,6 +63,21 @@
 //        [self startAuthentication:result];
 //    }
 }
+
+-(void)setActionListener{
+    [CLShanYanSDKManager setCLShanYanSDKManagerDelegate:self];
+}
+#pragma mark - CLShanYanSDKManagerDelegate
+-(void)clShanYanActionListener:(NSInteger)type code:(NSInteger)code  message:(NSString *_Nullable)message{
+    NSMutableDictionary * result = [NSMutableDictionary dictionary];
+    result[@"type"] = @(type);
+    result[@"code"] = @(code);
+    result[@"message"] = message;
+    if (self.channel) {
+        [self.channel invokeMethod:@"onReceiveAuthEvent" arguments:result];
+    }
+}
+
 
 - (void)init:(FlutterMethodCall*)call complete:(FlutterResult)complete{
     
