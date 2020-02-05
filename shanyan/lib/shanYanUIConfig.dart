@@ -174,7 +174,6 @@ class ShanYanUIConfig {
     -  int setPrivacyNavReturnBtnOffsetX; //设置协议页导航栏返回按钮距离屏幕左侧X偏移
     -  int setPrivacyNavReturnBtnOffsetY; //设置协议页导航栏返回按钮距离屏幕上侧Y偏移
     -
-    -  String addCustomPrivacyAlertView; //添加授权页上显示隐私协议弹框
     -  String setLoadingView; //设置授权页点击一键登录自定义loading
     -  List<String>
     -      setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
@@ -629,6 +628,9 @@ class ShanYanUIConfigAndroid {
   List<int> setCheckBoxMargin; //设置checkbox的间距，包含四个参数：1.左间距 2.上间距 3.右间距 4.下间距
   List<String> setPrivacyText; //设置隐私条款名称外的文字,包含五个参数
   bool setPrivacyTextBold; //设置协议栏字体是否加粗（true：加粗；false：不加粗）
+  String setPrivacyCustomToastText; //未勾选协议时toast提示文字
+  bool setPrivacyNameUnderline;  //协议是否显示下划线
+  bool setOperatorPrivacyAtLast;//运营商协议是否为最后一个显示
 
   //授权页 slogan（***提供认证服务）
   int setSloganOffsetY; //设置slogan相对于标题栏下边缘y偏移
@@ -661,7 +663,6 @@ class ShanYanUIConfigAndroid {
   int setPrivacyNavReturnBtnOffsetX; //设置协议页导航栏返回按钮距离屏幕左侧X偏移
   int setPrivacyNavReturnBtnOffsetY; //设置协议页导航栏返回按钮距离屏幕上侧Y偏移
 
-  String addCustomPrivacyAlertView; //添加授权页上显示隐私协议弹框
   String setLoadingView; //设置授权页点击一键登录自定义loading
   List<String>
   setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部

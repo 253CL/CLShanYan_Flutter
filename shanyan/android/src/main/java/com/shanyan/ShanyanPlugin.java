@@ -631,6 +631,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setCheckBoxMargin = valueForKey(shanYanUIConfig, "setCheckBoxMargin");
         Object setPrivacyText = valueForKey(shanYanUIConfig, "setPrivacyText");
         Object setPrivacyTextBold = valueForKey(shanYanUIConfig, "setPrivacyTextBold");
+        Object setPrivacyCustomToastText = valueForKey(shanYanUIConfig, "setPrivacyCustomToastText");
+        Object setPrivacyNameUnderline = valueForKey(shanYanUIConfig, "setPrivacyNameUnderline");
+        Object setOperatorPrivacyAtLast = valueForKey(shanYanUIConfig, "setOperatorPrivacyAtLast");
 
         Object setSloganTextColor = valueForKey(shanYanUIConfig, "setSloganTextColor");
         Object setSloganTextSize = valueForKey(shanYanUIConfig, "setSloganTextSize");
@@ -896,6 +899,15 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (null != setPrivacyTextBold) {
             builder.setPrivacyTextBold((Boolean) setPrivacyTextBold);
+        }
+        if (null != setPrivacyCustomToastText) {
+            builder.setPrivacyCustomToastText((String) setPrivacyCustomToastText);
+        }
+        if (null != setPrivacyNameUnderline) {
+            builder.setPrivacyNameUnderline((Boolean) setPrivacyNameUnderline);
+        }
+        if (null != setOperatorPrivacyAtLast) {
+            builder.setOperatorPrivacyAtLast((Boolean) setOperatorPrivacyAtLast);
         }
         //授权页 slogan（***提供认证服务）
         if (null != setSloganTextColor) {
