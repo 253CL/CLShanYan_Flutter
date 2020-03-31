@@ -120,7 +120,28 @@
     CLUIConfigure * baseUIConfigure = [[CLUIConfigure alloc]init];
     baseUIConfigure.viewController = [self findVisibleVC];;
     
+    
+    NSArray * setAppPrivacyFirstArray = clUIConfigure[@"setAppPrivacyFirst"];
+    if (setAppPrivacyFirstArray != nil && setAppPrivacyFirstArray.count == 2) {
+        NSString * clAppPrivacyFirstString = setAppPrivacyFirstArray.firstObject;
+        NSString * clAppPrivacyFirstUrl = setAppPrivacyFirstArray.lastObject;
+        
+        baseUIConfigure.clAppPrivacyFirst = @[clAppPrivacyFirstString,clAppPrivacyFirstUrl];
+    }
+    NSArray * setAppPrivacySecondArray = clUIConfigure[@"setAppPrivacySecond"];
+    if (setAppPrivacySecondArray != nil && setAppPrivacySecondArray.count == 2) {
+        NSString * clAppPrivacySecondString = setAppPrivacySecondArray.firstObject;
+        NSString * clAppPrivacySecondUrl = setAppPrivacySecondArray.lastObject;
+        
+        baseUIConfigure.clAppPrivacySecond = @[clAppPrivacySecondString,clAppPrivacySecondUrl];
+    }
+    baseUIConfigure.clAppPrivacyNormalDesTextSecond = @"、";
+    baseUIConfigure.clAppPrivacyNormalDesTextThird = @"、";
+
+    
+    
     [self configureWithSet:baseUIConfigure];
+    
     
     __weak typeof(self) weakSelf = self;
     
@@ -152,116 +173,128 @@
     screenWidth_Portrait = UIScreen.mainScreen.bounds.size.width;
     screenHeight_Portrait = UIScreen.mainScreen.bounds.size.height;
     
+    UIColor * themeColor = [UIColor colorWithRed:0/255.0 green:97/255.0 blue:234/255.0 alpha:1];;
+    
     baseUIConfigure.clAuthTypeUseWindow = @(NO);
     baseUIConfigure.manualDismiss = @(YES);
     baseUIConfigure.shouldAutorotate = @(NO);
-    baseUIConfigure.supportedInterfaceOrientations = @(UIInterfaceOrientationPortrait);
+    baseUIConfigure.supportedInterfaceOrientations = @(UIInterfaceOrientationMaskPortrait);
     baseUIConfigure.clNavigationBarHidden = @(YES);
     baseUIConfigure.clNavBackBtnAlimentRight = @(YES);
+    baseUIConfigure.clPrefersStatusBarHidden = @(YES);
     
     baseUIConfigure.clPhoneNumberColor = UIColor.blackColor;
-    baseUIConfigure.clPhoneNumberFont = [UIFont boldSystemFontOfSize:25];
+    baseUIConfigure.clPhoneNumberFont = [UIFont boldSystemFontOfSize:30];
     
     baseUIConfigure.clLoginBtnText = @"一键登录";
-    baseUIConfigure.clLoginBtnTextFont = [UIFont systemFontOfSize:14];
-    baseUIConfigure.clLoadingBackgroundColor = [UIColor colorWithRed:69/255.0 green:162/255.0 blue:238/255.0 alpha:1];
+    baseUIConfigure.clLoginBtnTextFont = [UIFont systemFontOfSize:15];
+    baseUIConfigure.clLoginBtnBgColor = themeColor;
     baseUIConfigure.clLoginBtnTextColor = UIColor.whiteColor;
+    baseUIConfigure.clLoginBtnCornerRadius = @(5);
     
-    CGFloat wibdowCenterYOffset = 80;
-    CGFloat wibdowHeight = 400;
+    baseUIConfigure.clShanYanSloganHidden = @(YES);
+    baseUIConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationFullScreen);
+    
+    baseUIConfigure.clCheckBoxValue = @(YES);
+    
+    baseUIConfigure.clAppPrivacyColor = @[[UIColor lightGrayColor],themeColor];
+
+    baseUIConfigure.clLoadingTintColor = themeColor;
+    baseUIConfigure.clLoadingCornerRadius = @(8);
+    baseUIConfigure.clLoadingSize = [NSValue valueWithCGSize:CGSizeMake(50, 50)];
+    baseUIConfigure.clLoadingBackgroundColor = UIColor.whiteColor;
+    baseUIConfigure.clLoadingIndicatorStyle = @(UIActivityIndicatorViewStyleWhite);
+    
+    CGFloat wibdowCenterYOffset = 0;
+    CGFloat wibdowHeight = 350;
     
     CGFloat windowTop = (screenHeight_Portrait - wibdowHeight)*0.5 - wibdowCenterYOffset;
     
-    CGFloat tipLabeltop = 20;
+    CGFloat tipLabeltop = 30;
     CGFloat tipLabelHeight = 20;
 
-    CGFloat phonetop = 20;
-    CGFloat phoneHeight = 20;
+    CGFloat phonetop = 30;
+    CGFloat phoneHeight = 30;
     
-    CGFloat logButtontop = 20;
-    CGFloat logButtonHeight = 20;
+    CGFloat logButtontop = 30;
+    CGFloat logButtonHeight = 45;
     
-    CGFloat otherWaytop = 20;
-    CGFloat otherWayHeight = 20;
+    CGFloat otherWaytop = 5;
+    CGFloat otherWayHeight = 40;
     
-    
+    CGFloat appPrivacyTop = 20;
+    CGFloat appPrivacyHeight = 60;
+
     //授权页自定义控件
     __weak typeof(self)weakSelf = self;
     baseUIConfigure.customAreaView = ^(UIView * _Nonnull customAreaView) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
 
-            customAreaView.backgroundColor = UIColor.clearColor;
-            
-            //白色圆角背景
-            UIView * whiteBGView = [[UIView alloc]init];
-            whiteBGView.layer.cornerRadius = 10;
-            whiteBGView.layer.masksToBounds = YES;
-            whiteBGView.backgroundColor = UIColor.whiteColor;
-            [customAreaView addSubview:whiteBGView];
-            NSDictionary * whiteBGViewContraint = @{
-                @"left":@(20),
-                @"right":@(-20),
-                @"height":@(260),
-                @"centerY":@(-wibdowCenterYOffset),
-            };
-            [ShanyanPlugin setConstraint:customAreaView targetView:whiteBGView contrains:whiteBGViewContraint];
+        //蒙版颜色
+        customAreaView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.6];
+        
+        //白色圆角背景
+        UIView * whiteBGView = [[UIView alloc]init];
+        whiteBGView.layer.cornerRadius = 10;
+        whiteBGView.layer.masksToBounds = YES;
+        whiteBGView.backgroundColor = UIColor.whiteColor;
+        [customAreaView addSubview:whiteBGView];
+        
+        NSDictionary * whiteBGViewContraint = @{
+            @"left":@(30),
+            @"right":@(30),
+            @"height":@(wibdowHeight),
+            @"centerY":@(-wibdowCenterYOffset),
+        };
+        [ShanyanPlugin setConstraint:customAreaView targetView:whiteBGView contrains:whiteBGViewContraint];
 
-            UILabel * tipLabel = [[UILabel alloc]init];
-            tipLabel.text = @"本机号码";
-            tipLabel.font = [UIFont systemFontOfSize:18];
-            tipLabel.textAlignment = NSTextAlignmentCenter;
-            tipLabel.textColor = UIColor.blackColor;
-            [customAreaView addSubview:tipLabel];
-            NSDictionary * tipLabelContraint = @{
-                @"top":@(20),
-                @"left":@(00),
-                @"height":@(20),
-                @"right":@(0),
-            };
-            [ShanyanPlugin setConstraint:customAreaView targetView:tipLabel contrains:tipLabelContraint];
-            
-            UIButton * otherWay = [[UIButton alloc]init];
-            [otherWay.titleLabel setFont:[UIFont systemFontOfSize:15]];
-            [otherWay setTitleColor:[UIColor colorWithRed:69/255.0 green:162/255.0 blue:238/255.0 alpha:1] forState:(UIControlStateNormal)];
-            [otherWay setTitle:@"去验证码登录" forState:(UIControlStateNormal)];
-            otherWay.widgetId = @"Button_20200331_otherLoginButton";
-            [otherWay addTarget:strongSelf action:@selector(customButtonClicked:) forControlEvents:(UIControlEventTouchUpInside)];
-            [whiteBGView addSubview:otherWay];
-            NSDictionary * otherWayContraint = @{
-                @"left":@(0),
-                @"right":@(0),
-                @"height":@(45),
-                @"bottom":@(0),
-            };
-            [ShanyanPlugin setConstraint:customAreaView targetView:otherWay contrains:otherWayContraint];
+        UILabel * tipLabel = [[UILabel alloc]init];
+        tipLabel.text = @"本机号码";
+        tipLabel.font = [UIFont systemFontOfSize:18];
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        tipLabel.textColor = UIColor.blackColor;
+        [whiteBGView addSubview:tipLabel];
+        NSDictionary * tipLabelContraint = @{
+            @"top":@(tipLabeltop),
+            @"left":@(0),
+        @"height":@(tipLabelHeight),
+            @"right":@(0),
+        };
+        [ShanyanPlugin setConstraint:whiteBGView targetView:tipLabel contrains:tipLabelContraint];
+        
+        UIButton * otherWay = [[UIButton alloc]init];
+        [otherWay.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [otherWay setTitleColor:themeColor forState:(UIControlStateNormal)];
+        [otherWay setTitle:@"去验证码登录>" forState:(UIControlStateNormal)];
+        otherWay.widgetId = @"Button_20200331_otherLoginButton";
+        otherWay.isFinish = YES;
+        [otherWay addTarget:strongSelf action:@selector(customButtonClicked:) forControlEvents:(UIControlEventTouchUpInside)];
+        [whiteBGView addSubview:otherWay];
+        NSDictionary * otherWayContraint = @{
+            @"left":@(0),
+            @"right":@(0),
+            @"height":@(45),
+        @"top":@(tipLabeltop+tipLabelHeight+phonetop+phoneHeight+logButtontop+logButtonHeight+otherWaytop),
+        };
+        [ShanyanPlugin setConstraint:whiteBGView targetView:otherWay contrains:otherWayContraint];
 
-            UIButton * cancelButton = [[UIButton alloc]init];
-            [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-            [cancelButton setTitleColor:[UIColor colorWithRed:69/255.0 green:162/255.0 blue:238/255.0 alpha:1] forState:(UIControlStateNormal)];
-            [cancelButton setImage:[UIImage imageNamed:@"back" inBundle:[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"sdk_oauth" ofType:@"bundle"]] compatibleWithTraitCollection:nil] forState:(UIControlStateNormal)];
-            cancelButton.widgetId = @"Button_20200331_cancelButton";
-            [cancelButton addTarget:strongSelf action:@selector(customButtonClicked:) forControlEvents:(UIControlEventTouchUpInside)];
-            [whiteBGView addSubview:cancelButton];
-            NSDictionary * cancelButtonContraint = @{
-                @"top":@(10),
-                @"right":@(-15),
-                @"height":@(45),
-                @"width":@(45),
-            };
-            [ShanyanPlugin setConstraint:customAreaView targetView:cancelButton contrains:cancelButtonContraint];
-//                    NSNumber * clLayoutLeft = dict[@"left"];
-//                    NSNumber * clLayoutTop = dict[@"top"];
-//                    NSNumber * clLayoutRight = dict[@"right"];
-//                    NSNumber * clLayoutBottom = dict[@"bottom"];
-//                    NSNumber * clLayoutWidth = dict[@"width"];
-//                    NSNumber * clLayoutHeight = dict[@"height"];
-//                    NSNumber * clLayoutCenterX = dict[@"centerX"];
-//                    NSNumber * clLayoutCenterY = dict[@"centerY"];
-
-        });
+        UIButton * cancelButton = [[UIButton alloc]init];
+//            cancelButton.backgroundColor = UIColor.greenColor;
+        [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [cancelButton setTitleColor:themeColor forState:(UIControlStateNormal)];
+        [cancelButton setImage:[UIImage imageNamed:@"back" inBundle:[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"sdk_oauth" ofType:@"bundle"]] compatibleWithTraitCollection:nil] forState:(UIControlStateNormal)];
+        cancelButton.widgetId = @"Button_20200331_cancelButton";
+        cancelButton.isFinish = YES;
+        [cancelButton addTarget:strongSelf action:@selector(customButtonClicked:) forControlEvents:(UIControlEventTouchUpInside)];
+        [whiteBGView addSubview:cancelButton];
+        NSDictionary * cancelButtonContraint = @{
+            @"top":@(0),
+            @"right":@(0),
+            @"height":@(50),
+            @"width":@(50),
+        };
+        [ShanyanPlugin setConstraint:whiteBGView targetView:cancelButton contrains:cancelButtonContraint];
     };
     
 
@@ -271,97 +304,30 @@
     
    clOrientationLayOutPortrait.clLayoutPhoneTop = @(windowTop + tipLabeltop + tipLabelHeight + phonetop);
    clOrientationLayOutPortrait.clLayoutPhoneHeight = @(phoneHeight);
-   clOrientationLayOutPortrait.clLayoutPhoneLeft = @(40);
-   clOrientationLayOutPortrait.clLayoutPhoneRight = @(-40);
+   clOrientationLayOutPortrait.clLayoutPhoneLeft = @(30);
+   clOrientationLayOutPortrait.clLayoutPhoneRight = @(-30);
     
     //一键登录按钮垂直居中，其他控件以此参考竖直位置
     clOrientationLayOutPortrait.clLayoutLoginBtnTop = @(clOrientationLayOutPortrait.clLayoutPhoneTop.floatValue + phoneHeight + logButtontop);
     clOrientationLayOutPortrait.clLayoutLoginBtnHeight = @(logButtonHeight);
-    clOrientationLayOutPortrait.clLayoutLoginBtnLeft = @(30);
-    clOrientationLayOutPortrait.clLayoutLoginBtnRight = @(-30);
+    clOrientationLayOutPortrait.clLayoutLoginBtnLeft = @(30 + 30);
+    clOrientationLayOutPortrait.clLayoutLoginBtnRight = @(-30 - 30);
     
-//    clOrientationLayOutPortrait.clLayoutSloganTop = @( screenHeight_Portrait*0.5 + clOrientationLayOutPortrait.clLayoutLoginBtnHeight.floatValue*0.5 + 15 + 40 + 15);//给切换帐号保留空间
-//    clOrientationLayOutPortrait.clLayoutSloganLeft = @(0);
-//    clOrientationLayOutPortrait.clLayoutSloganRight = @(0);
-//    clOrientationLayOutPortrait.clLayoutSloganHeight = @(15);
+    //Hide
+    clOrientationLayOutPortrait.clLayoutSloganWidth = @(0);
+    clOrientationLayOutPortrait.clLayoutSloganHeight = @(0);
     
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyTop = @(clOrientationLayOutPortrait.clLayoutSloganTop.floatValue + 15 + 5);
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = @(60);
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = @(-40);
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyHeight = @(60*screenScale);
-    
-    
-
-//
-//    clOrientationLayOutPortrait.clLayoutLoginBtnTop= @(clOrientationLayOutPortrait.clLayoutPhoneTop.floatValue + clOrientationLayOutPortrait.clLayoutPhoneHeight.floatValue + 20*screenScale);
-//    clOrientationLayOutPortrait.clLayoutLoginBtnHeight = @(40*screenScale);
-//    clOrientationLayOutPortrait.clLayoutLoginBtnLeft = @(20*screenScale);
-//    clOrientationLayOutPortrait.clLayoutLoginBtnRight = @(-20*screenScale);
-//
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = @(40*screenScale);
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = @(-40*screenScale);
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyBottom = @(-offSetY_Portrait_bottom);
-//    clOrientationLayOutPortrait.clLayoutAppPrivacyHeight = @(60*screenScale);
-//
-//    clOrientationLayOutPortrait.clLayoutSloganLeft = @(0);
-//    clOrientationLayOutPortrait.clLayoutSloganRight = @(0);
-//    clOrientationLayOutPortrait.clLayoutSloganHeight = @(15);
-//    clOrientationLayOutPortrait.clLayoutSloganBottom = @(clOrientationLayOutPortrait.clLayoutAppPrivacyBottom.floatValue - clOrientationLayOutPortrait.clLayoutAppPrivacyHeight.floatValue);
-    
+    clOrientationLayOutPortrait.clLayoutAppPrivacyTop = @(clOrientationLayOutPortrait.clLayoutLoginBtnTop.floatValue + logButtonHeight + otherWaytop + otherWayHeight + appPrivacyTop);
+    clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = @(30 + 30);
+    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = @(-30 - 30);
+    clOrientationLayOutPortrait.clLayoutAppPrivacyHeight = @(appPrivacyHeight);
+//    clOrientationLayOutPortrait.clLayoutAppPrivacyBottom = @(-20);
     
     baseUIConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
     
     return baseUIConfigure;
 }
 
-+(NSString * )dictToJson:(NSDictionary *)input{
-    NSError *error = nil;
-    NSData *jsonData = nil;
-    if (!input) {
-        return nil;
-    }
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [input enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        NSString *keyString = nil;
-        NSString *valueString = nil;
-        if ([key isKindOfClass:[NSString class]]) {
-            keyString = key;
-        }else{
-            keyString = [NSString stringWithFormat:@"%@",key];
-        }
-
-        if ([obj isKindOfClass:[NSString class]]) {
-            valueString = obj;
-        }else{
-            valueString = [NSString stringWithFormat:@"%@",obj];
-        }
-
-        [dict setObject:valueString forKey:keyString];
-    }];
-    jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
-    if ([jsonData length] == 0 || error != nil) {
-        return nil;
-    }
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return jsonString;
-
-}
-
-+ (UIFont *)fontWithSize:(NSNumber *)size blod:(NSNumber *)isBlod name:(NSString *)name{
-    if (size == nil) {
-        return nil;
-    }
-//    NSString * fontName = @"PingFang-SC-Medium";
-//    if (name) {
-//        fontName = fontName;
-//    }
-    BOOL blod = isBlod ? isBlod.boolValue : false;
-    if (blod) {
-        return [UIFont boldSystemFontOfSize:size.floatValue];
-    }else{
-        return [UIFont systemFontOfSize:size.floatValue];
-    }
-}
 
 + (UIColor *)colorWithHexStr:(NSString *)hexString {
     if (hexString == nil) {
@@ -478,93 +444,6 @@
     }
 }
 
--(CLShanYanCustomViewCongifure *)customViewConfigureWithDict:(NSDictionary *)clCustomDict{
-    
-    if (clCustomDict == nil) {
-        return nil;
-    }
-
-    @try {
-            
-            CLShanYanCustomViewCongifure * customViewConfigure = [[CLShanYanCustomViewCongifure alloc]init];
-            
-        //    NSString * widgetId = clCustomDict[@"widgetId"];
-        ////    customViewConfigure.widgetId = widgetId;
-        //
-        //    NSNumber * isFinish = clCustomDict[@"isFinish"];
-        //    if (isFinish) {
-        ////        customViewConfigure.isFinish = isFinish.boolValue;
-        //    }
-            
-            /**文字颜色*/
-            UIColor  * clTextColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"textColor"]];
-            if (clTextColor) {
-                customViewConfigure.button_textColor = clTextColor;
-                customViewConfigure.label_textColor = clTextColor;
-            }
-            NSNumber   * textFont = clCustomDict[@"textFont"];
-            if (textFont) {
-                customViewConfigure.button_titleLabelFont = [UIFont systemFontOfSize:textFont.floatValue];
-                customViewConfigure.label_font = [UIFont systemFontOfSize:textFont.floatValue];
-            }
-            NSString * textContent = clCustomDict[@"textContent"];
-            if (textContent) {
-                customViewConfigure.button_textContent = textContent;
-                customViewConfigure.label_text = textContent;
-            }
-            
-            NSNumber * numberOfLines = clCustomDict[@"numberOfLines"];
-            if (customViewConfigure) {
-                customViewConfigure.button_numberOfLines = numberOfLines;
-                customViewConfigure.label_numberOfLines = numberOfLines;
-            }
-            
-            NSString * clButtonImage = clCustomDict[@"image"];
-            if (clButtonImage) {
-                //UIButton
-                customViewConfigure.button_image = [UIImage imageNamed:clButtonImage];
-                //UIImageView
-                customViewConfigure.imageView_image = [UIImage imageNamed:clButtonImage];
-            }
-            
-            
-            NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImgPath"];
-            if (clButtonBackgroundImage) {
-                customViewConfigure.button_backgroundImage = [UIImage imageNamed:clButtonBackgroundImage];
-            }
-
-            
-            //UIView通用
-            UIColor * backgroundColor = [ShanyanPlugin colorWithHexStr: clCustomDict[@"backgroundColor"]];
-            if (backgroundColor) {
-                customViewConfigure.backgroundColor = backgroundColor;
-            }
-            
-            //UILabel
-            NSNumber * textAlignment = clCustomDict[@"textAlignment"];
-            if (textAlignment) {
-                customViewConfigure.label_textAlignment = textAlignment;
-            }
-        
-            //CALayer通用
-            NSNumber * cornerRadius = clCustomDict[@"cornerRadius"];
-//            NSNumber * masksToBounds =  clCustomDict[@"masksToBounds"];
-            if (cornerRadius) {
-                customViewConfigure.layer_cornerRadius = cornerRadius;
-                customViewConfigure.layer_masksToBounds = @(YES);
-            }
-//            if (masksToBounds) {
-//                customViewConfigure.layer_masksToBounds = masksToBounds;
-//            }
-            
-            
-            return customViewConfigure;
-    } @catch (NSException *exception) {
-        
-    }
-}
-
-
 +(void)setConstraint:(UIView * )superView targetView:(UIView *)subView contrains:(NSDictionary * )dict{
     
     @try {
@@ -626,289 +505,6 @@
 }
 
 
--(CLOrientationLayOut *)clOrientationLayOutPortraitWithConfigure:(NSDictionary *)layOutPortraitDict{
-    if (layOutPortraitDict == nil) {
-        return CLOrientationLayOut.clDefaultOrientationLayOut;
-    }
-    
-    CLOrientationLayOut * clOrientationLayOutPortrait = [CLOrientationLayOut new];
-    
-    NSNumber * clLayoutLogoLeft     = layOutPortraitDict[@"setLogoLeft"];
-    NSNumber * clLayoutLogoTop      = layOutPortraitDict[@"setLogoTop"];
-    NSNumber * clLayoutLogoRight    = layOutPortraitDict[@"setLogoRight"];
-    NSNumber * clLayoutLogoBottom   = layOutPortraitDict[@"setLogoBottom"];
-    NSNumber * clLayoutLogoWidth    = layOutPortraitDict[@"setLogoWidth"];
-    NSNumber * clLayoutLogoHeight   = layOutPortraitDict[@"setLogoHeight"];
-    NSNumber * clLayoutLogoCenterX  = layOutPortraitDict[@"setLogoCenterX"];
-    NSNumber * clLayoutLogoCenterY  = layOutPortraitDict[@"setLogoCenterY"];
-    
-    clOrientationLayOutPortrait.clLayoutLogoLeft = clLayoutLogoLeft;
-    clOrientationLayOutPortrait.clLayoutLogoTop = clLayoutLogoTop;
-    clOrientationLayOutPortrait.clLayoutLogoRight = clLayoutLogoRight.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutLogoBottom = clLayoutLogoBottom.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutLogoWidth = clLayoutLogoWidth;
-    clOrientationLayOutPortrait.clLayoutLogoHeight = clLayoutLogoHeight;
-    clOrientationLayOutPortrait.clLayoutLogoCenterX = clLayoutLogoCenterX;
-    clOrientationLayOutPortrait.clLayoutLogoCenterY = clLayoutLogoCenterY;
-
-    /**手机号显示控件*/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutPhoneLeft    = layOutPortraitDict[@"setNumFieldLeft"];;
-    NSNumber * clLayoutPhoneTop     = layOutPortraitDict[@"setNumFieldTop"];;
-    NSNumber * clLayoutPhoneRight   = layOutPortraitDict[@"setNumFieldRight"];;
-    NSNumber * clLayoutPhoneBottom  = layOutPortraitDict[@"setNumFieldBottom"];;
-    NSNumber * clLayoutPhoneWidth   = layOutPortraitDict[@"setNumFieldWidth"];;
-    NSNumber * clLayoutPhoneHeight  = layOutPortraitDict[@"setNumFieldHeight"];;
-    NSNumber * clLayoutPhoneCenterX = layOutPortraitDict[@"setNumFieldCenterX"];;
-    NSNumber * clLayoutPhoneCenterY = layOutPortraitDict[@"setNumFieldCenterY"];;
-    clOrientationLayOutPortrait.clLayoutPhoneLeft = clLayoutPhoneLeft;
-    clOrientationLayOutPortrait.clLayoutPhoneTop = clLayoutPhoneTop;
-    clOrientationLayOutPortrait.clLayoutPhoneRight = clLayoutPhoneRight.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutPhoneBottom = clLayoutPhoneBottom.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutPhoneWidth = clLayoutPhoneWidth;
-    clOrientationLayOutPortrait.clLayoutPhoneHeight = clLayoutPhoneHeight;
-    clOrientationLayOutPortrait.clLayoutPhoneCenterX = clLayoutPhoneCenterX;
-    clOrientationLayOutPortrait.clLayoutPhoneCenterY = clLayoutPhoneCenterY;
-    /*一键登录按钮 控件
-     注： 一键登录授权按钮 不得隐藏
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutLoginBtnLeft     = layOutPortraitDict[@"setLogBtnLeft"];
-    NSNumber * clLayoutLoginBtnTop      = layOutPortraitDict[@"setLogBtnTop"];
-    NSNumber * clLayoutLoginBtnRight    = layOutPortraitDict[@"setLogBtnRight"];
-    NSNumber * clLayoutLoginBtnBottom   = layOutPortraitDict[@"setLogBtnBottom"];
-    NSNumber * clLayoutLoginBtnWidth    = layOutPortraitDict[@"setLogBtnWidth"];
-    NSNumber * clLayoutLoginBtnHeight   = layOutPortraitDict[@"setLogBtnHeight"];
-    NSNumber * clLayoutLoginBtnCenterX  = layOutPortraitDict[@"setLogBtnCenterX"];
-    NSNumber * clLayoutLoginBtnCenterY  = layOutPortraitDict[@"setLogBtnCenterY"];
-    clOrientationLayOutPortrait.clLayoutLoginBtnLeft = clLayoutLoginBtnLeft;
-    clOrientationLayOutPortrait.clLayoutLoginBtnTop = clLayoutLoginBtnTop;
-    clOrientationLayOutPortrait.clLayoutLoginBtnRight = clLayoutLoginBtnRight.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutLoginBtnBottom = clLayoutLoginBtnBottom.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutLoginBtnWidth = clLayoutLoginBtnWidth;
-    clOrientationLayOutPortrait.clLayoutLoginBtnHeight = clLayoutLoginBtnHeight;
-    clOrientationLayOutPortrait.clLayoutLoginBtnCenterX = clLayoutLoginBtnCenterX;
-    clOrientationLayOutPortrait.clLayoutLoginBtnCenterY = clLayoutLoginBtnCenterY;
-    /*隐私条款Privacy
-     注： 运营商隐私条款 不得隐藏， 用户条款不限制
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutAppPrivacyLeft   = layOutPortraitDict[@"setPrivacyLeft"];
-    NSNumber * clLayoutAppPrivacyTop    = layOutPortraitDict[@"setPrivacyTop"];
-    NSNumber * clLayoutAppPrivacyRight  = layOutPortraitDict[@"setPrivacyRight"];
-    NSNumber * clLayoutAppPrivacyBottom = layOutPortraitDict[@"setPrivacyBottom"];
-    NSNumber * clLayoutAppPrivacyWidth  = layOutPortraitDict[@"setPrivacyWidth"];
-    NSNumber * clLayoutAppPrivacyHeight = layOutPortraitDict[@"setPrivacyHeight"];
-    NSNumber * clLayoutAppPrivacyCenterX= layOutPortraitDict[@"setPrivacyCenterX"];
-    NSNumber * clLayoutAppPrivacyCenterY= layOutPortraitDict[@"setPrivacyCenterY"];
-    clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = clLayoutAppPrivacyLeft;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyTop = clLayoutAppPrivacyTop;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyBottom = clLayoutAppPrivacyBottom.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyWidth = clLayoutAppPrivacyWidth;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyHeight = clLayoutAppPrivacyHeight;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyCenterX = clLayoutAppPrivacyCenterX;
-    clOrientationLayOutPortrait.clLayoutAppPrivacyCenterY = clLayoutAppPrivacyCenterY;
-    /*Slogan 运营商品牌标签："认证服务由中国移动/联通/电信提供" label
-     注： 运营商品牌标签，不得隐藏
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutSloganLeft   = layOutPortraitDict[@"setSloganLeft"];
-    NSNumber * clLayoutSloganTop    = layOutPortraitDict[@"setSloganTop"];
-    NSNumber * clLayoutSloganRight  = layOutPortraitDict[@"setSloganRight"];
-    NSNumber * clLayoutSloganBottom = layOutPortraitDict[@"setSloganBottom"];
-    NSNumber * clLayoutSloganWidth  = layOutPortraitDict[@"setSloganWidth"];
-    NSNumber * clLayoutSloganHeight = layOutPortraitDict[@"setSloganHeight"];
-    NSNumber * clLayoutSloganCenterX= layOutPortraitDict[@"setSloganCenterX"];
-    NSNumber * clLayoutSloganCenterY= layOutPortraitDict[@"setSloganCenterY"];
-    clOrientationLayOutPortrait.clLayoutSloganLeft = clLayoutSloganLeft;
-    clOrientationLayOutPortrait.clLayoutSloganTop = clLayoutSloganTop;
-    clOrientationLayOutPortrait.clLayoutSloganRight = clLayoutSloganRight.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutSloganBottom = clLayoutSloganBottom.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutSloganWidth = clLayoutSloganWidth;
-    clOrientationLayOutPortrait.clLayoutSloganHeight = clLayoutSloganHeight;
-    clOrientationLayOutPortrait.clLayoutSloganCenterX = clLayoutSloganCenterX;
-    clOrientationLayOutPortrait.clLayoutSloganCenterY = clLayoutSloganCenterY;
-    
-    /*ShanYanSlogan 运营商品牌标签："认证服务由中国移动/联通/电信提供" label
-     注： 运营商品牌标签，不得隐藏
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutShanYanSloganLeft   = layOutPortraitDict[@"setShanYanSloganLeft"];
-    NSNumber * clLayoutShanYanSloganTop    = layOutPortraitDict[@"setShanYanSloganTop"];
-    NSNumber * clLayoutShanYanSloganRight  = layOutPortraitDict[@"setShanYanSloganRight"];
-    NSNumber * clLayoutShanYanSloganBottom = layOutPortraitDict[@"setShanYanSloganBottom"];
-    NSNumber * clLayoutShanYanSloganWidth  = layOutPortraitDict[@"setShanYanSloganWidth"];
-    NSNumber * clLayoutShanYanSloganHeight = layOutPortraitDict[@"setShanYanSloganHeight"];
-    NSNumber * clLayoutShanYanSloganCenterX= layOutPortraitDict[@"setShanYanSloganCenterX"];
-    NSNumber * clLayoutShanYanSloganCenterY= layOutPortraitDict[@"setShanYanSloganCenterY"];
-    clOrientationLayOutPortrait.clLayoutShanYanSloganLeft = clLayoutShanYanSloganLeft;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganTop = clLayoutShanYanSloganTop;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganRight = clLayoutShanYanSloganRight.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganBottom = clLayoutShanYanSloganBottom.clShanYanNegative;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganWidth = clLayoutShanYanSloganWidth;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganHeight = clLayoutShanYanSloganHeight;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganCenterX = clLayoutShanYanSloganCenterX;
-    clOrientationLayOutPortrait.clLayoutShanYanSloganCenterY = clLayoutShanYanSloganCenterY;
-    
-    /**窗口模式*/
-    /**窗口中心：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationCenterX = layOutPortraitDict[@"setAuthWindowOrientationCenterX"];
-    NSNumber * clAuthWindowOrientationCenterY = layOutPortraitDict[@"setAuthWindowOrientationCenterY"];
-    if (clAuthWindowOrientationCenterX && clAuthWindowOrientationCenterY) {
-        clOrientationLayOutPortrait.clAuthWindowOrientationCenter = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationCenterX.floatValue, clAuthWindowOrientationCenterY.floatValue)];
-    }
-    
-    /**窗口左上角：frame.origin：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationOriginX = layOutPortraitDict[@"setAuthWindowOrientationOriginX"];
-    NSNumber * clAuthWindowOrientationOriginY = layOutPortraitDict[@"setAuthWindowOrientationOriginY"];
-    if (clAuthWindowOrientationCenterX && clAuthWindowOrientationOriginY) {
-        clOrientationLayOutPortrait.clAuthWindowOrientationOrigin = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationOriginX.floatValue, clAuthWindowOrientationOriginY.floatValue)];
-    }
-    /**窗口大小：宽 float */
-    NSNumber * clAuthWindowOrientationWidth = layOutPortraitDict[@"setAuthWindowOrientationWidth"];
-    {
-        clOrientationLayOutPortrait.clAuthWindowOrientationWidth = clAuthWindowOrientationWidth;
-    }
-    /**窗口大小：高 float */
-    NSNumber * clAuthWindowOrientationHeight= layOutPortraitDict[@"setAuthWindowOrientationHeight"];
-    {
-        clOrientationLayOutPortrait.clAuthWindowOrientationHeight = clAuthWindowOrientationHeight;
-    }
-    return clOrientationLayOutPortrait;
-}
-
--(CLOrientationLayOut *)clOrientationLayOutLandscapeWithConfigure:(NSDictionary *)layOutLandscapeDict{
-    if (layOutLandscapeDict == nil) {
-        return CLOrientationLayOut.clDefaultOrientationLayOut;
-    }
-    
-    CLOrientationLayOut * clOrientationLayOutLandscape = [CLOrientationLayOut new];
-    
-    NSNumber * clLayoutLogoLeft     = layOutLandscapeDict[@"clLayoutLogoLeft"];
-    NSNumber * clLayoutLogoTop      = layOutLandscapeDict[@"clLayoutLogoTop"];
-    NSNumber * clLayoutLogoRight    = layOutLandscapeDict[@"clLayoutLogoRight"];
-    NSNumber * clLayoutLogoBottom   = layOutLandscapeDict[@"clLayoutLogoBottom"];
-    NSNumber * clLayoutLogoWidth    = layOutLandscapeDict[@"clLayoutLogoWidth"];
-    NSNumber * clLayoutLogoHeight   = layOutLandscapeDict[@"clLayoutLogoHeight"];
-    NSNumber * clLayoutLogoCenterX  = layOutLandscapeDict[@"clLayoutLogoCenterX"];
-    NSNumber * clLayoutLogoCenterY  = layOutLandscapeDict[@"clLayoutLogoCenterY"];
-    
-    clOrientationLayOutLandscape.clLayoutLogoLeft = clLayoutLogoLeft;
-    clOrientationLayOutLandscape.clLayoutLogoTop = clLayoutLogoTop;
-    clOrientationLayOutLandscape.clLayoutLogoRight = clLayoutLogoRight.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutLogoBottom = clLayoutLogoBottom.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutLogoWidth = clLayoutLogoWidth;
-    clOrientationLayOutLandscape.clLayoutLogoHeight = clLayoutLogoHeight;
-    clOrientationLayOutLandscape.clLayoutLogoCenterX = clLayoutLogoCenterX;
-    clOrientationLayOutLandscape.clLayoutLogoCenterY = clLayoutLogoCenterY;
-    
-    /**手机号显示控件*/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutPhoneLeft    = layOutLandscapeDict[@"clLayoutPhoneLeft"];;
-    NSNumber * clLayoutPhoneTop     = layOutLandscapeDict[@"clLayoutPhoneTop"];;
-    NSNumber * clLayoutPhoneRight   = layOutLandscapeDict[@"clLayoutPhoneRight"];;
-    NSNumber * clLayoutPhoneBottom  = layOutLandscapeDict[@"clLayoutPhoneBottom"];;
-    NSNumber * clLayoutPhoneWidth   = layOutLandscapeDict[@"clLayoutPhoneWidth"];;
-    NSNumber * clLayoutPhoneHeight  = layOutLandscapeDict[@"clLayoutPhoneHeight"];;
-    NSNumber * clLayoutPhoneCenterX = layOutLandscapeDict[@"clLayoutPhoneCenterX"];;
-    NSNumber * clLayoutPhoneCenterY = layOutLandscapeDict[@"clLayoutPhoneCenterY"];;
-    clOrientationLayOutLandscape.clLayoutPhoneLeft = clLayoutPhoneLeft;
-    clOrientationLayOutLandscape.clLayoutPhoneTop = clLayoutPhoneTop;
-    clOrientationLayOutLandscape.clLayoutPhoneRight = clLayoutPhoneRight.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutPhoneBottom = clLayoutPhoneBottom.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutPhoneWidth = clLayoutPhoneWidth;
-    clOrientationLayOutLandscape.clLayoutPhoneHeight = clLayoutPhoneHeight;
-    clOrientationLayOutLandscape.clLayoutPhoneCenterX = clLayoutPhoneCenterX;
-    clOrientationLayOutLandscape.clLayoutPhoneCenterY = clLayoutPhoneCenterY;
-    /*一键登录按钮 控件
-     注： 一键登录授权按钮 不得隐藏
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutLoginBtnLeft     = layOutLandscapeDict[@"clLayoutLoginBtnLeft"];
-    NSNumber * clLayoutLoginBtnTop      = layOutLandscapeDict[@"clLayoutLoginBtnTop"];
-    NSNumber * clLayoutLoginBtnRight    = layOutLandscapeDict[@"clLayoutLoginBtnRight"];
-    NSNumber * clLayoutLoginBtnBottom   = layOutLandscapeDict[@"clLayoutLoginBtnBottom"];
-    NSNumber * clLayoutLoginBtnWidth    = layOutLandscapeDict[@"clLayoutLoginBtnWidth"];
-    NSNumber * clLayoutLoginBtnHeight   = layOutLandscapeDict[@"clLayoutLoginBtnHeight"];
-    NSNumber * clLayoutLoginBtnCenterX  = layOutLandscapeDict[@"clLayoutLoginBtnCenterX"];
-    NSNumber * clLayoutLoginBtnCenterY  = layOutLandscapeDict[@"clLayoutLoginBtnCenterY"];
-    clOrientationLayOutLandscape.clLayoutLoginBtnLeft = clLayoutLoginBtnLeft;
-    clOrientationLayOutLandscape.clLayoutLoginBtnTop = clLayoutLoginBtnTop;
-    clOrientationLayOutLandscape.clLayoutLoginBtnRight = clLayoutLoginBtnRight.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutLoginBtnBottom = clLayoutLoginBtnBottom.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutLoginBtnWidth = clLayoutLoginBtnWidth;
-    clOrientationLayOutLandscape.clLayoutLoginBtnHeight = clLayoutLoginBtnHeight;
-    clOrientationLayOutLandscape.clLayoutLoginBtnCenterX = clLayoutLoginBtnCenterX;
-    clOrientationLayOutLandscape.clLayoutLoginBtnCenterY = clLayoutLoginBtnCenterY;
-    /*隐私条款Privacy
-     注： 运营商隐私条款 不得隐藏， 用户条款不限制
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutAppPrivacyLeft   = layOutLandscapeDict[@"clLayoutAppPrivacyLeft"];
-    NSNumber * clLayoutAppPrivacyTop    = layOutLandscapeDict[@"clLayoutAppPrivacyTop"];
-    NSNumber * clLayoutAppPrivacyRight  = layOutLandscapeDict[@"clLayoutAppPrivacyRight"];
-    NSNumber * clLayoutAppPrivacyBottom = layOutLandscapeDict[@"clLayoutAppPrivacyBottom"];
-    NSNumber * clLayoutAppPrivacyWidth  = layOutLandscapeDict[@"clLayoutAppPrivacyWidth"];
-    NSNumber * clLayoutAppPrivacyHeight = layOutLandscapeDict[@"clLayoutAppPrivacyHeight"];
-    NSNumber * clLayoutAppPrivacyCenterX= layOutLandscapeDict[@"clLayoutAppPrivacyCenterX"];
-    NSNumber * clLayoutAppPrivacyCenterY= layOutLandscapeDict[@"clLayoutAppPrivacyCenterY"];
-    clOrientationLayOutLandscape.clLayoutAppPrivacyLeft = clLayoutAppPrivacyLeft;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyTop = clLayoutAppPrivacyTop;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyBottom = clLayoutAppPrivacyBottom.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyWidth = clLayoutAppPrivacyWidth;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyHeight = clLayoutAppPrivacyHeight;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyCenterX = clLayoutAppPrivacyCenterX;
-    clOrientationLayOutLandscape.clLayoutAppPrivacyCenterY = clLayoutAppPrivacyCenterY;
-    /*Slogan 运营商品牌标签："认证服务由中国移动/联通/电信提供" label
-     注： 运营商品牌标签，不得隐藏
-     **/
-    //layout 约束均相对vc.view
-    NSNumber * clLayoutSloganLeft   = layOutLandscapeDict[@"clLayoutSloganLeft"];
-    NSNumber * clLayoutSloganTop    = layOutLandscapeDict[@"clLayoutSloganTop"];
-    NSNumber * clLayoutSloganRight  = layOutLandscapeDict[@"clLayoutSloganRight"];
-    NSNumber * clLayoutSloganBottom = layOutLandscapeDict[@"clLayoutSloganBottom"];
-    NSNumber * clLayoutSloganWidth  = layOutLandscapeDict[@"clLayoutSloganWidth"];
-    NSNumber * clLayoutSloganHeight = layOutLandscapeDict[@"clLayoutSloganHeight"];
-    NSNumber * clLayoutSloganCenterX= layOutLandscapeDict[@"clLayoutSloganCenterX"];
-    NSNumber * clLayoutSloganCenterY= layOutLandscapeDict[@"clLayoutSloganCenterY"];
-    clOrientationLayOutLandscape.clLayoutSloganLeft = clLayoutSloganLeft;
-    clOrientationLayOutLandscape.clLayoutSloganTop = clLayoutSloganTop;
-    clOrientationLayOutLandscape.clLayoutSloganRight = clLayoutSloganRight.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutSloganBottom = clLayoutSloganBottom.clShanYanNegative;
-    clOrientationLayOutLandscape.clLayoutSloganWidth = clLayoutSloganWidth;
-    clOrientationLayOutLandscape.clLayoutSloganHeight = clLayoutSloganHeight;
-    clOrientationLayOutLandscape.clLayoutSloganCenterX = clLayoutSloganCenterX;
-    clOrientationLayOutLandscape.clLayoutSloganCenterY = clLayoutSloganCenterY;
-
-    /**窗口模式*/
-    /**窗口中心：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationCenterX = layOutLandscapeDict[@"clAuthWindowOrientationCenterX"];
-    NSNumber * clAuthWindowOrientationCenterY = layOutLandscapeDict[@"clAuthWindowOrientationCenterY"];
-    if (clAuthWindowOrientationCenterX && clAuthWindowOrientationCenterX) {
-        clOrientationLayOutLandscape.clAuthWindowOrientationCenter = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationCenterX.floatValue, clAuthWindowOrientationCenterY.floatValue)];
-    }
-    
-    /**窗口左上角：frame.origin：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationOriginX = layOutLandscapeDict[@"clAuthWindowOrientationOriginX"];
-    NSNumber * clAuthWindowOrientationOriginY = layOutLandscapeDict[@"clAuthWindowOrientationOriginY"];
-    if (clAuthWindowOrientationCenterX && clAuthWindowOrientationOriginY) {
-        clOrientationLayOutLandscape.clAuthWindowOrientationOrigin = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationOriginX.floatValue, clAuthWindowOrientationOriginY.floatValue)];
-    }
-    /**窗口大小：宽 float */
-    NSNumber * clAuthWindowOrientationWidth = layOutLandscapeDict[@"clAuthWindowOrientationWidth"];
-    {
-        clOrientationLayOutLandscape.clAuthWindowOrientationWidth = clAuthWindowOrientationWidth;
-    }
-    /**窗口大小：高 float */
-    NSNumber * clAuthWindowOrientationHeight= layOutLandscapeDict[@"clAuthWindowOrientationHeight"];
-    {
-        clOrientationLayOutLandscape.clAuthWindowOrientationHeight = clAuthWindowOrientationHeight;
-    }
-    return clOrientationLayOutLandscape;
-}
-
 - (void)finishAuthControllerCompletion:(FlutterResult)completion{
     [CLShanYanSDKManager finishAuthControllerAnimated:YES
                                            Completion:^{
@@ -926,8 +522,6 @@
         }
     }];
 }
-
-
 
 
 // 获取栈顶 UIViewController
