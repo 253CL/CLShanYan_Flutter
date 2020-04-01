@@ -209,7 +209,8 @@
     
     CGFloat wibdowCenterYOffset = 0;
     CGFloat wibdowHeight = 350;
-    
+    CGFloat windowPadding = 40;
+
     CGFloat windowTop = (screenHeight_Portrait - wibdowHeight)*0.5 - wibdowCenterYOffset;
     
     CGFloat tipLabeltop = 30;
@@ -244,8 +245,8 @@
         [customAreaView addSubview:whiteBGView];
         
         NSDictionary * whiteBGViewContraint = @{
-            @"left":@(30),
-            @"right":@(30),
+            @"left":@(windowPadding),
+            @"right":@(windowPadding),
             @"height":@(wibdowHeight),
             @"centerY":@(-wibdowCenterYOffset),
         };
@@ -306,22 +307,22 @@
     
    clOrientationLayOutPortrait.clLayoutPhoneTop = @(windowTop + tipLabeltop + tipLabelHeight + phonetop);
    clOrientationLayOutPortrait.clLayoutPhoneHeight = @(phoneHeight);
-   clOrientationLayOutPortrait.clLayoutPhoneLeft = @(30);
-   clOrientationLayOutPortrait.clLayoutPhoneRight = @(-30);
+   clOrientationLayOutPortrait.clLayoutPhoneLeft = @(windowPadding);
+   clOrientationLayOutPortrait.clLayoutPhoneRight = @(-windowPadding);
     
     //一键登录按钮垂直居中，其他控件以此参考竖直位置
     clOrientationLayOutPortrait.clLayoutLoginBtnTop = @(clOrientationLayOutPortrait.clLayoutPhoneTop.floatValue + phoneHeight + logButtontop);
     clOrientationLayOutPortrait.clLayoutLoginBtnHeight = @(logButtonHeight);
-    clOrientationLayOutPortrait.clLayoutLoginBtnLeft = @(30 + 30);
-    clOrientationLayOutPortrait.clLayoutLoginBtnRight = @(-30 - 30);
+    clOrientationLayOutPortrait.clLayoutLoginBtnLeft = @(30 + windowPadding);
+    clOrientationLayOutPortrait.clLayoutLoginBtnRight = @(-30 - windowPadding);
     
     //Hide
     clOrientationLayOutPortrait.clLayoutSloganWidth = @(0);
     clOrientationLayOutPortrait.clLayoutSloganHeight = @(0);
     
     clOrientationLayOutPortrait.clLayoutAppPrivacyTop = @(clOrientationLayOutPortrait.clLayoutLoginBtnTop.floatValue + logButtonHeight + otherWaytop + otherWayHeight + appPrivacyTop);
-    clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = @(30 + 30);
-    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = @(-30 - 30);
+    clOrientationLayOutPortrait.clLayoutAppPrivacyLeft = @(30 + windowPadding);
+    clOrientationLayOutPortrait.clLayoutAppPrivacyRight = @(-30 - windowPadding);
     clOrientationLayOutPortrait.clLayoutAppPrivacyHeight = @(appPrivacyHeight);
 //    clOrientationLayOutPortrait.clLayoutAppPrivacyBottom = @(-20);
     
