@@ -47,6 +47,8 @@
       [self setActionListener];
   }else if ([@"startAuthentication" isEqualToString:call.method]){
       [self startAuthentication:result];
+  }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
+      [self finishAuthControllerCompletion:result];
   } else {
     result(FlutterMethodNotImplemented);
   }
