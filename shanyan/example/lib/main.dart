@@ -171,6 +171,57 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAppPrivacyFirst = ["中策云店服务协议","https://www.baidu.com"];
     shanYanUIConfig.ios.setAppPrivacySecond = ["中策云店赢驷条款","https://www.sina.com"];
 
+    /*Android 页面样式具体设置*/
+    shanYanUIConfig.androidPortrait.isFinish = true;
+    shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
+    shanYanUIConfig.androidPortrait.setDialogTheme = ["120", "150", "0", "0", "false"];
+    shanYanUIConfig.androidPortrait.setLogoOffsetY = 20;
+    shanYanUIConfig.androidPortrait.setNumFieldOffsetY = 85;
+    shanYanUIConfig.androidPortrait.setSloganOffsetY = 110;
+    shanYanUIConfig.androidPortrait.setLogBtnOffsetY = 130;
+
+    List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
+    String layout_name = "relative_item_view";
+    ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
+        layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+    relativeLayoutWidget.top = 270;
+    relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
+    shanYanCustomWidgetLayout.add(relativeLayoutWidget);
+    List<ShanYanCustomWidget> shanyanCustomWidgetAndroid = [];
+    ShanYanCustomWidget buttonWidgetAndroid =
+    ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+    buttonWidgetAndroid.textContent = "其他方式登录 >";
+    buttonWidgetAndroid.top = 200;
+    buttonWidgetAndroid.width = 150;
+//    buttonWidgetAndroid.left = 50;
+//    buttonWidgetAndroid.right = 50;
+    buttonWidgetAndroid.height = 40;
+    buttonWidgetAndroid.backgroundColor = "#330000";
+    buttonWidgetAndroid.isFinish = true;
+    buttonWidgetAndroid.textAlignment = ShanYanCustomWidgetGravityType.center;
+    shanyanCustomWidgetAndroid.add(buttonWidgetAndroid);
+    shanYanUIConfig.androidPortrait.widgetLayouts = shanYanCustomWidgetLayout;
+    shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidgetAndroid;
+
+    shanYanUIConfig.androidLandscape.isFinish = true;
+    shanYanUIConfig.androidLandscape.setDialogTheme = ["100", "120", "0", "0", "false"];
+    shanYanUIConfig.androidLandscape.setLogoImgPath = "sy_logo";
+    shanYanUIConfig.androidLandscape.setAuthNavHidden =true;
+    shanYanUIConfig.androidLandscape.setLogoOffsetY = 14;
+    shanYanUIConfig.androidLandscape.setNumFieldOffsetY = 65;
+    shanYanUIConfig.androidLandscape.setSloganOffsetY = 100;
+    shanYanUIConfig.androidLandscape.setLogBtnOffsetY = 120;
+
+
+    List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayoutLand = [];
+    String layout_name_land = "relative_item_view";
+    ShanYanCustomWidgetLayout relativeLayoutWidgetLand = ShanYanCustomWidgetLayout(
+        layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
+    relativeLayoutWidgetLand.top = 200;
+    relativeLayoutWidgetLand.widgetLayoutId = ["weixin", "qq", "weibo"];
+    shanYanCustomWidgetLayoutLand.add(relativeLayoutWidgetLand);
+
+    shanYanUIConfig.androidLandscape.widgetLayouts = shanYanCustomWidgetLayoutLand;
     oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
 
     //隐私协议
