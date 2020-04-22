@@ -8,7 +8,7 @@ typedef ShanYanWidgetEventListener = void Function(String widgetId);
 
 /// 监听添加的自定义布局的点击事件
 typedef ShanYanWidgetLayoutEventListener = void Function(
-    WidgetLayoutOnClickEvent event);
+    String shanYanWidgetLayoutEvent);
 
 /// 闪验SDK 授权页默认控件点击事件回调
 typedef AuthPageOnClickListener = void Function(AuthPageOnClickEvent event);
@@ -35,7 +35,7 @@ class OneKeyLoginManager {
 
   // 自定布局的点击事件 Android
   addClikWidgetLayoutEventListener(ShanYanWidgetLayoutEventListener callback) {
-    _eventHanders.clickLayoutEvents.add(callback);
+    _eventHanders.shanYanWidgetLayoutEventListener = callback;
   }
 
   @visibleForTesting
@@ -133,13 +133,11 @@ class OneKeyLoginManager {
         break;
       case 'onReceiveClickWidgetLayoutEvent':
         {
-          for (ShanYanWidgetLayoutEventListener cb
-          in _eventHanders.clickLayoutEvents) {
-            Map json = call.arguments.cast<dynamic, dynamic>();
-            WidgetLayoutOnClickEvent ev =
-            WidgetLayoutOnClickEvent.fromJson(json);
-            cb(ev);
+          String widgetId = call.arguments.cast<dynamic, dynamic>()['widgetLayoutId'];
+          if (null != widgetId) {
+            _eventHanders.shanYanWidgetLayoutEventListener(widgetId);
           }
+
         }
         break;
       default:
@@ -203,7 +201,8 @@ class ShanYanEventHandlers {
 
   factory ShanYanEventHandlers() => _instance;
   Map<String, ShanYanWidgetEventListener> clickEventsMap = Map();
-  List<ShanYanWidgetLayoutEventListener> clickLayoutEvents = [];
+  ShanYanWidgetLayoutEventListener shanYanWidgetLayoutEventListener;
+
   List<AuthPageOnClickListener> authPageEvents = [];
 }
 

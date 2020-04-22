@@ -572,15 +572,18 @@ class _MyAppState extends State<MyApp> {
       relativeLayoutWidget.top = 300;
       relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
       oneKeyLoginManager.addClikWidgetLayoutEventListener(
-              (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
-            Map map = widgetLayoutOnClickEvent.toMap();
-            if ("weixin" == map[shanyan_widgetLayoutId]) {
-              _toast("点击 微信");
-            } else if ("qq" == map[shanyan_widgetLayoutId]) {
-              _toast("点击 QQ");
-            } else if ("weibo" == map[shanyan_widgetLayoutId]) {
-              _toast("点击 微博");
-            }
+              (eventId) {
+                switch(eventId){
+                  case "weixin":
+                    _toast("点击 微信");
+                    break;
+                  case "qq":
+                    _toast("点击 QQ");
+                    break;
+                  case "weibo":
+                    _toast("点击 微博");
+                    break;
+                }
           });
 
       shanYanCustomWidgetLayout.add(relativeLayoutWidget);
@@ -590,7 +593,7 @@ class _MyAppState extends State<MyApp> {
       ShanYanCustomWidget buttonWidget =
       ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.TextView);
       buttonWidget.textContent = "其他方式登录 >";
-      buttonWidget.bottom = 200;
+      buttonWidget.bottom = 150;
       buttonWidget.width = 150;
       buttonWidget.height = 40;
       buttonWidget.backgroundColor ="#330000";
@@ -871,14 +874,17 @@ class _MyAppState extends State<MyApp> {
       relativeLayoutWidget.top = 200;
       relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
       oneKeyLoginManager.addClikWidgetLayoutEventListener(
-              (WidgetLayoutOnClickEvent widgetLayoutOnClickEvent) {
-            Map map = widgetLayoutOnClickEvent.toMap();
-            if ("weixin" == map[shanyan_widgetLayoutId]) {
-              _toast("点击 微信");
-            } else if ("qq" == map[shanyan_widgetLayoutId]) {
-              _toast("点击 QQ");
-            } else if ("weibo" == map[shanyan_widgetLayoutId]) {
-              _toast("点击 微博");
+              (eventId) {
+            switch(eventId){
+              case "weixin":
+                _toast("点击 微信");
+                break;
+              case "qq":
+                _toast("点击 QQ");
+                break;
+              case "weibo":
+                _toast("点击 微博");
+                break;
             }
           });
 

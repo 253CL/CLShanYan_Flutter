@@ -248,78 +248,32 @@ public class ShanyanPlugin implements MethodCallHandler {
             }
             if (height > 0) {
                 mLayoutParams1.height = dp2Pix(context, (float) height);
-                ;
             }
+
             if (null != relativeLayout) {
                 relativeLayout.setLayoutParams(mLayoutParams1);
                 //授权页 隐私协议栏
                 if (null != widgetId) {
-                    ArrayList<String> widgetIdList = (ArrayList) widgetId;
-                    widgetIdList.addAll(Arrays.asList("", "", "", "", ""));
-                    for (int i = 0; i < 5; i++) {
-                        switch (i) {
-                            case 0:
-                                final Map<String, Object> jsonMap = new HashMap<>();
-                                jsonMap.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 1:
-                                final Map<String, Object> jsonMap1 = new HashMap<>();
-                                jsonMap1.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap1);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 2:
-                                final Map<String, Object> jsonMap2 = new HashMap<>();
-                                jsonMap2.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap2);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 3:
-                                final Map<String, Object> jsonMap3 = new HashMap<>();
-                                jsonMap3.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap3);
-                                        }
-                                    });
-                                }
-                                break;
-                            case 4:
-                                final Map<String, Object> jsonMap4 = new HashMap<>();
-                                jsonMap4.put(shanyan_widgetLayoutId, widgetIdList.get(i));
-                                if (0 != (getId(widgetIdList.get(i)))) {
-                                    relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap4);
-                                        }
-                                    });
-                                }
-                                break;
-                        }
+                    final ArrayList<String> widgetIdList = (ArrayList) widgetId;
+                    if (null != widgetIdList && widgetIdList.size() > 0) {
+                       
+                        for (int i = 0; i < widgetIdList.size(); i++) {
 
+                            if (0 != (getId(widgetIdList.get(i)))) {
+                                Log.d(TAG, "widgetIdList.get(i)============"+widgetIdList.get(i));
+                                final int finalI = i;
+                                relativeLayout.findViewById(getId(widgetIdList.get(i))).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        final Map<String, Object> jsonMap = new HashMap<>();
+                                        jsonMap.put(shanyan_widgetLayoutId, widgetIdList.get(finalI));
+                                        Log.d(TAG, "widgetIdList.size()"+widgetIdList.size());
+                                        channel.invokeMethod("onReceiveClickWidgetLayoutEvent", jsonMap);
+                                    }
+                                });
+                            }
+
+                        }
                     }
                 }
                 builder.addCustomView(relativeLayout, false, false, null);
@@ -327,6 +281,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         } else {
             Log.d(TAG, "layout【" + widgetLayoutName + "】 not found!");
         }
+
     }
 
     /**
