@@ -285,7 +285,7 @@ class ShanYanUIConfigIOS {
   bool setAppPrivacyNeedSizeToFit;               /// 是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑
   /**UITextView.textContainerInset 文字与TextView控件内边距 UIEdgeInset  eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyTextContainerInset;
-  num setAppPrivacyLineFragmentPadding;          /// 文字与TextView控件左右内边距
+//  num setAppPrivacyLineFragmentPadding;          /// 文字与TextView控件左右内边距
   /**UITextView.contentInset UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyContentInset;
 

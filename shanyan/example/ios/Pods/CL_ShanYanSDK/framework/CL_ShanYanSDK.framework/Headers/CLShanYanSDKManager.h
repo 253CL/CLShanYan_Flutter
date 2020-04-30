@@ -29,14 +29,17 @@
  */
 -(void)clShanYanSDKManagerAuthPageAfterViewDidLoad:(UIView *_Nonnull)authPageView currentTelecom:(NSString *_Nullable)telecom ;
 
-/**统一事件监听方法
- *type：事件类型（1，2）
- *1：隐私协议点击
+/**
+ * 统一事件监听方法
+ * type：事件类型（1，2，3）
+ * 1：隐私协议点击
  * - 同-clShanYanSDKManagerWebPrivacyClicked:privacyIndex:currentTelecom
  * code：0,1,2,3（协议页序号），message：协议名_当前运营商类型
- *2：协议勾选框点击
+ * 2：协议勾选框点击
  * code：0,1（0为未选中，1为选中）
- */
+ * 3："一键登录"按钮点击
+ * code：0,1（0为协议勾选框未选中，1为选中）
+*/
 -(void)clShanYanActionListener:(NSInteger)type code:(NSInteger)code  message:(NSString *_Nullable)message;
 @end
 
@@ -143,6 +146,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)forbiddenFullLogReport:(BOOL)forbidden;
 
 +(void)sdkInit:(NSString *)appId complete:(nullable CLComplete)complete;
+
++ (BOOL)checkAuthEnable;
 
 /**
  * 当前SDK版本号

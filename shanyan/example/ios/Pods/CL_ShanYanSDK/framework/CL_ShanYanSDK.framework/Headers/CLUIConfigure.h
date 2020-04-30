@@ -181,10 +181,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSNumber* clAppPrivacyNeedSizeToFit;
 /**UITextView.textContainerInset 文字与TextView控件内边距 UIEdgeInset  eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 @property (nonatomic,strong)NSValue* clAppPrivacyTextContainerInset;
-/**UITextView.textContainer.lineFragmentPadding 文字与TextView控件左右内边距 CGFloat  eg.@(0)*/
-@property (nonatomic,strong)NSNumber* clAppPrivacyLineFragmentPadding;
-/**UITextView.contentInset UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
-@property (nonatomic,strong)NSValue* clAppPrivacyContentInset;
+
 /**隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效*/
 @property (nonatomic,copy) NSString  * clAppPrivacyAbbreviatedName;
 /*
@@ -223,6 +220,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSAttributedString * clAppPrivacyWebAttributesTitle;
 /**运营商隐私协议WEB页面导航栏标题 默认显示运营商条款名称*/
 @property (nonatomic,strong)NSAttributedString * clAppPrivacyWebNormalAttributesTitle;
+/**自定义协议标题-按自定义协议对应顺序*/
+@property (nonatomic,strong)NSArray<NSString*> * clAppPrivacyWebTitleList;
+
 /**隐私协议标题文本属性（用户协议&&运营商协议）*/
 @property (nonatomic,strong)NSDictionary * clAppPrivacyWebAttributes;
 /**隐私协议WEB页面导航返回按钮图片*/
@@ -293,6 +293,12 @@ NS_ASSUME_NONNULL_BEGIN
  - 请自行在containerView添加自定义提示
  */
 @property (nonatomic,copy)void(^checkBoxTipView)(UIView * containerView);
+/**checkBox 未勾选时 提示文本，默认："请勾选协议"*/
+@property (nonatomic,copy) NSString *clCheckBoxTipMsg;
+/**使用sdk内部“一键登录”按钮点击时的吐丝提示("请勾选协议")
+ * NO:默认使用sdk内部吐丝 YES:禁止使用
+ */
+@property (nonatomic,strong) NSNumber *clCheckBoxTipDisable;
 
 /*Loading*/
 /**Loading 大小 CGSize eg.[NSValue valueWithCGSize:CGSizeMake(50, 50)]*/

@@ -244,7 +244,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacySmhHidden = true;
     shanYanUIConfig.ios.setAppPrivacyLineSpacing = 5;
     shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
-    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 10;
+//    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 10;
     shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
     shanYanUIConfig.ios.setAppPrivacyColor = ["#808080", "#00cc00"];
 
@@ -285,7 +285,7 @@ class _MyAppState extends State<MyApp> {
 //    shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyTop = true;
     shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyCenterY = true;
     shanYanUIConfig.ios.setUncheckedImgPath = "checkBoxNor";
-    shanYanUIConfig.ios.setCheckedImgPath =  "checkBoxNor";
+    shanYanUIConfig.ios.setCheckedImgPath =  "checkBoxSEL";
     shanYanUIConfig.ios.setCheckBoxWH = [40,40];
 //    shanYanUIConfig.ios.setCheckBoxImageEdgeInsets = [5,10,5,0];
 
@@ -507,7 +507,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setPrivacySmhHidden = true;
     shanYanUIConfig.ios.setAppPrivacyLineSpacing = 5;
     shanYanUIConfig.ios.setAppPrivacyNeedSizeToFit = false;
-    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 10;
+//    shanYanUIConfig.ios.setAppPrivacyLineFragmentPadding = 10; 属性已失效
     shanYanUIConfig.ios.setAppPrivacyAbbreviatedName = "666";
     shanYanUIConfig.ios.setAppPrivacyColor = ["#808080", "#00cc00"];
 
@@ -548,9 +548,9 @@ class _MyAppState extends State<MyApp> {
 //    shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyTop = true;
     shanYanUIConfig.ios.setCheckBoxVerticalAlignmentToAppPrivacyCenterY = true;
     shanYanUIConfig.ios.setUncheckedImgPath = "checkBoxNor";
-    shanYanUIConfig.ios.setCheckedImgPath =  "checkBoxNor";
+    shanYanUIConfig.ios.setCheckedImgPath =  "checkBoxSEL";
     shanYanUIConfig.ios.setCheckBoxWH = [40,40];
-    shanYanUIConfig.ios.setCheckBoxImageEdgeInsets = [6,12,6,0];
+    shanYanUIConfig.ios.setCheckBoxImageEdgeInsets = [0,12,12,0];
 
     shanYanUIConfig.ios.setLoadingCornerRadius = 10;
     shanYanUIConfig.ios.setLoadingBackgroundColor = "#E68147";

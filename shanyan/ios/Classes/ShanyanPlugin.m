@@ -569,12 +569,12 @@
         {
             baseConfigure.clAppPrivacyLineSpacing = clAppPrivacyLineSpacing;
         };
-        NSNumber* clAppPrivacyLineFragmentPadding = configureDic[@"setAppPrivacyLineFragmentPadding"];
-        {
-            if (clAppPrivacyLineFragmentPadding) {
-                baseConfigure.clAppPrivacyLineFragmentPadding = clAppPrivacyLineFragmentPadding;
-            }
-        }
+//        NSNumber* clAppPrivacyLineFragmentPadding = configureDic[@"setAppPrivacyLineFragmentPadding"];
+//        {
+//            if (clAppPrivacyLineFragmentPadding) {
+//                baseConfigure.clAppPrivacyLineFragmentPadding = clAppPrivacyLineFragmentPadding;
+//            }
+//        }
         /**是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑 BOOL eg.@(YES)*/
         NSNumber* clAppPrivacyNeedSizeToFit = configureDic[@"setAppPrivacyNeedSizeToFit"];;
         {

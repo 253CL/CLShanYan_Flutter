@@ -89,8 +89,6 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setPrivacySmhHidden = json['setPrivacySmhHidden'] as bool
     ..setAppPrivacyLineSpacing = json['setAppPrivacyLineSpacing'] as num
     ..setAppPrivacyNeedSizeToFit = json['setAppPrivacyNeedSizeToFit'] as bool
-    ..setAppPrivacyLineFragmentPadding =
-        json['setAppPrivacyLineFragmentPadding'] as num
     ..setAppPrivacyAbbreviatedName =
         json['setAppPrivacyAbbreviatedName'] as String
     ..setAppPrivacyFirst =
@@ -129,12 +127,13 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setSloganTextSize = json['setSloganTextSize'] as num
     ..setSloganTextBold = json['setSloganTextBold'] as bool
     ..setSloganTextColor = json['setSloganTextColor'] as String
-    ..setSloganTextAlignment =
-        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setSloganTextAlignment'])
+    ..setSloganTextAlignment = _$enumDecodeNullable(
+        _$iOSTextAlignmentEnumMap, json['setSloganTextAlignment'])
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as num
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool
     ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String
-    ..setShanYanSloganTextAlignment = _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSloganTextAlignment'])
+    ..setShanYanSloganTextAlignment =
+        _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSloganTextAlignment'])
     ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool
     ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool
     ..setPrivacyState = json['setPrivacyState'] as bool
@@ -224,8 +223,6 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setAppPrivacyLineSpacing', instance.setAppPrivacyLineSpacing);
   writeNotNull(
       'setAppPrivacyNeedSizeToFit', instance.setAppPrivacyNeedSizeToFit);
-  writeNotNull('setAppPrivacyLineFragmentPadding',
-      instance.setAppPrivacyLineFragmentPadding);
   writeNotNull(
       'setAppPrivacyAbbreviatedName', instance.setAppPrivacyAbbreviatedName);
   writeNotNull('setAppPrivacyFirst', instance.setAppPrivacyFirst);
