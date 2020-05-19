@@ -852,7 +852,7 @@ class _MyAppState extends State<MyApp> {
       shanYanUIConfig.setAppPrivacyTwo = ["协议2", "https://baidu.com/"];
       shanYanUIConfig.setAppPrivacyThree = ["协议3", "https://baidu.com/"];
       shanYanUIConfig.setPrivacyText = ["登录即同意", "、", "、", "和", "授权"];
-      shanYanUIConfig.setDialogTheme = ["120", "150", "0", "0", "false"];
+      shanYanUIConfig.setDialogTheme = ["300", "500", "0", "0", "false"];
       shanYanUIConfig.setLogoWidth=108;
       shanYanUIConfig.setLogoHeight=45;
       shanYanUIConfig.setLogoHidden=false;
