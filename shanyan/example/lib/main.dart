@@ -651,7 +651,7 @@ class _MyAppState extends State<MyApp> {
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = true;
     shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
-    shanYanUIConfig.androidPortrait.setDialogTheme = ["120", "150", "0", "0", "false"];
+    shanYanUIConfig.androidPortrait.setDialogTheme = ["300", "500", "0", "0", "false"];
     shanYanUIConfig.androidPortrait.setLogoOffsetY = 20;
     shanYanUIConfig.androidPortrait.setNumFieldOffsetY = 85;
     shanYanUIConfig.androidPortrait.setSloganOffsetY = 110;
@@ -681,7 +681,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidgetAndroid;
 
     shanYanUIConfig.androidLandscape.isFinish = true;
-    shanYanUIConfig.androidLandscape.setDialogTheme = ["100", "120", "0", "0", "false"];
+    shanYanUIConfig.androidLandscape.setDialogTheme = ["420", "300", "0", "0", "false"];
     shanYanUIConfig.androidLandscape.setLogoImgPath = "sy_logo";
     shanYanUIConfig.androidLandscape.setAuthNavHidden =true;
     shanYanUIConfig.androidLandscape.setLogoOffsetY = 14;

@@ -991,9 +991,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setDialogTheme) {
             ArrayList<String> setDialogThemeList = (ArrayList) setDialogTheme;
             setDialogThemeList.addAll(Arrays.asList("0", "0", "0", "0", "false"));
-            builder.setDialogTheme(true, dp2Pix(context, Integer.parseInt(setDialogThemeList.get(0))),
-                    dp2Pix(context, Integer.parseInt(setDialogThemeList.get(1))), dp2Pix(context, Integer.parseInt(setDialogThemeList.get(2))),
-                    dp2Pix(context, Integer.parseInt(setDialogThemeList.get(3))), Boolean.parseBoolean(setDialogThemeList.get(4)));
+            builder.setDialogTheme(true, Integer.parseInt(setDialogThemeList.get(0)),
+                    Integer.parseInt(setDialogThemeList.get(1)), Integer.parseInt(setDialogThemeList.get(2)),
+                    Integer.parseInt(setDialogThemeList.get(3)), Boolean.parseBoolean(setDialogThemeList.get(4)));
         }
 
     }
