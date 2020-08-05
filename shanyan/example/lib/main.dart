@@ -115,6 +115,8 @@ class _MyAppState extends State<MyApp> {
         _content = shanYanResult.toJson().toString();
       });
 
+      oneKeyLoginManager.setLoadingVisibility(true);
+
       if (1000 == shanYanResult.code) {
         ///一键登录获取token成功
       } else if (1011 == shanYanResult.code){
@@ -188,7 +190,7 @@ class _MyAppState extends State<MyApp> {
     ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
 
     /*iOS 页面样式设置*/
-    shanYanUIConfig.ios.isFinish = false;
+    shanYanUIConfig.ios.isFinish = true;
     shanYanUIConfig.ios.setAuthBGImgPath = "sy_login_test_bg";
 
     shanYanUIConfig.ios.setPreferredStatusBarStyle = iOSStatusBarStyle.styleLightContent;

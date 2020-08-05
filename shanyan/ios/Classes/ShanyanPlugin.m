@@ -49,9 +49,13 @@
       [self startAuthentication:result];
   }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
       [self finishAuthControllerCompletion:result];
+  }else if ([@"setLoadingVisibility" isEqualToString:call.method]){
+      [self setLoadingVisibility:call];
   } else {
     result(FlutterMethodNotImplemented);
   }
+
+
     
 //    else if ([@"setCustomInterface" isEqualToString:call.method]){
 //        [self setCustomInterface:result];
@@ -66,6 +70,15 @@
 //    }else if ([@"startAuthentication" isEqualToString:call.method]){
 //        [self startAuthentication:result];
 //    }
+}
+
+- (void)setLoadingVisibility:(FlutterMethodCall*)call {
+    NSDictionary* argv = call.arguments;
+    if (argv != nil && [argv isKindOfClass:[NSDictionary class]] && [argv[@"visibility"] boolValue] == YES) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [CLShanYanSDKManager hideLoading];
+        });
+    }
 }
 
 -(void)setActionListener{

@@ -114,11 +114,11 @@ class OneKeyLoginManager {
 //    _channel.invokeMethod("setCheckBoxValue", {"isChecked": isChecked});
 //  }
 //
-//  ///闪验SDK 设置授权页loading是否隐藏 Android+IOS
-//  void setLoadingVisibility(bool visibility) {
-//    _channel.invokeMethod("setLoadingVisibility", {"visibility": visibility});
-//  }
-//
+  ///闪验SDK 设置授权页loading是否隐藏 Android+IOS
+  void setLoadingVisibility(bool visibility) {
+    _channel.invokeMethod("setLoadingVisibility", {"visibility": visibility});
+  }
+
   ///闪验SDK 本机号校验获取token (Android+iOS)
   Future<ShanYanResult> startAuthentication() async {
     Map<dynamic, dynamic> result =
@@ -127,7 +127,6 @@ class OneKeyLoginManager {
     return ShanYanResult.fromJson(newResult);
   }
 
-//
   ///闪验SDK 配置授权页 Android
   void setAuthThemeConfig({ShanYanUIConfig uiConfig}) {
     shanYanUIConfig = uiConfig;
