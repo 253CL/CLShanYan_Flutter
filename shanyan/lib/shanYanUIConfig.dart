@@ -10,6 +10,9 @@ part 'shanYanUIConfig.g.dart';
 
 /// 修改UI属性后，需删除shanyan.g.dart,再执行`flutter packages pub run build_runner build`，会生成新的 shanyan.g.dart; 运行 ` flutter packages pub run build_runner clean ` 清空文件
 
+//Flutter 的 Github 上有关于这个问题的讨论 Failed to upload the package #16658，错误是因为伟大的墙。
+//我这里使用以下命令解决问题：sudo flutter packages pub publish -v  //https://pub.dartlang.org/api/packages/shanyan.
+
 @JsonSerializable(explicitToJson: true , includeIfNull: false)
 class ShanYanUIConfig {
 
