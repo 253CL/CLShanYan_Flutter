@@ -82,9 +82,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("setDebugMode")) {
             //闪验SDK 设置debug模式
             setDebug(call);
-        }else if (call.method.equals("getOperatorType")){
+        } else if (call.method.equals("getOperatorType")) {
             //闪验SDK 获取运营商类型
-            getOperatorType(call,result);
+            getOperatorType(call, result);
         } else if (call.method.equals("init")) {
             //闪验SDK 初始化
             init(call, result);
@@ -115,7 +115,7 @@ public class ShanyanPlugin implements MethodCallHandler {
     }
 
     private void getOperatorType(MethodCall call, Result result) {
-       String operatorType = OneKeyLoginManager.getInstance().getOperatorType(context);
+        String operatorType = OneKeyLoginManager.getInstance().getOperatorType(context);
         result.success(operatorType);
     }
 
@@ -313,7 +313,7 @@ public class ShanyanPlugin implements MethodCallHandler {
                     addCustomTextWidgets(widgetMap, landscapeBuilder);
                 } else if ("Button".equals(type)) {
                     addCustomBtnWidgets(widgetMap, landscapeBuilder);
-                }  else {
+                } else {
                     Log.e(TAG, "don't support widget");
                 }
             }
@@ -601,6 +601,8 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setNumberSize = valueForKey(shanYanUIConfig, "setNumberSize");
         Object setNumFieldOffsetX = valueForKey(shanYanUIConfig, "setNumFieldOffsetX");
         Object setNumberBold = valueForKey(shanYanUIConfig, "setNumberBold");
+        Object setTextSizeIsdp = valueForKey(shanYanUIConfig, "setTextSizeIsdp");
+
 
         Object setLogBtnText = valueForKey(shanYanUIConfig, "setLogBtnText");
         Object setLogBtnTextColor = valueForKey(shanYanUIConfig, "setLogBtnTextColor");
@@ -622,6 +624,8 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setPrivacyOffsetBottomY = valueForKey(shanYanUIConfig, "setPrivacyOffsetBottomY");
         Object setPrivacyOffsetY = valueForKey(shanYanUIConfig, "setPrivacyOffsetY");
         Object setPrivacyOffsetX = valueForKey(shanYanUIConfig, "setPrivacyOffsetX");
+        Object setCheckBoxOffsetXY = valueForKey(shanYanUIConfig, "setCheckBoxOffsetXY");
+
         Object setPrivacyOffsetGravityLeft = valueForKey(shanYanUIConfig, "setPrivacyOffsetGravityLeft");
         Object setPrivacyState = valueForKey(shanYanUIConfig, "setPrivacyState");
         Object setUncheckedImgPath = valueForKey(shanYanUIConfig, "setUncheckedImgPath");
@@ -634,7 +638,6 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setPrivacyCustomToastText = valueForKey(shanYanUIConfig, "setPrivacyCustomToastText");
         Object setPrivacyNameUnderline = valueForKey(shanYanUIConfig, "setPrivacyNameUnderline");
         Object setOperatorPrivacyAtLast = valueForKey(shanYanUIConfig, "setOperatorPrivacyAtLast");
-
         Object setSloganTextColor = valueForKey(shanYanUIConfig, "setSloganTextColor");
         Object setSloganTextSize = valueForKey(shanYanUIConfig, "setSloganTextSize");
         Object setSloganOffsetY = valueForKey(shanYanUIConfig, "setSloganOffsetY");
@@ -799,6 +802,10 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setNumberBold) {
             builder.setNumberBold((Boolean) setNumberBold);
         }
+        if (null != setTextSizeIsdp) {
+            builder.setTextSizeIsdp((Boolean) setTextSizeIsdp);
+        }
+
         //授权页 登录按钮
 
         if (null != setLogBtnText) {
@@ -882,6 +889,12 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setCheckBoxHidden) {
             builder.setCheckBoxHidden((Boolean) setCheckBoxHidden);
         }
+        if (null != setCheckBoxOffsetXY) {
+            ArrayList<Integer> setcheckBoxOffsetXYList = (ArrayList) setCheckBoxOffsetXY;
+            setcheckBoxOffsetXYList.addAll(Arrays.asList(0, 0));
+            builder.setcheckBoxOffsetXY(setcheckBoxOffsetXYList.get(0), setcheckBoxOffsetXYList.get(1));
+        }
+
         if (null != setCheckBoxWH) {
             ArrayList<Integer> setCheckBoxWHList = (ArrayList) setCheckBoxWH;
             setCheckBoxWHList.addAll(Arrays.asList(0, 0));
@@ -992,7 +1005,7 @@ public class ShanyanPlugin implements MethodCallHandler {
             ArrayList<String> setDialogThemeList = (ArrayList) setDialogTheme;
             setDialogThemeList.addAll(Arrays.asList("0", "0", "0", "0", "false"));
             builder.setDialogTheme(true, Integer.parseInt(setDialogThemeList.get(0)),
-                    Integer.parseInt(setDialogThemeList.get(1)),  Integer.parseInt(setDialogThemeList.get(2)),
+                    Integer.parseInt(setDialogThemeList.get(1)), Integer.parseInt(setDialogThemeList.get(2)),
                     Integer.parseInt(setDialogThemeList.get(3)), Boolean.parseBoolean(setDialogThemeList.get(4)));
         }
 
