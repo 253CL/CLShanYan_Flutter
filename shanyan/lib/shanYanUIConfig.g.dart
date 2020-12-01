@@ -900,6 +900,8 @@ ShanYanCustomWidgetIOS _$ShanYanCustomWidgetIOSFromJson(
     ..centerX = json['centerX'] as num
     ..centerY = json['centerY'] as num
     ..cornerRadius = json['cornerRadius'] as num
+    ..borderColor = json['borderColor'] as String
+    ..borderWidth = json['borderColor'] as num
     ..textContent = json['textContent'] as String
     ..textFont = (json['textFont'] as num)?.toDouble()
     ..textColor = json['textColor'] as String
@@ -933,6 +935,8 @@ Map<String, dynamic> _$ShanYanCustomWidgetIOSToJson(
   writeNotNull('centerX', instance.centerX);
   writeNotNull('centerY', instance.centerY);
   writeNotNull('cornerRadius', instance.cornerRadius);
+  writeNotNull('borderWidth', instance.borderWidth);
+  writeNotNull('borderColor', instance.borderColor);
   writeNotNull('textContent', instance.textContent);
   writeNotNull('textFont', instance.textFont);
   writeNotNull('textColor', instance.textColor);

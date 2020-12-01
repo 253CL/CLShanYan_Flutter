@@ -74,7 +74,7 @@
 
 - (void)setLoadingVisibility:(FlutterMethodCall*)call {
     NSDictionary* argv = call.arguments;
-    if (argv != nil && [argv isKindOfClass:[NSDictionary class]] && [argv[@"visibility"] boolValue] == YES) {
+    if (argv != nil && [argv isKindOfClass:[NSDictionary class]] && [argv[@"visibility"] boolValue] == NO) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [CLShanYanSDKManager hideLoading];
         });
@@ -1280,79 +1280,92 @@
 
     @try {
             
-            CLShanYanCustomViewCongifure * customViewConfigure = [[CLShanYanCustomViewCongifure alloc]init];
-            
-        //    NSString * widgetId = clCustomDict[@"widgetId"];
-        ////    customViewConfigure.widgetId = widgetId;
-        //
-        //    NSNumber * isFinish = clCustomDict[@"isFinish"];
-        //    if (isFinish) {
-        ////        customViewConfigure.isFinish = isFinish.boolValue;
-        //    }
-            
-            /**文字颜色*/
-            UIColor  * clTextColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"textColor"]];
-            if (clTextColor) {
-                customViewConfigure.button_textColor = clTextColor;
-                customViewConfigure.label_textColor = clTextColor;
-            }
-            NSNumber   * textFont = clCustomDict[@"textFont"];
-            if (textFont) {
-                customViewConfigure.button_titleLabelFont = [UIFont systemFontOfSize:textFont.floatValue];
-                customViewConfigure.label_font = [UIFont systemFontOfSize:textFont.floatValue];
-            }
-            NSString * textContent = clCustomDict[@"textContent"];
-            if (textContent) {
-                customViewConfigure.button_textContent = textContent;
-                customViewConfigure.label_text = textContent;
-            }
-            
-            NSNumber * numberOfLines = clCustomDict[@"numberOfLines"];
-            if (customViewConfigure) {
-                customViewConfigure.button_numberOfLines = numberOfLines;
-                customViewConfigure.label_numberOfLines = numberOfLines;
-            }
-            
-            NSString * clButtonImage = clCustomDict[@"image"];
-            if (clButtonImage) {
-                //UIButton
-                customViewConfigure.button_image = [UIImage imageNamed:clButtonImage];
-                //UIImageView
-                customViewConfigure.imageView_image = [UIImage imageNamed:clButtonImage];
-            }
-            
-            
-            NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImgPath"];
-            if (clButtonBackgroundImage) {
-                customViewConfigure.button_backgroundImage = [UIImage imageNamed:clButtonBackgroundImage];
-            }
-
-            
-            //UIView通用
-            UIColor * backgroundColor = [ShanyanPlugin colorWithHexStr: clCustomDict[@"backgroundColor"]];
-            if (backgroundColor) {
-                customViewConfigure.backgroundColor = backgroundColor;
-            }
-            
-            //UILabel
-            NSNumber * textAlignment = clCustomDict[@"textAlignment"];
-            if (textAlignment) {
-                customViewConfigure.label_textAlignment = textAlignment;
-            }
+        CLShanYanCustomViewCongifure * customViewConfigure = [[CLShanYanCustomViewCongifure alloc]init];
         
-            //CALayer通用
-            NSNumber * cornerRadius = clCustomDict[@"cornerRadius"];
+    //    NSString * widgetId = clCustomDict[@"widgetId"];
+    ////    customViewConfigure.widgetId = widgetId;
+    //
+    //    NSNumber * isFinish = clCustomDict[@"isFinish"];
+    //    if (isFinish) {
+    ////        customViewConfigure.isFinish = isFinish.boolValue;
+    //    }
+        
+        /**文字颜色*/
+        UIColor  * clTextColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"textColor"]];
+        if (clTextColor) {
+            customViewConfigure.button_textColor = clTextColor;
+            customViewConfigure.label_textColor = clTextColor;
+        }
+        NSNumber   * textFont = clCustomDict[@"textFont"];
+        if (textFont) {
+            customViewConfigure.button_titleLabelFont = [UIFont systemFontOfSize:textFont.floatValue];
+            customViewConfigure.label_font = [UIFont systemFontOfSize:textFont.floatValue];
+        }
+        NSString * textContent = clCustomDict[@"textContent"];
+        if (textContent) {
+            customViewConfigure.button_textContent = textContent;
+            customViewConfigure.label_text = textContent;
+        }
+        
+        NSNumber * numberOfLines = clCustomDict[@"numberOfLines"];
+        if (customViewConfigure) {
+            customViewConfigure.button_numberOfLines = numberOfLines;
+            customViewConfigure.label_numberOfLines = numberOfLines;
+        }
+        
+        NSString * clButtonImage = clCustomDict[@"image"];
+        if (clButtonImage) {
+            //UIButton
+            customViewConfigure.button_image = [UIImage imageNamed:clButtonImage];
+            //UIImageView
+            customViewConfigure.imageView_image = [UIImage imageNamed:clButtonImage];
+        }
+        
+        
+        NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImgPath"];
+        if (clButtonBackgroundImage) {
+            customViewConfigure.button_backgroundImage = [UIImage imageNamed:clButtonBackgroundImage];
+        }
+
+        
+        //UIView通用
+        UIColor * backgroundColor = [ShanyanPlugin colorWithHexStr: clCustomDict[@"backgroundColor"]];
+        if (backgroundColor) {
+            customViewConfigure.backgroundColor = backgroundColor;
+        }
+        
+        //UILabel
+        NSNumber * textAlignment = clCustomDict[@"textAlignment"];
+        if (textAlignment) {
+            customViewConfigure.label_textAlignment = textAlignment;
+        }
+    
+        //CALayer通用
+        NSNumber * cornerRadius = clCustomDict[@"cornerRadius"];
 //            NSNumber * masksToBounds =  clCustomDict[@"masksToBounds"];
-            if (cornerRadius) {
-                customViewConfigure.layer_cornerRadius = cornerRadius;
-                customViewConfigure.layer_masksToBounds = @(YES);
-            }
+        if (cornerRadius) {
+            customViewConfigure.layer_cornerRadius = cornerRadius;
+            customViewConfigure.layer_masksToBounds = @(YES);
+        }
 //            if (masksToBounds) {
 //                customViewConfigure.layer_masksToBounds = masksToBounds;
 //            }
-            
-            
-            return customViewConfigure;
+    
+        UIColor * borderColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"borderColor"]];
+        if (borderColor) {
+            customViewConfigure.layer_borderColor = borderColor.CGColor;
+            customViewConfigure.layer_masksToBounds = @(YES);
+        }
+        
+        NSNumber * borderWidth = clCustomDict[@"borderWidth"];
+        if (borderWidth) {
+            customViewConfigure.layer_borderWidth = borderWidth;
+            customViewConfigure.layer_masksToBounds = @(YES);
+        }
+        
+        
+        
+        return customViewConfigure;
     } @catch (NSException *exception) {
         
     }

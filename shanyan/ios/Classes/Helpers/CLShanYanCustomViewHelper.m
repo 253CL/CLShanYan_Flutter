@@ -142,6 +142,12 @@
     if (self.layer_masksToBounds) {
         customView.layer.masksToBounds = self.layer_masksToBounds.boolValue;
     }
+    if (self.layer_borderWidth) {
+        customView.layer.borderWidth = self.layer_borderWidth.floatValue;
+    }
+    if (self.layer_borderColor) {
+        customView.layer.borderColor = self.layer_borderColor;
+    }
 }
 @end
 
