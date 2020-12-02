@@ -1592,14 +1592,14 @@
     
     CLOrientationLayOut * clOrientationLayOutLandscape = [CLOrientationLayOut new];
     
-    NSNumber * clLayoutLogoLeft     = layOutLandscapeDict[@"clLayoutLogoLeft"];
-    NSNumber * clLayoutLogoTop      = layOutLandscapeDict[@"clLayoutLogoTop"];
-    NSNumber * clLayoutLogoRight    = layOutLandscapeDict[@"clLayoutLogoRight"];
-    NSNumber * clLayoutLogoBottom   = layOutLandscapeDict[@"clLayoutLogoBottom"];
-    NSNumber * clLayoutLogoWidth    = layOutLandscapeDict[@"clLayoutLogoWidth"];
-    NSNumber * clLayoutLogoHeight   = layOutLandscapeDict[@"clLayoutLogoHeight"];
-    NSNumber * clLayoutLogoCenterX  = layOutLandscapeDict[@"clLayoutLogoCenterX"];
-    NSNumber * clLayoutLogoCenterY  = layOutLandscapeDict[@"clLayoutLogoCenterY"];
+    NSNumber * clLayoutLogoLeft     = layOutLandscapeDict[@"setLogoLeft"];
+    NSNumber * clLayoutLogoTop      = layOutLandscapeDict[@"setLogoTop"];
+    NSNumber * clLayoutLogoRight    = layOutLandscapeDict[@"setLogoRight"];
+    NSNumber * clLayoutLogoBottom   = layOutLandscapeDict[@"setLogoBottom"];
+    NSNumber * clLayoutLogoWidth    = layOutLandscapeDict[@"setLogoWidth"];
+    NSNumber * clLayoutLogoHeight   = layOutLandscapeDict[@"setLogoHeight"];
+    NSNumber * clLayoutLogoCenterX  = layOutLandscapeDict[@"setLogoCenterX"];
+    NSNumber * clLayoutLogoCenterY  = layOutLandscapeDict[@"setLogoCenterY"];
     
     clOrientationLayOutLandscape.clLayoutLogoLeft = clLayoutLogoLeft;
     clOrientationLayOutLandscape.clLayoutLogoTop = clLayoutLogoTop;
@@ -1612,14 +1612,14 @@
     
     /**手机号显示控件*/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutPhoneLeft    = layOutLandscapeDict[@"clLayoutPhoneLeft"];;
-    NSNumber * clLayoutPhoneTop     = layOutLandscapeDict[@"clLayoutPhoneTop"];;
-    NSNumber * clLayoutPhoneRight   = layOutLandscapeDict[@"clLayoutPhoneRight"];;
-    NSNumber * clLayoutPhoneBottom  = layOutLandscapeDict[@"clLayoutPhoneBottom"];;
-    NSNumber * clLayoutPhoneWidth   = layOutLandscapeDict[@"clLayoutPhoneWidth"];;
-    NSNumber * clLayoutPhoneHeight  = layOutLandscapeDict[@"clLayoutPhoneHeight"];;
-    NSNumber * clLayoutPhoneCenterX = layOutLandscapeDict[@"clLayoutPhoneCenterX"];;
-    NSNumber * clLayoutPhoneCenterY = layOutLandscapeDict[@"clLayoutPhoneCenterY"];;
+    NSNumber * clLayoutPhoneLeft    = layOutLandscapeDict[@"setNumFieldLeft"];;
+    NSNumber * clLayoutPhoneTop     = layOutLandscapeDict[@"setNumFieldTop"];;
+    NSNumber * clLayoutPhoneRight   = layOutLandscapeDict[@"setNumFieldRight"];;
+    NSNumber * clLayoutPhoneBottom  = layOutLandscapeDict[@"setNumFieldBottom"];;
+    NSNumber * clLayoutPhoneWidth   = layOutLandscapeDict[@"setNumFieldWidth"];;
+    NSNumber * clLayoutPhoneHeight  = layOutLandscapeDict[@"setNumFieldHeight"];;
+    NSNumber * clLayoutPhoneCenterX = layOutLandscapeDict[@"setNumFieldCenterX"];;
+    NSNumber * clLayoutPhoneCenterY = layOutLandscapeDict[@"setNumFieldCenterY"];;
     clOrientationLayOutLandscape.clLayoutPhoneLeft = clLayoutPhoneLeft;
     clOrientationLayOutLandscape.clLayoutPhoneTop = clLayoutPhoneTop;
     clOrientationLayOutLandscape.clLayoutPhoneRight = clLayoutPhoneRight.clShanYanNegative;
@@ -1632,14 +1632,14 @@
      注： 一键登录授权按钮 不得隐藏
      **/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutLoginBtnLeft     = layOutLandscapeDict[@"clLayoutLoginBtnLeft"];
-    NSNumber * clLayoutLoginBtnTop      = layOutLandscapeDict[@"clLayoutLoginBtnTop"];
-    NSNumber * clLayoutLoginBtnRight    = layOutLandscapeDict[@"clLayoutLoginBtnRight"];
-    NSNumber * clLayoutLoginBtnBottom   = layOutLandscapeDict[@"clLayoutLoginBtnBottom"];
-    NSNumber * clLayoutLoginBtnWidth    = layOutLandscapeDict[@"clLayoutLoginBtnWidth"];
-    NSNumber * clLayoutLoginBtnHeight   = layOutLandscapeDict[@"clLayoutLoginBtnHeight"];
-    NSNumber * clLayoutLoginBtnCenterX  = layOutLandscapeDict[@"clLayoutLoginBtnCenterX"];
-    NSNumber * clLayoutLoginBtnCenterY  = layOutLandscapeDict[@"clLayoutLoginBtnCenterY"];
+    NSNumber * clLayoutLoginBtnLeft     = layOutLandscapeDict[@"setLogBtnLeft"];
+    NSNumber * clLayoutLoginBtnTop      = layOutLandscapeDict[@"setLogBtnTop"];
+    NSNumber * clLayoutLoginBtnRight    = layOutLandscapeDict[@"setLogBtnRight"];
+    NSNumber * clLayoutLoginBtnBottom   = layOutLandscapeDict[@"setLogBtnBottom"];
+    NSNumber * clLayoutLoginBtnWidth    = layOutLandscapeDict[@"setLogBtnWidth"];
+    NSNumber * clLayoutLoginBtnHeight   = layOutLandscapeDict[@"setLogBtnHeight"];
+    NSNumber * clLayoutLoginBtnCenterX  = layOutLandscapeDict[@"setLogBtnCenterX"];
+    NSNumber * clLayoutLoginBtnCenterY  = layOutLandscapeDict[@"setLogBtnCenterY"];
     clOrientationLayOutLandscape.clLayoutLoginBtnLeft = clLayoutLoginBtnLeft;
     clOrientationLayOutLandscape.clLayoutLoginBtnTop = clLayoutLoginBtnTop;
     clOrientationLayOutLandscape.clLayoutLoginBtnRight = clLayoutLoginBtnRight.clShanYanNegative;
@@ -1652,14 +1652,14 @@
      注： 运营商隐私条款 不得隐藏， 用户条款不限制
      **/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutAppPrivacyLeft   = layOutLandscapeDict[@"clLayoutAppPrivacyLeft"];
-    NSNumber * clLayoutAppPrivacyTop    = layOutLandscapeDict[@"clLayoutAppPrivacyTop"];
-    NSNumber * clLayoutAppPrivacyRight  = layOutLandscapeDict[@"clLayoutAppPrivacyRight"];
-    NSNumber * clLayoutAppPrivacyBottom = layOutLandscapeDict[@"clLayoutAppPrivacyBottom"];
-    NSNumber * clLayoutAppPrivacyWidth  = layOutLandscapeDict[@"clLayoutAppPrivacyWidth"];
-    NSNumber * clLayoutAppPrivacyHeight = layOutLandscapeDict[@"clLayoutAppPrivacyHeight"];
-    NSNumber * clLayoutAppPrivacyCenterX= layOutLandscapeDict[@"clLayoutAppPrivacyCenterX"];
-    NSNumber * clLayoutAppPrivacyCenterY= layOutLandscapeDict[@"clLayoutAppPrivacyCenterY"];
+    NSNumber * clLayoutAppPrivacyLeft   = layOutLandscapeDict[@"setPrivacyLeft"];
+    NSNumber * clLayoutAppPrivacyTop    = layOutLandscapeDict[@"setPrivacyTop"];
+    NSNumber * clLayoutAppPrivacyRight  = layOutLandscapeDict[@"setPrivacyRight"];
+    NSNumber * clLayoutAppPrivacyBottom = layOutLandscapeDict[@"setPrivacyBottom"];
+    NSNumber * clLayoutAppPrivacyWidth  = layOutLandscapeDict[@"setPrivacyWidth"];
+    NSNumber * clLayoutAppPrivacyHeight = layOutLandscapeDict[@"setPrivacyHeight"];
+    NSNumber * clLayoutAppPrivacyCenterX= layOutLandscapeDict[@"setPrivacyCenterX"];
+    NSNumber * clLayoutAppPrivacyCenterY= layOutLandscapeDict[@"setPrivacyCenterY"];
     clOrientationLayOutLandscape.clLayoutAppPrivacyLeft = clLayoutAppPrivacyLeft;
     clOrientationLayOutLandscape.clLayoutAppPrivacyTop = clLayoutAppPrivacyTop;
     clOrientationLayOutLandscape.clLayoutAppPrivacyRight = clLayoutAppPrivacyRight.clShanYanNegative;
@@ -1672,14 +1672,14 @@
      注： 运营商品牌标签，不得隐藏
      **/
     //layout 约束均相对vc.view
-    NSNumber * clLayoutSloganLeft   = layOutLandscapeDict[@"clLayoutSloganLeft"];
-    NSNumber * clLayoutSloganTop    = layOutLandscapeDict[@"clLayoutSloganTop"];
-    NSNumber * clLayoutSloganRight  = layOutLandscapeDict[@"clLayoutSloganRight"];
-    NSNumber * clLayoutSloganBottom = layOutLandscapeDict[@"clLayoutSloganBottom"];
-    NSNumber * clLayoutSloganWidth  = layOutLandscapeDict[@"clLayoutSloganWidth"];
-    NSNumber * clLayoutSloganHeight = layOutLandscapeDict[@"clLayoutSloganHeight"];
-    NSNumber * clLayoutSloganCenterX= layOutLandscapeDict[@"clLayoutSloganCenterX"];
-    NSNumber * clLayoutSloganCenterY= layOutLandscapeDict[@"clLayoutSloganCenterY"];
+    NSNumber * clLayoutSloganLeft   = layOutLandscapeDict[@"setSloganLeft"];
+    NSNumber * clLayoutSloganTop    = layOutLandscapeDict[@"setSloganTop"];
+    NSNumber * clLayoutSloganRight  = layOutLandscapeDict[@"setSloganRight"];
+    NSNumber * clLayoutSloganBottom = layOutLandscapeDict[@"setSloganBottom"];
+    NSNumber * clLayoutSloganWidth  = layOutLandscapeDict[@"setSloganWidth"];
+    NSNumber * clLayoutSloganHeight = layOutLandscapeDict[@"setSloganHeight"];
+    NSNumber * clLayoutSloganCenterX= layOutLandscapeDict[@"setSloganCenterX"];
+    NSNumber * clLayoutSloganCenterY= layOutLandscapeDict[@"setSloganCenterY"];
     clOrientationLayOutLandscape.clLayoutSloganLeft = clLayoutSloganLeft;
     clOrientationLayOutLandscape.clLayoutSloganTop = clLayoutSloganTop;
     clOrientationLayOutLandscape.clLayoutSloganRight = clLayoutSloganRight.clShanYanNegative;
@@ -1691,25 +1691,25 @@
 
     /**窗口模式*/
     /**窗口中心：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationCenterX = layOutLandscapeDict[@"clAuthWindowOrientationCenterX"];
-    NSNumber * clAuthWindowOrientationCenterY = layOutLandscapeDict[@"clAuthWindowOrientationCenterY"];
+    NSNumber * clAuthWindowOrientationCenterX = layOutLandscapeDict[@"setAuthWindowOrientationCenterX"];
+    NSNumber * clAuthWindowOrientationCenterY = layOutLandscapeDict[@"setAuthWindowOrientationCenterY"];
     if (clAuthWindowOrientationCenterX && clAuthWindowOrientationCenterX) {
         clOrientationLayOutLandscape.clAuthWindowOrientationCenter = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationCenterX.floatValue, clAuthWindowOrientationCenterY.floatValue)];
     }
     
     /**窗口左上角：frame.origin：CGPoint X Y*/
-    NSNumber * clAuthWindowOrientationOriginX = layOutLandscapeDict[@"clAuthWindowOrientationOriginX"];
-    NSNumber * clAuthWindowOrientationOriginY = layOutLandscapeDict[@"clAuthWindowOrientationOriginY"];
+    NSNumber * clAuthWindowOrientationOriginX = layOutLandscapeDict[@"setAuthWindowOrientationOriginX"];
+    NSNumber * clAuthWindowOrientationOriginY = layOutLandscapeDict[@"setAuthWindowOrientationOriginY"];
     if (clAuthWindowOrientationCenterX && clAuthWindowOrientationOriginY) {
         clOrientationLayOutLandscape.clAuthWindowOrientationOrigin = [NSValue valueWithCGPoint:CGPointMake(clAuthWindowOrientationOriginX.floatValue, clAuthWindowOrientationOriginY.floatValue)];
     }
     /**窗口大小：宽 float */
-    NSNumber * clAuthWindowOrientationWidth = layOutLandscapeDict[@"clAuthWindowOrientationWidth"];
+    NSNumber * clAuthWindowOrientationWidth = layOutLandscapeDict[@"setAuthWindowOrientationWidth"];
     {
         clOrientationLayOutLandscape.clAuthWindowOrientationWidth = clAuthWindowOrientationWidth;
     }
     /**窗口大小：高 float */
-    NSNumber * clAuthWindowOrientationHeight= layOutLandscapeDict[@"clAuthWindowOrientationHeight"];
+    NSNumber * clAuthWindowOrientationHeight= layOutLandscapeDict[@"setAuthWindowOrientationHeight"];
     {
         clOrientationLayOutLandscape.clAuthWindowOrientationHeight = clAuthWindowOrientationHeight;
     }
