@@ -1,11 +1,17 @@
-# flutter 2.3.1.4 集成文档
+# flutter 2.3.2 集成文档
 
-注：「[插件示例代码地址](https://github.com/253CL/CLShanYan_Flutter)」
+注：「[插件示例代码地址](https://github.com/253CL/CLShanYan_Flutter)」<br />
+
+<a name="AiyJS"></a>
+## 概述
+
+
+本文是闪验SDK_flutter **v2.3.2**版本的接入文档，用于指导SDK的使用方法。<br />
 
 <a name="65lmE"></a>
 # 创建应用
 
-应用的创建流程及APPID的获取，请查看「[账号创建](http://flash.253.com/document/details?lid=292&cid=91&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」文档<br />**注意：如果应用有多个包名或签名不同的马甲包，须创建多个对应包名和签名的应用，否则马甲包将报包名或签名校验不通过。**
+<br />应用的创建流程及APPID的获取，请查看「[账号创建](http://flash.253.com/document/details?lid=292&cid=91&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」文档<br />**注意：如果应用有多个包名或签名不同的马甲包，须创建多个对应包名和签名的应用，否则马甲包将报包名或签名校验不通过。**<br />
 
 <a name="h4mXI"></a>
 ### 安装
@@ -18,24 +24,132 @@ dependencies:
     git:
       url: git://github.com/253CL/CLShanYan_Flutter.git
       path: shanyan
-      ref: v2.3.1.4
+      ref: v2.3.2.7
 ```
 <a name="UlDef"></a>
 ### 使用
 
+
 ```dart
 import 'package:shanyan/shanyan.dart';
 ```
-<a name="khv3D"></a>
-## 
-<a name="Ks4kZ"></a>
+
+
+<a name="JRH4x"></a>
+### 开发环境搭建
+
+<br />权限配置（AndroidManifest.xml文件里面添加权限）<br />
+<br />必要权限：<br />
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+<uses-permission android:name="android.permission.GET_TASKS"/>
+```
+
+<br />建议的权限：如果选用该权限，需要在预取号步骤前提前动态申请。
+```xml
+<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+```
+**建议开发者申请本权限，本权限只用于移动运营商在双卡情况下，更精准的获取数据流量卡的运营商类型，**<br />**缺少该权限，存在取号失败概率上升的风险。**<br />
+<br />配置权限说明
+
+| **权限名称** | 权限说明 | 使用说明 |
+| --- | --- | --- |
+| INTERNET | 允许应用程序联网 | 用于访问网关和认证服务器 |
+| ACCESS_WIFI_STATE | 允许访问WiFi网络状态信息 | 允许程序访问WiFi网络状态信息 |
+| ACCESS_NETWORK_STATE | 允许访问网络状态 | 区分移动网络或WiFi网络 |
+| CHANGE_NETWORK_STATE | 允许改变网络连接状态 | 设备在WiFi跟数据双开时，强行切换使用数据网络 |
+| CHANGE_WIFI_STATE | 允许改变WiFi网络连接状态 | 设备在WiFi跟数据双开时，强行切换使用 |
+| READ_PHONE_STATE | 允许读取手机状态 | （可选）获取IMSI用于判断双卡和换卡 |
+| WRITE_SETTINGS | 允许读写系统设置项 | 电信SDK在6.0系统以下进行数据切换用到的权限，添加后可增加电信在WiFi+4G下网络环境下的取号成功率。6.0系统以上可去除 |
+| GET_TASKS | 允许应用程序访问TASK |  |
+
+
+
+在application标签内配置授权登录activity，screenOrientation和theme可以根据项目需求自行修改<br />
+
+```xml
+<activity
+    android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:launchMode="singleTop"
+    android:screenOrientation="behind"
+     />
+
+<activity-alias
+   android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+   android:configChanges="keyboardHidden|orientation|screenSize"
+   android:launchMode="singleTop"
+   android:screenOrientation="behind"
+   android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
+    /> 
+<activity
+   android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
+   android:configChanges="keyboardHidden|orientation|screenSize"
+   android:launchMode="singleTop"
+   android:screenOrientation="behind"
+    />
+<activity
+   android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
+   android:configChanges="keyboardHidden|orientation|screenSize"
+   android:launchMode="singleTop"
+   android:screenOrientation="behind"
+    /> 
+```
+
+<br />配置Android9.0对http协议的支持两种方式：<br />
+<br />方式一：<br />
+
+```xml
+android:usesCleartextTraffic="true"
+```
+
+<br />示例代码：<br />
+
+```xml
+<application
+    android:name=".view.MyApplication"
+    ***
+    android:usesCleartextTraffic="true"
+    ></application>
+```
+
+<br />方式二：<br />
+<br />目前只有移动运营商个别接口为http请求，对于全局禁用Http的项目，需要设置Http白名单。以下为运营商http接口域名：cmpassport.com;*.10010.com <br />
+<br />(3) 混淆规则：<br />
+
+```java
+-dontwarn com.cmic.sso.sdk.**
+-dontwarn com.unikuwei.mianmi.account.shield.**
+-dontwarn com.sdk.**
+-keep class com.cmic.sso.sdk.**{*;}
+-keep class com.sdk.** { *;}
+-keep class com.unikuwei.mianmi.account.shield.** {*;}
+-keep class cn.com.chinatelecom.account.api.**{*;}
+```
+
+<br />(4) AndResGuard资源压缩过滤：<br />
+
+```java
+"R.anim.umcsdk*",
+"R.drawable.umcsdk*",
+"R.layout.layout_shanyan*",
+"R.id.shanyan_view*",
+```
+
+<br />通过上面的几个步骤，工程就配置完成了，接下来就可以在工程中使用闪验SDK进行开发了。
+<a name="mglDi"></a>
 ## 一、免密登录API使用说明
 <a name="ANoDq"></a>
 ### 1.初始化
 
-使用一键登录功能前，必须先进行初始化操作。
-
-调用示例
+<br />使用一键登录功能前，必须先进行初始化操作。<br />
+<br />调用示例<br />
 
 ```dart
 OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
@@ -47,14 +161,14 @@ OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
       });
 ```
 
-参数描述
+<br />参数描述
 
 | 参数 | 类型 | 说明 |
 | --- | --- | --- |
 | appId | String | 闪验平台获取到的appId |
 
 
-返回为ShanYanResult对象属性如下：
+<br />返回为ShanYanResult对象属性如下：
 
 | **字段** | **类型** | **含义** |
 | --- | --- | --- |
@@ -65,8 +179,10 @@ OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
 | token | String  | token |
 
 
+
 <a name="8Cuhp"></a>
 ### 2.预取号
+
 
 - **建议在判断当前用户属于未登录状态时使用，****已登录状态用户请不要调用该方法**
 - 建议在执行拉取授权登录页的方法前，提前一段时间调用预取号方法，中间最好有2-3秒的缓冲（因为预取号方法需要1~3s的时间取得临时凭证）
@@ -75,7 +191,8 @@ OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
 
 
 
-调用示例：
+
+调用示例：<br />
 
 ```dart
 OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
@@ -100,22 +217,30 @@ oneKeyLoginManager.getPhoneInfo().then((ShanYanResult shanYanResult) {
 <a name="jdF5H"></a>
 ### 3.拉起授权页
 
+
 - 调用拉起授权页方法后将会调起运营商授权页面。**已登录状态请勿调用 。**
 - **每次调用拉起授权页方法前均需先调用授权页配置方法，否则授权页可能会展示异常。**
 
-调用示例：
+
+<br />调用示例：<br />
 
 ```dart
-OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
-oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
+oneKeyLoginManager.openLoginAuth().then((ShanYanResult shanYanResult) {
       setState(() {
         _code = shanYanResult.code;
         _result = shanYanResult.message;
         _content = shanYanResult.toJson().toString();
       });
+
+      if (1000 == shanYanResult.code) {
+        //拉起授权页成功
+      } else {
+        //拉起授权页失败
+      }
+    });
 ```
 
-返回为ShanYanResult对象属性如下：
+<br />返回为ShanYanResult对象属性如下：
 
 | **字段** | **类型** | **含义** |
 | --- | --- | --- |
@@ -126,7 +251,7 @@ oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
 | token | String  | token（成功情况下返回）用来后台置换手机号。一次有效。 |
 
 
-授权页点击一键登录监听，需要在拉起授权页方法之前调用
+<br />授权页点击一键登录监听，需要在拉起授权页方法之前调用
 ```dart
 oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
       setState(() {
@@ -147,7 +272,7 @@ oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
     });
 ```
 
-返回为ShanYanResult对象属性如下：
+<br />返回为ShanYanResult对象属性如下：
 
 | **字段** | **类型** | **含义** |
 | --- | --- | --- |
@@ -160,17 +285,18 @@ oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
 <a name="BRpZP"></a>
 ### 4.销毁授权页
 A.授权页面自动销毁<br />1.在授权登录页面，当用户主动点击左左上角返回按钮时，返回码为1011，SDK将自动销毁授权页；<br />2.安卓 SDK，当用户点击手机的硬件返回键（相当于取消登录），返回码为1011，SDK将自动销毁授权页<br />3.当用户设置一键登录或者其他自定义控件为自动销毁时，得到回调后，授权页面会自动销毁<br />
-<br />B.授权页手动销毁<br />1.当设置一键登录为手动销毁时，点击授权页一键登录按钮成功获取token不会自动销毁授权页，**请务必在回调中处理完自己的逻辑后手动调用销毁授权页方法。**<br />2.当设置自定义控件为手动销毁时，**请务必在回调中处理完自己的逻辑后手动调用销毁授权页方法。**<br />**<br />调用示例
+<br />B.授权页手动销毁<br />1.当设置一键登录为手动销毁时，点击授权页一键登录按钮成功获取token不会自动销毁授权页，**请务必在回调中处理完自己的逻辑后手动调用销毁授权页方法。**<br />2.当设置自定义控件为手动销毁时，**请务必在回调中处理完自己的逻辑后手动调用销毁授权页方法。**<br />**<br />调用示例<br />
 
 ```dart
 OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
 oneKeyLoginManager.finishAuthControllerCompletion();
 ```
 
+
 <a name="WDkUt"></a>
 ### 5.授权页点击事件监听
 
-调用示例
+<br />调用示例<br />
 
 ```dart
 OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
@@ -181,28 +307,28 @@ OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
       });
 ```
 
-返回参数含义如下：
+<br />返回参数含义如下：
 
 | **字段** | **类型** | **含义** |
 | --- | --- | --- |
-| type | int | type=1 ，隐私协议点击事件<br />type=2 ，checkbox点击事件 |
-| code | int | type=1 ，隐私协议点击事件，code分为0,1,2,3（协议页序号）<br />type=2 ，checkbox点击事件，code分为0,1（0为未选中，1为选中） |
+| type | int | type=1 ，隐私协议点击事件<br />type=2 ，checkbox点击事件<br />type=3 ，"一键登录"按钮点击事件 |
+| code | int | type=1 ，隐私协议点击事件，code分为0,1,2,3（协议页序号）<br />type=2 ，checkbox点击事件，code分为0,1（0为未选中，1为选中）<br />type=3 ，"一键登录"按钮点击事件，code分为0,1（0为协议勾选框未选中，1为选中） |
 | message | String | 点击事件的详细信息 |
 
 **
 <a name="EOGka"></a>
 ### 6.置换手机号
-当一键登录外层code为1000时，您将获取到返回的参数，请将这些参数传递给后端开发人员，并参考「[服务端](https://flash.253.com/document/details?lid=300&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」文档来实现获取手机号码的步骤。
+当一键登录外层code为1000时，您将获取到返回的参数，请将这些参数传递给后端开发人员，并参考「[服务端](https://flash.253.com/document/details?lid=300&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」文档来实现获取手机号码的步骤。<br />
 
 <a name="uPVnk"></a>
 ### 7.授权页界面配置
 
+
 <a name="Nkxdn"></a>
 #### Android部分
 
-调用该方法可实现对三网运营商授权页面个性化设计，**每次调用拉起授权页方法前必须先调用该方法**，否则授权界面会展示异常。（**三网界面配置内部实现逻辑不同，请务必使用移动、联通、电信卡分别测试三网界面**）
-
-调用示例
+<br />调用该方法可实现对三网运营商授权页面个性化设计，**每次调用拉起授权页方法前必须先调用该方法**，否则授权界面会展示异常。（**三网界面配置内部实现逻辑不同，请务必使用移动、联通、电信卡分别测试三网界面**）<br />
+<br />调用示例<br />
 
 ```dart
      ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
@@ -228,13 +354,13 @@ OneKeyLoginManager oneKeyLoginManager = new OneKeyLoginManager();
       shanYanUIConfig.androidPortrait.setSloganHidden = true;
 ```
 
-
-ShanYanUIConfig.java配置元素说明<br />是否自动销毁
+<br />
+<br />ShanYanUIConfig.java配置元素说明<br />是否自动销毁<br />
 
 ```dart
 bool isFinish; //是否自动销毁 true：是 false：不是
 ```
-授权页背景配置三选一，支持图片，gif图，视频
+授权页背景配置三选一，支持图片，gif图，视频<br />
 
 ```dart
   String setAuthBGImgPath; //普通图片
@@ -242,7 +368,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   String setAuthBgVideoPath; //视频背景
 ```
 
-授权页状态栏
+<br />授权页状态栏<br />
 
 ```dart
   bool setStatusBarHidden; //授权页状态栏 设置状态栏是否隐藏
@@ -251,7 +377,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setVirtualKeyTransparent; //设置虚拟键是否透明
 ```
 
-授权页导航栏
+<br />授权页导航栏<br />
 
 ```dart
   bool setFullScreen; //设置是否全屏显示（true：全屏；false：不全屏）默认不全屏
@@ -271,7 +397,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setNavTextBold; //设置导航栏字体是否加粗（true：加粗；false：不加粗）
 ```
 
-授权页logo
+<br />授权页logo<br />
 
 ```dart
   String setLogoImgPath; //设置logo图片
@@ -284,7 +410,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
 
 ```
 
-授权页号码栏
+<br />授权页号码栏<br />
 
 ```dart
   String setNumberColor; //设置号码栏字体颜色
@@ -297,7 +423,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setNumberBold; //设置号码栏字体是否加粗（true：加粗；false：不加粗）
 ```
 
-授权页登录按钮
+<br />授权页登录按钮<br />
 
 ```dart
   String setLogBtnText; //设置登录按钮文字
@@ -312,7 +438,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setLogBtnTextBold; //设置登录按钮字体是否加粗（true：加粗；false：不加粗）
 ```
 
-授权页隐私栏
+<br />授权页隐私栏<br />
 
 ```dart
   List<String> setAppPrivacyOne; //设置开发者隐私条款1，包含两个参数：1.名称 2.URL
@@ -338,7 +464,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setOperatorPrivacyAtLast;//运营商协议是否为最后一个显示
 ```
 
-授权页slogan
+<br />授权页slogan<br />
 
 ```dart
   String setSloganTextColor; //设置slogan文字颜色
@@ -350,7 +476,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setSloganTextBold; //设置slogan文字字体是否加粗（true：加粗；false：不加粗）
 ```
 
-创蓝slogan
+<br />创蓝slogan<br />
 
 ```dart
 //创蓝slogan设置
@@ -363,7 +489,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool setShanYanSloganTextBold; //设置创蓝slogan文字字体是否加粗（true：加粗；false：不加粗）
 ```
 
-协议页导航栏
+<br />协议页导航栏<br />
 
 ```dart
   int setPrivacyNavColor; //设置协议页导航栏背景颜色
@@ -379,30 +505,28 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   int setPrivacyNavReturnBtnOffsetY; //设置协议页导航栏返回按钮距离屏幕上侧Y偏移
 ```
 
-授权页隐私协议框
+<br />授权页隐私协议框<br />
 
 ```dart
   String addCustomPrivacyAlertView; //添加授权页上显示隐私协议弹框
 ```
 
-授权页loading
+<br />授权页loading<br />
 
 ```dart
   String setLoadingView; //设置授权页点击一键登录自定义loading
 ```
 
-授权页弹窗样式
+<br />授权页弹窗样式<br />
 
 ```dart
   List<String>setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
 
 ```
 
-**注意：**<br />**a.控件X偏移如果不设置默认居中。**
-
-添加自定义控件
-
-调用示例
+<br />**注意：**<br />**a.控件X偏移如果不设置默认居中。**<br />
+<br />添加自定义控件<br />
+<br />调用示例
 ```dart
  List<ShanYanCustomWidget> shanyanCustomWidget = [];
     final String btn_widgetId = "other_custom_button"; // 标识控件 id
@@ -425,7 +549,7 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   
 ```
 
-参数说明
+<br />参数说明<br />
 
 ```dart
   String widgetId; //自定义控件ID
@@ -445,13 +569,13 @@ bool isFinish; //是否自动销毁 true：是 false：不是
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 ```
 
+<br />
 
 <a name="pRSxu"></a>
 #### IOS部分
 
-调用该方法可实现对三网运营商授权页面个性化设计。（**三网界面配置内部实现逻辑不同，请务必使用移动、联通、电信卡分别测试三网界面**）
-
-调用示例
+<br />调用该方法可实现对三网运营商授权页面个性化设计。（**三网界面配置内部实现逻辑不同，请务必使用移动、联通、电信卡分别测试三网界面**）<br />
+<br />调用示例<br />
 
 ```dart
  /*iOS 页面样式设置*/
@@ -620,10 +744,9 @@ bool isFinish; //是否自动销毁 true：是 false：不是
 
 ```
 
-
-添加自定义控件
-
-调用示例
+<br />
+<br />添加自定义控件<br />
+<br />调用示例<br />
 
 ```dart
   List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
@@ -662,21 +785,20 @@ bool isFinish; //是否自动销毁 true：是 false：不是
 
 ```
 
-**注意：如果添加布局为自定义控件，监听实现请参考demo示例。**<br />**
+<br />**注意：如果添加布局为自定义控件，监听实现请参考demo示例。**<br />**
 <a name="D9qrI"></a>
 ## 二、本机认证API使用说明
 
-**注：本机认证同免密登录，需要初始化，本机认证、免密登录可共用初始化，两个功能同时使用时，只需调用一次初始化即可。**<br />**
+<br />**注：本机认证同免密登录，需要初始化，本机认证、免密登录可共用初始化，两个功能同时使用时，只需调用一次初始化即可。**<br />**
 <a name="C1ZCW"></a>
 ### 1.初始化
 
-**同免密登录初始化**<br />**
+<br />**同免密登录初始化**<br />**
 <a name="Lqzq4"></a>
 ### 2.本机号校验
 
-在初始化执行之后调用，本机号校验界面需自行实现，可以在多个需要校验的页面中调用。
-
-调用示例：
+<br />在初始化执行之后调用，本机号校验界面需自行实现，可以在多个需要校验的页面中调用。<br />
+<br />调用示例：<br />
 
 ```dart
 //闪验SDK 本机号校验获取token (Android+iOS)
@@ -688,7 +810,7 @@ oneKeyLoginManager.startAuthentication().then((shanYanResult) {
       });
 ```
 
-返回为ShanYanResult对象属性如下：
+<br />返回为ShanYanResult对象属性如下：
 
 | **字段** | **类型** | **含义** |
 | --- | --- | --- |
@@ -701,8 +823,8 @@ oneKeyLoginManager.startAuthentication().then((shanYanResult) {
 <a name="ApxrD"></a>
 ### 3.校验手机号
 
-当本机号校验外层code为2000时，您将获取到返回的参数，请将这些参数传递给后端开发人员，并参考「[服务端](http://flash.253.com/document/details?lid=300&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」文档来实现校验本机号的步骤
+<br />当本机号校验外层code为2000时，您将获取到返回的参数，请将这些参数传递给后端开发人员，并参考「[服务端](http://flash.253.com/document/details?lid=300&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」文档来实现校验本机号的步骤
 <a name="dCHBW"></a>
 ## 三、返回码
-该返回码为闪验SDK自身的返回码，请注意1003及1023错误内均含有运营商返回码，具体错误在碰到之后查阅「[返回码](http://flash.253.com/document/details?lid=301&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」
+该返回码为闪验SDK自身的返回码，请注意1003及1023错误内均含有运营商返回码，具体错误在碰到之后查阅「[返回码](http://flash.253.com/document/details?lid=301&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK)」<br />
 
