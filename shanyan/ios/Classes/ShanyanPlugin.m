@@ -51,7 +51,9 @@
       [self finishAuthControllerCompletion:result];
   }else if ([@"setLoadingVisibility" isEqualToString:call.method]){
       [self setLoadingVisibility:call];
-  } else {
+  }else if ([@"setCheckBoxValue" isEqualToString:call.method]){
+      [self setCheckBoxValue:call];
+  }else {
     result(FlutterMethodNotImplemented);
   }
 
@@ -72,6 +74,12 @@
 //    }
 }
 
+- (void)setCheckBoxValue:(FlutterMethodCall*)call{
+    NSDictionary* argv = call.arguments;
+    if (argv != nil && [argv isKindOfClass:[NSDictionary class]]) {
+        [CLShanYanSDKManager setCheckBoxValue:[argv[@"isChecked"] boolValue]];
+    }
+}
 - (void)setLoadingVisibility:(FlutterMethodCall*)call {
     NSDictionary* argv = call.arguments;
     if (argv != nil && [argv isKindOfClass:[NSDictionary class]] && [argv[@"visibility"] boolValue] == YES) {
