@@ -109,11 +109,11 @@ class OneKeyLoginManager {
 //  }
 
 //
-//  ///闪验SDK 设置复选框是否选中 Android+IOS
-//  void setCheckBoxValue(bool isChecked) {
-//    _channel.invokeMethod("setCheckBoxValue", {"isChecked": isChecked});
-//  }
-//
+ ///闪验SDK 设置复选框是否选中 Android+IOS
+ void setCheckBoxValue(bool isChecked) {
+   _channel.invokeMethod("setCheckBoxValue", {"isChecked": isChecked});
+ }
+
   ///闪验SDK 设置授权页loading是否隐藏 Android+IOS
   void setLoadingVisibility(bool visibility) {
     _channel.invokeMethod("setLoadingVisibility", {"visibility": visibility});
