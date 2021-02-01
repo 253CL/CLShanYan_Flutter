@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'shanyan'
-  s.version          = '2.3.2.7'
+  s.version          = '2.3.2.8'
   s.summary          = '闪验SDK Flutter plguin.'
   s.description      = <<-DESC
 A new Flutter plugin.
