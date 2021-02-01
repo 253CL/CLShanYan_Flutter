@@ -307,6 +307,8 @@ class ShanYanUIConfigIOS {
   String setAppPrivacyNormalDesTextFourth;      /// 描述文本四 default:"、"
   String setAppPrivacyNormalDesTextLast;        /// 描述文本 尾部 default: "并授权AppName使用认证服务"
 
+  String setCheckBoxTipMsg;  /// CheckBox未选中提示文本
+
   bool setOperatorPrivacyAtLast;  /// 运营商协议后置
 
 //  String setPrivacyNavText;         /// 协议页导航栏统一标题，默认显示条款名称
