@@ -23,11 +23,36 @@
 -(void)clShanYanSDKManagerWebPrivacyClicked:(NSString *_Nonnull)privacyName privacyIndex:(NSInteger)index currentTelecom:(NSString *_Nullable)telecom DEPRECATED_MSG_ATTRIBUTE("Method deprecated. Use `clShanYanActionListner:code:message:`");
 
 /**
- * 授权页面将要显示的回调
- * ViewDidLoad After
+ * 授权页面已经显示的回调
+ * ViewDidAppear
  * @param telecom     当前运营商类型
  */
 -(void)clShanYanSDKManagerAuthPageAfterViewDidLoad:(UIView *_Nonnull)authPageView currentTelecom:(NSString *_Nullable)telecom ;
+
+/**
+ * 授权页面将要显示的回调 ViewDidLoad即将全部执行完毕的最后时机
+ * ViewDidLoad  did complete
+ * @param telecom     当前运营商类型
+ */
+-(void)clShanYanSDKManagerAuthPageCompleteViewDidLoad:(UIViewController *_Nonnull)authPageVC currentTelecom:(NSString *_Nullable)telecom object:(NSObject*_Nullable)object userInfo:(NSDictionary*_Nullable)userInfo;
+/**
+ * 授权页面将要显示的回调
+ * ViewWillAppear
+ * @param telecom     当前运营商类型
+ */
+-(void)clShanYanSDKManagerAuthPageCompleteViewWillAppear:(UIViewController *_Nonnull)authPageVC currentTelecom:(NSString *_Nullable)telecom object:(NSObject*_Nullable)object userInfo:(NSDictionary*_Nullable)userInfo;
+/**
+ * 授权页vc alloc init
+ * init，注：此时authPageVC.navigationController为nil
+ * @param telecom     当前运营商类型
+ */
+-(void)clShanYanSDKManagerAuthPageCompleteInit:(UIViewController *_Nonnull)authPageVC currentTelecom:(NSString *_Nullable)telecom object:(NSObject*_Nullable)object userInfo:(NSDictionary*_Nullable)userInfo;
+/**
+ * 授权页vc 将要被present
+ * 将要调用[uiconfigure.viewcontroller  present:authPageVC animation:completion:]
+ * @param telecom     当前运营商类型
+ */
+-(void)clShanYanSDKManagerAuthPageWillPresent:(UIViewController *_Nonnull)authPageVC currentTelecom:(NSString *_Nullable)telecom object:(NSObject*_Nullable)object userInfo:(NSDictionary*_Nullable)userInfo;
 
 /**
  * 统一事件监听方法
@@ -45,7 +70,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @interface CLShanYanSDKManager : NSObject
-
 
 /// 设置点击协议代理
 /// @param delegate 代理
@@ -75,14 +99,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 预取号
  * 此调用将有助于提高闪验拉起授权页的速度和成功率
- * 建议在一键登录前提前调用此方法，比如调一键登录的vc的viewdidload中、初始化成功的回调中
+ * 建议在一键登录前提前调用此方法，比如调一键登录的vc的viewdidload中
  * 不建议在拉起授权页后调用
- * 回调中如需UI操作，建议自行切到主线程
+ * ⚠️‼️以 if (completeResult.error == nil) 为判断成功的依据，而非返回码
+ * ⚠️‼️此方法回调队列为dispatch_get_global_queue(0, 0)，回调中如需UI操作，请自行切到主线程
  */
 +(void)preGetPhonenumber:(nullable CLComplete)complete;
 
 /**
- * 一键登录
+ * 一键登录拉起内置授权页&获取Token
  @param clUIConfigure 闪验授权页参数配置
  @param complete 回调block
  * 回调中如需UI操作，建议自行切到主线程
@@ -92,11 +117,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- 一键登录 区分拉起授权页之前和之后的回调
+ 一键登录拉起内置授权页&获取Token( 区分拉起授权页之前和之后的回调)
  
  @param clUIConfigure 闪验授权页参数配置
  @param openLoginAuthListener 拉起授权页监听：拉起授权页面成功或失败的回调，拉起成功或失败均触发。当拉起失败时，oneKeyLoginListener不会触发。此回调的内部触发时机是viewDidAppear
-                    
+    
  @param oneKeyLoginListener 一键登录监听：拉起授权页成功后的后续操作回调，包括点击SDK内置的(非外部自定义)取消登录按钮，以及点击本机号码一键登录的回调。点击授权页自定义按钮不触发此回调
  
  * 回调中如需UI操作，建议自行切到主线程
@@ -108,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  关闭授权页
- 注：若授权页未拉起，此方法调用无效果，complete不触发。内部实现为调用系统方法dismissViewcontroller:Complete。
+ 注：若授权页未拉起或已经提前关闭，此方法调用无效果，complete不触发。内部实现为调用系统方法dismissViewcontroller:Complete
  @param flag dismissViewcontroller`Animated, default is YES.
  @param completion dismissViewcontroller`completion
  */
@@ -120,23 +145,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(void)hideLoading;
 
-/**************本机认证功能***************/
-/**
- 本机号码校验
 
- @param complete 校验回调
- */
+
+///**************一键登录获取Token***************/
+///// 注：此方法回调队列为dispatch_get_global_queue(0, 0)，如需UI操作请自行切入主线程
+//+(void)loginAuth:(CLComplete)complete;
+
+
+
+/**************本机认证(本机号码校验)***************/
 + (void)mobileCheckWithLocalPhoneNumberComplete:(CLComplete)complete;
 
-/**************本机认证功能***************/
 
 
+
+/**************SDK功能方法***************/
 /**
  模式控制台日志输出控制（默认关闭）
  @param enable 开关参数
  */
 + (void)printConsoleEnable:(BOOL)enable;
 
+
+/// 获取当前流量卡运营商，结果仅供参考
+// CTCC：电信、CMCC：移动、CUCC：联通、UNKNOW：未知
++ (NSString *)getOperatorType;
+
++ (void)clearScripCache;
 
 /**
  禁止日志上报(默认开启)

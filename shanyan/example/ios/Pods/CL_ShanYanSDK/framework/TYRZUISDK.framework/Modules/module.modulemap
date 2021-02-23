@@ -1,0 +1,6 @@
+framework module TYRZUISDK {
+  umbrella header "TYRZSDK.h"
+
+  export *
+  module * { export * }
+}

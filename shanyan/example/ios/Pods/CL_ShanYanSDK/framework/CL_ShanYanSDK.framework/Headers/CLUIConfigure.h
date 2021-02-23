@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**授权页-背景图片*/
 @property (nonatomic,strong) UIImage *clBackgroundImg;
+/**授权页-背景色*/
+@property (nonatomic,strong) UIColor *clBackgroundColor;
 
 //导航栏
 /**导航栏 是否隐藏 BOOL default is NO, 设置优先级高于clNavigationBackgroundClear eg.@(NO)*/
@@ -82,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**导航栏分割线 是否隐藏
  * set backgroundImage=UIImage.new && shadowImage=UIImage.new
- * BOOL, default is NO
+ * BOOL, default is YES
  * eg.@(YES)
  */
 @property (nonatomic,strong)NSNumber * clNavigationBottomLineHidden;
@@ -167,6 +169,8 @@ NS_ASSUME_NONNULL_BEGIN
  注： 运营商隐私条款 不得隐藏
  用户条款不限制
  **/
+/**隐私条款 下划线设置，默认隐藏，设置clPrivacyShowUnderline = @(YES)显示下划线*/
+@property (nonatomic,strong)NSNumber * clPrivacyShowUnderline;
 /**隐私条款名称颜色：@[基础文字颜色UIColor*,条款颜色UIColor*] eg.@[[UIColor lightGrayColor],[UIColor greenColor]]*/
 @property (nonatomic,strong) NSArray<UIColor*> *clAppPrivacyColor;
 /**隐私条款文字字体*/
@@ -281,6 +285,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSValue *clCheckBoxImageEdgeInsets;
 /**协议勾选框 设置CheckBox顶部与隐私协议控件顶部对齐 YES或大于0生效 eg.@(YES)*/
 @property (nonatomic,strong) NSNumber *clCheckBoxVerticalAlignmentToAppPrivacyTop;
+
+/**协议勾选框 设置CheckBox对齐后的偏移量,相对于对齐后的中心距离在当前垂直方向上的偏移*/
+@property (nonatomic,strong) NSNumber *clCheckBoxVerticalAlignmentOffset;
+
+
+
 /**协议勾选框 设置CheckBox顶部与隐私协议控件竖向中心对齐 YES或大于0生效 eg.@(YES)*/
 @property (nonatomic,strong) NSNumber *clCheckBoxVerticalAlignmentToAppPrivacyCenterY;
 /**协议勾选框 非选中状态图片*/
@@ -374,6 +384,10 @@ NS_ASSUME_NONNULL_BEGIN
  * 授权页面present弹出时animate动画设置，默认带动画，eg. @(YES)
  */
 @property (nonatomic,strong) NSNumber * clAuthWindowPresentingAnimate;
+/**
+ * sdk自带返回键：授权页面dismiss时animate动画设置，默认带动画，eg. @(YES)
+ */
+@property (nonatomic,strong) NSNumber * clAuthWindowDismissAnimate;
 
 /**弹窗的MaskLayer，用于自定义窗口形状*/
 @property (nonatomic,strong) CALayer * clAuthWindowMaskLayer;
