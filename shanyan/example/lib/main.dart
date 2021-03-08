@@ -351,7 +351,7 @@ class _MyAppState extends State<MyApp> {
     final String btn_widgetId = "other_custom_button"; // 标识控件 id
     ShanYanCustomWidgetIOS buttonWidgetiOS =
     ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
-    buttonWidgetiOS.textContent = "其他方式登录 >";
+    buttonWidgetiOS.textContent = "其他方式登录 >1";
     buttonWidgetiOS.centerY = 100;
     buttonWidgetiOS.centerX = 0 ;
     buttonWidgetiOS.width = 150;
@@ -361,6 +361,9 @@ class _MyAppState extends State<MyApp> {
     buttonWidgetiOS.backgroundColor = "#330000";
     buttonWidgetiOS.isFinish = true;
     buttonWidgetiOS.textAlignment = iOSTextAlignment.center;
+    buttonWidgetiOS.borderWidth = 2;
+    buttonWidgetiOS.borderColor = "#ff0000";
+
 
     shanyanCustomWidgetIOS.add(buttonWidgetiOS);
 

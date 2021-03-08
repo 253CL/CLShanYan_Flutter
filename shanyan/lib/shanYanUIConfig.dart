@@ -761,6 +761,8 @@ class ShanYanCustomWidgetIOS {
   num centerX;
   num centerY;
   num cornerRadius;
+  num borderWidth;
+  String borderColor; // 自定义控件边框颜色
   String textContent; // 自定义控件内容
   double textFont = 13.0; // 自定义控件文字大小，单位sp
   String textColor; // 自定义控件文字颜色

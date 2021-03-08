@@ -1292,7 +1292,6 @@
     }
 
     @try {
-            
             CLShanYanCustomViewCongifure * customViewConfigure = [[CLShanYanCustomViewCongifure alloc]init];
             
         //    NSString * widgetId = clCustomDict[@"widgetId"];
@@ -1360,9 +1359,18 @@
                 customViewConfigure.layer_cornerRadius = cornerRadius;
                 customViewConfigure.layer_masksToBounds = @(YES);
             }
-//            if (masksToBounds) {
-//                customViewConfigure.layer_masksToBounds = masksToBounds;
-//            }
+            UIColor * borderColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"borderColor"]];
+            if (borderColor) {
+                customViewConfigure.layer_borderColor = borderColor.CGColor;
+                customViewConfigure.layer_masksToBounds = @(YES);
+            }
+                
+            NSNumber * borderWidth = clCustomDict[@"borderWidth"];
+            if (borderWidth) {
+                customViewConfigure.layer_borderWidth = borderWidth;
+                customViewConfigure.layer_masksToBounds = @(YES);
+            }
+        
             
             
             return customViewConfigure;
