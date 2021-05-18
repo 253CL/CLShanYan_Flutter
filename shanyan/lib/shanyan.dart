@@ -22,7 +22,7 @@ class OneKeyLoginManager {
 
   final MethodChannel _channel = const MethodChannel("shanyan");
 
-  ShanYanUIConfig shanYanUIConfig;
+  ShanYanUIConfig shanYanUIConfig = new ShanYanUIConfig();
 
   OneKeyLoginManager() {
     _channel.setMethodCallHandler(_handlerMethod);
@@ -44,7 +44,7 @@ class OneKeyLoginManager {
 //  }
 
   ///闪验SDK 初始化(Android+iOS)
-  Future<ShanYanResult> init({String appId}) async {
+  Future<ShanYanResult> init({required String appId}) async {
     Map result = await _channel.invokeMethod("init", {"appId": appId});
     Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
     return ShanYanResult.fromJson(newResult);
@@ -128,7 +128,7 @@ class OneKeyLoginManager {
   }
 
   ///闪验SDK 配置授权页 Android
-  void setAuthThemeConfig({ShanYanUIConfig uiConfig}) {
+  void setAuthThemeConfig({required ShanYanUIConfig uiConfig}) {
     shanYanUIConfig = uiConfig;
     if (Platform.isIOS) {
       print("uiConfig====" + uiConfig.ios.toJson().toString());
@@ -146,21 +146,21 @@ class OneKeyLoginManager {
         Map<String, dynamic> newResult =
             new Map<String, dynamic>.from(call.arguments);
         ShanYanResult result = ShanYanResult.fromJson(newResult);
-        _eventHanders.oneKeyLoginListener(result);
+        _eventHanders.oneKeyLoginListener?.call(result);
         break;
       case 'onReceiveClickWidgetEvent':
         {
           String widgetId = call.arguments.cast<dynamic, dynamic>()['widgetId'];
           print("点击了：" + widgetId);
           if (null != widgetId) {
-            _eventHanders.shanYanWidgetEventListener(widgetId);
+            _eventHanders.shanYanWidgetEventListener?.call(widgetId);
           }
         }
         break;
       case 'onReceiveAuthEvent':
         Map json = call.arguments.cast<dynamic, dynamic>();
         AuthPageActionEvent ev = AuthPageActionEvent.fromJson(json);
-        _eventHanders.authPageActionListener(ev);
+        _eventHanders.authPageActionListener?.call(ev);
         break;
       default:
         throw new UnsupportedError("Unrecognized Event");
@@ -197,9 +197,9 @@ class ShanYanWidgetEvent {
 }
 
 class ShanYanEventHandlers {
-  ShanYanOneKeyLoginListener oneKeyLoginListener;
-  ShanYanWidgetEventListener shanYanWidgetEventListener;
-  AuthPageActionListener authPageActionListener;
+  ShanYanOneKeyLoginListener? oneKeyLoginListener;
+  ShanYanWidgetEventListener? shanYanWidgetEventListener;
+  AuthPageActionListener? authPageActionListener;
 }
 
 //

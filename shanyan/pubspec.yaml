@@ -5,7 +5,7 @@ author: CL253 <app@253.com>
 homepage: https://www.253.com
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -15,8 +15,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.2.2
-  json_serializable: ^4.1.0
+  build_runner: ^2.0.3
+  json_serializable: ^4.1.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
