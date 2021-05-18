@@ -119,6 +119,9 @@ class _MyAppState extends State<MyApp> {
 
       if (1000 == shanYanResult.code) {
         ///一键登录获取token成功
+
+        oneKeyLoginManager.finishAuthControllerCompletion();
+
       } else if (1011 == shanYanResult.code){
         ///点击返回/取消 （强制自动销毁）
       }else{
