@@ -12,8 +12,8 @@ import 'package:shanyan/shanYanUIConfig.dart';
 import 'package:shanyan/shanYanResult.dart';
 
 import 'package:flutter/cupertino.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:modal_progress_hud/modal_progress_hud.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 import 'dart:ui';
 import 'dart:io';
@@ -57,14 +57,21 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('shanyan_flutter demo'),
         ),
-        body: ModalProgressHUD(child: _buildContent(), inAsyncCall: _loading),
+        // body: ModalProgressHUD(child: _buildContent(), inAsyncCall: _loading),
+        body: Container(
+          margin: const EdgeInsets.all(10.0),
+          color: Colors.amber[600],
+          // width: 48.0,
+          // height: 48.0,
+          child: _buildContent(),
+        ),
       ),
     );
   }
 
 
   Future<void> initPlatformState() async {
-    String appId;
+    String appId = "7I5nJT7h";
     if (Platform.isIOS) {
       appId = "7I5nJT7h";
     } else if (Platform.isAndroid) {
@@ -74,8 +81,8 @@ class _MyAppState extends State<MyApp> {
     oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
 
       setState(() {
-        _code = shanYanResult.code;
-        _result = shanYanResult.message;
+        _code = shanYanResult.code ?? 0;
+        _result = shanYanResult.message ?? "";
         _content = shanYanResult.toJson().toString();
       });
 
@@ -92,8 +99,8 @@ class _MyAppState extends State<MyApp> {
     //闪验SDK 预取号
     oneKeyLoginManager.getPhoneInfo().then((ShanYanResult shanYanResult) {
       setState(() {
-        _code = shanYanResult.code;
-        _result = shanYanResult.message;
+        _code = shanYanResult.code ?? 0;
+        _result = shanYanResult.message ?? "";
         _content = shanYanResult.toJson().toString();
       });
 
@@ -110,8 +117,8 @@ class _MyAppState extends State<MyApp> {
     ///闪验SDK 设置授权页一键登录回调（“一键登录按钮”、返回按钮（包括物理返回键））
     oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
       setState(() {
-        _code = shanYanResult.code;
-        _result = shanYanResult.message;
+        _code = shanYanResult.code ?? 0;
+        _result = shanYanResult.message ?? "";
         _content = shanYanResult.toJson().toString();
       });
 
@@ -136,8 +143,8 @@ class _MyAppState extends State<MyApp> {
     ///闪验SDK 拉起授权页
     oneKeyLoginManager.openLoginAuth().then((ShanYanResult shanYanResult) {
       setState(() {
-        _code = shanYanResult.code;
-        _result = shanYanResult.message;
+        _code = shanYanResult.code ?? 0;
+        _result = shanYanResult.message ?? "";
         _content = shanYanResult.toJson().toString();
       });
 
@@ -173,8 +180,8 @@ class _MyAppState extends State<MyApp> {
 //    //闪验SDK 本机认证获取token
     oneKeyLoginManager.startAuthentication().then((shanYanResult) {
       setState(() {
-        _code = shanYanResult.code;
-        _result = shanYanResult.message;
+        _code = shanYanResult.code ?? 0;
+        _result = shanYanResult.message ?? "";
         _content = shanYanResult.toJson().toString();
       });
 
@@ -338,15 +345,15 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.layOutPortrait.setSloganHeight = 15;
     shanYanUIConfig.ios.layOutPortrait.setSloganLeft = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganRight = 0;
-    shanYanUIConfig.ios.layOutPortrait.setSloganBottom = shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom
-        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight;
+    shanYanUIConfig.ios.layOutPortrait.setSloganBottom = shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom!
+        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
 
     //隐私协议
 //    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 60;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 60;
-    shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom
-      + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight + 5;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom!
+      + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight! + 5;
 
 
     List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
@@ -611,15 +618,15 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.layOutPortrait.setSloganHeight = 15;
     shanYanUIConfig.ios.layOutPortrait.setSloganLeft = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganRight = 0;
-    shanYanUIConfig.ios.layOutPortrait.setSloganBottom = shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom
-        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight;
+    shanYanUIConfig.ios.layOutPortrait.setSloganBottom = shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom!
+        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
 
     //隐私协议
 //    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 30;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 30;
-    shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom
-        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight;
+    shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom = shanYanUIConfig.ios.layOutPortrait.setSloganBottom!
+        + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
 
 
     List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
@@ -842,22 +849,22 @@ class _MyAppState extends State<MyApp> {
 }
 
 void _toast(String str) {
-  Fluttertoast.showToast(
-      msg: str,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIos: 1,
-      backgroundColor: Colors.redAccent,
-      textColor: Colors.white,
-      fontSize: 16.0);
+  // Fluttertoast.showToast(
+  //     msg: str,
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM,
+  //     timeInSecForIos: 1,
+  //     backgroundColor: Colors.redAccent,
+  //     textColor: Colors.white,
+  //     fontSize: 16.0);
 }
 
 /// 封装 按钮
 class CustomButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String title;
+  final VoidCallback? onPressed;
+  final String? title;
 
-  const CustomButton({@required this.onPressed, this.title});
+  const CustomButton({ this.onPressed, this.title});
 
   @override
   Widget build(BuildContext context) {

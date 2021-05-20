@@ -8,11 +8,11 @@ part of 'shanYanResult.dart';
 
 ShanYanResult _$ShanYanResultFromJson(Map<String, dynamic> json) {
   return ShanYanResult(
-    code: json['code'] as int,
-    message: json['message'] as String,
-    innerCode: json['innerCode'] as int,
-    innerDesc: json['innerDesc'] as String,
-    token: json['token'] as String,
+    code: json['code'] as int?,
+    message: json['message'] as String?,
+    innerCode: json['innerCode'] as int?,
+    innerDesc: json['innerDesc'] as String?,
+    token: json['token'] as String?,
   );
 }
 
