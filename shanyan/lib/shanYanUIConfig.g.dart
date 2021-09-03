@@ -640,9 +640,9 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as int?
     ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool?
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool?
-    ..setPrivacyNavColor = json['setPrivacyNavColor'] as int?
+    ..setPrivacyNavColor = json['setPrivacyNavColor'] as String?
     ..setPrivacyNavTextBold = json['setPrivacyNavTextBold'] as bool?
-    ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as int?
+    ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as String?
     ..setPrivacyNavTextSize = json['setPrivacyNavTextSize'] as int?
     ..setPrivacyNavReturnImgPath = json['setPrivacyNavReturnImgPath'] as String?
     ..setPrivacyNavReturnImgHidden =

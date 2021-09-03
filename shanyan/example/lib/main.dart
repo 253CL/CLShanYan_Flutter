@@ -399,7 +399,8 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.isFinish = true;
     shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sy_login_test_bg";
     shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
-
+    shanYanUIConfig.androidPortrait.setPrivacyNavColor = "#aa00cc";
+    shanYanUIConfig.androidPortrait.setPrivacyNavTextColor="#00aacc";
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";
     ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
@@ -671,6 +672,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.setNumFieldOffsetY = 85;
     shanYanUIConfig.androidPortrait.setSloganOffsetY = 110;
     shanYanUIConfig.androidPortrait.setLogBtnOffsetY = 130;
+
 
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";

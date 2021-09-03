@@ -28,6 +28,7 @@
         android:layout_gravity="center"
         android:layout_toRightOf="@+id/shanyan_view_privacy_checkbox_rootlayout"
         android:lineSpacingMultiplier="1.3"
+        android:padding="5dp"
         android:text="同意《运营商服务协议》并授权闪验获取本机号码"
         android:textColor="#222222"
         android:textSize="10sp" />

@@ -656,9 +656,9 @@ class ShanYanUIConfigAndroid {
   bool? setShanYanSloganTextBold; //设置创蓝slogan文字字体是否加粗（true：加粗；false：不加粗）
 
   //协议页导航栏
-  int? setPrivacyNavColor; //设置协议页导航栏背景颜色
+  String? setPrivacyNavColor; //设置协议页导航栏背景颜色
   bool? setPrivacyNavTextBold; //设置协议页导航栏标题文字是否加粗（true：加粗；false：不加粗）
-  int? setPrivacyNavTextColor; //设置协议页导航栏标题文字颜色
+  String? setPrivacyNavTextColor; //设置协议页导航栏标题文字颜色
   int? setPrivacyNavTextSize; //设置协议页导航栏标题文字大小
   String? setPrivacyNavReturnImgPath; //设置协议页导航栏返回按钮图标
   bool? setPrivacyNavReturnImgHidden; //设置协议页导航栏返回按钮是否隐藏（true：隐藏；false：不隐藏）

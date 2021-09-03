@@ -15,7 +15,7 @@
         android:layout_height="0.5dp"
         android:background="#e8e8e8" />
 
-    <com.chuanglan.shanyan_sdk.view.ProgressWebView
+    <WebView
         android:id="@+id/shanyan_view_baseweb_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
