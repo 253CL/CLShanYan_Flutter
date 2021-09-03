@@ -636,7 +636,7 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setShanYanSloganOffsetBottomY =
         json['setShanYanSloganOffsetBottomY'] as int?
     ..setShanYanSloganOffsetX = json['setShanYanSloganOffsetX'] as int?
-    ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as int?
+    ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String?
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as int?
     ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool?
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool?

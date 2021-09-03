@@ -650,7 +650,7 @@ class ShanYanUIConfigAndroid {
   int? setShanYanSloganOffsetY; //设置创蓝slogan相对于标题栏下边缘y偏移
   int? setShanYanSloganOffsetBottomY; //设置创蓝slogan相对屏幕底部Y偏移
   int? setShanYanSloganOffsetX; //设置创蓝slogan相对屏幕左侧X偏移
-  int? setShanYanSloganTextColor; //设置创蓝slogan文字颜色
+  String? setShanYanSloganTextColor; //设置创蓝slogan文字颜色
   int? setShanYanSloganTextSize; //设置创蓝slogan文字字体大小
   bool? setShanYanSloganHidden; //设置创蓝slogan是否隐藏（true：隐藏；false：不隐藏）
   bool? setShanYanSloganTextBold; //设置创蓝slogan文字字体是否加粗（true：加粗；false：不加粗）
