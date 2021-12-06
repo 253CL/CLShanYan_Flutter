@@ -1,6 +1,11 @@
-# flutter 2.3.1 集成文档
+# 闪验flutter 集成文档
 
 注：「[插件示例代码地址](https://github.com/253CL/CLShanYan_Flutter)」<br />
+
+## 升级指南
+**1.修改依赖中的版本号为ref: v2.3.3.2**
+
+**2.AndroidManifest.xml中移动授权页com.cmic.sso.sdk.activity.LoginAuthActivity更改为com.cmic.sso.sdk.view.LoginAuthActivity**
 
 <a name="AiyJS"></a>
 ## 概述
@@ -24,7 +29,7 @@ dependencies:
     git:
       url: git://github.com/253CL/CLShanYan_Flutter.git
       path: shanyan
-      ref: v2.3.3.1
+      ref: v2.3.3.2
 ```
 <a name="UlDef"></a>
 ### 使用
