@@ -4,6 +4,7 @@
 
 ## 升级指南
 **1.修改依赖中的版本号为ref: v2.3.3.2**
+
 **2.AndroidManifest.xml中移动授权页com.cmic.sso.sdk.activity.LoginAuthActivity更改为com.cmic.sso.sdk.view.LoginAuthActivity**
 
 <a name="AiyJS"></a>
