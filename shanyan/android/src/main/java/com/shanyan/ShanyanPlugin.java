@@ -690,7 +690,7 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (null != setAuthBgVideoPath) {
             int bgVideoId = getRawForId((String) setAuthBgVideoPath);
             if (bgVideoId != 0) {
-                String bgVideoPath = "android.resource://chuanglan.com.shanyantest/" + bgVideoId;
+                String bgVideoPath = "android.resource://" + context.getPackageName() + "/" + bgVideoId;
                 builder.setAuthBgVideoPath(bgVideoPath);
             }
         }
