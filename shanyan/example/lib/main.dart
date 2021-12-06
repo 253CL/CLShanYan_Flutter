@@ -71,6 +71,7 @@ class _MyAppState extends State<MyApp> {
 
 
   Future<void> initPlatformState() async {
+    oneKeyLoginManager.setDebug(true);
     String appId = "7I5nJT7h";
     if (Platform.isIOS) {
       appId = "7I5nJT7h";
@@ -397,7 +398,7 @@ class _MyAppState extends State<MyApp> {
 
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = true;
-    shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sy_login_test_bg";
+    shanYanUIConfig.androidPortrait.setAuthBgVideoPath = "login_demo_test_vedio";
     shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
     shanYanUIConfig.androidPortrait.setPrivacyNavColor = "#aa00cc";
     shanYanUIConfig.androidPortrait.setPrivacyNavTextColor="#00aacc";

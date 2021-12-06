@@ -49,7 +49,7 @@
             android:theme="@style/MyTheme" />
 
         <activity-alias
-            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+            android:name="com.cmic.sso.sdk.view.LoginAuthActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="unspecified"

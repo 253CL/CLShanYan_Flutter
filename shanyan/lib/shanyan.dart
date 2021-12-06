@@ -35,13 +35,13 @@ class OneKeyLoginManager {
   }
 
 //  /// 设置调试模式开关 Android
-//  void setDebug(bool debug) {
-//    _channel.invokeMethod("setDebugMode", {"debug": debug});
-//  }
-//
-//  Future<String> getOperatorType()async{
-//    return await _channel.invokeMethod("getOperatorType");
-//  }
+ void setDebug(bool debug) {
+   _channel.invokeMethod("setDebugMode", {"debug": debug});
+ }
+
+ Future<String> getOperatorType()async{
+   return await _channel.invokeMethod("getOperatorType");
+ }
 
   ///闪验SDK 初始化(Android+iOS)
   Future<ShanYanResult> init({required String appId}) async {

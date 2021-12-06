@@ -1,17 +1,13 @@
 package com.shanyan;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +17,6 @@ import com.chuanglan.shanyan_sdk.listener.ActionListener;
 import com.chuanglan.shanyan_sdk.listener.AuthenticationExecuteListener;
 import com.chuanglan.shanyan_sdk.listener.GetPhoneInfoListener;
 import com.chuanglan.shanyan_sdk.listener.InitListener;
-import com.chuanglan.shanyan_sdk.listener.OnClickPrivacyListener;
 import com.chuanglan.shanyan_sdk.listener.OneKeyLoginListener;
 import com.chuanglan.shanyan_sdk.listener.OpenLoginAuthListener;
 import com.chuanglan.shanyan_sdk.listener.ShanYanCustomInterface;
@@ -693,7 +688,11 @@ public class ShanyanPlugin implements MethodCallHandler {
             builder.setAuthBgGifPath((String) setAuthBgGifPath);
         }
         if (null != setAuthBgVideoPath) {
-            builder.setAuthBgVideoPath((String) setAuthBgVideoPath);
+            int bgVideoId = getRawForId((String) setAuthBgVideoPath);
+            if (bgVideoId != 0) {
+                String bgVideoPath = "android.resource://chuanglan.com.shanyantest/" + bgVideoId;
+                builder.setAuthBgVideoPath(bgVideoPath);
+            }
         }
         //状态栏
         if (null != setStatusBarColor) {
@@ -1016,6 +1015,19 @@ public class ShanyanPlugin implements MethodCallHandler {
             return para.get(key);
         } else {
             return null;
+        }
+    }
+
+    private int getRawForId(String rawName) {
+        if (null == rawName) {
+            return 0;
+        } else {
+            Resources mResources = context.getResources();
+            if (mResources != null) {
+                return mResources.getIdentifier(rawName, "raw", context.getPackageName());
+            } else {
+                return 0;
+            }
         }
     }
 
