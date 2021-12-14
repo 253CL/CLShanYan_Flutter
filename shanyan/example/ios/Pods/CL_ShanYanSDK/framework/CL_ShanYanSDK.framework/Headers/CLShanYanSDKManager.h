@@ -96,6 +96,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)setPreGetPhonenumberTimeOut:(NSTimeInterval)preGetPhoneTimeOut;
 
+/// 当无蜂窝网络（拔出SIM卡/切换SIM卡,网络切换期间/或者直接关闭流量开关）是否使用之前的取号缓存
+/// @param isUseCache YES/NO  默认YES   设置为NO  获取SIM实时的预取号，无蜂窝网络、或者蜂窝网络不稳定则无法取号成功
++ (void)setPreGetPhonenumberUseCacheIfNoCellularNetwork:(BOOL)isUseCache;
+
 /**
  * 预取号
  * 此调用将有助于提高闪验拉起授权页的速度和成功率

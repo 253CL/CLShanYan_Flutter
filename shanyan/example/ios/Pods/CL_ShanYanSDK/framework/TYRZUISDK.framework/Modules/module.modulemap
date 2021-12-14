@@ -1,5 +1,5 @@
 framework module TYRZUISDK {
-  umbrella header "TYRZSDK.h"
+  umbrella header "TYRZUISDK.h"
 
   export *
   module * { export * }

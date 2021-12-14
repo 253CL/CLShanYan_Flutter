@@ -203,6 +203,8 @@ class _MyAppState extends State<MyApp> {
     /*iOS 页面样式设置*/
     shanYanUIConfig.ios.isFinish = true;
     shanYanUIConfig.ios.setAuthBGImgPath = "sy_login_test_bg";
+    shanYanUIConfig.ios.setAuthBGVedioPath = "login_demo_test_vedio";
+
 
     shanYanUIConfig.ios.setPreferredStatusBarStyle = iOSStatusBarStyle.styleLightContent;
     shanYanUIConfig.ios.setStatusBarHidden = false;
@@ -470,6 +472,7 @@ class _MyAppState extends State<MyApp> {
     /*iOS 页面样式设置*/
     shanYanUIConfig.ios.isFinish = false;
     shanYanUIConfig.ios.setAuthBGImgPath = "sy_login_test_bg";
+    shanYanUIConfig.ios.setAuthBGVedioPath = "login_demo_test_vedio";
 
     shanYanUIConfig.ios.setPreferredStatusBarStyle = iOSStatusBarStyle.styleLightContent;
     shanYanUIConfig.ios.setStatusBarHidden = false;

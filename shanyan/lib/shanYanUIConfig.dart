@@ -192,7 +192,8 @@ class ShanYanUIConfigIOS {
 
   bool? isFinish;            ///外部手动管理关闭界面 BOOL,default is NO
 
-  String? setAuthBGImgPath;                        /// /// 授权页-背景图片
+  String? setAuthBGImgPath;                        /// /// 授权页-背景图片(优先使用视频背景)
+  String? setAuthBGVedioPath;                        /// /// 授权页-背景视频
 
   iOSStatusBarStyle? setPreferredStatusBarStyle;   /// 状态栏样式
 

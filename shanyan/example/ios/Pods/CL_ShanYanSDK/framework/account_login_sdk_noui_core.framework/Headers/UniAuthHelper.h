@@ -12,6 +12,9 @@
 //                 2. socket请求时，host头域追加端口号
 //                 3. 仅数据网络开通和wifi双开时，都启动预取号计时器。
 //                 4. 按照阿里建议， 超时时间可以设置x.x秒样式
+//  4.7.0IR01B0331 1. 减少体积
+//                 2. 解决苹果appstore审核时，可能会对getaddrinfo域名解析接口触发本地设备连接授权弹窗进行驳回处理。
+//  5.0.0IR01B0420 全https 5g取号支持
 
 #import <Foundation/Foundation.h>
 

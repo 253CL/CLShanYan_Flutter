@@ -17,7 +17,4 @@ FOUNDATION_EXPORT const unsigned char CL_ShanYanSDKVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <CL_ShanYanSDK/PublicHeader.h>
 #import <CL_ShanYanSDK/CLShanYanSDKManager.h>
 #import <CL_ShanYanSDK/CLCompleteResult.h>
-
-
-
-
+#import <CL_ShanYanSDK/CLFaceIDTool.h>

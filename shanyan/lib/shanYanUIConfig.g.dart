@@ -26,6 +26,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
   return ShanYanUIConfigIOS()
     ..isFinish = json['isFinish'] as bool?
     ..setAuthBGImgPath = json['setAuthBGImgPath'] as String?
+    ..setAuthBGVedioPath = json['setAuthBGVedioPath'] as String?
     ..setPreferredStatusBarStyle = _$enumDecodeNullable(
         _$iOSStatusBarStyleEnumMap, json['setPreferredStatusBarStyle'])
     ..setStatusBarHidden = json['setStatusBarHidden'] as bool?
@@ -163,6 +164,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
 
   writeNotNull('isFinish', instance.isFinish);
   writeNotNull('setAuthBGImgPath', instance.setAuthBGImgPath);
+  writeNotNull('setAuthBGVedioPath', instance.setAuthBGVedioPath);
   writeNotNull('setPreferredStatusBarStyle',
       _$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle]);
   writeNotNull('setStatusBarHidden', instance.setStatusBarHidden);

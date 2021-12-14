@@ -33,6 +33,7 @@ typedef void(^CLComplete)(CLCompleteResult * completeResult);
 // */
 //@property (nonatomic,assign)BOOL authPagePresented;
 
+/// 累计上报 （为1则累计上报）
 @property (nonatomic,assign)NSInteger clShanYanReportTag;
 
 +(instancetype)cl_CompleteWithCode:(NSInteger)code message:(NSString *)message data:(nullable NSDictionary *)data  error:(nullable NSError *)error;

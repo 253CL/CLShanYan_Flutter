@@ -1,9 +1,11 @@
 #import "ShanyanPlugin.h"
 #import <CL_ShanYanSDK/CL_ShanYanSDK.h>
+#import <AVFoundation/AVFoundation.h>
 //Helpers
 #import "CLShanYanCustomViewHelper.h"
 #import "UIView+CLShanYanWidget.h"
 #import "NSNumber+shanyanCategory.h"
+#import "PlayerView.h"
 
 @interface ShanyanPlugin ()<CLShanYanSDKManagerDelegate>
 @property (nonatomic,strong)id notifObserver;
@@ -103,6 +105,9 @@
     }
 }
 
+-(void)clShanYanSDKManagerAuthPageAfterViewDidLoad:(UIView *_Nonnull)authPageView currentTelecom:(NSString *_Nullable)telecom {
+    [authPageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)]];
+}
 
 - (void)init:(FlutterMethodCall*)call complete:(FlutterResult)complete{
     
@@ -141,11 +146,12 @@
 
 -(void)quickAuthLoginWithConfigure:(NSDictionary *)clUIConfigure complete:(FlutterResult)complete{
     
-    CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
-     baseUIConfigure.viewController = [self findVisibleVC];;
+     CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
+     baseUIConfigure.viewController = [self findVisibleVC];
     
     __weak typeof(self) weakSelf = self;
     
+    [CLShanYanSDKManager setCLShanYanSDKManagerDelegate:self];
      [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
          
         NSLog(@"%@",completeResult.message);
@@ -198,6 +204,7 @@
 
 }
 
+- (void)tap{ }
 + (UIFont *)fontWithSize:(NSNumber *)size blod:(NSNumber *)isBlod name:(NSString *)name{
     if (size == nil) {
         return nil;
@@ -314,9 +321,6 @@
 }
 
 -(CLUIConfigure *)configureWithConfig:(NSDictionary *)configureDic{
-    
-    
-    
     CLUIConfigure * baseConfigure = [CLUIConfigure new];
 
     @try {
@@ -326,7 +330,8 @@
         }
         
         NSString * clBackgroundImg = configureDic[@"setAuthBGImgPath"];
-        if (clBackgroundImg) {
+        NSString * clBackgroundVedio = configureDic[@"setAuthBGVedioPath"];
+        if (clBackgroundImg && (!clBackgroundVedio || clBackgroundVedio.length<1)) {
             baseConfigure.clBackgroundImg = [UIImage imageNamed:clBackgroundImg];
         }
         NSNumber * setPreferredStatusBarStyle = configureDic[@"setPreferredStatusBarStyle"];
@@ -1116,27 +1121,12 @@
                 baseConfigure.clAuthWindowPresentingAnimate = setAuthWindowPresentingAnimate;
             }
         }
-        
-        /**弹窗的MaskLayer，用于自定义窗口形状*/
-        CALayer * clAuthWindowMaskLayer;
-        
-        NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"layOutPortrait"];
-        NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"layOutLandscape"];
 
-        if (clOrientationLayOutPortraitDict.count > 0) {
-            CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
-            baseConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
-        }
-        if (clOrientationLayOutLandscapeDict.count > 0) {
-            CLOrientationLayOut * clOrientationLayOutLandscape = [self clOrientationLayOutLandscapeWithConfigure:clOrientationLayOutLandscapeDict];
-            baseConfigure.clOrientationLayOutLandscape = clOrientationLayOutLandscape;
-        }
     
         //自定义控件
         NSArray * clCustomViewArray = configureDic[@"widgets"];
         if (clCustomViewArray) {
-            
-            
+
             //导航栏控件
             for (NSDictionary * clCustomDict in clCustomViewArray) {
                 NSString * type = clCustomDict[@"type"];
@@ -1260,9 +1250,64 @@
 
                         }
                     }
+                     NSString *clBackgroundVedio = configureDic[@"setAuthBGVedioPath"];
+                     if (clBackgroundVedio) {
+                        NSLog(@" === clBackgroundVedio %@", clBackgroundVedio);
+                        NSString *path = [[NSBundle mainBundle] pathForResource:clBackgroundVedio ofType:@"mp4"];
+                        NSLog(@" === path %@", path);
+                        if (path) {
+
+                            NSURL *url = [NSURL fileURLWithPath:path];
+                                NSLog(@" === url %@", url);
+                            if (url) {
+                                PlayerView *playerView = [[PlayerView alloc] init];
+                                [customAreaView addSubview:playerView];
+                                playerView.translatesAutoresizingMaskIntoConstraints = NO;
+                                NSLayoutConstraint * left = [NSLayoutConstraint constraintWithItem:playerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:customAreaView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.];
+                                left.active = YES;
+                                NSLayoutConstraint * top = [NSLayoutConstraint constraintWithItem:playerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:customAreaView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.];
+                                top.active = YES;
+                                NSLayoutConstraint * right = [NSLayoutConstraint constraintWithItem:playerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:customAreaView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.];
+                                right.active = YES;
+                                NSLayoutConstraint * bottom = [NSLayoutConstraint constraintWithItem:playerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:customAreaView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.];
+                                bottom.active = YES;
+                               [customAreaView updateConstraintsIfNeeded];
+                               [customAreaView sendSubviewToBack:playerView];
+
+                                AVPlayerItem *playeItem = [[AVPlayerItem alloc] initWithURL:url];
+                                AVPlayer *player = [AVPlayer playerWithPlayerItem:playeItem];
+
+                                AVPlayerLayer *playerLayer = (AVPlayerLayer *)playerView.layer;
+                                playerLayer.player = player;
+                                playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+                                [player play];
+                                [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+                                    CMTime time  = CMTimeMake(0, 1);
+                                    [player seekToTime:time];
+                                    [player play];
+                                }];
+                             }
+                        }
+
+                     }
                 });
             };
         }
+
+         /**弹窗的MaskLayer，用于自定义窗口形状*/
+         CALayer * clAuthWindowMaskLayer;
+
+         NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"layOutPortrait"];
+         NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"layOutLandscape"];
+
+         if (clOrientationLayOutPortraitDict.count > 0) {
+             CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
+             baseConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
+         }
+         if (clOrientationLayOutLandscapeDict.count > 0) {
+             CLOrientationLayOut * clOrientationLayOutLandscape = [self clOrientationLayOutLandscapeWithConfigure:clOrientationLayOutLandscapeDict];
+             baseConfigure.clOrientationLayOutLandscape = clOrientationLayOutLandscape;
+         }
     } @catch (NSException *exception) {
         NSLog(@"%@",exception.userInfo);
     }
