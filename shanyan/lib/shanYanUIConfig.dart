@@ -791,7 +791,7 @@ enum ShanYanCustomWidgetiOSNavPosition {
   navright
 }
 
-String? getStringFromEnum<T>(T) {
+String? getStringFromEnum(T) {
   if (T == null) {
     return null;
   }
