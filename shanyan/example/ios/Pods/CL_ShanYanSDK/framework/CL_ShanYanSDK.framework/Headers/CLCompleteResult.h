@@ -14,30 +14,36 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLCompleteResult;
 typedef void(^CLComplete)(CLCompleteResult * completeResult);
 
+/// 回调内容
 @interface CLCompleteResult : NSObject
-@property (nonatomic,assign)NSInteger code;//SDK外层code
-@property (nonatomic,nullable,copy)NSString * message;//SDK外层msg
-@property (nonatomic,nullable,copy)NSDictionary * data;//SDK外层data
-@property (nonatomic,nullable,strong)NSError * error;//Error
-
-//内层
-@property (nonatomic,assign)NSInteger innerCode;//SDK内层code
-@property (nonatomic,nullable,copy)NSString * innerDesc;//SDK内层msg
+/// SDK外层code
+@property (nonatomic,assign)NSInteger code;
+/// SDK外层msg
+@property (nonatomic,nullable,copy)NSString * message;
+/// SDK外层data
+@property (nonatomic,nullable,copy)NSDictionary * data;
+/// Error
+@property (nonatomic,nullable,strong)NSError * error;
+/// SDK内层code
+@property (nonatomic,assign)NSInteger innerCode;
+/// SDK内层msg
+@property (nonatomic,nullable,copy)NSString * innerDesc;
 
 #ifdef DEBUG
 @property (nonatomic,assign)NSTimeInterval debug_createTime;
 #endif
-///**
-// 是否已经拉起授权页
-// default is NO
-// */
-//@property (nonatomic,assign)BOOL authPagePresented;
+
 
 /// 累计上报 （为1则累计上报）
 @property (nonatomic,assign)NSInteger clShanYanReportTag;
 
-+(instancetype)cl_CompleteWithCode:(NSInteger)code message:(NSString *)message data:(nullable NSDictionary *)data  error:(nullable NSError *)error;
++(instancetype)cl_CompleteWithCode:(NSInteger)code
+                           message:(NSString *)message
+                              data:(nullable NSDictionary *)data
+                             error:(nullable NSError *)error;
 -(void)fillPropertyInfo;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

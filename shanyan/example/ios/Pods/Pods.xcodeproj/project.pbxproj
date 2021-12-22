@@ -28,61 +28,61 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		273F1CAED07DF3374E1AD034295EF11B /* shanyan-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2061CB7731F33E147E9D492540288CA3 /* shanyan-dummy.m */; };
-		2E7BC3DB5BAE852C373BD985C719E5F2 /* Pods-Runner-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0769263DD910C3C79E304E0CD1CE0049 /* Pods-Runner-dummy.m */; };
-		2FEDD391F2DDB61DB1DFB4016C8E6499 /* UIView+CLShanYanWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = A070A2822A8090493912851956EFB3A4 /* UIView+CLShanYanWidget.m */; };
-		31BF4478DBD72B156D87B274B6DCBA43 /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35398ECE2792659DAEFB257C62E8C298 /* PlayerView.m */; };
-		62843F6977496CD97A14BD00B5B14CF0 /* UIView+CLShanYanWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 74FC6C74749047CB92FAD29120B03CC7 /* UIView+CLShanYanWidget.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7622BBEFD58B5348EADBD0DA46BD3A5F /* CLShanYanCustomViewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 97355F99E91DFD4692E1BB87D4877178 /* CLShanYanCustomViewHelper.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7695A3540A107D424C21455223A85712 /* PlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = C7AA82C736C05CF4277756CC3892EFCE /* PlayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AB0EA4DC8412381F3A62106942E3E464 /* NSNumber+shanyanCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 62078390019AF70B4EC0B4FD7934B18D /* NSNumber+shanyanCategory.m */; };
-		E8C572AF184FB288136F4BE921481C9C /* CLShanYanCustomViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E939B6958E097270301A0B42E94ABE8 /* CLShanYanCustomViewHelper.m */; };
-		EFD75A31EFFBB9BBF6B8AE8297D1AF90 /* ShanyanPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD9F56F2E6945F699F3F45E15E04767 /* ShanyanPlugin.m */; };
-		EFF0503991EE041DAEBABE24A683221A /* ShanyanPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A451AEA6D657F477B315F50B7F850D /* ShanyanPlugin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FBEB8B641299C058AFA053883D247341 /* NSNumber+shanyanCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = C83D05ABE89FA9BED2A640B0EBBB6FB6 /* NSNumber+shanyanCategory.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0B34B3C13F4A78FAF3D5A505E6ABF0CC /* CLShanYanCustomViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E939B6958E097270301A0B42E94ABE8 /* CLShanYanCustomViewHelper.m */; };
+		5292C01B524FD6E633542A9261FD5D55 /* NSNumber+shanyanCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = C83D05ABE89FA9BED2A640B0EBBB6FB6 /* NSNumber+shanyanCategory.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5C24D024EE95F6ABA005BD106C6F7297 /* UIView+CLShanYanWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 74FC6C74749047CB92FAD29120B03CC7 /* UIView+CLShanYanWidget.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		85861851BB9E6EA7AB6F7E3CDE016D74 /* NSNumber+shanyanCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 62078390019AF70B4EC0B4FD7934B18D /* NSNumber+shanyanCategory.m */; };
+		89228042FBB03F782E9AB887D2053265 /* Pods-Runner-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0769263DD910C3C79E304E0CD1CE0049 /* Pods-Runner-dummy.m */; };
+		96D91911739AD72F4984BE47B12A0C78 /* ShanyanPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD9F56F2E6945F699F3F45E15E04767 /* ShanyanPlugin.m */; };
+		A103A4E1A177116E1FF358C2ECA58170 /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35398ECE2792659DAEFB257C62E8C298 /* PlayerView.m */; };
+		B67DFCA9E7984DE39487C9BEA11C30B0 /* CLShanYanCustomViewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 97355F99E91DFD4692E1BB87D4877178 /* CLShanYanCustomViewHelper.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BE4A20282E0010F5A8A5741235492C15 /* UIView+CLShanYanWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = A070A2822A8090493912851956EFB3A4 /* UIView+CLShanYanWidget.m */; };
+		C3A92BCE165F85E55FED1AEFA4968FA8 /* PlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = C7AA82C736C05CF4277756CC3892EFCE /* PlayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C40609609417ED991887B6E03ADBFCB8 /* ShanyanPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A451AEA6D657F477B315F50B7F850D /* ShanyanPlugin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FD78D16ECADE16889E9338155561FCCD /* shanyan-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2061CB7731F33E147E9D492540288CA3 /* shanyan-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		11D815C7B320FC4E4A9D5A705E12542E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EFDDC32A34D56D411E640A81DCD9E73;
-			remoteInfo = Flutter;
-		};
-		6F37D60758D2CB5D273C23285D1E77E0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EFDDC32A34D56D411E640A81DCD9E73;
-			remoteInfo = Flutter;
-		};
-		FA6933C9AF3FD5B162B2533A570A691C /* PBXContainerItemProxy */ = {
+		168ED1B716E1CB406CF12D4C28C0968C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6CEA38EC2E63D96E7179449F1279A773;
 			remoteInfo = CL_ShanYanSDK;
 		};
-		FE0CBE8D4913F55132D5DA749ECC953B /* PBXContainerItemProxy */ = {
+		2E739B1980F1AFF6DF09FE1ADFD0B096 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6CEA38EC2E63D96E7179449F1279A773;
-			remoteInfo = CL_ShanYanSDK;
+			remoteGlobalIDString = 1EFDDC32A34D56D411E640A81DCD9E73;
+			remoteInfo = Flutter;
 		};
-		FFDB6B0893D1A9E9BE22E4521A3D76F2 /* PBXContainerItemProxy */ = {
+		7EBEAD05EA155F95A66A752073E21CE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EFDDC32A34D56D411E640A81DCD9E73;
+			remoteInfo = Flutter;
+		};
+		B7DE9523539635890817E2C129EF3D80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 99EF29ED9D09678B8F8177B9A17F1FFB;
 			remoteInfo = shanyan;
 		};
+		E0CB3B04A5AAB894869542A4F2D26429 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CEA38EC2E63D96E7179449F1279A773;
+			remoteInfo = CL_ShanYanSDK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0769263DD910C3C79E304E0CD1CE0049 /* Pods-Runner-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Runner-dummy.m"; sourceTree = "<group>"; };
-		0C8CC4F43125B1D6C496E28FAF06D64D /* libshanyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libshanyan.a; path = libshanyan.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8CC4F43125B1D6C496E28FAF06D64D /* shanyan */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = shanyan; path = libshanyan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A038AEF8FDDC544AF31F4BC6E5C9FF /* shanyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shanyan.debug.xcconfig; sourceTree = "<group>"; };
 		1B8C8874AAE5186C511E2FD7E62AC976 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../../../../../../LICENSE; sourceTree = "<group>"; };
 		1D9F047A81FC5F2EAB60CEDA0798BCD9 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth.framework; path = framework/OAuth.framework; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		492EE06409778E4E698C333D56834513 /* shanyan-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "shanyan-prefix.pch"; sourceTree = "<group>"; };
 		4E939B6958E097270301A0B42E94ABE8 /* CLShanYanCustomViewHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLShanYanCustomViewHelper.m; path = ../../../../../../../../ios/Classes/Helpers/CLShanYanCustomViewHelper.m; sourceTree = "<group>"; };
 		62078390019AF70B4EC0B4FD7934B18D /* NSNumber+shanyanCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+shanyanCategory.m"; path = "../../../../../../../../ios/Classes/Helpers/NSNumber+shanyanCategory.m"; sourceTree = "<group>"; };
-		669E8F25E1897672BDB80B7EB784DA24 /* libPods-Runner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Runner.a"; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		669E8F25E1897672BDB80B7EB784DA24 /* Pods-Runner */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-Runner"; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74FC6C74749047CB92FAD29120B03CC7 /* UIView+CLShanYanWidget.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+CLShanYanWidget.h"; path = "../../../../../../../../ios/Classes/Helpers/UIView+CLShanYanWidget.h"; sourceTree = "<group>"; };
 		8462906CDA15086EBDBCC1F1E0986F2B /* CL_ShanYanSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CL_ShanYanSDK.release.xcconfig; sourceTree = "<group>"; };
 		9039460E8D3FAD357BF2E7D56AA0D6B2 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
@@ -121,14 +121,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0CC7C7F33A7842C3FE6CFE7D94FAF667 /* Frameworks */ = {
+		1711C9937B0766A9433A3D93072A91DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18683B97760CDCE4FDBE2BB3AB08710B /* Frameworks */ = {
+		8E6CC20CA2BF30690836A4A1D21B5E27 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -267,6 +267,15 @@
 			path = ../.symlinks/plugins/shanyan/ios;
 			sourceTree = "<group>";
 		};
+		91B57DD6710EE60AE6D288B40236C3D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				669E8F25E1897672BDB80B7EB784DA24 /* Pods-Runner */,
+				0C8CC4F43125B1D6C496E28FAF06D64D /* shanyan */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		98EA5C7B46C72AF0C887C86D802FC2B6 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,15 +335,6 @@
 			path = ios;
 			sourceTree = "<group>";
 		};
-		B5AD34AB8CF9F33178C740740F568AF0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				669E8F25E1897672BDB80B7EB784DA24 /* libPods-Runner.a */,
-				0C8CC4F43125B1D6C496E28FAF06D64D /* libshanyan.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		BC13E27C78A1B43FB2A9BDC9E8435221 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,7 +350,7 @@
 				7B6870E455E3700715004706DADCB610 /* Development Pods */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
 				D36ED2C6D1EB701BC35A4B68B2590CC9 /* Pods */,
-				B5AD34AB8CF9F33178C740740F568AF0 /* Products */,
+				91B57DD6710EE60AE6D288B40236C3D9 /* Products */,
 				6F2A2EF8165275926B54C1764A239A70 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -409,19 +409,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		ADE82B91975EA1B3729896433637B3A0 /* Headers */ = {
+		9D1C027E8D0B201954F731690F4AC019 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7622BBEFD58B5348EADBD0DA46BD3A5F /* CLShanYanCustomViewHelper.h in Headers */,
-				FBEB8B641299C058AFA053883D247341 /* NSNumber+shanyanCategory.h in Headers */,
-				7695A3540A107D424C21455223A85712 /* PlayerView.h in Headers */,
-				EFF0503991EE041DAEBABE24A683221A /* ShanyanPlugin.h in Headers */,
-				62843F6977496CD97A14BD00B5B14CF0 /* UIView+CLShanYanWidget.h in Headers */,
+				B67DFCA9E7984DE39487C9BEA11C30B0 /* CLShanYanCustomViewHelper.h in Headers */,
+				5292C01B524FD6E633542A9261FD5D55 /* NSNumber+shanyanCategory.h in Headers */,
+				C3A92BCE165F85E55FED1AEFA4968FA8 /* PlayerView.h in Headers */,
+				C40609609417ED991887B6E03ADBFCB8 /* ShanyanPlugin.h in Headers */,
+				5C24D024EE95F6ABA005BD106C6F7297 /* UIView+CLShanYanWidget.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2D784E12D0974DCD157B71443AFE4EE /* Headers */ = {
+		E7D439BD915867F9E5F48223662AF946 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -433,41 +433,41 @@
 /* Begin PBXNativeTarget section */
 		8B74B458B450D74B75744B87BD747314 /* Pods-Runner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D138782421797130B1734B2A2A9CF028 /* Build configuration list for PBXNativeTarget "Pods-Runner" */;
+			buildConfigurationList = 055D121DC700D3BC5E9223E2EFDA8DEE /* Build configuration list for PBXNativeTarget "Pods-Runner" */;
 			buildPhases = (
-				F2D784E12D0974DCD157B71443AFE4EE /* Headers */,
-				B8B9E1A9FC510A03C5F02EAA8F525AAC /* Sources */,
-				0CC7C7F33A7842C3FE6CFE7D94FAF667 /* Frameworks */,
+				E7D439BD915867F9E5F48223662AF946 /* Headers */,
+				4E7051621139FD88F6FA139B94698397 /* Sources */,
+				1711C9937B0766A9433A3D93072A91DF /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DF91B2CC1E1DEF29EEA2C354014731BA /* PBXTargetDependency */,
-				EEDBC0BDAEA680A4BE99566484FF76C8 /* PBXTargetDependency */,
-				C61B5F3375D20D468B7122BCE06F7B08 /* PBXTargetDependency */,
+				6740B176FEB5440E3ADF24AB5339016F /* PBXTargetDependency */,
+				C050E4636284E082D8D640A5AFECC765 /* PBXTargetDependency */,
+				5DDF6D805710C877F8868DDAF8B84B15 /* PBXTargetDependency */,
 			);
 			name = "Pods-Runner";
 			productName = "Pods-Runner";
-			productReference = 669E8F25E1897672BDB80B7EB784DA24 /* libPods-Runner.a */;
+			productReference = 669E8F25E1897672BDB80B7EB784DA24 /* Pods-Runner */;
 			productType = "com.apple.product-type.library.static";
 		};
 		99EF29ED9D09678B8F8177B9A17F1FFB /* shanyan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7707F2CCEE4BDEF25BDC131EAF3D62F1 /* Build configuration list for PBXNativeTarget "shanyan" */;
+			buildConfigurationList = 499DCD4EE99EB74A9C450CC4072B9D33 /* Build configuration list for PBXNativeTarget "shanyan" */;
 			buildPhases = (
-				ADE82B91975EA1B3729896433637B3A0 /* Headers */,
-				9E80F4A25703CA2E67686AD2A88F015E /* Sources */,
-				18683B97760CDCE4FDBE2BB3AB08710B /* Frameworks */,
+				9D1C027E8D0B201954F731690F4AC019 /* Headers */,
+				766EAF45D339671D6EC053DC28C52893 /* Sources */,
+				8E6CC20CA2BF30690836A4A1D21B5E27 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7EB6EC0343FEBFC1DDAEE4A793FC8B75 /* PBXTargetDependency */,
-				631A771B65FE3874747EB1DA8261BDB4 /* PBXTargetDependency */,
+				272E5F3D542E80120596002BB9FB7B94 /* PBXTargetDependency */,
+				94C83AE7B705C22380BF17D1139ACA1A /* PBXTargetDependency */,
 			);
 			name = shanyan;
 			productName = shanyan;
-			productReference = 0C8CC4F43125B1D6C496E28FAF06D64D /* libshanyan.a */;
+			productReference = 0C8CC4F43125B1D6C496E28FAF06D64D /* shanyan */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -484,11 +484,11 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = B5AD34AB8CF9F33178C740740F568AF0 /* Products */;
+			productRefGroup = 91B57DD6710EE60AE6D288B40236C3D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -501,80 +501,66 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9E80F4A25703CA2E67686AD2A88F015E /* Sources */ = {
+		4E7051621139FD88F6FA139B94698397 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8C572AF184FB288136F4BE921481C9C /* CLShanYanCustomViewHelper.m in Sources */,
-				AB0EA4DC8412381F3A62106942E3E464 /* NSNumber+shanyanCategory.m in Sources */,
-				31BF4478DBD72B156D87B274B6DCBA43 /* PlayerView.m in Sources */,
-				273F1CAED07DF3374E1AD034295EF11B /* shanyan-dummy.m in Sources */,
-				EFD75A31EFFBB9BBF6B8AE8297D1AF90 /* ShanyanPlugin.m in Sources */,
-				2FEDD391F2DDB61DB1DFB4016C8E6499 /* UIView+CLShanYanWidget.m in Sources */,
+				89228042FBB03F782E9AB887D2053265 /* Pods-Runner-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8B9E1A9FC510A03C5F02EAA8F525AAC /* Sources */ = {
+		766EAF45D339671D6EC053DC28C52893 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E7BC3DB5BAE852C373BD985C719E5F2 /* Pods-Runner-dummy.m in Sources */,
+				0B34B3C13F4A78FAF3D5A505E6ABF0CC /* CLShanYanCustomViewHelper.m in Sources */,
+				85861851BB9E6EA7AB6F7E3CDE016D74 /* NSNumber+shanyanCategory.m in Sources */,
+				A103A4E1A177116E1FF358C2ECA58170 /* PlayerView.m in Sources */,
+				FD78D16ECADE16889E9338155561FCCD /* shanyan-dummy.m in Sources */,
+				96D91911739AD72F4984BE47B12A0C78 /* ShanyanPlugin.m in Sources */,
+				BE4A20282E0010F5A8A5741235492C15 /* UIView+CLShanYanWidget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		631A771B65FE3874747EB1DA8261BDB4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Flutter;
-			target = 1EFDDC32A34D56D411E640A81DCD9E73 /* Flutter */;
-			targetProxy = 6F37D60758D2CB5D273C23285D1E77E0 /* PBXContainerItemProxy */;
-		};
-		7EB6EC0343FEBFC1DDAEE4A793FC8B75 /* PBXTargetDependency */ = {
+		272E5F3D542E80120596002BB9FB7B94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CL_ShanYanSDK;
 			target = 6CEA38EC2E63D96E7179449F1279A773 /* CL_ShanYanSDK */;
-			targetProxy = FA6933C9AF3FD5B162B2533A570A691C /* PBXContainerItemProxy */;
+			targetProxy = 168ED1B716E1CB406CF12D4C28C0968C /* PBXContainerItemProxy */;
 		};
-		C61B5F3375D20D468B7122BCE06F7B08 /* PBXTargetDependency */ = {
+		5DDF6D805710C877F8868DDAF8B84B15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = shanyan;
 			target = 99EF29ED9D09678B8F8177B9A17F1FFB /* shanyan */;
-			targetProxy = FFDB6B0893D1A9E9BE22E4521A3D76F2 /* PBXContainerItemProxy */;
+			targetProxy = B7DE9523539635890817E2C129EF3D80 /* PBXContainerItemProxy */;
 		};
-		DF91B2CC1E1DEF29EEA2C354014731BA /* PBXTargetDependency */ = {
+		6740B176FEB5440E3ADF24AB5339016F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CL_ShanYanSDK;
 			target = 6CEA38EC2E63D96E7179449F1279A773 /* CL_ShanYanSDK */;
-			targetProxy = FE0CBE8D4913F55132D5DA749ECC953B /* PBXContainerItemProxy */;
+			targetProxy = E0CB3B04A5AAB894869542A4F2D26429 /* PBXContainerItemProxy */;
 		};
-		EEDBC0BDAEA680A4BE99566484FF76C8 /* PBXTargetDependency */ = {
+		94C83AE7B705C22380BF17D1139ACA1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Flutter;
 			target = 1EFDDC32A34D56D411E640A81DCD9E73 /* Flutter */;
-			targetProxy = 11D815C7B320FC4E4A9D5A705E12542E /* PBXContainerItemProxy */;
+			targetProxy = 7EBEAD05EA155F95A66A752073E21CE8 /* PBXContainerItemProxy */;
+		};
+		C050E4636284E082D8D640A5AFECC765 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Flutter;
+			target = 1EFDDC32A34D56D411E640A81DCD9E73 /* Flutter */;
+			targetProxy = 2E739B1980F1AFF6DF09FE1ADFD0B096 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		049A9DF21B5D9C438C45FD80A89F7B86 /* Profile */ = {
+		0110E49084FFB183CAB162143E105F9E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7C9DDC395AB3F5CC372B0BAC48B5D00 /* Flutter.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Profile;
-		};
-		1EA78FFA2B68AAFE17536CA7808ACFA7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C402C6A7EC1533CFA22021E04BA135B2 /* shanyan.release.xcconfig */;
+			baseConfigurationReference = 14A038AEF8FDDC544AF31F4BC6E5C9FF /* shanyan.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -582,11 +568,11 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_armv7\"",
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_armv7\"",
 					"$(inherited)",
 				);
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/shanyan/shanyan-prefix.pch";
@@ -604,10 +590,23 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
 			};
-			name = Release;
+			name = Debug;
+		};
+		049A9DF21B5D9C438C45FD80A89F7B86 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7C9DDC395AB3F5CC372B0BAC48B5D00 /* Flutter.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile;
 		};
 		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -688,6 +687,77 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		32EDA45BFDC0E54F34FB4ED488212F9B /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9039460E8D3FAD357BF2E7D56AA0D6B2 /* Pods-Runner.profile.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_armv7\"",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					Flutter,
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
+			};
+			name = Profile;
+		};
+		403BE02529B7DA765433EB7014747A33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A6D3B1784C82F22825710930DD8BE77 /* Pods-Runner.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_armv7\"",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					Flutter,
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
+			};
+			name = Debug;
 		};
 		42096E1BCB51A587856DD065D1C443DF /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -791,42 +861,6 @@
 			};
 			name = Profile;
 		};
-		73BDB0816EF15699C623152BCFE9089E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14A038AEF8FDDC544AF31F4BC6E5C9FF /* shanyan.debug.xcconfig */;
-			buildSettings = {
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_armv7\"",
-					"$(inherited)",
-				);
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
-					"$(inherited)",
-				);
-				GCC_PREFIX_HEADER = "Target Support Files/shanyan/shanyan-prefix.pch";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					Flutter,
-				);
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = shanyan;
-				PRODUCT_NAME = shanyan;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
-			};
-			name = Debug;
-		};
 		75CE1ADAFCE855DFB0C8BE8581F930A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8462906CDA15086EBDBCC1F1E0986F2B /* CL_ShanYanSDK.release.xcconfig */;
@@ -841,7 +875,43 @@
 			};
 			name = Release;
 		};
-		794C20FC5B3929687DCA86E6C99DC4DE /* Profile */ = {
+		7DF915A8A6EA45F7377636842F570497 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D40527A090D33E04D34690525F7F739 /* Pods-Runner.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_armv7\"",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					Flutter,
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
+			};
+			name = Release;
+		};
+		A351B8C49D0C8EB4F1FD1BB95B0CAA35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C402C6A7EC1533CFA22021E04BA135B2 /* shanyan.release.xcconfig */;
 			buildSettings = {
@@ -872,77 +942,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
-			};
-			name = Profile;
-		};
-		B8AB74E941A94D676FFE3EE9BFF6B956 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A6D3B1784C82F22825710930DD8BE77 /* Pods-Runner.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_armv7\"",
-					"$(inherited)",
-				);
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
-					"$(inherited)",
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					Flutter,
-				);
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
-			};
-			name = Debug;
-		};
-		C5DBFA83AE18665C7CDA1BFDEFC4B643 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D40527A090D33E04D34690525F7F739 /* Pods-Runner.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_armv7\"",
-					"$(inherited)",
-				);
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
-					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
-					"$(inherited)",
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					Flutter,
-				);
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
@@ -1011,11 +1010,10 @@
 			};
 			name = Release;
 		};
-		CF1542917F5C1298E687564168C0D153 /* Profile */ = {
+		E0251409557D437A85BC0E3B093FCC53 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9039460E8D3FAD357BF2E7D56AA0D6B2 /* Pods-Runner.profile.xcconfig */;
+			baseConfigurationReference = C402C6A7EC1533CFA22021E04BA135B2 /* shanyan.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1029,18 +1027,20 @@
 					"\"/Users/ydong/flutter/bin/cache/artifacts/engine/ios-release/Flutter.xcframework/ios-arm64_x86_64-simulator\"",
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
+				GCC_PREFIX_HEADER = "Target Support Files/shanyan/shanyan-prefix.pch";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
 					Flutter,
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = shanyan;
+				PRODUCT_NAME = shanyan;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
@@ -1050,6 +1050,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		055D121DC700D3BC5E9223E2EFDA8DEE /* Build configuration list for PBXNativeTarget "Pods-Runner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				403BE02529B7DA765433EB7014747A33 /* Debug */,
+				32EDA45BFDC0E54F34FB4ED488212F9B /* Profile */,
+				7DF915A8A6EA45F7377636842F570497 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1060,12 +1070,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7707F2CCEE4BDEF25BDC131EAF3D62F1 /* Build configuration list for PBXNativeTarget "shanyan" */ = {
+		499DCD4EE99EB74A9C450CC4072B9D33 /* Build configuration list for PBXNativeTarget "shanyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				73BDB0816EF15699C623152BCFE9089E /* Debug */,
-				794C20FC5B3929687DCA86E6C99DC4DE /* Profile */,
-				1EA78FFA2B68AAFE17536CA7808ACFA7 /* Release */,
+				0110E49084FFB183CAB162143E105F9E /* Debug */,
+				E0251409557D437A85BC0E3B093FCC53 /* Profile */,
+				A351B8C49D0C8EB4F1FD1BB95B0CAA35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1086,16 +1096,6 @@
 				42096E1BCB51A587856DD065D1C443DF /* Debug */,
 				700C6D66CA481EF1F35CDB87044FF5E3 /* Profile */,
 				75CE1ADAFCE855DFB0C8BE8581F930A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D138782421797130B1734B2A2A9CF028 /* Build configuration list for PBXNativeTarget "Pods-Runner" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B8AB74E941A94D676FFE3EE9BFF6B956 /* Debug */,
-				CF1542917F5C1298E687564168C0D153 /* Profile */,
-				C5DBFA83AE18665C7CDA1BFDEFC4B643 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

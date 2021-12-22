@@ -1,8 +1,8 @@
 PODS:
-  - CL_ShanYanSDK (2.3.4.9)
+  - CL_ShanYanSDK (2.3.5.0)
   - Flutter (1.0.0)
-  - shanyan (2.3.3.2):
-    - CL_ShanYanSDK (~> 2.3.4.9)
+  - shanyan (2.3.3.3):
+    - CL_ShanYanSDK (~> 2.3.5.0)
     - Flutter
 
 DEPENDENCIES:
@@ -20,10 +20,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shanyan/ios"
 
 SPEC CHECKSUMS:
-  CL_ShanYanSDK: 0421d340b1e2c63b532b327248917d85bbdb1c30
+  CL_ShanYanSDK: 1abb2d99e0af45f21712b4c76c21c6cd8c347c3a
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  shanyan: b79789f1c606dcac9d0f5020ed2cbfb26a828aa3
+  shanyan: a702eeb0c0e596af7b594e5527b9893faa9291bb
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
