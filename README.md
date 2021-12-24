@@ -3,7 +3,7 @@
 注：「[插件示例代码地址](https://github.com/253CL/CLShanYan_Flutter)」<br />
 
 ## 升级指南
-**1.修改依赖中的版本号为ref: v2.3.3.2**
+**1.修改依赖中的版本号为ref: v2.3.3.3**
 
 **2.AndroidManifest.xml中移动授权页com.cmic.sso.sdk.activity.LoginAuthActivity更改为com.cmic.sso.sdk.view.LoginAuthActivity**
 
@@ -11,7 +11,7 @@
 ## 概述
 
 
-本文是闪验SDK_flutter **v2.3.2**版本的接入文档，用于指导SDK的使用方法。<br />
+本文是闪验SDK_flutter **v2.3.3**版本的接入文档，用于指导SDK的使用方法。<br />
 
 <a name="65lmE"></a>
 # 创建应用
@@ -29,7 +29,7 @@ dependencies:
     git:
       url: git://github.com/253CL/CLShanYan_Flutter.git
       path: shanyan
-      ref: v2.3.3.2
+      ref: v2.3.3.3
 ```
 <a name="UlDef"></a>
 ### 使用
