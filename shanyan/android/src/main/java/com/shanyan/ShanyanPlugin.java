@@ -77,36 +77,95 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("setDebugMode")) {
             //闪验SDK 设置debug模式
             setDebug(call);
-        } else if (call.method.equals("getOperatorType")) {
+        }
+        if (call.method.equals("getOperatorType")) {
             //闪验SDK 获取运营商类型
             getOperatorType(call, result);
-        } else if (call.method.equals("init")) {
+        }
+        if (call.method.equals("init")) {
             //闪验SDK 初始化
             init(call, result);
-        } else if (call.method.equals("getPhoneInfo")) {
+        }
+        if (call.method.equals("getPhoneInfo")) {
             //闪验SDK 预取号
             getPhoneInfo(result);
-        } else if (call.method.equals("setAuthThemeConfig")) {
+        }
+        if (call.method.equals("setAuthThemeConfig")) {
             setAuthThemeConfig(call, result);
-        } else if (call.method.equals("openLoginAuth")) {
+        }
+        if (call.method.equals("openLoginAuth")) {
             //闪验SDK 拉起授权页
             openLoginAuth(call, result);
-        } else if (call.method.equals("finishAuthActivity")) {
+        }
+        if (call.method.equals("finishAuthActivity")) {
             OneKeyLoginManager.getInstance().finishAuthActivity();
-        } else if (call.method.equals("getPreIntStatus")) {
+        }
+        if (call.method.equals("getPreIntStatus")) {
             result.success(OneKeyLoginManager.getInstance().getPreIntStatus());
-        } else if (call.method.equals("getOperatorType")) {
+        }
+        if (call.method.equals("getOperatorType")) {
             result.success(OneKeyLoginManager.getInstance().getOperatorType(context));
-        } else if (call.method.equals("startAuthentication")) {
+        }
+        if (call.method.equals("startAuthentication")) {
             startAuthentication(call, result);
-        } else if (call.method.equals("setLoadingVisibility")) {
+        }
+        if (call.method.equals("setLoadingVisibility")) {
             setLoadingVisibility(call);
-        } else if (call.method.equals("setCheckBoxValue")) {
+        }
+        if (call.method.equals("setCheckBoxValue")) {
             setCheckBoxValue(call);
-        } else if (call.method.equals("setActionListener")) {
+        }
+        if (call.method.equals("setActionListener")) {
             setActionListener(call, result);
         }
+        if (call.method.equals("getOaidEnable")) {
+            getOaidEnable(call);
+        }
+        if (call.method.equals("getSinbEnable")) {
+            getSinbEnable(call);
+        }
+        if (call.method.equals("getSiEnable")) {
+            getSiEnable(call);
+        }
+        if (call.method.equals("getIEnable")) {
+            getIEnable(call);
+        }
+        if (call.method.equals("getMaEnable")) {
+            getMaEnable(call);
+        }
+        if (call.method.equals("getImEnable")) {
+            getImEnable(call);
+        }
+    }
 
+    private void getImEnable(MethodCall call) {
+        boolean imEnable = call.argument("imEnable");
+        OneKeyLoginManager.getInstance().getImEnable(imEnable);
+    }
+
+    private void getMaEnable(MethodCall call) {
+        boolean maEnable = call.argument("maEnable");
+        OneKeyLoginManager.getInstance().getMaEnable(maEnable);
+    }
+
+    private void getIEnable(MethodCall call) {
+        boolean iEnable = call.argument("iEnable");
+        OneKeyLoginManager.getInstance().getIEnable(iEnable);
+    }
+
+    private void getSiEnable(MethodCall call) {
+        boolean sibEnable = call.argument("sibEnable");
+        OneKeyLoginManager.getInstance().getSiEnable(sibEnable);
+    }
+
+    private void getSinbEnable(MethodCall call) {
+        boolean sinbEnable = call.argument("sinbEnable");
+        OneKeyLoginManager.getInstance().getSinbEnable(sinbEnable);
+    }
+
+    private void getOaidEnable(MethodCall call) {
+        boolean oaidEnable = call.argument("oaidEnable");
+        OneKeyLoginManager.getInstance().getOaidEnable(oaidEnable);
     }
 
     private void getOperatorType(MethodCall call, Result result) {
