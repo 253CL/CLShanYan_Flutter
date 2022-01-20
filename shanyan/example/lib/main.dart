@@ -814,7 +814,7 @@ class _MyAppState extends State<MyApp> {
                         hintStyle: TextStyle(color: Colors.black)),
                     controller: controllerPHone,
                     inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly, //只输入数字
+                      FilteringTextInputFormatter.digitsOnly, //只输入数字
                       LengthLimitingTextInputFormatter(11) //限制长度
                     ],
                   ),

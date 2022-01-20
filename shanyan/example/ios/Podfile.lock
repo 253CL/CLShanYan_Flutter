@@ -1,7 +1,7 @@
 PODS:
   - CL_ShanYanSDK (2.3.5.0)
   - Flutter (1.0.0)
-  - shanyan (2.3.3.3):
+  - shanyan (2.3.3.4):
     - CL_ShanYanSDK (~> 2.3.5.0)
     - Flutter
 
