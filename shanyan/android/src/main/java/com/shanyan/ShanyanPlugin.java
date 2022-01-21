@@ -761,7 +761,7 @@ public class ShanyanPlugin implements MethodCallHandler {
             builder.setLightColor((Boolean) setLightColor);
         }
         if (null != setStatusBarHidden) {
-            builder.setLightColor((Boolean) setStatusBarHidden);
+            builder.setStatusBarHidden((Boolean) setStatusBarHidden);
         }
         if (null != setVirtualKeyTransparent) {
             builder.setVirtualKeyTransparent((Boolean) setVirtualKeyTransparent);
