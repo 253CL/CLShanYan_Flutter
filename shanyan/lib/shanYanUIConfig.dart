@@ -631,6 +631,7 @@ class ShanYanUIConfigAndroid {
   String? setCheckedImgPath; //设置隐私条款的CheckBox选中时图片
   bool? setCheckBoxHidden; //设置隐私条款的CheckBox是否隐藏（true：隐藏；false：不隐藏）
   List<int>? setCheckBoxWH; //设置checkbox的宽高，包含两个参数：1.宽 2.高
+  List<int>? setCheckBoxOffsetXY; //设置checkbox在协议框父控件中的位置，包含两个参数：1.左偏移量 2.上偏移量（默认：在父控件内居中）
   List<int>? setCheckBoxMargin; //设置checkbox的间距，包含四个参数：1.左间距 2.上间距 3.右间距 4.下间距
   List<String>? setPrivacyText; //设置隐私条款名称外的文字,包含五个参数
   bool? setPrivacyTextBold; //设置协议栏字体是否加粗（true：加粗；false：不加粗）
