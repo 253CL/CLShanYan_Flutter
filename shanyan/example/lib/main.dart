@@ -5,6 +5,7 @@ import 'dart:ui' as prefix0;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:async';
 
 import 'package:shanyan/shanyan.dart';
@@ -893,7 +894,6 @@ void _toast(String str) {
   //     msg: str,
   //     toastLength: Toast.LENGTH_SHORT,
   //     gravity: ToastGravity.BOTTOM,
-  //     timeInSecForIos: 1,
   //     backgroundColor: Colors.redAccent,
   //     textColor: Colors.white,
   //     fontSize: 16.0);

@@ -309,6 +309,7 @@ class ShanYanUIConfigIOS {
   String? setAppPrivacyNormalDesTextLast;        /// 描述文本 尾部 default: "并授权AppName使用认证服务"
 
   String? setCheckBoxTipMsg;  /// CheckBox未选中提示文本
+  bool? setCheckBoxTipDisable;  ///  使用sdk内部“一键登录”按钮点击时的吐丝提示("请勾选协议") - NO:默认使用sdk内部吐丝 YES:禁止使用
 
   bool? setOperatorPrivacyAtLast;  /// 运营商协议后置
 

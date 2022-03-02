@@ -1,28 +1,38 @@
 PODS:
   - CL_ShanYanSDK (2.3.5.0)
   - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - shanyan (2.3.3.5):
     - CL_ShanYanSDK (~> 2.3.5.0)
     - Flutter
+  - Toast (4.0.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - shanyan (from `.symlinks/plugins/shanyan/ios`)
 
 SPEC REPOS:
   trunk:
     - CL_ShanYanSDK
+    - Toast
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   shanyan:
     :path: ".symlinks/plugins/shanyan/ios"
 
 SPEC CHECKSUMS:
   CL_ShanYanSDK: 1abb2d99e0af45f21712b4c76c21c6cd8c347c3a
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  shanyan: a702eeb0c0e596af7b594e5527b9893faa9291bb
+  fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
+  shanyan: 5f1f27eadf70fbd5919105fc7d94a53f86725bcb
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
 PODFILE CHECKSUM: cbf008b6fa923145fab5f77d1fd79a6dc6fcbde1
 

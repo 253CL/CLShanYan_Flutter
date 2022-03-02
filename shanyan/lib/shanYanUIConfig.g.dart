@@ -99,6 +99,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setAppPrivacyNormalDesTextLast =
         json['setAppPrivacyNormalDesTextLast'] as String?
     ..setCheckBoxTipMsg = json['setCheckBoxTipMsg'] as String?
+    ..setCheckBoxTipDisable = json['setCheckBoxTipDisable'] as bool?
     ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool?
     ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as String?
     ..setPrivacyNavTextSize = json['setPrivacyNavTextSize'] as num?
@@ -257,6 +258,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setAppPrivacyNormalDesTextLast',
       instance.setAppPrivacyNormalDesTextLast);
   writeNotNull('setCheckBoxTipMsg', instance.setCheckBoxTipMsg);
+  writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
   writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
   writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
   writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);

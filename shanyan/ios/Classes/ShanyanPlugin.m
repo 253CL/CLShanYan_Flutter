@@ -685,6 +685,10 @@
         {
             baseConfigure.clCheckBoxTipMsg = clCheckBoxTipMsg;
         };
+        NSNumber *setCheckBoxTipDisable = configureDic[@"setCheckBoxTipDisable"];;
+        {
+            baseConfigure.clCheckBoxTipDisable = setCheckBoxTipDisable;
+        };
         
         /**用户隐私协议WEB页面导航栏标题 默认显示用户条款名称*/
         NSAttributedString * clAppPrivacyWebAttributesTitle;
