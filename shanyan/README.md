@@ -1,4 +1,4 @@
-# flutter 2.3.1 集成文档
+# flutter 2.3.3 集成文档
 
 注：「[插件示例代码地址](https://github.com/253CL/CLShanYan_Flutter)」<br />
 
@@ -24,7 +24,7 @@ dependencies:
     git:
       url: git://github.com/253CL/CLShanYan_Flutter.git
       path: shanyan
-      ref: v2.3.3.2
+      ref: v2.3.3.5
 ```
 <a name="UlDef"></a>
 ### 使用

@@ -57,7 +57,8 @@
 @property (nonatomic,strong) NSDictionary<NSAttributedStringKey,id> *numberTextAttributes;
 /**号码栏X偏移量*/
 @property (nonatomic,strong) NSNumber * numberOffsetX;
-
+/**号码栏Y偏移量 numberOffsetY优先级高于numberOffsetY_B*/
+@property (nonatomic,strong) NSNumber * numberOffsetY;
 /**号码栏Y偏移量（基于底部）*/
 @property (nonatomic,strong) NSNumber * numberOffsetY_B;
 
@@ -96,6 +97,8 @@
 @property (nonatomic,assign) BOOL privacyState;
 /**隐私条款Y偏移量(注:此属性为与屏幕底部的距离)*/
 @property (nonatomic,strong) NSNumber *privacyOffsetY_B;
+/**隐私条款增加抖动效果 默认:NO */
+@property (nonatomic,assign) BOOL privacyUncheckAnimation;
 
 #pragma mark -----------------------------------协议页面-----------------------------------
 /**web协议界面导航返回图标(尺寸根据图片大小)*/
