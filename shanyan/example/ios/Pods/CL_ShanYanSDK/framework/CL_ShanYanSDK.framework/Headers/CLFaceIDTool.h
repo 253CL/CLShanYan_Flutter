@@ -10,6 +10,7 @@
 #import "CLCompleteResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  设备的生物验证方式状态
  */
@@ -81,12 +82,7 @@ typedef NS_ENUM(NSInteger, CLFaceIDErrorCode) {
     *  系统TouchID/FaceID 发生变更 ，绑定失效
     */
     CLFaceIDErrorCodeDataChange,
-    
-    
 };
-
-
-
 
 /**
 *  需要执行的业务类型
@@ -102,7 +98,6 @@ typedef NS_ENUM(NSInteger ,CLFaceIDAuthType) {
     *   验证
     */
     CLFaceIDAuthTypeAuth,
-    
 };
 
 @interface CLFaceIDTool : NSObject
@@ -113,14 +108,14 @@ typedef NS_ENUM(NSInteger ,CLFaceIDAuthType) {
 -(CLFaceIDDeviceSupportState )clBiometricsTypeCheck;
 
 /// 判断该账户是否绑定过 生物识别
-/// @param accountInfo 账号信息(每个账户唯一)
+/// @param accountInfo      账号信息(每个账户唯一)
 -(BOOL)isHadBoundAccountInfo:(NSString *)accountInfo;
 
 /// 生物识别 绑定/验证
-/// @param faceIDAuthType 业务类型
-/// @param accountInfo 账号信息
-/// @param desc 业务描述
-/// @param complete 回调信息
+/// @param faceIDAuthType   业务类型
+/// @param accountInfo      账号信息
+/// @param desc             业务描述
+/// @param complete         回调信息
 -(void)clStartAuthWithCLFaceIDAuthType:(CLFaceIDAuthType )faceIDAuthType
                            accountInfo:(NSString *)accountInfo
                            description:(NSString *)desc

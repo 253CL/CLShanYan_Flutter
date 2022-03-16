@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'shanYanUIConfig.dart';
 import 'shanYanResult.dart';
+import 'shanYanUIConfig.dart';
 
 /// 闪验SDK 授权页回调（一键登录点击/sdk自带返回）
 typedef ShanYanOneKeyLoginListener = void Function(ShanYanResult shanYanResult);
@@ -35,13 +33,37 @@ class OneKeyLoginManager {
   }
 
 //  /// 设置调试模式开关 Android
- void setDebug(bool debug) {
-   _channel.invokeMethod("setDebugMode", {"debug": debug});
- }
+  void setDebug(bool debug) {
+    _channel.invokeMethod("setDebugMode", {"debug": debug});
+  }
 
- Future<String> getOperatorType()async{
-   return await _channel.invokeMethod("getOperatorType");
- }
+  void getOaidEnable(bool oaidEnable) {
+    _channel.invokeMethod("getOaidEnable", {"oaidEnable": oaidEnable});
+  }
+
+  void getSinbEnable(bool sinbEnable) {
+    _channel.invokeMethod("getSinbEnable", {"sinbEnable": sinbEnable});
+  }
+
+  void getSiEnable(bool sibEnable) {
+    _channel.invokeMethod("getSiEnable", {"sibEnable": sibEnable});
+  }
+
+  void getIEnable(bool iEnable) {
+    _channel.invokeMethod("getIEnable", {"iEnable": iEnable});
+  }
+
+  void getMaEnable(bool maEnable) {
+    _channel.invokeMethod("getMaEnable", {"maEnable": maEnable});
+  }
+
+  void getImEnable(bool imEnable) {
+    _channel.invokeMethod("getImEnable", {"imEnable": imEnable});
+  }
+
+  Future<String> getOperatorType() async {
+    return await _channel.invokeMethod("getOperatorType");
+  }
 
   ///闪验SDK 初始化(Android+iOS)
   Future<ShanYanResult> init({required String appId}) async {
@@ -76,7 +98,8 @@ class OneKeyLoginManager {
       return ShanYanResult.fromJson(newResult);
     } else if (Platform.isIOS) {
       Map iosConfigure = this.shanYanUIConfig.ios.toJson();
-      Map<dynamic, dynamic> result = await _channel.invokeMethod("openLoginAuth",iosConfigure);
+      Map<dynamic, dynamic> result =
+          await _channel.invokeMethod("openLoginAuth", iosConfigure);
       Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
       return ShanYanResult.fromJson(newResult);
     } else {
@@ -93,7 +116,6 @@ class OneKeyLoginManager {
     }
   }
 
-
 //  Future<void> alertNativeIOS(String title,String message,String cancelButtonTitle,String okButtonTitle,String otherButtonTitle) async {
 //    Map alert = {
 //      "title":title,
@@ -109,10 +131,10 @@ class OneKeyLoginManager {
 //  }
 
 //
- ///闪验SDK 设置复选框是否选中 Android+IOS
- void setCheckBoxValue(bool isChecked) {
-   _channel.invokeMethod("setCheckBoxValue", {"isChecked": isChecked});
- }
+  ///闪验SDK 设置复选框是否选中 Android+IOS
+  void setCheckBoxValue(bool isChecked) {
+    _channel.invokeMethod("setCheckBoxValue", {"isChecked": isChecked});
+  }
 
   ///闪验SDK 设置授权页loading是否隐藏 Android+IOS
   void setLoadingVisibility(bool visibility) {
@@ -167,7 +189,6 @@ class OneKeyLoginManager {
     }
   }
 }
-
 
 /// 闪验SDK 授权页默认控件点击事件
 class AuthPageActionEvent {

@@ -99,6 +99,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setAppPrivacyNormalDesTextLast =
         json['setAppPrivacyNormalDesTextLast'] as String?
     ..setCheckBoxTipMsg = json['setCheckBoxTipMsg'] as String?
+    ..setCheckBoxTipDisable = json['setCheckBoxTipDisable'] as bool?
     ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool?
     ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as String?
     ..setPrivacyNavTextSize = json['setPrivacyNavTextSize'] as num?
@@ -124,33 +125,59 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as num?
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool?
     ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String?
-    ..setShanYanSloganTextAlignment = _$enumDecodeNullable(_$iOSTextAlignmentEnumMap, json['setShanYanSloganTextAlignment'])
+    ..setShanYanSloganTextAlignment = _$enumDecodeNullable(
+        _$iOSTextAlignmentEnumMap, json['setShanYanSloganTextAlignment'])
     ..setShanYanSloganHidden = json['setShanYanSloganHidden'] as bool?
     ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool?
     ..setPrivacyState = json['setPrivacyState'] as bool?
-    ..setCheckBoxWH = (json['setCheckBoxWH'] as List<dynamic>?)?.map((e) => e as num).toList()
-    ..setCheckBoxImageEdgeInsets = (json['setCheckBoxImageEdgeInsets'] as List<dynamic>?)?.map((e) => e as num).toList()
-    ..setCheckBoxVerticalAlignmentToAppPrivacyTop = json['setCheckBoxVerticalAlignmentToAppPrivacyTop'] as bool?
-    ..setCheckBoxVerticalAlignmentToAppPrivacyCenterY = json['setCheckBoxVerticalAlignmentToAppPrivacyCenterY'] as bool?
+    ..setCheckBoxWH =
+        (json['setCheckBoxWH'] as List<dynamic>?)?.map((e) => e as num).toList()
+    ..setCheckBoxImageEdgeInsets =
+        (json['setCheckBoxImageEdgeInsets'] as List<dynamic>?)
+            ?.map((e) => e as num)
+            .toList()
+    ..setCheckBoxVerticalAlignmentToAppPrivacyTop =
+        json['setCheckBoxVerticalAlignmentToAppPrivacyTop'] as bool?
+    ..setCheckBoxVerticalAlignmentToAppPrivacyCenterY =
+        json['setCheckBoxVerticalAlignmentToAppPrivacyCenterY'] as bool?
     ..setUncheckedImgPath = json['setUncheckedImgPath'] as String?
     ..setCheckedImgPath = json['setCheckedImgPath'] as String?
-    ..setLoadingSize = (json['setLoadingSize'] as List<dynamic>?)?.map((e) => e as num).toList()
+    ..setLoadingSize = (json['setLoadingSize'] as List<dynamic>?)
+        ?.map((e) => e as num)
+        .toList()
     ..setLoadingCornerRadius = json['setLoadingCornerRadius'] as num?
     ..setLoadingBackgroundColor = json['setLoadingBackgroundColor'] as String?
     ..setLoadingTintColor = json['setLoadingTintColor'] as String?
-    ..widgets = (json['widgets'] as List<dynamic>?)?.map((e) => ShanYanCustomWidgetIOS.fromJson(e as Map<String, dynamic>)).toList()
+    ..widgets = (json['widgets'] as List<dynamic>?)
+        ?.map((e) => ShanYanCustomWidgetIOS.fromJson(e as Map<String, dynamic>))
+        .toList()
     ..setShouldAutorotate = json['setShouldAutorotate'] as bool?
-    ..supportedInterfaceOrientations = _$enumDecodeNullable(_$iOSInterfaceOrientationMaskEnumMap, json['supportedInterfaceOrientations'])
-    ..preferredInterfaceOrientationForPresentation = _$enumDecodeNullable(_$iOSInterfaceOrientationEnumMap, json['preferredInterfaceOrientationForPresentation'])
+    ..supportedInterfaceOrientations = _$enumDecodeNullable(
+        _$iOSInterfaceOrientationMaskEnumMap,
+        json['supportedInterfaceOrientations'])
+    ..preferredInterfaceOrientationForPresentation = _$enumDecodeNullable(
+        _$iOSInterfaceOrientationEnumMap,
+        json['preferredInterfaceOrientationForPresentation'])
     ..setAuthTypeUseWindow = json['setAuthTypeUseWindow'] as bool?
     ..setAuthWindowCornerRadius = json['setAuthWindowCornerRadius'] as num?
-    ..setAuthWindowModalTransitionStyle = _$enumDecodeNullable(_$iOSModalTransitionStyleEnumMap, json['setAuthWindowModalTransitionStyle'])
-    ..setAuthWindowModalPresentationStyle = _$enumDecodeNullable(_$iOSModalPresentationStyleEnumMap, json['setAuthWindowModalPresentationStyle'])
-    ..setAppPrivacyWebModalPresentationStyle = _$enumDecodeNullable(_$iOSModalPresentationStyleEnumMap, json['setAppPrivacyWebModalPresentationStyle'])
-    ..setAuthWindowOverrideUserInterfaceStyle = _$enumDecodeNullable(_$iOSUserInterfaceStyleEnumMap, json['setAuthWindowOverrideUserInterfaceStyle'])
-    ..setAuthWindowPresentingAnimate = json['setAuthWindowPresentingAnimate'] as bool?
-    ..layOutPortrait = ClOrientationLayOutIOS.fromJson(json['layOutPortrait'] as Map<String, dynamic>)
-    ..layOutLandscape = ClOrientationLayOutIOS.fromJson(json['layOutLandscape'] as Map<String, dynamic>);
+    ..setAuthWindowModalTransitionStyle = _$enumDecodeNullable(
+        _$iOSModalTransitionStyleEnumMap,
+        json['setAuthWindowModalTransitionStyle'])
+    ..setAuthWindowModalPresentationStyle = _$enumDecodeNullable(
+        _$iOSModalPresentationStyleEnumMap,
+        json['setAuthWindowModalPresentationStyle'])
+    ..setAppPrivacyWebModalPresentationStyle = _$enumDecodeNullable(
+        _$iOSModalPresentationStyleEnumMap,
+        json['setAppPrivacyWebModalPresentationStyle'])
+    ..setAuthWindowOverrideUserInterfaceStyle = _$enumDecodeNullable(
+        _$iOSUserInterfaceStyleEnumMap,
+        json['setAuthWindowOverrideUserInterfaceStyle'])
+    ..setAuthWindowPresentingAnimate =
+        json['setAuthWindowPresentingAnimate'] as bool?
+    ..layOutPortrait = ClOrientationLayOutIOS.fromJson(
+        json['layOutPortrait'] as Map<String, dynamic>)
+    ..layOutLandscape = ClOrientationLayOutIOS.fromJson(
+        json['layOutLandscape'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
@@ -231,6 +258,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setAppPrivacyNormalDesTextLast',
       instance.setAppPrivacyNormalDesTextLast);
   writeNotNull('setCheckBoxTipMsg', instance.setCheckBoxTipMsg);
+  writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
   writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
   writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
   writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);
@@ -617,6 +645,9 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setCheckBoxHidden = json['setCheckBoxHidden'] as bool?
     ..setCheckBoxWH =
         (json['setCheckBoxWH'] as List<dynamic>?)?.map((e) => e as int).toList()
+    ..setCheckBoxOffsetXY = (json['setCheckBoxOffsetXY'] as List<dynamic>?)
+        ?.map((e) => e as int)
+        .toList()
     ..setCheckBoxMargin = (json['setCheckBoxMargin'] as List<dynamic>?)
         ?.map((e) => e as int)
         .toList()
@@ -747,6 +778,7 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull('setCheckedImgPath', instance.setCheckedImgPath);
   writeNotNull('setCheckBoxHidden', instance.setCheckBoxHidden);
   writeNotNull('setCheckBoxWH', instance.setCheckBoxWH);
+  writeNotNull('setCheckBoxOffsetXY', instance.setCheckBoxOffsetXY);
   writeNotNull('setCheckBoxMargin', instance.setCheckBoxMargin);
   writeNotNull('setPrivacyText', instance.setPrivacyText);
   writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
