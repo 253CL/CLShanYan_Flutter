@@ -149,6 +149,16 @@ class OneKeyLoginManager {
     return ShanYanResult.fromJson(newResult);
   }
 
+  /// 清除预取号缓存
+  void clearScripCache() {
+    if (Platform.isIOS) {
+      _channel.invokeMethod("clearScripCache");
+    }
+    else if (Platform.isAndroid) {
+
+    }
+  }
+
   ///闪验SDK 配置授权页 Android
   void setAuthThemeConfig({required ShanYanUIConfig uiConfig}) {
     shanYanUIConfig = uiConfig;

@@ -55,7 +55,10 @@
       [self setLoadingVisibility:call];
   }else if ([@"setCheckBoxValue" isEqualToString:call.method]){
       [self setCheckBoxValue:call];
-  }else {
+  }else if ([@"clearScripCache" isEqualToString:call.method]){
+      [self clearScripCache];
+  }
+  else {
     result(FlutterMethodNotImplemented);
   }
 
@@ -74,6 +77,10 @@
 //    }else if ([@"startAuthentication" isEqualToString:call.method]){
 //        [self startAuthentication:result];
 //    }
+}
+
+- (void)clearScripCache {
+    [CLShanYanSDKManager clearScripCache];
 }
 
 - (void)setCheckBoxValue:(FlutterMethodCall*)call{
