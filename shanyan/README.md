@@ -24,7 +24,7 @@ dependencies:
     git:
       url: git://github.com/253CL/CLShanYan_Flutter.git
       path: shanyan
-      ref: v2.3.3.5
+      ref: v2.3.3.7
 ```
 <a name="UlDef"></a>
 ### 使用

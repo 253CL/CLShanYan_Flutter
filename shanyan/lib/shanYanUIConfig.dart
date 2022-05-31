@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'shanYanUIConfig.g.dart';
 
 /// 修改UI属性后，需删除shanyan.g.dart,再执行`flutter packages pub run build_runner build`，会生成新的 shanyan.g.dart; 运行 ` flutter packages pub run build_runner clean ` 清空文件
@@ -13,12 +14,12 @@ part 'shanYanUIConfig.g.dart';
 //Flutter 的 Github 上有关于这个问题的讨论 Failed to upload the package #16658，错误是因为伟大的墙。
 //我这里使用以下命令解决问题：sudo flutter packages pub publish -v  //https://pub.dartlang.org/api/packages/shanyan.
 
-@JsonSerializable(explicitToJson: true , includeIfNull: false)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanUIConfig {
-
   ShanYanUIConfigIOS _ios = new ShanYanUIConfigIOS(); //iOS
   // ignore: unnecessary_getters_setters
   set ios(ShanYanUIConfigIOS ios) => _ios;
+
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigIOS get ios {
     if (_ios == null) {
@@ -27,11 +28,15 @@ class ShanYanUIConfig {
     return _ios;
   }
 
-  ShanYanUIConfigAndroid _androidPortrait  = new ShanYanUIConfigAndroid(); //Android竖屏
-  ShanYanUIConfigAndroid _androidLandscape  = new ShanYanUIConfigAndroid(); //Android横屏
+  ShanYanUIConfigAndroid _androidPortrait =
+      new ShanYanUIConfigAndroid(); //Android竖屏
+  ShanYanUIConfigAndroid _androidLandscape =
+      new ShanYanUIConfigAndroid(); //Android横屏
 
   // ignore: unnecessary_getters_setters,
-  set androidPortrait(ShanYanUIConfigAndroid androidPortrait) => _androidPortrait;
+  set androidPortrait(ShanYanUIConfigAndroid androidPortrait) =>
+      _androidPortrait;
+
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigAndroid get androidPortrait {
     if (_androidPortrait == null) {
@@ -41,7 +46,9 @@ class ShanYanUIConfig {
   }
 
   // ignore: unnecessary_getters_setters
-  set androidLandscape(ShanYanUIConfigAndroid androidLandscape) => _androidLandscape;
+  set androidLandscape(ShanYanUIConfigAndroid androidLandscape) =>
+      _androidLandscape;
+
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigAndroid get androidLandscape {
     if (_androidLandscape == null) {
@@ -50,20 +57,21 @@ class ShanYanUIConfig {
     return _androidLandscape;
   }
 
-
   ShanYanUIConfig();
 
   //反序列化
-  factory ShanYanUIConfig.fromJson(Map<String, dynamic> json) => _$ShanYanUIConfigFromJson(json);
+  factory ShanYanUIConfig.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanUIConfigFromJson(json);
+
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanUIConfigToJson(this);
 }
 
 /**
  * -class ShanYanUIConfig {
-//    -  bool isFinish; //是否自动销毁
-//    -  // 授权页背景
-//    -  String setAuthBGImgPath; //普通图片
+    //    -  bool isFinish; //是否自动销毁
+    //    -  // 授权页背景
+    //    -  String setAuthBGImgPath; //普通图片
     -  String setAuthBgGifPath; //GIF图片（只支持本地gif图，需要放置到drawable文件夹中）
     -
     -  String setAuthBgVideoPath; //视频背景
@@ -72,7 +80,7 @@ class ShanYanUIConfig {
     -  String setStatusBarColor; //设置状态栏背景颜色
     -  bool setLightColor; //设置状态栏字体颜色是否为白色
 
-//    -  bool setStatusBarHidden; //设置状态栏是否隐藏
+    //    -  bool setStatusBarHidden; //设置状态栏是否隐藏
 
     -  bool setVirtualKeyTransparent; //设置虚拟键是否透明
     -
@@ -185,27 +193,41 @@ class ShanYanUIConfig {
 
  * */
 
-
 ///*iOS独有*/
-@JsonSerializable(explicitToJson: true , includeIfNull: false)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanUIConfigIOS {
+  bool? isFinish;
 
-  bool? isFinish;            ///外部手动管理关闭界面 BOOL,default is NO
+  ///外部手动管理关闭界面 BOOL,default is NO
 
-  String? setAuthBGImgPath;                        /// /// 授权页-背景图片(优先使用视频背景)
-  String? setAuthBGVedioPath;                        /// /// 授权页-背景视频
+  String? setAuthBGImgPath;
 
-  iOSStatusBarStyle? setPreferredStatusBarStyle;   /// 状态栏样式
+  /// /// 授权页-背景图片(优先使用视频背景)
+  String? setAuthBGVedioPath;
 
-  bool? setStatusBarHidden;            ///状态栏隐藏
+  /// /// 授权页-背景视频
+
+  iOSStatusBarStyle? setPreferredStatusBarStyle;
+
+  /// 状态栏样式
+
+  bool? setStatusBarHidden;
+
+  ///状态栏隐藏
 
   //导航栏
 
-  bool? setAuthNavHidden;              /// 导航栏 是否隐藏 BOOL default is NO
+  bool? setAuthNavHidden;
 
-  iOSBarStyle? setNavigationBarStyle;   /// 导航栏样式
+  /// 导航栏 是否隐藏 BOOL default is NO
 
-  bool? setAuthNavTransparent;         /// 导航栏 背景透明 BOOL
+  iOSBarStyle? setNavigationBarStyle;
+
+  /// 导航栏样式
+
+  bool? setAuthNavTransparent;
+
+  /// 导航栏 背景透明 BOOL
 
   /// 导航栏标题*/
   String? setNavText; //设置导航栏标题文字
@@ -218,14 +240,22 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,strong)UIBarButtonItem * clNavigationLeftControl;
 
 // 返回按钮
-  String? setNavReturnImgPath;           /// 导航栏左侧返回按钮图片
-  bool? setNavReturnImgHidden;           /// 导航栏自带返回按钮隐藏，默认显示 BOOL
+  String? setNavReturnImgPath;
+
+  /// 导航栏左侧返回按钮图片
+  bool? setNavReturnImgHidden;
+
+  /// 物理返回键是否有效
+  bool? setBackPressedAvailable;
+
+  /// 导航栏自带返回按钮隐藏，默认显示 BOOL
 
   /// 返回按钮图片缩进 btn.imageInsets = UIEdgeInsetsMake(0, 0, 20, 20)*/
 //  @property (nonatomic,strong)NSValue * clNavBackBtnImageInsets;
 
-  bool? setNavBackBtnAlimentRight;       /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示
+  bool? setNavBackBtnAlimentRight;
 
+  /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示
 
   /// 导航栏分割线 是否隐藏
   /// set backgroundImage=UIImage.new && shadowImage=UIImage.new
@@ -233,133 +263,258 @@ class ShanYanUIConfigIOS {
   /// eg.@(YES)
   bool? setNavigationBottomLineHidden;
 
-  String? setNavigationTintColor;          /// 导航栏 渲染色*/
+  String? setNavigationTintColor;
 
-  String? setNavigationBarTintColor;      /// 导航栏 背景色 default is white*/
+  /// 导航栏 渲染色*/
 
-  String? setNavigationBackgroundImage; /// 导航栏 背景图片
+  String? setNavigationBarTintColor;
+
+  /// 导航栏 背景色 default is white*/
+
+  String? setNavigationBackgroundImage;
+
+  /// 导航栏 背景图片
 
   /**导航栏 配合背景图片设置，用来控制在不同状态下导航栏的显示(横竖屏是否显示) UIBarMetrics eg.@(UIBarMetricsCompact)*/
 //  @property (nonatomic,strong)NSNumber * setNavigationBarMetrics;
 
-  String? setNavigationShadowImage;    /// /// 导航栏 导航栏底部分割线（图片）
+  String? setNavigationShadowImage;
+
+  /// /// 导航栏 导航栏底部分割线（图片）
 
 //LOGO图片
 
-  String? setLogoImgPath;    /// LOGO图片
+  String? setLogoImgPath;
 
-  num? setLogoCornerRadius;  /// LOGO圆角
+  /// LOGO图片
 
-  bool? setLogoHidden;       /// LOGO显隐
+  num? setLogoCornerRadius;
+
+  /// LOGO圆角
+
+  bool? setLogoHidden;
+
+  /// LOGO显隐
 
 //手机号显示控件
-  String?  setNumberColor;   /// 号码栏字体颜色
-  num?     setNumberSize;    /// 号码栏字体
-  bool?    setNumberBold;    /// 号码栏字体是否加粗（true：加粗；false：不加粗）
+  String? setNumberColor;
 
-  iOSTextAlignment? setNumberTextAlignment; /// 手机号对齐方式
+  /// 号码栏字体颜色
+  num? setNumberSize;
+
+  /// 号码栏字体
+  bool? setNumberBold;
+
+  /// 号码栏字体是否加粗（true：加粗；false：不加粗）
+
+  iOSTextAlignment? setNumberTextAlignment;
+
+  /// 手机号对齐方式
 
 //一键登录按钮 !不得隐藏
-  String?  setLogBtnText;          /// 按钮文字
-  String?  setLogBtnTextColor;     /// 按钮文字颜色
-  num?     setLoginBtnTextSize;    /// 号码栏字体
-  bool?    setLoginBtnTextBold;    /// 号码栏字体是否加粗
-  String? setLoginBtnBgColor;           /// 按钮背景颜色
-  String? setLoginBtnNormalBgImage;     /// 按钮背景图片
-  String? setLoginBtnHightLightBgImage; /// 按钮背景高亮图片
-  String? setLoginBtnDisabledBgImage;   /// 按钮背景不可用图片
-  String? setLoginBtnBorderColor;       /// 按钮边框颜色
-  num? setLoginBtnCornerRadius;         /// 按钮圆角
-  num? setLoginBtnBorderWidth;          /// 按钮边框线框
+  String? setLogBtnText;
 
+  /// 按钮文字
+  String? setLogBtnTextColor;
+
+  /// 按钮文字颜色
+  num? setLoginBtnTextSize;
+
+  /// 号码栏字体
+  bool? setLoginBtnTextBold;
+
+  /// 号码栏字体是否加粗
+  String? setLoginBtnBgColor;
+
+  /// 按钮背景颜色
+  String? setLoginBtnNormalBgImage;
+
+  /// 按钮背景图片
+  String? setLoginBtnHightLightBgImage;
+
+  /// 按钮背景高亮图片
+  String? setLoginBtnDisabledBgImage;
+
+  /// 按钮背景不可用图片
+  String? setLoginBtnBorderColor;
+
+  /// 按钮边框颜色
+  num? setLoginBtnCornerRadius;
+
+  /// 按钮圆角
+  num? setLoginBtnBorderWidth;
+
+  /// 按钮边框线框
 
 /*隐私条款Privacy
  注： 运营商隐私条款 不得隐藏
  用户条款不限制
  **/
-  List<String>? setAppPrivacyColor; ///设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色,eg. ["#FFD13D","#CAACE1"]
+  List<String>? setAppPrivacyColor;
+
+  ///设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色,eg. ["#FFD13D","#CAACE1"]
 
   /**隐私条款文字字体*/
-  num? setPrivacyTextSize;   /// 设置隐私栏字体大小
-  bool? setPrivacyTextBold;  /// 设置协议栏字体是否加粗
+  num? setPrivacyTextSize;
 
-  iOSTextAlignment? setAppPrivacyTextAlignment;  /// 隐私条款文字对齐方式
-  bool? setPrivacySmhHidden;                     /// 运营商隐私条款书名号
-  num? setAppPrivacyLineSpacing;                 /// 多行时行距
-  bool? setAppPrivacyNeedSizeToFit;               /// 是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑
+  /// 设置隐私栏字体大小
+  bool? setPrivacyTextBold;
+
+  /// 设置协议栏字体是否加粗
+
+  iOSTextAlignment? setAppPrivacyTextAlignment;
+
+  /// 隐私条款文字对齐方式
+  bool? setPrivacySmhHidden;
+
+  /// 运营商隐私条款书名号
+  num? setAppPrivacyLineSpacing;
+
+  /// 多行时行距
+  bool? setAppPrivacyNeedSizeToFit;
+
+  /// 是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑
   /**UITextView.textContainerInset 文字与TextView控件内边距 UIEdgeInset  eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyTextContainerInset;
 //  num setAppPrivacyLineFragmentPadding;          /// 文字与TextView控件左右内边距
   /**UITextView.contentInset UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyContentInset;
 
-  String? setAppPrivacyAbbreviatedName;           /// 隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效
+  String? setAppPrivacyAbbreviatedName;
 
-  List<String>? setAppPrivacyFirst;              /// 隐私条款一:需同时设置Name和UrlString
-  List<String>? setAppPrivacySecond;             /// 隐私条款二:需同时设置Name和UrlString
-  List<String>? setAppPrivacyThird;              /// 隐私条款三:需同时设置Name和UrlString
+  /// 隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效
+
+  List<String>? setAppPrivacyFirst;
+
+  /// 隐私条款一:需同时设置Name和UrlString
+  List<String>? setAppPrivacySecond;
+
+  /// 隐私条款二:需同时设置Name和UrlString
+  List<String>? setAppPrivacyThird;
+
+  /// 隐私条款三:需同时设置Name和UrlString
 
 /*
  隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth+隐私条款三+DesTextLast
  **/
-  String? setAppPrivacyNormalDesTextFirst;       /// 描述文本 首部 default:"同意"
-  String? setAppPrivacyNormalDesTextSecond;      /// 描述文本二 default:"和"
-  String? setAppPrivacyNormalDesTextThird;       /// 描述文本三 default:"、"
-  String? setAppPrivacyNormalDesTextFourth;      /// 描述文本四 default:"、"
-  String? setAppPrivacyNormalDesTextLast;        /// 描述文本 尾部 default: "并授权AppName使用认证服务"
+  String? setAppPrivacyNormalDesTextFirst;
 
-  String? setCheckBoxTipMsg;  /// CheckBox未选中提示文本
-  bool? setCheckBoxTipDisable;  ///  使用sdk内部“一键登录”按钮点击时的吐丝提示("请勾选协议") - NO:默认使用sdk内部吐丝 YES:禁止使用
+  /// 描述文本 首部 default:"同意"
+  String? setAppPrivacyNormalDesTextSecond;
 
-  bool? setOperatorPrivacyAtLast;  /// 运营商协议后置
+  /// 描述文本二 default:"和"
+  String? setAppPrivacyNormalDesTextThird;
+
+  /// 描述文本三 default:"、"
+  String? setAppPrivacyNormalDesTextFourth;
+
+  /// 描述文本四 default:"、"
+  String? setAppPrivacyNormalDesTextLast;
+
+  /// 描述文本 尾部 default: "并授权AppName使用认证服务"
+
+  String? setCheckBoxTipMsg;
+
+  /// CheckBox未选中提示文本
+  bool? setCheckBoxTipDisable;
+
+  ///  使用sdk内部“一键登录”按钮点击时的吐丝提示("请勾选协议") - NO:默认使用sdk内部吐丝 YES:禁止使用
+
+  bool? setOperatorPrivacyAtLast;
+
+  /// 运营商协议后置
 
 //  String setPrivacyNavText;         /// 协议页导航栏统一标题，默认显示条款名称
-  String? setPrivacyNavTextColor;    /// 协议页导航栏标题文字颜色
-  num? setPrivacyNavTextSize;        /// 协议页标题文字大小
+  String? setPrivacyNavTextColor;
 
-  String? setPrivacyNavReturnImgPath;  /// 隐私协议WEB页面导航返回按钮图片
+  /// 协议页导航栏标题文字颜色
+  num? setPrivacyNavTextSize;
 
-  iOSStatusBarStyle? setAppPrivacyWebPreferredStatusBarStyle;  /// 协议页状态栏样式
-  iOSBarStyle? setAppPrivacyWebNavigationBarStyle;             /// 协议页导航栏样式
+  /// 协议页标题文字大小
+
+  String? setPrivacyNavReturnImgPath;
+
+  /// 隐私协议WEB页面导航返回按钮图片
+
+  iOSStatusBarStyle? setAppPrivacyWebPreferredStatusBarStyle;
+
+  /// 协议页状态栏样式
+  iOSBarStyle? setAppPrivacyWebNavigationBarStyle;
+
+  /// 协议页导航栏样式
 
   ///协议页导航栏其他属性
   String? setAppPrivacyWebNavigationTintColor;
   String? setAppPrivacyWebNavigationBarTintColor;
   String? setAppPrivacyWebNavigationBackgroundImage;
+
   /**UINavigationBarMetrics*/
 //  @property (nonatomic,strong)NSNumber * clAppPrivacyWebNavigationBarMetrics;
   String? setAppPrivacyWebNavigationShadowImage;
 
 //运营商品牌标签("中国**提供认证服务")，不得隐藏
-  num? setSloganTextSize;    /// slogan文字字体大小
-  bool? setSloganTextBold;   /// slogan文字字体是否加粗
-  String? setSloganTextColor; /// slogan文字颜色
-  iOSTextAlignment? setSloganTextAlignment;   /// slogan文字对齐方式
+  num? setSloganTextSize;
+
+  /// slogan文字字体大小
+  bool? setSloganTextBold;
+
+  /// slogan文字字体是否加粗
+  String? setSloganTextColor;
+
+  /// slogan文字颜色
+  iOSTextAlignment? setSloganTextAlignment;
+
+  /// slogan文字对齐方式
 
 //供应商品牌标签("创蓝253提供认技术支持")
-  num? setShanYanSloganTextSize;    /// slogan文字字体大小
-  bool? setShanYanSloganTextBold;   /// slogan文字字体是否加粗
-  String? setShanYanSloganTextColor; /// slogan文字颜色
-  iOSTextAlignment? setShanYanSloganTextAlignment;   /// slogan文字对齐方式
-  bool? setShanYanSloganHidden;                     /// slogan是否隐藏
+  num? setShanYanSloganTextSize;
 
+  /// slogan文字字体大小
+  bool? setShanYanSloganTextBold;
+
+  /// slogan文字字体是否加粗
+  String? setShanYanSloganTextColor;
+
+  /// slogan文字颜色
+  iOSTextAlignment? setShanYanSloganTextAlignment;
+
+  /// slogan文字对齐方式
+  bool? setShanYanSloganHidden;
+
+  /// slogan是否隐藏
 
 /*CheckBox
  *协议勾选框，默认选中且在协议前显示
  *可在sdk_oauth.bundle中替换checkBox_unSelected、checkBox_selected图片
  *也可以通过属性设置选中和未选择图片
  **/
-  bool? setCheckBoxHidden;       /// 协议勾选框（默认显示,放置在协议之前）BOOL
-  bool? setPrivacyState;         /// 协议勾选框默认值（默认选中）BOOL
+  bool? setCheckBoxHidden;
 
-  List<num>? setCheckBoxWH;      /// 协议勾选框 宽高 eg. [40,40]
-  List<num>? setCheckBoxImageEdgeInsets;         /// 协议勾选框 UIButton.image图片缩进,eg. [2, 2, 2, 2]
+  /// 协议勾选框（默认显示,放置在协议之前）BOOL
+  bool? setPrivacyState;
 
-  bool? setCheckBoxVerticalAlignmentToAppPrivacyTop;     /// 设置是否CheckBox顶部与隐私协议控件顶部对齐
-  bool? setCheckBoxVerticalAlignmentToAppPrivacyCenterY; /// 设置是否CheckBox顶部与隐私协议控件竖向中心对齐，!!!与setCheckBoxVerticalAlignmentToAppPrivacyTop 同时只需设置一个
+  /// 协议勾选框默认值（默认选中）BOOL
 
-  String? setUncheckedImgPath;   /// 协议勾选框 非选中状态图片
-  String? setCheckedImgPath;     /// 协议勾选框 选中状态图片
+  List<num>? setCheckBoxWH;
+
+  /// 协议勾选框 宽高 eg. [40,40]
+  List<num>? setCheckBoxImageEdgeInsets;
+
+  /// 协议勾选框 UIButton.image图片缩进,eg. [2, 2, 2, 2]
+
+  bool? setCheckBoxVerticalAlignmentToAppPrivacyTop;
+
+  /// 设置是否CheckBox顶部与隐私协议控件顶部对齐
+  bool? setCheckBoxVerticalAlignmentToAppPrivacyCenterY;
+
+  /// 设置是否CheckBox顶部与隐私协议控件竖向中心对齐，!!!与setCheckBoxVerticalAlignmentToAppPrivacyTop 同时只需设置一个
+
+  String? setUncheckedImgPath;
+
+  /// 协议勾选框 非选中状态图片
+  String? setCheckedImgPath;
+
+  /// 协议勾选框 选中状态图片
 
   /**授权页自定义 "请勾选协议"提示框
       - containerView为loading的全屏蒙版view
@@ -367,19 +522,28 @@ class ShanYanUIConfigIOS {
    */
 //  @property (nonatomic,copy)void(^checkBoxTipView)(UIView * containerView);
 
-
 /*Loading*/
-  List<num>? setLoadingSize;         /// Loading 大小
+  List<num>? setLoadingSize;
 
-  num? setLoadingCornerRadius;       /// Loading 圆角
-  String? setLoadingBackgroundColor; /// Loading 背景色
+  /// Loading 大小
+
+  num? setLoadingCornerRadius;
+
+  /// Loading 圆角
+  String? setLoadingBackgroundColor;
+
+  /// Loading 背景色
 
   /**UIActivityIndicatorViewStyle eg.@(UIActivityIndicatorViewStyleWhiteLarge)*/
 //  @property (nonatomic,strong) NSNumber *clLoadingIndicatorStyle;
 
-  String? setLoadingTintColor; /// Loading Indicator渲染色
+  String? setLoadingTintColor;
 
-  List<ShanYanCustomWidgetIOS>? widgets;  ///自定义控件
+  /// Loading Indicator渲染色
+
+  List<ShanYanCustomWidgetIOS>? widgets;
+
+  ///自定义控件
 
   /**授权页自定义Loading
       - containerView为loading的全屏蒙版view
@@ -395,7 +559,9 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,copy)void(^customPrivacyAlertView)(UIViewController * authPageVC);
 
 //横竖屏
-  bool? setShouldAutorotate;  /// 是否支持自动旋转
+  bool? setShouldAutorotate;
+
+  /// 是否支持自动旋转
 
 /*支持方向
  - 如果设置只支持竖屏，只需配置竖屏布局layOutPortrait
@@ -404,12 +570,20 @@ class ShanYanUIConfigIOS {
  */
   iOSInterfaceOrientationMask? supportedInterfaceOrientations;
 
-  iOSInterfaceOrientation? preferredInterfaceOrientationForPresentation; /// 默认方向
+  iOSInterfaceOrientation? preferredInterfaceOrientationForPresentation;
 
-  bool? setAuthTypeUseWindow;      /// 以窗口方式显示
-  num? setAuthWindowCornerRadius;  /// 窗口圆角
+  /// 默认方向
 
-  iOSModalTransitionStyle? setAuthWindowModalTransitionStyle;  /// 系统自带的弹出动画
+  bool? setAuthTypeUseWindow;
+
+  /// 以窗口方式显示
+  num? setAuthWindowCornerRadius;
+
+  /// 窗口圆角
+
+  iOSModalTransitionStyle? setAuthWindowModalTransitionStyle;
+
+  /// 系统自带的弹出动画
 
 /* UIModalPresentationStyle
  * 若使用窗口模式，请设置为UIModalPresentationOverFullScreen 或不设置
@@ -419,8 +593,12 @@ class ShanYanUIConfigIOS {
  * eg. @(UIModalPresentationOverFullScreen)
  */
 
-  iOSModalPresentationStyle? setAuthWindowModalPresentationStyle; /// 授权页弹出样式
-  iOSModalPresentationStyle? setAppPrivacyWebModalPresentationStyle; /// 协议页弹出样式。当授权页使用窗口模式时，协议页强制使用模态弹出，此时此属性有效
+  iOSModalPresentationStyle? setAuthWindowModalPresentationStyle;
+
+  /// 授权页弹出样式
+  iOSModalPresentationStyle? setAppPrivacyWebModalPresentationStyle;
+
+  /// 协议页弹出样式。当授权页使用窗口模式时，协议页强制使用模态弹出，此时此属性有效
 
 /* UIUserInterfaceStyle
  * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
@@ -430,18 +608,24 @@ class ShanYanUIConfigIOS {
 /*授权页 UIUserInterfaceStyle,默认:UIUserInterfaceStyleLight,eg. @(UIUserInterfaceStyleLight)*/
   iOSUserInterfaceStyle? setAuthWindowOverrideUserInterfaceStyle;
 
-  bool? setAuthWindowPresentingAnimate;      /// 授权页面present弹出时animate动画设置，默认带动画
+  bool? setAuthWindowPresentingAnimate;
+
+  /// 授权页面present弹出时animate动画设置，默认带动画
 
   /**弹窗的MaskLayer，用于自定义窗口形状*/
 //  @property (nonatomic,strong) CALayer * clAuthWindowMaskLayer;
 
-
   //布局设置
-  ClOrientationLayOutIOS _layOutPortrait = new ClOrientationLayOutIOS() ;  /// 横屏下使用的布局
-  ClOrientationLayOutIOS _layOutLandscape =  new ClOrientationLayOutIOS(); /// 竖屏下使用的布局(不需要则不设置)
+  ClOrientationLayOutIOS _layOutPortrait = new ClOrientationLayOutIOS();
+
+  /// 横屏下使用的布局
+  ClOrientationLayOutIOS _layOutLandscape = new ClOrientationLayOutIOS();
+
+  /// 竖屏下使用的布局(不需要则不设置)
 
   // ignore: unnecessary_getters_setters,
   set layOutPortrait(ClOrientationLayOutIOS layOutPortrait) => _layOutPortrait;
+
   // ignore: unnecessary_getters_setters
   ClOrientationLayOutIOS get layOutPortrait {
     // if (_layOutPortrait == null) {
@@ -451,7 +635,9 @@ class ShanYanUIConfigIOS {
   }
 
   // ignore: unnecessary_getters_setters
-  set layOutLandscape(ClOrientationLayOutIOS layOutLandscape) => _layOutLandscape;
+  set layOutLandscape(ClOrientationLayOutIOS layOutLandscape) =>
+      _layOutLandscape;
+
   // ignore: unnecessary_getters_setters
   ClOrientationLayOutIOS get layOutLandscape {
     // if (_layOutLandscape == null) {
@@ -463,15 +649,16 @@ class ShanYanUIConfigIOS {
   ShanYanUIConfigIOS();
 
 //反序列化
-  factory ShanYanUIConfigIOS.fromJson(Map<String, dynamic> json) => _$ShanYanUIConfigIOSFromJson(json);
+  factory ShanYanUIConfigIOS.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanUIConfigIOSFromJson(json);
+
 //序列化
   Map<String, dynamic> toJson() => _$ShanYanUIConfigIOSToJson(this);
 }
 
 /*iOS布局(横竖需屏分别设置)*/
 @JsonSerializable(includeIfNull: false)
-class ClOrientationLayOutIOS{
-
+class ClOrientationLayOutIOS {
   ClOrientationLayOutIOS();
 
   //logo
@@ -483,7 +670,6 @@ class ClOrientationLayOutIOS{
   num? setLogoBottom;
   num? setLogoCenterX;
   num? setLogoCenterY;
-
 
   //脱敏手机号
   num? setNumFieldWidth;
@@ -543,16 +729,16 @@ class ClOrientationLayOutIOS{
   num? setAuthWindowOrientationHeight;
 
   //反序列化
-  factory ClOrientationLayOutIOS.fromJson(Map<String, dynamic> json) => _$ClOrientationLayOutIOSFromJson(json);
+  factory ClOrientationLayOutIOS.fromJson(Map<String, dynamic> json) =>
+      _$ClOrientationLayOutIOSFromJson(json);
+
   //序列化
   Map<String, dynamic> toJson() => _$ClOrientationLayOutIOSToJson(this);
 }
 
-
 /*Android独有布局*/
-@JsonSerializable(explicitToJson: true , includeIfNull: false)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanUIConfigAndroid {
-
   ShanYanUIConfigAndroid({this.isFinish = false});
 
   bool isFinish; //是否自动销毁
@@ -581,6 +767,7 @@ class ShanYanUIConfigAndroid {
   int? setNavTextSize; //设置导航栏标题文字大小
   String? setNavReturnImgPath; //设置导航栏返回按钮图标
   bool? setNavReturnImgHidden = false; //设置导航栏返回按钮是否隐藏（true：隐藏；false：不隐藏）
+  bool? setBackPressedAvailable = true; //设置物理返回键是否有效（true：有效；false：无效）
   bool? setAuthNavHidden; //设置导航栏是否隐藏（true：隐藏；false：不隐藏）
   bool? setAuthNavTransparent; //设置导航栏是否透明（true：透明；false：不透明）
   bool? setNavTextBold; //设置导航栏字体是否加粗（true：加粗；false：不加粗）
@@ -632,13 +819,14 @@ class ShanYanUIConfigAndroid {
   String? setCheckedImgPath; //设置隐私条款的CheckBox选中时图片
   bool? setCheckBoxHidden; //设置隐私条款的CheckBox是否隐藏（true：隐藏；false：不隐藏）
   List<int>? setCheckBoxWH; //设置checkbox的宽高，包含两个参数：1.宽 2.高
-  List<int>? setCheckBoxOffsetXY; //设置checkbox在协议框父控件中的位置，包含两个参数：1.左偏移量 2.上偏移量（默认：在父控件内居中）
+  List<int>?
+      setCheckBoxOffsetXY; //设置checkbox在协议框父控件中的位置，包含两个参数：1.左偏移量 2.上偏移量（默认：在父控件内居中）
   List<int>? setCheckBoxMargin; //设置checkbox的间距，包含四个参数：1.左间距 2.上间距 3.右间距 4.下间距
   List<String>? setPrivacyText; //设置隐私条款名称外的文字,包含五个参数
   bool? setPrivacyTextBold; //设置协议栏字体是否加粗（true：加粗；false：不加粗）
   String? setPrivacyCustomToastText; //未勾选协议时toast提示文字
-  bool? setPrivacyNameUnderline;  //协议是否显示下划线
-  bool? setOperatorPrivacyAtLast;//运营商协议是否为最后一个显示
+  bool? setPrivacyNameUnderline; //协议是否显示下划线
+  bool? setOperatorPrivacyAtLast; //运营商协议是否为最后一个显示
 
   //授权页 slogan（***提供认证服务）
   int? setSloganOffsetY; //设置slogan相对于标题栏下边缘y偏移
@@ -673,16 +861,19 @@ class ShanYanUIConfigAndroid {
 
   String? setLoadingView; //设置授权页点击一键登录自定义loading
   List<String>?
-  setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
-  List<ShanYanCustomWidgetLayout> ?widgetLayouts;
-  List<ShanYanCustomWidget> ?widgets;
+      setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
+  List<String>?
+      setActivityTranslateAnim; //设置授权页进出场动画，包含两个参数：1.进场动画传xml文件名即可  2.退场动画传xml文件名即可
+  List<ShanYanCustomWidgetLayout>? widgetLayouts;
+  List<ShanYanCustomWidget>? widgets;
 
   //反序列化
-  factory ShanYanUIConfigAndroid.fromJson(Map<String, dynamic> json) => _$ShanYanUIConfigAndroidFromJson(json);
+  factory ShanYanUIConfigAndroid.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanUIConfigAndroidFromJson(json);
+
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanUIConfigAndroidToJson(this);
 }
-
 
 //添加自定义布局类型，目前支持RelativeLayout布局xml文件
 enum ShanYanCustomWidgetLayoutType { RelativeLayout }
@@ -706,15 +897,17 @@ class ShanYanCustomWidgetLayout {
   }
 
   //反序列化
-  factory ShanYanCustomWidgetLayout.fromJson(Map<String, dynamic> json) => _$ShanYanCustomWidgetLayoutFromJson(json);
+  factory ShanYanCustomWidgetLayout.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanCustomWidgetLayoutFromJson(json);
+
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanCustomWidgetLayoutToJson(this);
 }
 
 //添加自定义控件类型，目前只支持 TextView
 enum ShanYanCustomWidgetType {
-  TextView ,
-  Button  ,
+  TextView,
+  Button,
   ImageView //(Only iOS available)
 }
 
@@ -722,7 +915,7 @@ enum ShanYanCustomWidgetType {
 enum ShanYanCustomWidgetGravityType { left, right, center }
 
 // 自定义控件 (Android available)
-@JsonSerializable(explicitToJson: true , includeIfNull: false)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanCustomWidget {
   String widgetId; //自定义控件ID
   int left = 0; // 自定义控件距离屏幕左边缘偏移量，单位dp
@@ -736,7 +929,8 @@ class ShanYanCustomWidget {
   String textColor = "#aa0000"; // 自定义控件文字颜色
   String? backgroundColor; // 自定义控件背景颜色
   String? backgroundImgPath; // 自定义控件背景图片(Only Android available)
-  ShanYanCustomWidgetGravityType textAlignment = ShanYanCustomWidgetGravityType.center; //自定义控件内容对齐方式 (Only Android available)
+  ShanYanCustomWidgetGravityType textAlignment = ShanYanCustomWidgetGravityType
+      .center; //自定义控件内容对齐方式 (Only Android available)
   ShanYanCustomWidgetType? type; //自定义控件类型，目前只支持 textView,button
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 
@@ -744,15 +938,17 @@ class ShanYanCustomWidget {
     this.widgetId = widgetId;
     this.type = type;
   }
+
 //反序列化
-  factory ShanYanCustomWidget.fromJson(Map<String, dynamic> json) => _$ShanYanCustomWidgetFromJson(json);
+  factory ShanYanCustomWidget.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanCustomWidgetFromJson(json);
+
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanCustomWidgetToJson(this);
 }
 
-
 // 自定义控件 (iOS available)
-@JsonSerializable(explicitToJson: true , includeIfNull: false)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanCustomWidgetIOS {
   String widgetId; //自定义控件ID
   num? left; // 自定义控件距离屏幕左边缘偏移量，单位dp
@@ -772,26 +968,28 @@ class ShanYanCustomWidgetIOS {
   String? backgroundColor; // 自定义控件背景颜色
   String? image; //按钮左侧图片 （Button available）
   String? backgroundImgPath; // 自定义控件背景图片(ImageView available)
-  iOSTextAlignment textAlignment = iOSTextAlignment.center; //自定义控件内容对齐方式 (Only Android available)
+  iOSTextAlignment textAlignment =
+      iOSTextAlignment.center; //自定义控件内容对齐方式 (Only Android available)
   ShanYanCustomWidgetType? type; //自定义控件类型，目前只支持 textView,button,ImageView
-  ShanYanCustomWidgetiOSNavPosition? navPosition;//如需添加到导航栏，请设置控件位置（左或右，导航栏按钮仅支持自定义width、height）
+  ShanYanCustomWidgetiOSNavPosition?
+      navPosition; //如需添加到导航栏，请设置控件位置（左或右，导航栏按钮仅支持自定义width、height）
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 
   ShanYanCustomWidgetIOS(@required this.widgetId, @required this.type) {
     this.widgetId = widgetId;
     this.type = type;
   }
+
 //反序列化
-  factory ShanYanCustomWidgetIOS.fromJson(Map<String, dynamic> json) => _$ShanYanCustomWidgetIOSFromJson(json);
+  factory ShanYanCustomWidgetIOS.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanCustomWidgetIOSFromJson(json);
+
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanCustomWidgetIOSToJson(this);
 }
 
 //iOS导航栏自定义控件位置
-enum ShanYanCustomWidgetiOSNavPosition {
-  navleft ,
-  navright
-}
+enum ShanYanCustomWidgetiOSNavPosition { navleft, navright }
 
 String? getStringFromEnum<T>(T) {
   if (T == null) {
@@ -802,7 +1000,7 @@ String? getStringFromEnum<T>(T) {
 }
 
 ///iOS 文字对齐方式
-enum iOSTextAlignment  {
+enum iOSTextAlignment {
   @JsonValue(0)
   center, // Visually centered 居中
   @JsonValue(1)
@@ -822,63 +1020,63 @@ enum iOSTextAlignment  {
 
 /// iOS 状态栏样式
 /// Xcode工程内的Info.plist文件配置需设置为YES，即运行单个页面自行管理状态栏: View controller-based status bar appearance = YES
-enum iOSStatusBarStyle{
-@JsonValue(0)
-  styleDefault,        // 状态栏显示 黑
-@JsonValue(1)
-  styleLightContent,   // 状态栏显示 白
-@JsonValue(2)
-  styleDarkContent     // 状态栏显示 黑 API_AVAILABLE(ios(13.0)) = 3
+enum iOSStatusBarStyle {
+  @JsonValue(0)
+  styleDefault, // 状态栏显示 黑
+  @JsonValue(1)
+  styleLightContent, // 状态栏显示 白
+  @JsonValue(2)
+  styleDarkContent // 状态栏显示 黑 API_AVAILABLE(ios(13.0)) = 3
 }
 
 /// iOS 导航栏样式，也可用于修改状态栏样式
-enum iOSBarStyle{
-@JsonValue(0)
+enum iOSBarStyle {
+  @JsonValue(0)
   styleDefault, // 状态栏显示 黑
-@JsonValue(1)
-  styleBlack    // 状态栏显示 白
+  @JsonValue(1)
+  styleBlack // 状态栏显示 白
 }
 
 /// iOS 支持的横竖屏方向
-enum iOSInterfaceOrientationMask{
-@JsonValue(0)
-  portrait,           //竖屏
-@JsonValue(1)
-  landscapeLeft,      //横屏：左
-@JsonValue(2)
-  landscapeRight,     //横屏：右
-@JsonValue(3)
+enum iOSInterfaceOrientationMask {
+  @JsonValue(0)
+  portrait, //竖屏
+  @JsonValue(1)
+  landscapeLeft, //横屏：左
+  @JsonValue(2)
+  landscapeRight, //横屏：右
+  @JsonValue(3)
   portraitUpsideDown, //上下倒置
-@JsonValue(4)
-  landscape,          //横屏：左+右
-@JsonValue(5)
-  all,                //全部方向
-@JsonValue(6)
-  allButUpsideDown    //全部方向，除了上下倒置
+  @JsonValue(4)
+  landscape, //横屏：左+右
+  @JsonValue(5)
+  all, //全部方向
+  @JsonValue(6)
+  allButUpsideDown //全部方向，除了上下倒置
 }
 
 /// iOS 屏幕方向
-enum iOSInterfaceOrientation{
-@JsonValue(0)
-  portrait,           //竖屏
-@JsonValue(1)
+enum iOSInterfaceOrientation {
+  @JsonValue(0)
+  portrait, //竖屏
+  @JsonValue(1)
   portraitUpsideDown, //上下倒置
-@JsonValue(2)
-  landscapeLeft,      //横屏：左
-@JsonValue(3)
-  landscapeRight,     //横屏：右
-@JsonValue(4)
+  @JsonValue(2)
+  landscapeLeft, //横屏：左
+  @JsonValue(3)
+  landscapeRight, //横屏：右
+  @JsonValue(4)
   unknown,
 }
 
 /// iOS 系统自带的弹出方式
 enum iOSModalTransitionStyle {
-@JsonValue(0)
- coverVertical,       // 底部弹出
-@JsonValue(1)
- flipHorizontal,      // 淡入
-@JsonValue(2)
- crossDissolve        // 翻转显示
+  @JsonValue(0)
+  coverVertical, // 底部弹出
+  @JsonValue(1)
+  flipHorizontal, // 淡入
+  @JsonValue(2)
+  crossDissolve // 翻转显示
 }
 
 /* UIModalPresentationStyle
@@ -890,21 +1088,21 @@ enum iOSModalTransitionStyle {
  */
 
 /// iOS 系统的弹出样式
-enum iOSModalPresentationStyle{
-@JsonValue(0)
-  fullScreen,       // 弹出全屏
-@JsonValue(1)
-  overFullScreen,   // 在原页面弹出，可透视原页面
-@JsonValue(2)
-  automatic         // 自动
+enum iOSModalPresentationStyle {
+  @JsonValue(0)
+  fullScreen, // 弹出全屏
+  @JsonValue(1)
+  overFullScreen, // 在原页面弹出，可透视原页面
+  @JsonValue(2)
+  automatic // 自动
 }
 
 /// iOS 主题模式
 enum iOSUserInterfaceStyle {
-@JsonValue(0)
-  unspecified,  //跟随系统
-@JsonValue(1)
-  light,        //亮
-@JsonValue(2)
-  dark          //暗黑 API_AVAILABLE(ios(13.0))
+  @JsonValue(0)
+  unspecified, //跟随系统
+  @JsonValue(1)
+  light, //亮
+  @JsonValue(2)
+  dark //暗黑 API_AVAILABLE(ios(13.0))
 }

@@ -136,6 +136,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("getImEnable")) {
             getImEnable(call);
         }
+        if (call.method.equals("clearScripCache")) {
+            OneKeyLoginManager.getInstance().clearScripCache(context);
+        }
     }
 
     private void getImEnable(MethodCall call) {
@@ -638,6 +641,8 @@ public class ShanyanPlugin implements MethodCallHandler {
         Object setAuthNavHidden = valueForKey(shanYanUIConfig, "setAuthNavHidden");
         Object setAuthNavTransparent = valueForKey(shanYanUIConfig, "setAuthNavTransparent");
         Object setNavTextBold = valueForKey(shanYanUIConfig, "setNavTextBold");
+        Object setBackPressedAvailable = valueForKey(shanYanUIConfig, "setBackPressedAvailable");
+
 
         Object setLogoImgPath = valueForKey(shanYanUIConfig, "setLogoImgPath");
         Object setLogoWidth = valueForKey(shanYanUIConfig, "setLogoWidth");
@@ -724,6 +729,7 @@ public class ShanyanPlugin implements MethodCallHandler {
 
         Object setLoadingView = valueForKey(shanYanUIConfig, "setLoadingView");
         Object setDialogTheme = valueForKey(shanYanUIConfig, "setDialogTheme");
+        Object setActivityTranslateAnim = valueForKey(shanYanUIConfig, "setActivityTranslateAnim");
         if (0 != getLayoutForId((String) setLoadingView)) {
             RelativeLayout.LayoutParams mLayoutParams3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
             RelativeLayout view_dialog = (RelativeLayout) LayoutInflater.from(context).inflate(getLayoutForId((String) setLoadingView), null);
@@ -788,6 +794,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (null != setNavReturnImgHidden) {
             builder.setNavReturnImgHidden((Boolean) setNavReturnImgHidden);
+        }
+        if (null != setBackPressedAvailable) {
+            builder.setBackPressedAvailable((Boolean) setBackPressedAvailable);
         }
         if (null != setNavReturnBtnWidth) {
             builder.setNavReturnBtnWidth((Integer) setNavReturnBtnWidth);
@@ -1065,6 +1074,11 @@ public class ShanyanPlugin implements MethodCallHandler {
             builder.setDialogTheme(true, Integer.parseInt(setDialogThemeList.get(0)),
                     Integer.parseInt(setDialogThemeList.get(1)), Integer.parseInt(setDialogThemeList.get(2)),
                     Integer.parseInt(setDialogThemeList.get(3)), Boolean.parseBoolean(setDialogThemeList.get(4)));
+        }
+        if (null != setActivityTranslateAnim) {
+            ArrayList<String> setActivityTranslateAnimList = (ArrayList) setActivityTranslateAnim;
+            setActivityTranslateAnimList.addAll(Arrays.asList("0", "0"));
+            builder.setActivityTranslateAnim(setActivityTranslateAnimList.get(0), setActivityTranslateAnimList.get(1));
         }
 
     }

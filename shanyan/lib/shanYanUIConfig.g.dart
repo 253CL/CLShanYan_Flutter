@@ -39,6 +39,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setNavTextSize = json['setNavTextSize'] as int?
     ..setNavReturnImgPath = json['setNavReturnImgPath'] as String?
     ..setNavReturnImgHidden = json['setNavReturnImgHidden'] as bool?
+    ..setBackPressedAvailable = json['setBackPressedAvailable'] as bool?
     ..setNavBackBtnAlimentRight = json['setNavBackBtnAlimentRight'] as bool?
     ..setNavigationBottomLineHidden =
         json['setNavigationBottomLineHidden'] as bool?
@@ -204,6 +205,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setNavTextSize', instance.setNavTextSize);
   writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
   writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
+  writeNotNull('setBackPressedAvailable', instance.setBackPressedAvailable);
   writeNotNull('setNavBackBtnAlimentRight', instance.setNavBackBtnAlimentRight);
   writeNotNull(
       'setNavigationBottomLineHidden', instance.setNavigationBottomLineHidden);
@@ -593,6 +595,7 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setNavTextSize = json['setNavTextSize'] as int?
     ..setNavReturnImgPath = json['setNavReturnImgPath'] as String?
     ..setNavReturnImgHidden = json['setNavReturnImgHidden'] as bool?
+    ..setBackPressedAvailable = json['setBackPressedAvailable'] as bool?
     ..setAuthNavHidden = json['setAuthNavHidden'] as bool?
     ..setAuthNavTransparent = json['setAuthNavTransparent'] as bool?
     ..setNavTextBold = json['setNavTextBold'] as bool?
@@ -693,6 +696,10 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setDialogTheme = (json['setDialogTheme'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList()
+    ..setActivityTranslateAnim =
+        (json['setActivityTranslateAnim'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList()
     ..widgetLayouts = (json['widgetLayouts'] as List<dynamic>?)
         ?.map((e) =>
             ShanYanCustomWidgetLayout.fromJson(e as Map<String, dynamic>))
@@ -734,6 +741,7 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull('setNavTextSize', instance.setNavTextSize);
   writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
   writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
+  writeNotNull('setBackPressedAvailable', instance.setBackPressedAvailable);
   writeNotNull('setAuthNavHidden', instance.setAuthNavHidden);
   writeNotNull('setAuthNavTransparent', instance.setAuthNavTransparent);
   writeNotNull('setNavTextBold', instance.setNavTextBold);
@@ -820,6 +828,7 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
       'setPrivacyNavReturnBtnOffsetY', instance.setPrivacyNavReturnBtnOffsetY);
   writeNotNull('setLoadingView', instance.setLoadingView);
   writeNotNull('setDialogTheme', instance.setDialogTheme);
+  writeNotNull('setActivityTranslateAnim', instance.setActivityTranslateAnim);
   writeNotNull(
       'widgetLayouts', instance.widgetLayouts?.map((e) => e.toJson()).toList());
   writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());

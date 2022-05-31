@@ -4,7 +4,7 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - shanyan (2.3.3.5):
+  - shanyan (2.3.3.7):
     - CL_ShanYanSDK (~> 2.3.5.0)
     - Flutter
   - Toast (4.0.0)

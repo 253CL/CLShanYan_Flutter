@@ -71,7 +71,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-
   Future<void> initPlatformState() async {
     oneKeyLoginManager.setDebug(true);
     String appId = "7I5nJT7h";
@@ -114,7 +113,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> openLoginAuthPlatformState() async {
-
     ///闪验SDK 设置授权页一键登录回调（“一键登录按钮”、返回按钮（包括物理返回键））
     oneKeyLoginManager.setOneKeyLoginListener((ShanYanResult shanYanResult) {
       setState(() {
@@ -131,6 +129,7 @@ class _MyAppState extends State<MyApp> {
         oneKeyLoginManager.finishAuthControllerCompletion();
       } else if (1011 == shanYanResult.code) {
         ///点击返回/取消 （强制自动销毁）
+        oneKeyLoginManager.setLoadingVisibility(false);
       } else {
         ///一键登录获取token失败
 
@@ -192,8 +191,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setAuthThemeConfig() {
-    double screenWidthPortrait = window.physicalSize.width /
-        window.devicePixelRatio; //竖屏宽
+    double screenWidthPortrait =
+        window.physicalSize.width / window.devicePixelRatio; //竖屏宽
 
     ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
 
@@ -201,7 +200,6 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.isFinish = true;
     shanYanUIConfig.ios.setAuthBGImgPath = "sy_login_test_bg";
     shanYanUIConfig.ios.setAuthBGVedioPath = "login_demo_test_vedio";
-
 
     shanYanUIConfig.ios.setPreferredStatusBarStyle =
         iOSStatusBarStyle.styleLightContent;
@@ -356,23 +354,23 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.layOutPortrait.setSloganLeft = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganRight = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganBottom =
-        shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom!
-            + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
+        shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom! +
+            shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
 
     //隐私协议
 //    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 60;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 60;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom =
-        shanYanUIConfig.ios.layOutPortrait.setSloganBottom!
-            + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight! + 5;
-
+        shanYanUIConfig.ios.layOutPortrait.setSloganBottom! +
+            shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight! +
+            5;
 
     List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
 
     final String btn_widgetId = "other_custom_button"; // 标识控件 id
     ShanYanCustomWidgetIOS buttonWidgetiOS =
-    ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetiOS.textContent = "其他方式登录 >1";
     buttonWidgetiOS.centerY = 100;
     buttonWidgetiOS.centerX = 0;
@@ -386,12 +384,11 @@ class _MyAppState extends State<MyApp> {
     buttonWidgetiOS.borderWidth = 2;
     buttonWidgetiOS.borderColor = "#ff0000";
 
-
     shanyanCustomWidgetIOS.add(buttonWidgetiOS);
 
-    final String nav_right_btn_widgetId = "other_custom_nav_right_button"; // 标识控件 id
-    ShanYanCustomWidgetIOS navRightButtonWidgetiOS =
-    ShanYanCustomWidgetIOS(
+    final String nav_right_btn_widgetId =
+        "other_custom_nav_right_button"; // 标识控件 id
+    ShanYanCustomWidgetIOS navRightButtonWidgetiOS = ShanYanCustomWidgetIOS(
         nav_right_btn_widgetId, ShanYanCustomWidgetType.Button);
     navRightButtonWidgetiOS.navPosition =
         ShanYanCustomWidgetiOSNavPosition.navright;
@@ -407,11 +404,10 @@ class _MyAppState extends State<MyApp> {
 
     shanYanUIConfig.ios.widgets = shanyanCustomWidgetIOS;
 
-
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = true;
     shanYanUIConfig.androidPortrait.setAuthBgVideoPath =
-    "login_demo_test_vedio";
+        "login_demo_test_vedio";
     shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
     shanYanUIConfig.androidPortrait.setPrivacyNavColor = "#aa00cc";
     shanYanUIConfig.androidPortrait.setPrivacyNavTextColor = "#00aacc";
@@ -425,7 +421,7 @@ class _MyAppState extends State<MyApp> {
     shanYanCustomWidgetLayout.add(relativeLayoutWidget);
     List<ShanYanCustomWidget> shanyanCustomWidgetAndroid = [];
     ShanYanCustomWidget buttonWidgetAndroid =
-    ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetAndroid.textContent = "其他方式登录 >";
     buttonWidgetAndroid.top = 300;
     buttonWidgetAndroid.width = 150;
@@ -439,12 +435,16 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.widgetLayouts = shanYanCustomWidgetLayout;
     shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidgetAndroid;
 
+    shanYanUIConfig.androidPortrait.setActivityTranslateAnim = [
+      "activity_anim_bottom_in",
+      "activity_anim_bottom_out"
+    ];
     //oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
     oneKeyLoginManager.addClikWidgetEventListener((eventId) {
       _toast("点击了：" + eventId);
     });
-    oneKeyLoginManager.setAuthPageActionListener((
-        AuthPageActionEvent authPageActionEvent) {
+    oneKeyLoginManager
+        .setAuthPageActionListener((AuthPageActionEvent authPageActionEvent) {
       Map map = authPageActionEvent.toMap();
       print("setActionListener" + map.toString());
       _toast("点击：${map.toString()}");
@@ -459,11 +459,11 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidLandscape.setSloganOffsetY = 100;
     shanYanUIConfig.androidLandscape.setLogBtnOffsetY = 120;
 
-
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayoutLand = [];
     String layout_name_land = "relative_item_view";
-    ShanYanCustomWidgetLayout relativeLayoutWidgetLand = ShanYanCustomWidgetLayout(
-        layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
+    ShanYanCustomWidgetLayout relativeLayoutWidgetLand =
+        ShanYanCustomWidgetLayout(
+            layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidgetLand.top = 200;
     relativeLayoutWidgetLand.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayoutLand.add(relativeLayoutWidgetLand);
@@ -478,10 +478,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setAuthPopupThemeConfig() {
-    double screenWidthPortrait = window.physicalSize.width /
-        window.devicePixelRatio; //竖屏宽
-    double screenHeightPortrait = window.physicalSize.height /
-        window.devicePixelRatio; //竖屏宽
+    double screenWidthPortrait =
+        window.physicalSize.width / window.devicePixelRatio; //竖屏宽
+    double screenHeightPortrait =
+        window.physicalSize.height / window.devicePixelRatio; //竖屏宽
 
     ShanYanUIConfig shanYanUIConfig = ShanYanUIConfig();
 
@@ -651,23 +651,22 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.layOutPortrait.setSloganLeft = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganRight = 0;
     shanYanUIConfig.ios.layOutPortrait.setSloganBottom =
-        shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom!
-            + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
+        shanYanUIConfig.ios.layOutPortrait.setShanYanSloganBottom! +
+            shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
 
     //隐私协议
 //    shanYanUIConfig.ios.layOutPortrait.setPrivacyHeight = 50;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyLeft = 30;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyRight = 30;
     shanYanUIConfig.ios.layOutPortrait.setPrivacyBottom =
-        shanYanUIConfig.ios.layOutPortrait.setSloganBottom!
-            + shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
-
+        shanYanUIConfig.ios.layOutPortrait.setSloganBottom! +
+            shanYanUIConfig.ios.layOutPortrait.setShanYanSloganHeight!;
 
     List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
 
     final String btn_widgetId = "other_custom_button"; // 标识控件 id
     ShanYanCustomWidgetIOS buttonWidgetiOS =
-    ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetiOS.textContent = "其他方式登录 >";
     buttonWidgetiOS.top = 140 + 20 + 10;
     buttonWidgetiOS.centerX = 0;
@@ -681,9 +680,9 @@ class _MyAppState extends State<MyApp> {
 
     shanyanCustomWidgetIOS.add(buttonWidgetiOS);
 
-    final String nav_right_btn_widgetId = "other_custom_nav_right_button"; // 标识控件 id
-    ShanYanCustomWidgetIOS navRightButtonWidgetiOS =
-    ShanYanCustomWidgetIOS(
+    final String nav_right_btn_widgetId =
+        "other_custom_nav_right_button"; // 标识控件 id
+    ShanYanCustomWidgetIOS navRightButtonWidgetiOS = ShanYanCustomWidgetIOS(
         nav_right_btn_widgetId, ShanYanCustomWidgetType.Button);
     navRightButtonWidgetiOS.navPosition =
         ShanYanCustomWidgetiOSNavPosition.navright;
@@ -702,13 +701,18 @@ class _MyAppState extends State<MyApp> {
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = true;
     shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
-    shanYanUIConfig.androidPortrait.setDialogTheme =
-    ["300", "500", "0", "0", "false"];
+    shanYanUIConfig.androidPortrait.setDialogTheme = [
+      "300",
+      "500",
+      "0",
+      "0",
+      "false"
+    ];
+    shanYanUIConfig.androidPortrait.setBackPressedAvailable = false;
     shanYanUIConfig.androidPortrait.setLogoOffsetY = 20;
     shanYanUIConfig.androidPortrait.setNumFieldOffsetY = 85;
     shanYanUIConfig.androidPortrait.setSloganOffsetY = 110;
     shanYanUIConfig.androidPortrait.setLogBtnOffsetY = 130;
-
 
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";
@@ -719,7 +723,7 @@ class _MyAppState extends State<MyApp> {
     shanYanCustomWidgetLayout.add(relativeLayoutWidget);
     List<ShanYanCustomWidget> shanyanCustomWidgetAndroid = [];
     ShanYanCustomWidget buttonWidgetAndroid =
-    ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetAndroid.textContent = "其他方式登录 >";
     buttonWidgetAndroid.top = 200;
     buttonWidgetAndroid.width = 150;
@@ -734,8 +738,13 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.widgets = shanyanCustomWidgetAndroid;
 
     shanYanUIConfig.androidLandscape.isFinish = true;
-    shanYanUIConfig.androidLandscape.setDialogTheme =
-    ["420", "300", "0", "0", "false"];
+    shanYanUIConfig.androidLandscape.setDialogTheme = [
+      "420",
+      "300",
+      "0",
+      "0",
+      "false"
+    ];
     shanYanUIConfig.androidLandscape.setLogoImgPath = "sy_logo";
     shanYanUIConfig.androidLandscape.setAuthNavHidden = true;
     shanYanUIConfig.androidLandscape.setLogoOffsetY = 14;
@@ -743,11 +752,11 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidLandscape.setSloganOffsetY = 100;
     shanYanUIConfig.androidLandscape.setLogBtnOffsetY = 120;
 
-
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayoutLand = [];
     String layout_name_land = "relative_item_view";
-    ShanYanCustomWidgetLayout relativeLayoutWidgetLand = ShanYanCustomWidgetLayout(
-        layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
+    ShanYanCustomWidgetLayout relativeLayoutWidgetLand =
+        ShanYanCustomWidgetLayout(
+            layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidgetLand.top = 200;
     relativeLayoutWidgetLand.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayoutLand.add(relativeLayoutWidgetLand);
@@ -759,8 +768,8 @@ class _MyAppState extends State<MyApp> {
     oneKeyLoginManager.addClikWidgetEventListener((eventId) {
       _toast("点击了：" + eventId);
     });
-    oneKeyLoginManager.setAuthPageActionListener((
-        AuthPageActionEvent authPageActionEvent) {
+    oneKeyLoginManager
+        .setAuthPageActionListener((AuthPageActionEvent authPageActionEvent) {
       Map map = authPageActionEvent.toMap();
       print("setActionListener" + map.toString());
       _toast("点击：${map.toString()}");
@@ -904,7 +913,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String? title;
 
-  const CustomButton({ this.onPressed, this.title});
+  const CustomButton({this.onPressed, this.title});
 
   @override
   Widget build(BuildContext context) {
