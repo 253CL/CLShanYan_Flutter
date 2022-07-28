@@ -16,7 +16,7 @@ A new Flutter plugin.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.static_framework = true
-  s.ios.dependency 'CL_ShanYanSDK', '~> 2.3.5.0'
+  s.ios.dependency 'CL_ShanYanSDK', '~> 2.3.5.3'
   s.ios.deployment_target = '8.0'
 end
 

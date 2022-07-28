@@ -146,9 +146,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param completion       关闭回调（⚠️在子线程中回调）
 + (void)finishAuthControllerCompletion:(void(^_Nullable)(void))completion;
 
+/// 返回授权页内置导航控制器（生命周期与授权页一致）
++ (UINavigationController *)authNavigationController;
+
 /// 设置checkBox勾选状态
 /// @param isSelect         勾选状态：YES：为勾选
 + (void)setCheckBoxValue:(BOOL)isSelect;
+
+/// 手动触发一键登录按钮点击（授权页存在时调用）
++ (void)loginBtnClick;
 
 /// 隐藏一键登录loading
 + (void)hideLoading;

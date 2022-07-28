@@ -7,9 +7,8 @@
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ZOAuthManager.h"
 
-@interface ZUOAuthManager : ZOAuthManager
+@interface ZUOAuthManager : NSObject
 
 
 /**
@@ -19,13 +18,13 @@
 
 
 /**
- *  初始化-联通
+ *  初始化方法
  */
 - (void) init:(NSString*) apiKey pubKey:(NSString*)pubKey;
 
 
 /**
- *  取号-联通
+ *  预取号接口
  */
 - (void)login:(double)timeout resultListener:(void (^)(NSDictionary *data))listener;
 
@@ -34,14 +33,6 @@
  * 清除缓存 ***注意***：SDK取号默认会使用缓存机制，请及时清理缓存；
  */
 + (BOOL)clearCULoginCache;
-
-
-/**
- 不推荐使用
- 中断取号登录流程(按需使用)
- 取消取号请求
- */
-- (void)tryToInterruptTheCULoginFlow;
 
 
 /**
@@ -56,7 +47,7 @@
  手动关闭后，不必调用clearOauthCache；
  @param  yesOrNo 是否关闭联通认证缓存策略
  */
-- (void) closeCUOauthCachingStrategy:(BOOL)yesOrNo;
++ (void) closeCUOauthCachingStrategy:(BOOL)yesOrNo;
 
 
 /**
@@ -67,14 +58,10 @@
 + (BOOL) clearCUOauthCache;
 
 
-/**
- *  获取登录/认证结果
- *  测试接口
- */
-- (void) gmbc:(NSString*)accessCode mobile:(NSString *)mobile listener:(void (^)(NSDictionary *data))listener;
-
-
-//释放SDK内部单例对象 不推荐使用
--(void)ZOAURelease;
-
+#pragma mark - 其他方法
++ (void) setDebug:(BOOL) ISD ;
++ (void) useSchemeBInSecurityModule:(BOOL)schemeB;
++ (void)setUAString:(NSString *)UAString;
++ (void)removeUAString;
++ (NSString *)getVersionInfo;
 @end
