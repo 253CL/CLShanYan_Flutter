@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -78,9 +79,17 @@ public class ShanyanPlugin implements MethodCallHandler {
             //闪验SDK 设置debug模式
             setDebug(call);
         }
+        if (call.method.equals("setInitDebug")) {
+            //闪验SDK 设置debug模式
+            setInitDebug(call);
+        }
         if (call.method.equals("getOperatorType")) {
             //闪验SDK 获取运营商类型
             getOperatorType(call, result);
+        }
+        if (call.method.equals("getOperatorInfo")) {
+            //闪验SDK 获取运营商类型
+            getOperatorInfo(call, result);
         }
         if (call.method.equals("init")) {
             //闪验SDK 初始化
@@ -102,9 +111,6 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (call.method.equals("getPreIntStatus")) {
             result.success(OneKeyLoginManager.getInstance().getPreIntStatus());
-        }
-        if (call.method.equals("getOperatorType")) {
-            result.success(OneKeyLoginManager.getInstance().getOperatorType(context));
         }
         if (call.method.equals("startAuthentication")) {
             startAuthentication(call, result);
@@ -139,6 +145,32 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("clearScripCache")) {
             OneKeyLoginManager.getInstance().clearScripCache(context);
         }
+        if (call.method.equals("setTimeOutForPreLogin")) {
+            int timeOut = call.argument("timeOut");
+            OneKeyLoginManager.getInstance().setTimeOutForPreLogin(timeOut);
+        }
+        if (call.method.equals("performLoginClick")) {
+            OneKeyLoginManager.getInstance().performLoginClick();
+        }
+        if (call.method.equals("getPrivacyCheckBox")) {
+            getPrivacyCheckBox(call, result);
+        }
+        if (call.method.equals("setActivityLifecycleCallbacksEnable")) {
+            boolean enable = call.argument("activityLifecycleCallbacksEnable");
+            OneKeyLoginManager.getInstance().setActivityLifecycleCallbacksEnable(enable);
+        }
+        if (call.method.equals("checkProcessesEnable")) {
+            boolean enable = call.argument("checkProcessesEnable");
+            OneKeyLoginManager.getInstance().checkProcessesEnable(enable);
+        }
+        if (call.method.equals("removeAllListener")) {
+            OneKeyLoginManager.getInstance().removeAllListener();
+        }
+    }
+
+    private void getPrivacyCheckBox(MethodCall call, Result result) {
+        CheckBox privacyCheckBox = OneKeyLoginManager.getInstance().getPrivacyCheckBox();
+        result.success(privacyCheckBox);
     }
 
     private void getImEnable(MethodCall call) {
@@ -174,6 +206,11 @@ public class ShanyanPlugin implements MethodCallHandler {
     private void getOperatorType(MethodCall call, Result result) {
         String operatorType = OneKeyLoginManager.getInstance().getOperatorType(context);
         result.success(operatorType);
+    }
+
+    private void getOperatorInfo(MethodCall call, Result result) {
+        String operatorInfo = OneKeyLoginManager.getInstance().getOperatorInfo(context);
+        result.success(operatorInfo);
     }
 
     private void setActionListener(MethodCall call, Result result) {
@@ -317,6 +354,11 @@ public class ShanyanPlugin implements MethodCallHandler {
 
     private void setDebug(MethodCall call) {
         boolean debug = call.argument("debug");
+        OneKeyLoginManager.getInstance().setDebug(debug);
+    }
+
+    private void setInitDebug(MethodCall call) {
+        boolean debug = call.argument("initDebug");
         OneKeyLoginManager.getInstance().setDebug(debug);
     }
 

@@ -110,6 +110,7 @@ class _MyAppState extends State<MyApp> {
         //预取号失败
       }
     });
+
   }
 
   Future<void> openLoginAuthPlatformState() async {

@@ -6,11 +6,11 @@
          In most cases you can leave this as-is, but you if you want to provide
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -25,6 +25,7 @@
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme"
@@ -42,6 +43,7 @@
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="unspecified"
             android:theme="@style/MyTheme" />
@@ -49,6 +51,7 @@
         <activity-alias
             android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="unspecified"
             android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
@@ -56,6 +59,7 @@
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="unspecified"
             android:theme="@style/MyTheme" />
@@ -63,6 +67,7 @@
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="unspecified"
             android:theme="@style/MyTheme" />
