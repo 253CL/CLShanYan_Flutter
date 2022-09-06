@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +21,9 @@ import com.chuanglan.shanyan_sdk.listener.GetPhoneInfoListener;
 import com.chuanglan.shanyan_sdk.listener.InitListener;
 import com.chuanglan.shanyan_sdk.listener.OneKeyLoginListener;
 import com.chuanglan.shanyan_sdk.listener.OpenLoginAuthListener;
+import com.chuanglan.shanyan_sdk.listener.PricacyOnClickListener;
 import com.chuanglan.shanyan_sdk.listener.ShanYanCustomInterface;
+import com.chuanglan.shanyan_sdk.tool.ConfigPrivacyBean;
 import com.chuanglan.shanyan_sdk.tool.ShanYanUIConfig;
 
 import org.json.JSONException;
@@ -33,19 +36,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * MyFlutterPlugin
  */
-public class ShanyanPlugin implements MethodCallHandler {
+public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
 
     // 定义日志 TAG
-    private static final String TAG = "|shanyan_flutter======|";
+    private static final String TAG = "|ProcessShanYanLogger_|";
     final String shanyan_code = "code";//返回码
     final String shanyan_message = "message";//描述
     String shanyan_innerCode = "innerCode"; //内层返回码
@@ -62,15 +66,16 @@ public class ShanyanPlugin implements MethodCallHandler {
     private Context context;
     private boolean isFinish;
 
-    public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "shanyan");
-        channel.setMethodCallHandler(new ShanyanPlugin(registrar, channel));
-
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "shanyan");
+        context = flutterPluginBinding.getApplicationContext();
+        channel.setMethodCallHandler(this);
     }
 
-    private ShanyanPlugin(Registrar registrar, MethodChannel channel) {
-        this.context = registrar.context();
-        this.channel = channel;
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        channel.setMethodCallHandler(null);
     }
 
     @Override
@@ -124,6 +129,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("setActionListener")) {
             setActionListener(call, result);
         }
+        if (call.method.equals("setPrivacyOnClickListener")) {
+            setPrivacyOnClickListener(call, result);
+        }
         if (call.method.equals("getOaidEnable")) {
             getOaidEnable(call);
         }
@@ -166,6 +174,19 @@ public class ShanyanPlugin implements MethodCallHandler {
         if (call.method.equals("removeAllListener")) {
             OneKeyLoginManager.getInstance().removeAllListener();
         }
+    }
+
+    private void setPrivacyOnClickListener(MethodCall call, Result result) {
+        OneKeyLoginManager.getInstance().setPrivacyOnClickListener(new PricacyOnClickListener() {
+            @Override
+            public void onClick(String s, String s1) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("url", s);
+                map.put("name", s1);
+                Log.e(TAG, "map=" + map);
+                channel.invokeMethod("onReceivePrivacyEvent", map);
+            }
+        });
     }
 
     private void getPrivacyCheckBox(MethodCall call, Result result) {
@@ -221,7 +242,7 @@ public class ShanyanPlugin implements MethodCallHandler {
                 map.put(shanyan_type, i);
                 map.put(shanyan_code, i1);
                 map.put(shanyan_message, s);
-                Log.e("logger", "map=" + map.toString());
+                Log.e(TAG, "map=" + map.toString());
                 channel.invokeMethod("onReceiveAuthEvent", map);
             }
         });
@@ -367,7 +388,11 @@ public class ShanyanPlugin implements MethodCallHandler {
         Map portraitConfig = call.argument("androidPortrait");
         List<Map> portraitWidgets = (List<Map>) valueForKey(portraitConfig, "widgets");
         List<Map> portraitWidgetLayout = (List<Map>) valueForKey(portraitConfig, "widgetLayouts");
+        List<Map> morePrivacy = (List<Map>) valueForKey(portraitConfig, "morePrivacy");
         ShanYanUIConfig.Builder builder = new ShanYanUIConfig.Builder();
+        if (null != morePrivacy) {
+            setMorePrivacy(morePrivacy, builder);
+        }
         if (null != portraitConfig) {
             setAuthLayoutView(portraitConfig, builder);
         }
@@ -436,6 +461,29 @@ public class ShanyanPlugin implements MethodCallHandler {
             landscapeUIConfig = null;
         }
         OneKeyLoginManager.getInstance().setAuthThemeConfig(portraitUIConfig, landscapeUIConfig);
+    }
+
+    private void setMorePrivacy(List<Map> morePrivacy, ShanYanUIConfig.Builder builder) {
+        List<ConfigPrivacyBean> list = new ArrayList();
+        for (Map privacy : morePrivacy) {
+            String name = (String) privacy.get("name");
+            String url = (String) privacy.get("url");
+            String color = (String) privacy.get("color");
+            String midStr = (String) privacy.get("midStr");
+            String title = (String) privacy.get("title");
+            ConfigPrivacyBean bean = new ConfigPrivacyBean(name, url);
+            if (!TextUtils.isEmpty(color)) {
+                bean.setColor(Color.parseColor(color));
+            }
+            if (!TextUtils.isEmpty(midStr)) {
+                bean.setMidStr(midStr);
+            }
+            if (!TextUtils.isEmpty(title)) {
+                bean.setTitle(title);
+            }
+            list.add(bean);
+        }
+        builder.setMorePrivacy(list);
     }
 
     /**
@@ -729,6 +777,7 @@ public class ShanyanPlugin implements MethodCallHandler {
 
         Object setPrivacyOffsetGravityLeft = valueForKey(shanYanUIConfig, "setPrivacyOffsetGravityLeft");
         Object setPrivacyState = valueForKey(shanYanUIConfig, "setPrivacyState");
+        Object setPrivacyActivityEnabled = valueForKey(shanYanUIConfig, "setPrivacyActivityEnabled");
         Object setUncheckedImgPath = valueForKey(shanYanUIConfig, "setUncheckedImgPath");
         Object setCheckedImgPath = valueForKey(shanYanUIConfig, "setCheckedImgPath");
         Object setCheckBoxHidden = valueForKey(shanYanUIConfig, "setCheckBoxHidden");
@@ -988,6 +1037,9 @@ public class ShanyanPlugin implements MethodCallHandler {
         }
         if (null != setPrivacyState) {
             builder.setPrivacyState((Boolean) setPrivacyState);
+        }
+        if (null != setPrivacyActivityEnabled) {
+            builder.setPrivacyActivityEnabled((Boolean) setPrivacyActivityEnabled);
         }
         if (null != setUncheckedImgPath) {
             builder.setUncheckedImgPath(getDrawableByReflect(setUncheckedImgPath));

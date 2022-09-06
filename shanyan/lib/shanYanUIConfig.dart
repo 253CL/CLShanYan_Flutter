@@ -2,8 +2,6 @@
 * 闪验SDK 授权页UI 配置类
 * */
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -866,6 +864,7 @@ class ShanYanUIConfigAndroid {
       setActivityTranslateAnim; //设置授权页进出场动画，包含两个参数：1.进场动画传xml文件名即可  2.退场动画传xml文件名即可
   List<ShanYanCustomWidgetLayout>? widgetLayouts;
   List<ShanYanCustomWidget>? widgets;
+  List<ConfigPrivacyBean>? morePrivacy;
 
   //反序列化
   factory ShanYanUIConfigAndroid.fromJson(Map<String, dynamic> json) =>
@@ -902,6 +901,26 @@ class ShanYanCustomWidgetLayout {
 
   //序列化
   Map<String, dynamic> toJson() => _$ShanYanCustomWidgetLayoutToJson(this);
+}
+
+@JsonSerializable()
+class ConfigPrivacyBean {
+  String? name; //协议名称
+  String? url; //协议url
+  String? color = ""; //协议字体颜色
+  String? midStr = "、"; //协议中间文字描述
+  String? title = ""; //协议页标题
+  ConfigPrivacyBean(@required this.name, @required this.url) {
+    this.name = name;
+    this.url = url;
+  }
+
+  //反序列化
+  factory ConfigPrivacyBean.fromJson(Map<String, dynamic> json) =>
+      _$ConfigPrivacyBeanFromJson(json);
+
+  //序列化
+  Map<String, dynamic> toJson() => _$ConfigPrivacyBeanToJson(this);
 }
 
 //添加自定义控件类型，目前只支持 TextView

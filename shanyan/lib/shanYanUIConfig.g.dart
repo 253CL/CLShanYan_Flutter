@@ -706,6 +706,9 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
         .toList()
     ..widgets = (json['widgets'] as List<dynamic>?)
         ?.map((e) => ShanYanCustomWidget.fromJson(e as Map<String, dynamic>))
+        .toList()
+    ..morePrivacy = (json['morePrivacy'] as List<dynamic>?)
+        ?.map((e) => ConfigPrivacyBean.fromJson(e as Map<String, dynamic>))
         .toList();
 }
 
@@ -832,6 +835,8 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull(
       'widgetLayouts', instance.widgetLayouts?.map((e) => e.toJson()).toList());
   writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'morePrivacy', instance.morePrivacy?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -869,6 +874,25 @@ Map<String, dynamic> _$ShanYanCustomWidgetLayoutToJson(
 const _$ShanYanCustomWidgetLayoutTypeEnumMap = {
   ShanYanCustomWidgetLayoutType.RelativeLayout: 'RelativeLayout',
 };
+
+ConfigPrivacyBean _$ConfigPrivacyBeanFromJson(Map<String, dynamic> json) {
+  return ConfigPrivacyBean(
+    json['name'] as String?,
+    json['url'] as String?,
+  )
+    ..color = json['color'] as String?
+    ..midStr = json['midStr'] as String?
+    ..title = json['title'] as String?;
+}
+
+Map<String, dynamic> _$ConfigPrivacyBeanToJson(ConfigPrivacyBean instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'url': instance.url,
+      'color': instance.color,
+      'midStr': instance.midStr,
+      'title': instance.title,
+    };
 
 ShanYanCustomWidget _$ShanYanCustomWidgetFromJson(Map<String, dynamic> json) {
   return ShanYanCustomWidget(

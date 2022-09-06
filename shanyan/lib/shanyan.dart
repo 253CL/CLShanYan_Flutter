@@ -16,6 +16,9 @@ typedef ShanYanWidgetEventListener = void Function(String shanYanWidgetEvent);
 /// 闪验SDK 授权页点击事件监听（复选框和协议）
 typedef AuthPageActionListener = void Function(AuthPageActionEvent event);
 
+/// 闪验SDK 协议点击事件监听
+typedef PricacyOnClickListener = void Function(PrivacyOnClickEvent event);
+
 class OneKeyLoginManager {
   final ShanYanEventHandlers _eventHanders = new ShanYanEventHandlers();
 
@@ -31,6 +34,12 @@ class OneKeyLoginManager {
   setAuthPageActionListener(AuthPageActionListener callback) {
     _channel.invokeMethod("setActionListener");
     _eventHanders.authPageActionListener = callback;
+  }
+
+  /// 授权页协议点击事件
+  setPrivacyOnClickListener(PricacyOnClickListener callback) {
+    _channel.invokeMethod("setPrivacyOnClickListener");
+    _eventHanders.pricacyOnClickListener = callback;
   }
 
 //  /// 设置调试模式开关 Android
@@ -269,6 +278,11 @@ class OneKeyLoginManager {
         AuthPageActionEvent ev = AuthPageActionEvent.fromJson(json);
         _eventHanders.authPageActionListener?.call(ev);
         break;
+      case 'onReceivePrivacyEvent':
+        Map json = call.arguments.cast<dynamic, dynamic>();
+        PrivacyOnClickEvent ev = PrivacyOnClickEvent.fromJson(json);
+        _eventHanders.pricacyOnClickListener?.call(ev);
+        break;
       default:
         throw new UnsupportedError("Unrecognized Event");
     }
@@ -291,6 +305,20 @@ class AuthPageActionEvent {
   }
 }
 
+/// 闪验SDK 授权页协议点击事件
+class PrivacyOnClickEvent {
+  final String url; //协议名称
+  final String name; //协议链接
+
+  PrivacyOnClickEvent.fromJson(Map<dynamic, dynamic> json)
+      : url = json['url'],
+        name = json['name'];
+
+  Map toMap() {
+    return {'url': url, 'name': name};
+  }
+}
+
 /// 闪验SDK 自定义控件点击事件
 class ShanYanWidgetEvent {
   final String widgetLayoutId; //点击的控件id
@@ -306,6 +334,7 @@ class ShanYanEventHandlers {
   ShanYanOneKeyLoginListener? oneKeyLoginListener;
   ShanYanWidgetEventListener? shanYanWidgetEventListener;
   AuthPageActionListener? authPageActionListener;
+  PricacyOnClickListener? pricacyOnClickListener;
 }
 
 //

@@ -1,25 +1,17 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:ffi';
-import 'dart:ui' as prefix0;
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:async';
-
-import 'package:shanyan/shanyan.dart';
-import 'package:shanyan/shanYanUIConfig.dart';
-import 'package:shanyan/shanYanResult.dart';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 // import 'package:modal_progress_hud/modal_progress_hud.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 
 import 'dart:ui';
-import 'dart:io';
-import 'dart:convert' as convert;
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shanyan/shanYanResult.dart';
+import 'package:shanyan/shanYanUIConfig.dart';
+import 'package:shanyan/shanyan.dart';
 
 void main() => runApp(new MyApp());
 
@@ -93,6 +85,17 @@ class _MyAppState extends State<MyApp> {
         //初始化失败
       }
     });
+    oneKeyLoginManager
+        .getOperatorType()
+        .then((value) => print("getOperatorType===" + value));
+    oneKeyLoginManager
+        .getOperatorInfo()
+        .then((value) => print("getOperatorInfo===" + value));
+    oneKeyLoginManager
+        .setPrivacyOnClickListener((PrivacyOnClickEvent privacyOnclickEvent) {
+      Map map = privacyOnclickEvent.toMap();
+      print("setPrivacyOnClickListener===" + map.toString());
+    });
   }
 
   Future<void> getPhoneInfoPlatformState() async {
@@ -110,7 +113,6 @@ class _MyAppState extends State<MyApp> {
         //预取号失败
       }
     });
-
   }
 
   Future<void> openLoginAuthPlatformState() async {
@@ -413,6 +415,33 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.setCheckBoxOffsetXY = [10, 5];
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";
+    ConfigPrivacyBean configPrivacyBean1 = ConfigPrivacyBean("闪验测试1",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html");
+    configPrivacyBean1.color = "#aa00cc";
+    configPrivacyBean1.midStr = "和";
+    configPrivacyBean1.title = "闪验测试1协议标题";
+    ConfigPrivacyBean configPrivacyBean2 = ConfigPrivacyBean("闪验测试协议2",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html");
+    configPrivacyBean2.color = "#aacc00";
+    configPrivacyBean2.midStr = "＆";
+    configPrivacyBean2.title = "闪验测试2协议标题";
+    ConfigPrivacyBean configPrivacyBean3 = ConfigPrivacyBean("闪验测试协议3",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html");
+    ConfigPrivacyBean configPrivacyBean4 = ConfigPrivacyBean("闪验测试协议4",
+        "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html");
+    List<ConfigPrivacyBean> setMorePrivacy = [];
+    setMorePrivacy.add(configPrivacyBean1);
+    setMorePrivacy.add(configPrivacyBean2);
+    setMorePrivacy.add(configPrivacyBean3);
+    setMorePrivacy.add(configPrivacyBean4);
+    shanYanUIConfig.androidPortrait.morePrivacy = setMorePrivacy;
+    shanYanUIConfig.androidPortrait.setPrivacyText = [
+      "登录即同意",
+      "and",
+      "、",
+      "和",
+      "授权"
+    ];
     ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
         layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidget.top = 380;
@@ -712,7 +741,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.setNumFieldOffsetY = 85;
     shanYanUIConfig.androidPortrait.setSloganOffsetY = 110;
     shanYanUIConfig.androidPortrait.setLogBtnOffsetY = 130;
-    shanYanUIConfig.androidPortrait.setAuthBGImgPath="sysdk_login_bg";
+    shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sysdk_login_bg";
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";
     ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
