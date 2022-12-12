@@ -749,8 +749,11 @@ class ShanYanUIConfigAndroid {
   //授权页 状态栏
   bool? setStatusBarHidden; //授权页状态栏 设置状态栏是否隐藏
   String? setStatusBarColor; //设置状态栏背景颜色
+  String? setLogBtnBackgroundColor; //设置登录按钮背景颜色
   bool? setLightColor; //设置状态栏字体颜色是否为白色
   bool? setVirtualKeyTransparent; //设置虚拟键是否透明
+  bool? setAuthFlagSecureEnable; //设置进入列表授权页是否模糊显示
+  bool? setPrivacyFlagSecureEnable; //设置进入列表协议页是否模糊显示
 
   //授权页 导航栏
   bool? setFullScreen; //-*Android only*- 设置是否全屏显示（true：全屏；false：不全屏）默认不全屏

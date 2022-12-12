@@ -413,6 +413,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.setPrivacyNavColor = "#aa00cc";
     shanYanUIConfig.androidPortrait.setPrivacyNavTextColor = "#00aacc";
     shanYanUIConfig.androidPortrait.setCheckBoxOffsetXY = [10, 5];
+    shanYanUIConfig.androidPortrait.setLogBtnBackgroundColor="#ff0000";
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layout_name = "relative_item_view";
     ConfigPrivacyBean configPrivacyBean1 = ConfigPrivacyBean("闪验测试1",

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/shanyan_view_shanyan_privacy_rootlayout"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:orientation="horizontal">
 
     <RelativeLayout
@@ -25,6 +25,7 @@
         android:id="@+id/shanyan_view_privacy_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_gravity="center"
         android:layout_toRightOf="@+id/shanyan_view_privacy_checkbox_rootlayout"
         android:lineSpacingMultiplier="1.3"

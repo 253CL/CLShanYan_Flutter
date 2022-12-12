@@ -581,8 +581,11 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setAuthBgVideoPath = json['setAuthBgVideoPath'] as String?
     ..setStatusBarHidden = json['setStatusBarHidden'] as bool?
     ..setStatusBarColor = json['setStatusBarColor'] as String?
+    ..setLogBtnBackgroundColor = json['setLogBtnBackgroundColor'] as String?
     ..setLightColor = json['setLightColor'] as bool?
     ..setVirtualKeyTransparent = json['setVirtualKeyTransparent'] as bool?
+    ..setAuthFlagSecureEnable = json['setAuthFlagSecureEnable'] as bool?
+    ..setPrivacyFlagSecureEnable = json['setPrivacyFlagSecureEnable'] as bool?
     ..setFullScreen = json['setFullScreen'] as bool?
     ..setNavReturnBtnWidth = json['setNavReturnBtnWidth'] as int?
     ..setNavReturnBtnHeight = json['setNavReturnBtnHeight'] as int?
@@ -729,8 +732,12 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull('setAuthBgVideoPath', instance.setAuthBgVideoPath);
   writeNotNull('setStatusBarHidden', instance.setStatusBarHidden);
   writeNotNull('setStatusBarColor', instance.setStatusBarColor);
+  writeNotNull('setLogBtnBackgroundColor', instance.setLogBtnBackgroundColor);
   writeNotNull('setLightColor', instance.setLightColor);
   writeNotNull('setVirtualKeyTransparent', instance.setVirtualKeyTransparent);
+  writeNotNull('setAuthFlagSecureEnable', instance.setAuthFlagSecureEnable);
+  writeNotNull(
+      'setPrivacyFlagSecureEnable', instance.setPrivacyFlagSecureEnable);
   writeNotNull('setFullScreen', instance.setFullScreen);
   writeNotNull('setNavReturnBtnWidth', instance.setNavReturnBtnWidth);
   writeNotNull('setNavReturnBtnHeight', instance.setNavReturnBtnHeight);

@@ -712,9 +712,12 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         Object setAuthBgVideoPath = valueForKey(shanYanUIConfig, "setAuthBgVideoPath");
 
         Object setStatusBarColor = valueForKey(shanYanUIConfig, "setStatusBarColor");
+        Object setLogBtnBackgroundColor = valueForKey(shanYanUIConfig, "setLogBtnBackgroundColor");
         Object setLightColor = valueForKey(shanYanUIConfig, "setLightColor");
         Object setStatusBarHidden = valueForKey(shanYanUIConfig, "setStatusBarHidden");
         Object setVirtualKeyTransparent = valueForKey(shanYanUIConfig, "setVirtualKeyTransparent");
+        Object setAuthFlagSecureEnable = valueForKey(shanYanUIConfig, "setAuthFlagSecureEnable");
+        Object setPrivacyFlagSecureEnable = valueForKey(shanYanUIConfig, "setPrivacyFlagSecureEnable");
 
         Object setFullScreen = valueForKey(shanYanUIConfig, "setFullScreen");
         Object setNavColor = valueForKey(shanYanUIConfig, "setNavColor");
@@ -854,6 +857,9 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         if (null != setStatusBarColor) {
             builder.setStatusBarColor(Color.parseColor((String) setStatusBarColor));
         }
+        if (null != setLogBtnBackgroundColor) {
+            builder.setLogBtnBackgroundColor(Color.parseColor((String) setLogBtnBackgroundColor));
+        }
         if (null != setLightColor) {
             builder.setLightColor((Boolean) setLightColor);
         }
@@ -862,6 +868,12 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         }
         if (null != setVirtualKeyTransparent) {
             builder.setVirtualKeyTransparent((Boolean) setVirtualKeyTransparent);
+        }
+        if (null != setAuthFlagSecureEnable) {
+            builder.setAuthFlagSecureEnable((Boolean) setAuthFlagSecureEnable);
+        }
+        if (null != setPrivacyFlagSecureEnable) {
+            builder.setPrivacyFlagSecureEnable((Boolean) setPrivacyFlagSecureEnable);
         }
 
         //导航栏
