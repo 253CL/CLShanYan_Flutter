@@ -20,6 +20,7 @@ class ShanYanUIConfig {
 
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigIOS get ios {
+    // ignore: unnecessary_null_comparison
     if (_ios == null) {
       _ios = new ShanYanUIConfigIOS();
     }
@@ -37,6 +38,7 @@ class ShanYanUIConfig {
 
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigAndroid get androidPortrait {
+    // ignore: unnecessary_null_comparison
     if (_androidPortrait == null) {
       _androidPortrait = new ShanYanUIConfigAndroid();
     }
@@ -49,6 +51,7 @@ class ShanYanUIConfig {
 
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigAndroid get androidLandscape {
+    // ignore: unnecessary_null_comparison
     if (_androidLandscape == null) {
       _androidLandscape = new ShanYanUIConfigAndroid();
     }
@@ -194,38 +197,37 @@ class ShanYanUIConfig {
 ///*iOS独有*/
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanUIConfigIOS {
+  ///外部手动管理关闭界面 BOOL,default is NO
   bool? isFinish;
 
-  ///外部手动管理关闭界面 BOOL,default is NO
-
+  /// 授权页-背景图片(优先使用视频背景)
   String? setAuthBGImgPath;
 
-  /// /// 授权页-背景图片(优先使用视频背景)
+  /// 授权页-背景视频
   String? setAuthBGVedioPath;
 
-  /// /// 授权页-背景视频
-
-  iOSStatusBarStyle? setPreferredStatusBarStyle;
 
   /// 状态栏样式
+  iOSStatusBarStyle? setPreferredStatusBarStyle;
 
-  bool? setStatusBarHidden;
 
   ///状态栏隐藏
+  bool? setStatusBarHidden;
+
 
   //导航栏
 
+  /// 导航栏 是否隐藏 BOOL default is NO
   bool? setAuthNavHidden;
 
-  /// 导航栏 是否隐藏 BOOL default is NO
-
-  iOSBarStyle? setNavigationBarStyle;
 
   /// 导航栏样式
+  iOSBarStyle? setNavigationBarStyle;
 
-  bool? setAuthNavTransparent;
 
   /// 导航栏 背景透明 BOOL
+  bool? setAuthNavTransparent;
+
 
   /// 导航栏标题*/
   String? setNavText; //设置导航栏标题文字
@@ -238,22 +240,22 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,strong)UIBarButtonItem * clNavigationLeftControl;
 
 // 返回按钮
+  /// 导航栏左侧返回按钮图片
   String? setNavReturnImgPath;
 
-  /// 导航栏左侧返回按钮图片
+  /// 物理返回键是否有效
   bool? setNavReturnImgHidden;
 
-  /// 物理返回键是否有效
+  /// 导航栏自带返回按钮隐藏，默认显示 BOOL
   bool? setBackPressedAvailable;
 
-  /// 导航栏自带返回按钮隐藏，默认显示 BOOL
 
   /// 返回按钮图片缩进 btn.imageInsets = UIEdgeInsetsMake(0, 0, 20, 20)*/
 //  @property (nonatomic,strong)NSValue * clNavBackBtnImageInsets;
 
+  /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示
   bool? setNavBackBtnAlimentRight;
 
-  /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示
 
   /// 导航栏分割线 是否隐藏
   /// set backgroundImage=UIImage.new && shadowImage=UIImage.new
@@ -261,258 +263,264 @@ class ShanYanUIConfigIOS {
   /// eg.@(YES)
   bool? setNavigationBottomLineHidden;
 
+  /// 导航栏 渲染色*/
   String? setNavigationTintColor;
 
-  /// 导航栏 渲染色*/
-
-  String? setNavigationBarTintColor;
 
   /// 导航栏 背景色 default is white*/
+  String? setNavigationBarTintColor;
 
-  String? setNavigationBackgroundImage;
 
   /// 导航栏 背景图片
+  String? setNavigationBackgroundImage;
+
 
   /**导航栏 配合背景图片设置，用来控制在不同状态下导航栏的显示(横竖屏是否显示) UIBarMetrics eg.@(UIBarMetricsCompact)*/
 //  @property (nonatomic,strong)NSNumber * setNavigationBarMetrics;
 
+  /// /// 导航栏 导航栏底部分割线（图片）
   String? setNavigationShadowImage;
 
-  /// /// 导航栏 导航栏底部分割线（图片）
 
 //LOGO图片
 
+  /// LOGO图片
   String? setLogoImgPath;
 
-  /// LOGO图片
-
-  num? setLogoCornerRadius;
 
   /// LOGO圆角
+  num? setLogoCornerRadius;
 
-  bool? setLogoHidden;
 
   /// LOGO显隐
+  bool? setLogoHidden;
+
 
 //手机号显示控件
+  /// 号码栏字体颜色
   String? setNumberColor;
 
-  /// 号码栏字体颜色
+  /// 号码栏字体
   num? setNumberSize;
 
-  /// 号码栏字体
+  /// 号码栏字体是否加粗（true：加粗；false：不加粗）
   bool? setNumberBold;
 
-  /// 号码栏字体是否加粗（true：加粗；false：不加粗）
-
-  iOSTextAlignment? setNumberTextAlignment;
 
   /// 手机号对齐方式
+  iOSTextAlignment? setNumberTextAlignment;
+
 
 //一键登录按钮 !不得隐藏
+  /// 按钮文字
   String? setLogBtnText;
 
-  /// 按钮文字
+  /// 按钮文字颜色
   String? setLogBtnTextColor;
 
-  /// 按钮文字颜色
+  /// 号码栏字体
   num? setLoginBtnTextSize;
 
-  /// 号码栏字体
+  /// 号码栏字体是否加粗
   bool? setLoginBtnTextBold;
 
-  /// 号码栏字体是否加粗
+  /// 按钮背景颜色
   String? setLoginBtnBgColor;
 
-  /// 按钮背景颜色
+  /// 按钮背景图片
   String? setLoginBtnNormalBgImage;
 
-  /// 按钮背景图片
+  /// 按钮背景高亮图片
   String? setLoginBtnHightLightBgImage;
 
-  /// 按钮背景高亮图片
+  /// 按钮背景不可用图片
   String? setLoginBtnDisabledBgImage;
 
-  /// 按钮背景不可用图片
+  /// 按钮边框颜色
   String? setLoginBtnBorderColor;
 
-  /// 按钮边框颜色
+  /// 按钮圆角
   num? setLoginBtnCornerRadius;
 
-  /// 按钮圆角
+  /// 按钮边框线框
   num? setLoginBtnBorderWidth;
 
-  /// 按钮边框线框
 
 /*隐私条款Privacy
  注： 运营商隐私条款 不得隐藏
  用户条款不限制
  **/
+  ///设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色,eg. ["#FFD13D","#CAACE1"]
   List<String>? setAppPrivacyColor;
 
-  ///设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色,eg. ["#FFD13D","#CAACE1"]
 
   /**隐私条款文字字体*/
+  /// 设置隐私栏字体大小
   num? setPrivacyTextSize;
 
-  /// 设置隐私栏字体大小
+  /// 设置协议栏字体是否加粗
   bool? setPrivacyTextBold;
 
-  /// 设置协议栏字体是否加粗
-
-  iOSTextAlignment? setAppPrivacyTextAlignment;
 
   /// 隐私条款文字对齐方式
-  bool? setPrivacySmhHidden;
+  iOSTextAlignment? setAppPrivacyTextAlignment;
 
   /// 运营商隐私条款书名号
-  num? setAppPrivacyLineSpacing;
+  bool? setPrivacySmhHidden;
 
   /// 多行时行距
-  bool? setAppPrivacyNeedSizeToFit;
+  num? setAppPrivacyLineSpacing;
 
   /// 是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑
+  bool? setAppPrivacyNeedSizeToFit;
+
   /**UITextView.textContainerInset 文字与TextView控件内边距 UIEdgeInset  eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyTextContainerInset;
 //  num setAppPrivacyLineFragmentPadding;          /// 文字与TextView控件左右内边距
   /**UITextView.contentInset UIEdgeInset eg.[NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)]*/
 //  @property (nonatomic,strong)NSValue* clAppPrivacyContentInset;
 
+  /// 隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效
   String? setAppPrivacyAbbreviatedName;
 
-  /// 隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效
-
-  List<String>? setAppPrivacyFirst;
 
   /// 隐私条款一:需同时设置Name和UrlString
-  List<String>? setAppPrivacySecond;
+  List<String>? setAppPrivacyFirst;
 
   /// 隐私条款二:需同时设置Name和UrlString
-  List<String>? setAppPrivacyThird;
+  List<String>? setAppPrivacySecond;
 
   /// 隐私条款三:需同时设置Name和UrlString
+  List<String>? setAppPrivacyThird;
+
 
 /*
  隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth+隐私条款三+DesTextLast
  **/
+  /// 描述文本 首部 default:"同意"
   String? setAppPrivacyNormalDesTextFirst;
 
-  /// 描述文本 首部 default:"同意"
+  /// 描述文本二 default:"和"
   String? setAppPrivacyNormalDesTextSecond;
 
-  /// 描述文本二 default:"和"
+  /// 描述文本三 default:"、"
   String? setAppPrivacyNormalDesTextThird;
 
-  /// 描述文本三 default:"、"
+  /// 描述文本四 default:"、"
   String? setAppPrivacyNormalDesTextFourth;
 
-  /// 描述文本四 default:"、"
+  /// 描述文本 尾部 default: "并授权AppName使用认证服务"
   String? setAppPrivacyNormalDesTextLast;
 
-  /// 描述文本 尾部 default: "并授权AppName使用认证服务"
-
-  String? setCheckBoxTipMsg;
+  /// 添加多条协议
+  List<ConfigPrivacyBean>? morePrivacy;
 
   /// CheckBox未选中提示文本
-  bool? setCheckBoxTipDisable;
+  String? setCheckBoxTipMsg;
 
   ///  使用sdk内部“一键登录”按钮点击时的吐丝提示("请勾选协议") - NO:默认使用sdk内部吐丝 YES:禁止使用
+  bool? setCheckBoxTipDisable;
 
-  bool? setOperatorPrivacyAtLast;
 
   /// 运营商协议后置
+  bool? setOperatorPrivacyAtLast;
+
 
 //  String setPrivacyNavText;         /// 协议页导航栏统一标题，默认显示条款名称
+  /// 协议页导航栏标题文字颜色
   String? setPrivacyNavTextColor;
 
-  /// 协议页导航栏标题文字颜色
+  /// 协议页标题文字大小
   num? setPrivacyNavTextSize;
 
-  /// 协议页标题文字大小
-
-  String? setPrivacyNavReturnImgPath;
 
   /// 隐私协议WEB页面导航返回按钮图片
+  String? setPrivacyNavReturnImgPath;
 
-  iOSStatusBarStyle? setAppPrivacyWebPreferredStatusBarStyle;
 
   /// 协议页状态栏样式
-  iOSBarStyle? setAppPrivacyWebNavigationBarStyle;
+  iOSStatusBarStyle? setAppPrivacyWebPreferredStatusBarStyle;
 
   /// 协议页导航栏样式
+  iOSBarStyle? setAppPrivacyWebNavigationBarStyle;
+
 
   ///协议页导航栏其他属性
   String? setAppPrivacyWebNavigationTintColor;
   String? setAppPrivacyWebNavigationBarTintColor;
   String? setAppPrivacyWebNavigationBackgroundImage;
 
+  // ignore: slash_for_doc_comments
   /**UINavigationBarMetrics*/
 //  @property (nonatomic,strong)NSNumber * clAppPrivacyWebNavigationBarMetrics;
   String? setAppPrivacyWebNavigationShadowImage;
 
-//运营商品牌标签("中国**提供认证服务")，不得隐藏
+//运营商品牌标签("中国**提供认证服务")
+  /// slogan文字字体大小
   num? setSloganTextSize;
 
-  /// slogan文字字体大小
+  /// slogan文字字体是否加粗
   bool? setSloganTextBold;
 
-  /// slogan文字字体是否加粗
+  /// slogan文字颜色
   String? setSloganTextColor;
 
-  /// slogan文字颜色
+  /// slogan文字对齐方式
   iOSTextAlignment? setSloganTextAlignment;
 
-  /// slogan文字对齐方式
+  /// slogan是否隐藏
+  bool? setSloganTextHidden;
+
 
 //供应商品牌标签("创蓝253提供认技术支持")
+  /// slogan文字字体大小
   num? setShanYanSloganTextSize;
 
-  /// slogan文字字体大小
+  /// slogan文字字体是否加粗
   bool? setShanYanSloganTextBold;
 
-  /// slogan文字字体是否加粗
+  /// slogan文字颜色
   String? setShanYanSloganTextColor;
 
-  /// slogan文字颜色
+  /// slogan文字对齐方式
   iOSTextAlignment? setShanYanSloganTextAlignment;
 
-  /// slogan文字对齐方式
+  /// slogan是否隐藏
   bool? setShanYanSloganHidden;
 
-  /// slogan是否隐藏
 
 /*CheckBox
  *协议勾选框，默认选中且在协议前显示
  *可在sdk_oauth.bundle中替换checkBox_unSelected、checkBox_selected图片
  *也可以通过属性设置选中和未选择图片
  **/
+  /// 协议勾选框（默认显示,放置在协议之前）BOOL
   bool? setCheckBoxHidden;
 
-  /// 协议勾选框（默认显示,放置在协议之前）BOOL
+  /// 协议勾选框默认值（默认选中）BOOL
   bool? setPrivacyState;
 
-  /// 协议勾选框默认值（默认选中）BOOL
-
-  List<num>? setCheckBoxWH;
 
   /// 协议勾选框 宽高 eg. [40,40]
-  List<num>? setCheckBoxImageEdgeInsets;
+  List<num>? setCheckBoxWH;
 
   /// 协议勾选框 UIButton.image图片缩进,eg. [2, 2, 2, 2]
+  List<num>? setCheckBoxImageEdgeInsets;
 
-  bool? setCheckBoxVerticalAlignmentToAppPrivacyTop;
 
   /// 设置是否CheckBox顶部与隐私协议控件顶部对齐
-  bool? setCheckBoxVerticalAlignmentToAppPrivacyCenterY;
+  bool? setCheckBoxVerticalAlignmentToAppPrivacyTop;
 
   /// 设置是否CheckBox顶部与隐私协议控件竖向中心对齐，!!!与setCheckBoxVerticalAlignmentToAppPrivacyTop 同时只需设置一个
+  bool? setCheckBoxVerticalAlignmentToAppPrivacyCenterY;
 
-  String? setUncheckedImgPath;
 
   /// 协议勾选框 非选中状态图片
-  String? setCheckedImgPath;
+  String? setUncheckedImgPath;
 
   /// 协议勾选框 选中状态图片
+  String? setCheckedImgPath;
+
 
   /**授权页自定义 "请勾选协议"提示框
       - containerView为loading的全屏蒙版view
@@ -521,27 +529,27 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,copy)void(^checkBoxTipView)(UIView * containerView);
 
 /*Loading*/
+  /// Loading 大小
   List<num>? setLoadingSize;
 
-  /// Loading 大小
-
-  num? setLoadingCornerRadius;
 
   /// Loading 圆角
-  String? setLoadingBackgroundColor;
+  num? setLoadingCornerRadius;
 
   /// Loading 背景色
+  String? setLoadingBackgroundColor;
+
 
   /**UIActivityIndicatorViewStyle eg.@(UIActivityIndicatorViewStyleWhiteLarge)*/
 //  @property (nonatomic,strong) NSNumber *clLoadingIndicatorStyle;
 
+  /// Loading Indicator渲染色
   String? setLoadingTintColor;
 
-  /// Loading Indicator渲染色
-
-  List<ShanYanCustomWidgetIOS>? widgets;
 
   ///自定义控件
+  List<ShanYanCustomWidgetIOS>? widgets;
+
 
   /**授权页自定义Loading
       - containerView为loading的全屏蒙版view
@@ -557,9 +565,9 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,copy)void(^customPrivacyAlertView)(UIViewController * authPageVC);
 
 //横竖屏
+  /// 是否支持自动旋转
   bool? setShouldAutorotate;
 
-  /// 是否支持自动旋转
 
 /*支持方向
  - 如果设置只支持竖屏，只需配置竖屏布局layOutPortrait
@@ -568,20 +576,20 @@ class ShanYanUIConfigIOS {
  */
   iOSInterfaceOrientationMask? supportedInterfaceOrientations;
 
+  /// 默认方向
   iOSInterfaceOrientation? preferredInterfaceOrientationForPresentation;
 
-  /// 默认方向
-
-  bool? setAuthTypeUseWindow;
 
   /// 以窗口方式显示
-  num? setAuthWindowCornerRadius;
+  bool? setAuthTypeUseWindow;
 
   /// 窗口圆角
+  num? setAuthWindowCornerRadius;
 
-  iOSModalTransitionStyle? setAuthWindowModalTransitionStyle;
 
   /// 系统自带的弹出动画
+  iOSModalTransitionStyle? setAuthWindowModalTransitionStyle;
+
 
 /* UIModalPresentationStyle
  * 若使用窗口模式，请设置为UIModalPresentationOverFullScreen 或不设置
@@ -591,12 +599,12 @@ class ShanYanUIConfigIOS {
  * eg. @(UIModalPresentationOverFullScreen)
  */
 
+  /// 授权页弹出样式
   iOSModalPresentationStyle? setAuthWindowModalPresentationStyle;
 
-  /// 授权页弹出样式
+  /// 协议页弹出样式。当授权页使用窗口模式时，协议页强制使用模态弹出，此时此属性有效
   iOSModalPresentationStyle? setAppPrivacyWebModalPresentationStyle;
 
-  /// 协议页弹出样式。当授权页使用窗口模式时，协议页强制使用模态弹出，此时此属性有效
 
 /* UIUserInterfaceStyle
  * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
@@ -606,20 +614,20 @@ class ShanYanUIConfigIOS {
 /*授权页 UIUserInterfaceStyle,默认:UIUserInterfaceStyleLight,eg. @(UIUserInterfaceStyleLight)*/
   iOSUserInterfaceStyle? setAuthWindowOverrideUserInterfaceStyle;
 
+  /// 授权页面present弹出时animate动画设置，默认带动画
   bool? setAuthWindowPresentingAnimate;
 
-  /// 授权页面present弹出时animate动画设置，默认带动画
 
   /**弹窗的MaskLayer，用于自定义窗口形状*/
 //  @property (nonatomic,strong) CALayer * clAuthWindowMaskLayer;
 
   //布局设置
+  /// 横屏下使用的布局
   ClOrientationLayOutIOS _layOutPortrait = new ClOrientationLayOutIOS();
 
-  /// 横屏下使用的布局
+  /// 竖屏下使用的布局(不需要则不设置)
   ClOrientationLayOutIOS _layOutLandscape = new ClOrientationLayOutIOS();
 
-  /// 竖屏下使用的布局(不需要则不设置)
 
   // ignore: unnecessary_getters_setters,
   set layOutPortrait(ClOrientationLayOutIOS layOutPortrait) => _layOutPortrait;
@@ -893,6 +901,7 @@ class ShanYanCustomWidgetLayout {
   int height = 0; // 自定义控件高度，单位dp
   ShanYanCustomWidgetLayoutType type; //自定义控件类型，目前只支持 textView,button
   ShanYanCustomWidgetLayout(
+      // ignore: invalid_required_positional_param
       @required this.widgetLayoutName, @required this.type) {
     this.widgetLayoutName = widgetLayoutName;
     this.type = type;
@@ -913,6 +922,7 @@ class ConfigPrivacyBean {
   String? color = ""; //协议字体颜色
   String? midStr = "、"; //协议中间文字描述
   String? title = ""; //协议页标题
+  // ignore: invalid_required_positional_param
   ConfigPrivacyBean(@required this.name, @required this.url) {
     this.name = name;
     this.url = url;
@@ -956,6 +966,7 @@ class ShanYanCustomWidget {
   ShanYanCustomWidgetType? type; //自定义控件类型，目前只支持 textView,button
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 
+  // ignore: invalid_required_positional_param
   ShanYanCustomWidget(@required this.widgetId, @required this.type) {
     this.widgetId = widgetId;
     this.type = type;
@@ -997,6 +1008,7 @@ class ShanYanCustomWidgetIOS {
       navPosition; //如需添加到导航栏，请设置控件位置（左或右，导航栏按钮仅支持自定义width、height）
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 
+  // ignore: invalid_required_positional_param
   ShanYanCustomWidgetIOS(@required this.widgetId, @required this.type) {
     this.widgetId = widgetId;
     this.type = type;

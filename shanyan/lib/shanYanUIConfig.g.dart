@@ -99,6 +99,9 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
         json['setAppPrivacyNormalDesTextFourth'] as String?
     ..setAppPrivacyNormalDesTextLast =
         json['setAppPrivacyNormalDesTextLast'] as String?
+    ..morePrivacy = (json['morePrivacy'] as List<dynamic>?)
+        ?.map((e) => ConfigPrivacyBean.fromJson(e as Map<String, dynamic>))
+        .toList()
     ..setCheckBoxTipMsg = json['setCheckBoxTipMsg'] as String?
     ..setCheckBoxTipDisable = json['setCheckBoxTipDisable'] as bool?
     ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool?
@@ -123,6 +126,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setSloganTextColor = json['setSloganTextColor'] as String?
     ..setSloganTextAlignment = _$enumDecodeNullable(
         _$iOSTextAlignmentEnumMap, json['setSloganTextAlignment'])
+    ..setSloganTextHidden = json['setSloganTextHidden'] as bool?
     ..setShanYanSloganTextSize = json['setShanYanSloganTextSize'] as num?
     ..setShanYanSloganTextBold = json['setShanYanSloganTextBold'] as bool?
     ..setShanYanSloganTextColor = json['setShanYanSloganTextColor'] as String?
@@ -259,6 +263,8 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
       instance.setAppPrivacyNormalDesTextFourth);
   writeNotNull('setAppPrivacyNormalDesTextLast',
       instance.setAppPrivacyNormalDesTextLast);
+  writeNotNull(
+      'morePrivacy', instance.morePrivacy?.map((e) => e.toJson()).toList());
   writeNotNull('setCheckBoxTipMsg', instance.setCheckBoxTipMsg);
   writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
   writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
@@ -285,6 +291,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setSloganTextColor', instance.setSloganTextColor);
   writeNotNull('setSloganTextAlignment',
       _$iOSTextAlignmentEnumMap[instance.setSloganTextAlignment]);
+  writeNotNull('setSloganTextHidden', instance.setSloganTextHidden);
   writeNotNull('setShanYanSloganTextSize', instance.setShanYanSloganTextSize);
   writeNotNull('setShanYanSloganTextBold', instance.setShanYanSloganTextBold);
   writeNotNull('setShanYanSloganTextColor', instance.setShanYanSloganTextColor);

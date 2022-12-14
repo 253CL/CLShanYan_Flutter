@@ -24,12 +24,16 @@
     ]
   },
   "pod_target_xcconfig": {
-    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+    "DEFINES_MODULE": "YES",
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386, arm64"
   },
   "user_target_xcconfig": {
     "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
   },
   "platforms": {
-    "ios": "8.0"
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
   }
 }

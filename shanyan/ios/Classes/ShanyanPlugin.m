@@ -28,8 +28,8 @@
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"shanyan"
-            binaryMessenger:[registrar messenger]];
+                                     methodChannelWithName:@"shanyan"
+                                     binaryMessenger:[registrar messenger]];
     ShanyanPlugin* instance = [[ShanyanPlugin alloc] init];
     instance.channel = channel;
     instance.registrar = registrar;
@@ -37,46 +37,63 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  } else if ([@"init" isEqualToString:call.method]){
-      [self init:call complete:result];
-  }else if ([@"getPhoneInfo" isEqualToString:call.method]){
-      [self preGetPhonenumber:result];
-  }else if ([@"openLoginAuth" isEqualToString:call.method]){
-      [self quickAuthLoginWithConfigure:call.arguments complete:result];
-  }else if ([@"setActionListener" isEqualToString:call.method]){
-      [self setActionListener];
-  }else if ([@"startAuthentication" isEqualToString:call.method]){
-      [self startAuthentication:result];
-  }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
-      [self finishAuthControllerCompletion:result];
-  }else if ([@"setLoadingVisibility" isEqualToString:call.method]){
-      [self setLoadingVisibility:call];
-  }else if ([@"setCheckBoxValue" isEqualToString:call.method]){
-      [self setCheckBoxValue:call];
-  }else if ([@"clearScripCache" isEqualToString:call.method]){
-      [self clearScripCache];
-  }
-  else {
-    result(FlutterMethodNotImplemented);
-  }
+    if ([@"getPlatformVersion" isEqualToString:call.method]) {
+        result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+    } else if ([@"init" isEqualToString:call.method]){
+        [self init:call complete:result];
+    }else if ([@"getPhoneInfo" isEqualToString:call.method]){
+        [self preGetPhonenumber:result];
+    }else if ([@"openLoginAuth" isEqualToString:call.method]){
+        [self quickAuthLoginWithConfigure:call.arguments complete:result];
+    }else if ([@"setActionListener" isEqualToString:call.method]){
+        [self setActionListener];
+    }else if ([@"startAuthentication" isEqualToString:call.method]){
+        [self startAuthentication:result];
+    }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
+        [self finishAuthControllerCompletion:result];
+    }else if ([@"setLoadingVisibility" isEqualToString:call.method]){
+        [self setLoadingVisibility:call];
+    }else if ([@"setCheckBoxValue" isEqualToString:call.method]){
+        [self setCheckBoxValue:call];
+    }else if ([@"clearScripCache" isEqualToString:call.method]){
+        [self clearScripCache];
+    }else if ([@"performLoginClick" isEqualToString:call.method]){
+        [self loginBtnClick];
+    }else if ([@"setTimeOutForPreLogin" isEqualToString:call.method]){
+        [self setPreGetPhonenumberTimeOut:call];
+    }else if ([@"setInitDebug" isEqualToString:call.method]){
+        [self printConsoleEnable:call];
+    }else if ([@"getIEnable" isEqualToString:call.method]){
+        [self getIEnable:call];
+    }
+    else {
+        result(FlutterMethodNotImplemented);
+    }
+}
 
+- (void)getIEnable:(FlutterMethodCall*)call{
+    NSDictionary* argv = call.arguments;
+    if (argv != nil && [argv isKindOfClass:[NSDictionary class]]) {
+        [CLShanYanSDKManager forbiddenNonessentialIp:![argv[@"iEnable"] boolValue]];
+    }
+}
 
-    
-//    else if ([@"setCustomInterface" isEqualToString:call.method]){
-//        [self setCustomInterface:result];
-//    }else if ([@"openLoginAuthListener" isEqualToString:call.method]){
-//        [self openLoginAuthListener:result];
-//    }else if ([@"oneKeyLoginListener" isEqualToString:call.method]){
-//        [self oneKeyLoginListener:result];
-//    }else if ([@"quickAuthLoginWithConfigure" isEqualToString:call.method]){
-//        [self quickAuthLoginWithConfigure:call.arguments];
-//    }else if ([@"finishAuthControllerCompletion" isEqualToString:call.method]){
-//        [self finishAuthControllerCompletion:result];
-//    }else if ([@"startAuthentication" isEqualToString:call.method]){
-//        [self startAuthentication:result];
-//    }
+- (void)printConsoleEnable:(FlutterMethodCall*)call{
+    NSDictionary* argv = call.arguments;
+    if (argv != nil && [argv isKindOfClass:[NSDictionary class]]) {
+        [CLShanYanSDKManager printConsoleEnable:[argv[@"initDebug"] boolValue]];
+    }
+}
+
+- (void)setPreGetPhonenumberTimeOut:(FlutterMethodCall*)call{
+    NSDictionary* argv = call.arguments;
+    if (argv != nil && [argv isKindOfClass:[NSDictionary class]]) {
+        [CLShanYanSDKManager setPreGetPhonenumberTimeOut:[argv[@"timeOut"] floatValue]];
+    }
+}
+
+-(void)loginBtnClick {
+    [CLShanYanSDKManager loginBtnClick];
 }
 
 - (void)clearScripCache {
@@ -117,7 +134,6 @@
 }
 
 - (void)init:(FlutterMethodCall*)call complete:(FlutterResult)complete{
-    
     NSDictionary * argv = call.arguments;
     if (argv == nil || ![argv isKindOfClass:[NSDictionary class]]) {
         if (complete) {
@@ -130,7 +146,7 @@
     }
     
     NSString * appId = argv[@"appId"];
-
+    
     [CLShanYanSDKManager initWithAppId:appId complete:^(CLCompleteResult * _Nonnull completeResult) {
         
         if (complete) {
@@ -142,9 +158,6 @@
 - (void)preGetPhonenumber:(FlutterResult)complete{
     
     [CLShanYanSDKManager preGetPhonenumber:^(CLCompleteResult * _Nonnull completeResult) {
-        
-        NSLog(@"%@",completeResult.message);
-        
         if (complete) {
             complete([ShanyanPlugin completeResultToJson:completeResult]);
         }
@@ -153,29 +166,26 @@
 
 -(void)quickAuthLoginWithConfigure:(NSDictionary *)clUIConfigure complete:(FlutterResult)complete{
     
-     CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
-     baseUIConfigure.viewController = [self findVisibleVC];
+    CLUIConfigure * baseUIConfigure = [self configureWithConfig:clUIConfigure];
+    baseUIConfigure.viewController = [self findVisibleVC];
     
     __weak typeof(self) weakSelf = self;
     
     [CLShanYanSDKManager setCLShanYanSDKManagerDelegate:self];
-     [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
-         
-        NSLog(@"%@",completeResult.message);
-         
+    [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
         if (complete) {
             complete([ShanyanPlugin completeResultToJson:completeResult]);
         }
-
-     } oneKeyLoginListener:^(CLCompleteResult * _Nonnull completeResult) {
-         
+        
+    } oneKeyLoginListener:^(CLCompleteResult * _Nonnull completeResult) {
+        
         __strong typeof(weakSelf) strongSelf = weakSelf;
-
-         //一键登录回调
-         if (strongSelf.channel) {
-             [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
-         }
-     }];
+        
+        //一键登录回调
+        if (strongSelf.channel) {
+            [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
+        }
+    }];
 }
 
 +(NSString * )dictToJson:(NSDictionary *)input{
@@ -193,13 +203,13 @@
         }else{
             keyString = [NSString stringWithFormat:@"%@",key];
         }
-
+        
         if ([obj isKindOfClass:[NSString class]]) {
             valueString = obj;
         }else{
             valueString = [NSString stringWithFormat:@"%@",obj];
         }
-
+        
         [dict setObject:valueString forKey:keyString];
     }];
     jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
@@ -208,7 +218,7 @@
     }
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     return jsonString;
-
+    
 }
 
 - (void)tap{ }
@@ -216,11 +226,11 @@
     if (size == nil) {
         return nil;
     }
-//    NSString * fontName = @"PingFang-SC-Medium";
-//    if (name) {
-//        fontName = fontName;
-//    }
-    BOOL blod = isBlod ? isBlod.boolValue : false;
+    //    NSString * fontName = @"PingFang-SC-Medium";
+    //    if (name) {
+    //        fontName = fontName;
+    //    }
+    BOOL blod = isBlod!=nil ? isBlod.boolValue : false;
     if (blod) {
         return [UIFont boldSystemFontOfSize:size.floatValue];
     }else{
@@ -240,14 +250,14 @@
     }
     @try {
         NSString *colorString = [[hexString stringByReplacingOccurrencesOfString:@"#" withString:@""] uppercaseString];
-         CGFloat alpha, red, blue, green;
-         switch ([colorString length]) {
-             case 3: // #RGB
-                 alpha = 1.0f;
-                 red   = [self colorComponentFrom: colorString start: 0 length: 1];
-                 green = [self colorComponentFrom: colorString start: 1 length: 1];
-                 blue  = [self colorComponentFrom: colorString start: 2 length: 1];
-                 break;
+        CGFloat alpha, red, blue, green;
+        switch ([colorString length]) {
+            case 3: // #RGB
+                alpha = 1.0f;
+                red   = [self colorComponentFrom: colorString start: 0 length: 1];
+                green = [self colorComponentFrom: colorString start: 1 length: 1];
+                blue  = [self colorComponentFrom: colorString start: 2 length: 1];
+                break;
             case 4: // #ARGB
                 alpha = [self colorComponentFrom: colorString start: 0 length: 1];
                 red   = [self colorComponentFrom: colorString start: 1 length: 1];
@@ -329,7 +339,7 @@
 
 -(CLUIConfigure *)configureWithConfig:(NSDictionary *)configureDic{
     CLUIConfigure * baseConfigure = [CLUIConfigure new];
-
+    
     @try {
         NSNumber * isFinish = configureDic[@"isFinish"];
         {
@@ -343,7 +353,7 @@
         }
         NSNumber * setPreferredStatusBarStyle = configureDic[@"setPreferredStatusBarStyle"];
         {
-            if (setPreferredStatusBarStyle) {
+            if (setPreferredStatusBarStyle!=nil) {
                 switch (setPreferredStatusBarStyle.intValue) {
                     case 0: default:
                         baseConfigure.clPreferredStatusBarStyle = @(UIStatusBarStyleDefault);
@@ -352,10 +362,10 @@
                         baseConfigure.clPreferredStatusBarStyle = @(UIStatusBarStyleLightContent);
                         break;
                     case 2:
-                        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                        if (@available(iOS 13.0, *)) {
                             baseConfigure.clPreferredStatusBarStyle = @(UIStatusBarStyleDarkContent);
                         }
-                    break;
+                        break;
                 }
             }
         };
@@ -369,7 +379,7 @@
         }
         NSNumber * setNavigationBarStyle = configureDic[@"setNavigationBarStyle"];
         {
-            if (setNavigationBarStyle) {
+            if (setNavigationBarStyle!=nil) {
                 switch (setNavigationBarStyle.intValue) {
                     case 0: default:
                         baseConfigure.clNavigationBarStyle = @(UIBarStyleDefault);
@@ -400,8 +410,8 @@
             baseConfigure.clNavigationAttributesTitleText = [[NSAttributedString alloc]initWithString:setNavText attributes:attributes];
         }
         
-        UIBarButtonItem * clNavigationRightControl;
-        UIBarButtonItem * clNavigationLeftControl;
+        // UIBarButtonItem * clNavigationRightControl;
+        // UIBarButtonItem * clNavigationLeftControl;
         
         NSString   * clNavigationBackBtnImage = configureDic[@"setNavReturnImgPath"];
         if (clNavigationBackBtnImage) {
@@ -412,7 +422,7 @@
         {
             baseConfigure.clNavigationBackBtnHidden = clNavigationBackBtnHidden;
         }
-        NSValue * clNavBackBtnImageInsets;
+        // NSValue * clNavBackBtnImageInsets;
         NSNumber * clNavBackBtnAlimentRight = configureDic[@"setNavBackBtnAlimentRight"];
         {
             baseConfigure.clNavBackBtnAlimentRight = clNavBackBtnAlimentRight;
@@ -469,14 +479,14 @@
         NSNumber   * clPhoneNumberFont = configureDic[@"setNumberSize"];
         NSNumber * setNumberBold = configureDic[@"setNumberBold"];
         {
-            if (clPhoneNumberFont) {
+            if (clPhoneNumberFont!=nil) {
                 baseConfigure.clPhoneNumberFont = [ShanyanPlugin fontWithSize:clPhoneNumberFont blod:setNumberBold name:nil];
             }
         };
         NSNumber * clPhoneNumberTextAlignment = configureDic[@"clPhoneNumberTextAlignment"];
         {
             //0: center 1: left 2: right
-            if (clPhoneNumberTextAlignment) {
+            if (clPhoneNumberTextAlignment!=nil) {
                 switch (clPhoneNumberTextAlignment.integerValue) {
                     case 0:default:
                         baseConfigure.clPhoneNumberTextAlignment = @(NSTextAlignmentCenter);
@@ -506,7 +516,7 @@
         NSNumber   * setLoginBtnTextSize = configureDic[@"setLoginBtnTextSize"];
         NSNumber * setLoginBtnTextBold = configureDic[@"setLoginBtnTextBold"];
         {
-            if (setLoginBtnTextSize) {
+            if (setLoginBtnTextSize!=nil) {
                 baseConfigure.clLoginBtnTextFont = [ShanyanPlugin fontWithSize:setLoginBtnTextSize blod:setLoginBtnTextBold name:nil];
             }
         }
@@ -517,7 +527,7 @@
                 baseConfigure.clLoginBtnBgColor = [ShanyanPlugin colorWithHexStr:clLoginBtnBgColor];
             }
         }
-
+        
         /**按钮背景图片*/
         NSString  * clLoginBtnNormalBgImage = configureDic[@"setLoginBtnNormalBgImage"];
         if (clLoginBtnNormalBgImage) {
@@ -569,7 +579,7 @@
         NSNumber   * setPrivacyTextSize = configureDic[@"setPrivacyTextSize"];
         NSNumber * setPrivacyTextBold = configureDic[@"setPrivacyTextBold"];
         {
-            if (setPrivacyTextSize) {
+            if (setPrivacyTextSize!=nil) {
                 baseConfigure.clAppPrivacyTextFont = [ShanyanPlugin fontWithSize:setPrivacyTextSize blod:setPrivacyTextBold name:nil];
             }
         };
@@ -577,7 +587,7 @@
         NSNumber * clAppPrivacyTextAlignment = configureDic[@"setAppPrivacyTextAlignment"];;
         {
             //0: center 1: left 2: right
-            if (clAppPrivacyTextAlignment) {
+            if (clAppPrivacyTextAlignment!=nil) {
                 switch (clAppPrivacyTextAlignment.integerValue) {
                     case 0:default:
                         baseConfigure.clAppPrivacyTextAlignment = @(NSTextAlignmentCenter);
@@ -602,12 +612,12 @@
         {
             baseConfigure.clAppPrivacyLineSpacing = clAppPrivacyLineSpacing;
         };
-//        NSNumber* clAppPrivacyLineFragmentPadding = configureDic[@"setAppPrivacyLineFragmentPadding"];
-//        {
-//            if (clAppPrivacyLineFragmentPadding) {
-//                baseConfigure.clAppPrivacyLineFragmentPadding = clAppPrivacyLineFragmentPadding;
-//            }
-//        }
+        //        NSNumber* clAppPrivacyLineFragmentPadding = configureDic[@"setAppPrivacyLineFragmentPadding"];
+        //        {
+        //            if (clAppPrivacyLineFragmentPadding) {
+        //                baseConfigure.clAppPrivacyLineFragmentPadding = clAppPrivacyLineFragmentPadding;
+        //            }
+        //        }
         /**是否需要sizeToFit,设置后与宽高约束的冲突请自行考虑 BOOL eg.@(YES)*/
         NSNumber* clAppPrivacyNeedSizeToFit = configureDic[@"setAppPrivacyNeedSizeToFit"];;
         {
@@ -641,9 +651,9 @@
             }
         };
         /*
-        *隐私条款三:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
-        *@[NSSting,NSURL];
-        */
+         *隐私条款三:需同时设置Name和UrlString eg.@[@"条款一名称",条款一URL]
+         *@[NSSting,NSURL];
+         */
         NSArray * clAppPrivacyThird = configureDic[@"setAppPrivacyThird"];
         {
             if (clAppPrivacyThird && clAppPrivacyThird.count == 2) {
@@ -651,7 +661,7 @@
             }
         };
         
-
+        
         /*
          隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth
          **/
@@ -683,9 +693,22 @@
         
         NSNumber * setOperatorPrivacyAtLast = configureDic[@"setOperatorPrivacyAtLast"];
         {
-            if (setOperatorPrivacyAtLast) {
+            if (setOperatorPrivacyAtLast!=nil) {
                 baseConfigure.clOperatorPrivacyAtLast = setOperatorPrivacyAtLast;
             }
+        }
+        
+        NSArray * morePrivacyArr = configureDic[@"morePrivacy"];
+        if(morePrivacyArr && morePrivacyArr.count>0) {
+            NSMutableArray *priArr = [NSMutableArray arrayWithCapacity:0];
+            for (NSDictionary *itemDic in morePrivacyArr) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:3];
+                dic[@"decollator"] = itemDic[@"midStr"]?:@"";
+                dic[@"privacyName"] = itemDic[@"name"]?:@"";
+                dic[@"privacyURL"] = itemDic[@"url"]?:@"";
+                [priArr addObject:dic];
+            }
+            baseConfigure.clAppMorePrivacyArray = priArr;
         }
         
         NSString *clCheckBoxTipMsg = configureDic[@"setCheckBoxTipMsg"];
@@ -698,11 +721,11 @@
         };
         
         /**用户隐私协议WEB页面导航栏标题 默认显示用户条款名称*/
-        NSAttributedString * clAppPrivacyWebAttributesTitle;
+        // NSAttributedString * clAppPrivacyWebAttributesTitle;
         /**运营商隐私协议WEB页面导航栏标题 默认显示运营商条款名称*/
-        NSAttributedString * clAppPrivacyWebNormalAttributesTitle;
+        // NSAttributedString * clAppPrivacyWebNormalAttributesTitle;
         
-//        NSString * setPrivacyNavText = configureDic[@"setPrivacyNavText"];
+        //        NSString * setPrivacyNavText = configureDic[@"setPrivacyNavText"];
         NSString * setPrivacyNavTextColor = configureDic[@"setPrivacyNavTextColor"];
         NSNumber * setPrivacyNavTextSize = configureDic[@"setPrivacyNavTextSize"];
         {
@@ -725,8 +748,8 @@
         
         NSNumber * setAppPrivacyWebPreferredStatusBarStyle = configureDic[@"setAppPrivacyWebPreferredStatusBarStyle"];
         {
-            if (setAppPrivacyWebPreferredStatusBarStyle) {
-                if (setPreferredStatusBarStyle) {
+            if (setAppPrivacyWebPreferredStatusBarStyle!=nil) {
+                if (setPreferredStatusBarStyle!=nil) {
                     switch (setPreferredStatusBarStyle.intValue) {
                         case 0: default:
                             baseConfigure.clAppPrivacyWebPreferredStatusBarStyle = @(UIStatusBarStyleDefault);
@@ -735,10 +758,10 @@
                             baseConfigure.clAppPrivacyWebPreferredStatusBarStyle = @(UIStatusBarStyleLightContent);
                             break;
                         case 2:
-                            if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                            if (@available(iOS 13.0, *)) {
                                 baseConfigure.clAppPrivacyWebPreferredStatusBarStyle = @(UIStatusBarStyleDarkContent);
                             }
-                        break;
+                            break;
                     }
                 }
             }
@@ -746,7 +769,7 @@
         
         NSNumber * setAppPrivacyWebNavigationBarStyle = configureDic[@"setAppPrivacyWebNavigationBarStyle"];
         {
-            if (setAppPrivacyWebNavigationBarStyle) {
+            if (setAppPrivacyWebNavigationBarStyle!=nil) {
                 switch (setAppPrivacyWebNavigationBarStyle.intValue) {
                     case 0: default:
                         baseConfigure.clAppPrivacyWebNavigationBarStyle = @(UIBarStyleDefault);
@@ -757,7 +780,7 @@
                 }
             }
         }
-
+        
         NSString * setAppPrivacyWebNavigationTintColor = configureDic[@"setAppPrivacyWebNavigationTintColor"];
         {
             if (setAppPrivacyWebNavigationTintColor) {
@@ -786,7 +809,7 @@
         NSNumber   * setSloganTextSize = configureDic[@"setSloganTextSize"];
         NSNumber * setSloganTextBold = configureDic[@"setSloganTextBold"];
         {
-            if (setSloganTextSize) {
+            if (setSloganTextSize!=nil) {
                 baseConfigure.clSloganTextFont = [ShanyanPlugin fontWithSize:setSloganTextSize blod:setSloganTextBold name:nil];
             }
         };;
@@ -801,7 +824,7 @@
         NSNumber * clSlogaTextAlignment = configureDic[@"setSloganTextAlignment"];;
         {
             //0: center 1: left 2: right
-            if (clSlogaTextAlignment) {
+            if (clSlogaTextAlignment!=nil) {
                 switch (clSlogaTextAlignment.integerValue) {
                     case 0:default:
                         baseConfigure.clSlogaTextAlignment = @(NSTextAlignmentCenter);
@@ -816,6 +839,13 @@
             }
         };
         
+        NSNumber * setSloganTextHidden = configureDic[@"setSloganTextHidden"];
+        {
+            if (setSloganTextHidden!=nil) {
+                baseConfigure.clSloganTextHidden = setSloganTextHidden;
+            }
+        }
+        
         /*ShanyanSLOGAN
          注： 运营商品牌标签("创蓝253提供认证服务")，不得隐藏
          **/
@@ -823,7 +853,7 @@
         NSNumber   * setShanYanSloganTextSize = configureDic[@"setShanYanSloganTextSize"];
         NSNumber * setShanYanSloganTextBold = configureDic[@"setShanYanSloganTextBold"];
         {
-            if (setShanYanSloganTextSize) {
+            if (setShanYanSloganTextSize!=nil) {
                 baseConfigure.clShanYanSloganTextFont = [ShanyanPlugin fontWithSize:setShanYanSloganTextSize blod:setShanYanSloganTextBold name:nil];
             }
         };;
@@ -838,7 +868,7 @@
         NSNumber * setShanYanSlogaTextAlignment = configureDic[@"setShanYanSloganTextAlignment"];;
         {
             //0: center 1: left 2: right
-            if (setShanYanSlogaTextAlignment) {
+            if (setShanYanSlogaTextAlignment!=nil) {
                 switch (setShanYanSlogaTextAlignment.integerValue) {
                     case 0:default:
                         baseConfigure.clShanYanSloganTextAlignment = @(NSTextAlignmentCenter);
@@ -855,7 +885,7 @@
         
         NSNumber * setShanYanSloganHidden = configureDic[@"setShanYanSloganHidden"];
         {
-            if (setShanYanSloganHidden) {
+            if (setShanYanSloganHidden!=nil) {
                 baseConfigure.clShanYanSloganHidden = setShanYanSloganHidden;
             }
         }
@@ -939,10 +969,10 @@
             }
         };
         /**UIActivityIndicatorViewStyle eg.@(UIActivityIndicatorViewStyleWhiteLarge)*/
-    //    NSNumber *clLoadingIndicatorStyle = configureDic[@"clLoadingIndicatorStyle"];
-    //    {
-    //        baseConfigure.clLoadingIndicatorStyle = clLoadingIndicatorStyle;
-    //    };
+        //    NSNumber *clLoadingIndicatorStyle = configureDic[@"clLoadingIndicatorStyle"];
+        //    {
+        //        baseConfigure.clLoadingIndicatorStyle = clLoadingIndicatorStyle;
+        //    };
         baseConfigure.clLoadingIndicatorStyle = @(UIActivityIndicatorViewStyleWhite);
         
         /**Loading Indicator渲染色 UIColor eg.[UIColor greenColor]; */
@@ -975,7 +1005,7 @@
              * 5:UIInterfaceOrientationMaskAll
              * 6:UIInterfaceOrientationMaskAllButUpsideDown
              * */
-            if (supportedInterfaceOrientations) {
+            if (supportedInterfaceOrientations!=nil) {
                 switch (supportedInterfaceOrientations.integerValue) {
                     case 0:
                         baseConfigure.supportedInterfaceOrientations = @(UIInterfaceOrientationMaskPortrait);
@@ -1014,7 +1044,7 @@
              * 3:UIInterfaceOrientationLandscapeRight
              * */
             //偏好方向默认Portrait preferredInterfaceOrientationForPresentation: Number(5),
-            if (preferredInterfaceOrientationForPresentation) {
+            if (preferredInterfaceOrientationForPresentation!=nil) {
                 switch (preferredInterfaceOrientationForPresentation.integerValue) {
                     case 0:
                         baseConfigure.preferredInterfaceOrientationForPresentation = @(UIInterfaceOrientationPortrait);
@@ -1055,7 +1085,7 @@
          */
         NSNumber * clAuthWindowModalTransitionStyle = configureDic[@"setAuthWindowModalTransitionStyle"];
         {
-            if (clAuthWindowModalTransitionStyle) {
+            if (clAuthWindowModalTransitionStyle!=nil) {
                 switch (clAuthWindowModalTransitionStyle.intValue) {
                     case 0: default:
                         baseConfigure.clAuthWindowModalTransitionStyle = @(UIModalTransitionStyleCoverVertical);
@@ -1072,7 +1102,7 @@
         
         NSNumber * setAuthWindowModalPresentationStyle = configureDic[@"setAuthWindowModalPresentationStyle"];
         {
-            if (setAuthWindowModalPresentationStyle) {
+            if (setAuthWindowModalPresentationStyle!=nil) {
                 switch (setAuthWindowModalPresentationStyle.intValue) {
                     case 0: default:
                         baseConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationFullScreen);
@@ -1081,7 +1111,7 @@
                         baseConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationOverFullScreen);
                         break;
                     case 2:
-                        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                        if (@available(iOS 13.0, *)) {
                             baseConfigure.clAuthWindowModalPresentationStyle = @(UIModalPresentationAutomatic);
                         }
                         break;
@@ -1090,7 +1120,7 @@
         };
         NSNumber * setAppPrivacyWebModalPresentationStyle = configureDic[@"setAppPrivacyWebModalPresentationStyle"];
         {
-            if (setAppPrivacyWebModalPresentationStyle) {
+            if (setAppPrivacyWebModalPresentationStyle!=nil) {
                 switch (setAppPrivacyWebModalPresentationStyle.intValue) {
                     case 0: default:
                         baseConfigure.clAppPrivacyWebModalPresentationStyle = @(UIModalPresentationFullScreen);
@@ -1099,7 +1129,7 @@
                         baseConfigure.clAppPrivacyWebModalPresentationStyle = @(UIModalPresentationOverFullScreen);
                         break;
                     case 2:
-                        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+                        if (@available(iOS 13.0, *)) {
                             baseConfigure.clAppPrivacyWebModalPresentationStyle = @(UIModalPresentationAutomatic);
                         }
                         break;
@@ -1109,8 +1139,8 @@
         
         NSNumber * setAuthWindowOverrideUserInterfaceStyle = configureDic[@"setAuthWindowOverrideUserInterfaceStyle"];
         {
-            if (setAuthWindowOverrideUserInterfaceStyle) {
-                if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+            if (setAuthWindowOverrideUserInterfaceStyle!=nil) {
+                if (@available(iOS 13.0, *)) {
                     switch (setAuthWindowOverrideUserInterfaceStyle.integerValue) {
                         case 0: default:
                             baseConfigure.clAuthWindowOverrideUserInterfaceStyle = @(UIUserInterfaceStyleUnspecified);
@@ -1120,7 +1150,7 @@
                             break;
                         case 2:
                             baseConfigure.clAuthWindowOverrideUserInterfaceStyle = @(UIUserInterfaceStyleDark);
-                        break;
+                            break;
                     }
                 }
             }
@@ -1128,16 +1158,16 @@
         
         NSNumber * setAuthWindowPresentingAnimate = configureDic[@"setAuthWindowPresentingAnimate"];
         {
-            if (setAuthWindowPresentingAnimate) {
+            if (setAuthWindowPresentingAnimate!=nil) {
                 baseConfigure.clAuthWindowPresentingAnimate = setAuthWindowPresentingAnimate;
             }
         }
-
-    
+        
+        
         //自定义控件
         NSArray * clCustomViewArray = configureDic[@"widgets"];
         if (clCustomViewArray) {
-
+            
             //导航栏控件
             for (NSDictionary * clCustomDict in clCustomViewArray) {
                 NSString * type = clCustomDict[@"type"];
@@ -1157,20 +1187,20 @@
                         UILabel * customLabel = [CLShanYanCustomViewHelper customLabelWithCongifure:customViewConfigure];
                         
                         customLabel.widgetId = widgetId;
-
+                        
                         NSNumber * clLayoutWidth = clCustomDict[@"width"];
                         NSNumber * clLayoutHeight = clCustomDict[@"height"];
                         
                         customLabel.frame = CGRectMake(0, 0, clLayoutWidth.floatValue, clLayoutHeight.floatValue);
                         
                         [barButtonItem setCustomView:customLabel];
-                                                                
+                        
                     }else if ([type isEqualToString:@"ImageView"]){
                         
                         UIImageView * customImageView = [CLShanYanCustomViewHelper customImageViewWithCongifure:customViewConfigure];
                         
                         customImageView.widgetId = widgetId;
-
+                        
                         NSNumber * clLayoutWidth = clCustomDict[@"width"];
                         NSNumber * clLayoutHeight = clCustomDict[@"height"];
                         
@@ -1214,7 +1244,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     __strong typeof(weakSelf) strongSelf = weakSelf;
                     for (NSDictionary * clCustomDict in clCustomViewArray) {
-                                    
+                        
                         NSString * type = clCustomDict[@"type"];
                         NSString * navPosition = clCustomDict[@"navPosition"];
                         if ([navPosition isEqualToString:@"navleft"] || [navPosition isEqualToString:@"navright"]) {
@@ -1223,7 +1253,7 @@
                         }
                         NSString * widgetId = clCustomDict[@"widgetId"];
                         NSNumber * isFinish = clCustomDict[@"isFinish"];
-
+                        
                         CLShanYanCustomViewCongifure * customViewConfigure = [strongSelf customViewConfigureWithDict:clCustomDict];
                         
                         if ([type isEqualToString:@"TextView"]) {
@@ -1231,9 +1261,9 @@
                             UILabel * customLabel = [CLShanYanCustomViewHelper customLabelWithCongifure:customViewConfigure];
                             
                             customLabel.widgetId = widgetId;
-
+                            
                             [customAreaView addSubview:customLabel];
-                                                
+                            
                             [ShanyanPlugin setConstraint:customAreaView targetView:customLabel contrains:clCustomDict];
                             
                         }else if ([type isEqualToString:@"ImageView"]){
@@ -1241,9 +1271,9 @@
                             UIImageView * customImageView = [CLShanYanCustomViewHelper customImageViewWithCongifure:customViewConfigure];
                             
                             customImageView.widgetId = widgetId;
-
+                            
                             [customAreaView addSubview:customImageView];
-                                                
+                            
                             [ShanyanPlugin setConstraint:customAreaView targetView:customImageView contrains:clCustomDict];
                             
                         }else if ([type isEqualToString:@"Button"]){
@@ -1254,22 +1284,18 @@
                             custonButton.isFinish = isFinish.boolValue;
                             
                             [custonButton addTarget:strongSelf action:@selector(customButtonClicked:) forControlEvents:(UIControlEventTouchUpInside)];
-
+                            
                             [customAreaView addSubview:custonButton];
-                                                
+                            
                             [ShanyanPlugin setConstraint:customAreaView targetView:custonButton contrains:clCustomDict];
-
+                            
                         }
                     }
-                     NSString *clBackgroundVedio = configureDic[@"setAuthBGVedioPath"];
-                     if (clBackgroundVedio) {
-                        NSLog(@" === clBackgroundVedio %@", clBackgroundVedio);
+                    NSString *clBackgroundVedio = configureDic[@"setAuthBGVedioPath"];
+                    if (clBackgroundVedio) {
                         NSString *path = [[NSBundle mainBundle] pathForResource:clBackgroundVedio ofType:@"mp4"];
-                        NSLog(@" === path %@", path);
                         if (path) {
-
                             NSURL *url = [NSURL fileURLWithPath:path];
-                                NSLog(@" === url %@", url);
                             if (url) {
                                 PlayerView *playerView = [[PlayerView alloc] init];
                                 [customAreaView addSubview:playerView];
@@ -1282,12 +1308,12 @@
                                 right.active = YES;
                                 NSLayoutConstraint * bottom = [NSLayoutConstraint constraintWithItem:playerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:customAreaView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.];
                                 bottom.active = YES;
-                               [customAreaView updateConstraintsIfNeeded];
-                               [customAreaView sendSubviewToBack:playerView];
-
+                                [customAreaView updateConstraintsIfNeeded];
+                                [customAreaView sendSubviewToBack:playerView];
+                                
                                 AVPlayerItem *playeItem = [[AVPlayerItem alloc] initWithURL:url];
                                 AVPlayer *player = [AVPlayer playerWithPlayerItem:playeItem];
-
+                                
                                 AVPlayerLayer *playerLayer = (AVPlayerLayer *)playerView.layer;
                                 playerLayer.player = player;
                                 playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -1297,28 +1323,28 @@
                                     [player seekToTime:time];
                                     [player play];
                                 }];
-                             }
+                            }
                         }
-
-                     }
+                        
+                    }
                 });
             };
         }
-
-         /**弹窗的MaskLayer，用于自定义窗口形状*/
-         CALayer * clAuthWindowMaskLayer;
-
-         NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"layOutPortrait"];
-         NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"layOutLandscape"];
-
-         if (clOrientationLayOutPortraitDict.count > 0) {
-             CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
-             baseConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
-         }
-         if (clOrientationLayOutLandscapeDict.count > 0) {
-             CLOrientationLayOut * clOrientationLayOutLandscape = [self clOrientationLayOutLandscapeWithConfigure:clOrientationLayOutLandscapeDict];
-             baseConfigure.clOrientationLayOutLandscape = clOrientationLayOutLandscape;
-         }
+        
+        /**弹窗的MaskLayer，用于自定义窗口形状*/
+        // CALayer * clAuthWindowMaskLayer;
+        
+        NSDictionary * clOrientationLayOutPortraitDict = configureDic[@"layOutPortrait"];
+        NSDictionary * clOrientationLayOutLandscapeDict = configureDic[@"layOutLandscape"];
+        
+        if (clOrientationLayOutPortraitDict.count > 0) {
+            CLOrientationLayOut * clOrientationLayOutPortrait = [self clOrientationLayOutPortraitWithConfigure:clOrientationLayOutPortraitDict];
+            baseConfigure.clOrientationLayOutPortrait = clOrientationLayOutPortrait;
+        }
+        if (clOrientationLayOutLandscapeDict.count > 0) {
+            CLOrientationLayOut * clOrientationLayOutLandscape = [self clOrientationLayOutLandscapeWithConfigure:clOrientationLayOutLandscapeDict];
+            baseConfigure.clOrientationLayOutLandscape = clOrientationLayOutLandscape;
+        }
     } @catch (NSException *exception) {
         NSLog(@"%@",exception.userInfo);
     }
@@ -1335,7 +1361,7 @@
         [self.channel invokeMethod:@"onReceiveClickWidgetEvent" arguments:result];
     }
     
-
+    
     if (sender.isFinish) {
         [CLShanYanSDKManager finishAuthControllerCompletion:nil];
     }
@@ -1346,10 +1372,10 @@
     if (clCustomDict == nil) {
         return nil;
     }
-
+    
     @try {
-            CLShanYanCustomViewCongifure * customViewConfigure = [[CLShanYanCustomViewCongifure alloc]init];
-            
+        CLShanYanCustomViewCongifure * customViewConfigure = [[CLShanYanCustomViewCongifure alloc]init];
+        
         //    NSString * widgetId = clCustomDict[@"widgetId"];
         ////    customViewConfigure.widgetId = widgetId;
         //
@@ -1357,79 +1383,79 @@
         //    if (isFinish) {
         ////        customViewConfigure.isFinish = isFinish.boolValue;
         //    }
-            
-            /**文字颜色*/
-            UIColor  * clTextColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"textColor"]];
-            if (clTextColor) {
-                customViewConfigure.button_textColor = clTextColor;
-                customViewConfigure.label_textColor = clTextColor;
-            }
-            NSNumber   * textFont = clCustomDict[@"textFont"];
-            if (textFont) {
-                customViewConfigure.button_titleLabelFont = [UIFont systemFontOfSize:textFont.floatValue];
-                customViewConfigure.label_font = [UIFont systemFontOfSize:textFont.floatValue];
-            }
-            NSString * textContent = clCustomDict[@"textContent"];
-            if (textContent) {
-                customViewConfigure.button_textContent = textContent;
-                customViewConfigure.label_text = textContent;
-            }
-            
-            NSNumber * numberOfLines = clCustomDict[@"numberOfLines"];
-            if (customViewConfigure) {
-                customViewConfigure.button_numberOfLines = numberOfLines;
-                customViewConfigure.label_numberOfLines = numberOfLines;
-            }
-            
-            NSString * clButtonImage = clCustomDict[@"image"];
-            if (clButtonImage) {
-                //UIButton
-                customViewConfigure.button_image = [UIImage imageNamed:clButtonImage];
-                //UIImageView
-                customViewConfigure.imageView_image = [UIImage imageNamed:clButtonImage];
-            }
-            
-            
-            NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImgPath"];
-            if (clButtonBackgroundImage) {
-                customViewConfigure.button_backgroundImage = [UIImage imageNamed:clButtonBackgroundImage];
-            }
-
-            
-            //UIView通用
-            UIColor * backgroundColor = [ShanyanPlugin colorWithHexStr: clCustomDict[@"backgroundColor"]];
-            if (backgroundColor) {
-                customViewConfigure.backgroundColor = backgroundColor;
-            }
-            
-            //UILabel
-            NSNumber * textAlignment = clCustomDict[@"textAlignment"];
-            if (textAlignment) {
-                customViewConfigure.label_textAlignment = textAlignment;
-            }
         
-            //CALayer通用
-            NSNumber * cornerRadius = clCustomDict[@"cornerRadius"];
-//            NSNumber * masksToBounds =  clCustomDict[@"masksToBounds"];
-            if (cornerRadius) {
-                customViewConfigure.layer_cornerRadius = cornerRadius;
-                customViewConfigure.layer_masksToBounds = @(YES);
-            }
-            UIColor * borderColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"borderColor"]];
-            if (borderColor) {
-                customViewConfigure.layer_borderColor = borderColor.CGColor;
-                customViewConfigure.layer_masksToBounds = @(YES);
-            }
-                
-            NSNumber * borderWidth = clCustomDict[@"borderWidth"];
-            if (borderWidth) {
-                customViewConfigure.layer_borderWidth = borderWidth;
-                customViewConfigure.layer_masksToBounds = @(YES);
-            }
+        /**文字颜色*/
+        UIColor  * clTextColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"textColor"]];
+        if (clTextColor) {
+            customViewConfigure.button_textColor = clTextColor;
+            customViewConfigure.label_textColor = clTextColor;
+        }
+        NSNumber   * textFont = clCustomDict[@"textFont"];
+        if (textFont!=nil) {
+            customViewConfigure.button_titleLabelFont = [UIFont systemFontOfSize:textFont.floatValue];
+            customViewConfigure.label_font = [UIFont systemFontOfSize:textFont.floatValue];
+        }
+        NSString * textContent = clCustomDict[@"textContent"];
+        if (textContent) {
+            customViewConfigure.button_textContent = textContent;
+            customViewConfigure.label_text = textContent;
+        }
         
-            
-            
-            return customViewConfigure;
+        NSNumber * numberOfLines = clCustomDict[@"numberOfLines"];
+        if (customViewConfigure) {
+            customViewConfigure.button_numberOfLines = numberOfLines;
+            customViewConfigure.label_numberOfLines = numberOfLines;
+        }
+        
+        NSString * clButtonImage = clCustomDict[@"image"];
+        if (clButtonImage) {
+            //UIButton
+            customViewConfigure.button_image = [UIImage imageNamed:clButtonImage];
+            //UIImageView
+            customViewConfigure.imageView_image = [UIImage imageNamed:clButtonImage];
+        }
+        
+        
+        NSString * clButtonBackgroundImage = clCustomDict[@"backgroundImgPath"];
+        if (clButtonBackgroundImage) {
+            customViewConfigure.button_backgroundImage = [UIImage imageNamed:clButtonBackgroundImage];
+        }
+        
+        
+        //UIView通用
+        UIColor * backgroundColor = [ShanyanPlugin colorWithHexStr: clCustomDict[@"backgroundColor"]];
+        if (backgroundColor) {
+            customViewConfigure.backgroundColor = backgroundColor;
+        }
+        
+        //UILabel
+        NSNumber * textAlignment = clCustomDict[@"textAlignment"];
+        if (textAlignment!=nil) {
+            customViewConfigure.label_textAlignment = textAlignment;
+        }
+        
+        //CALayer通用
+        NSNumber * cornerRadius = clCustomDict[@"cornerRadius"];
+        //            NSNumber * masksToBounds =  clCustomDict[@"masksToBounds"];
+        if (cornerRadius!=nil) {
+            customViewConfigure.layer_cornerRadius = cornerRadius;
+            customViewConfigure.layer_masksToBounds = @(YES);
+        }
+        UIColor * borderColor = [ShanyanPlugin colorWithHexStr:clCustomDict[@"borderColor"]];
+        if (borderColor) {
+            customViewConfigure.layer_borderColor = borderColor.CGColor;
+            customViewConfigure.layer_masksToBounds = @(YES);
+        }
+        
+        NSNumber * borderWidth = clCustomDict[@"borderWidth"];
+        if (borderWidth!=nil) {
+            customViewConfigure.layer_borderWidth = borderWidth;
+            customViewConfigure.layer_masksToBounds = @(YES);
+        }
+        
+        
+        
+        return customViewConfigure;
     } @catch (NSException *exception) {
         
     }
@@ -1521,7 +1547,7 @@
     clOrientationLayOutPortrait.clLayoutLogoHeight = clLayoutLogoHeight;
     clOrientationLayOutPortrait.clLayoutLogoCenterX = clLayoutLogoCenterX;
     clOrientationLayOutPortrait.clLayoutLogoCenterY = clLayoutLogoCenterY;
-
+    
     /**手机号显示控件*/
     //layout 约束均相对vc.view
     NSNumber * clLayoutPhoneLeft    = layOutPortraitDict[@"setNumFieldLeft"];;
@@ -1752,7 +1778,7 @@
     clOrientationLayOutLandscape.clLayoutSloganHeight = clLayoutSloganHeight;
     clOrientationLayOutLandscape.clLayoutSloganCenterX = clLayoutSloganCenterX;
     clOrientationLayOutLandscape.clLayoutSloganCenterY = clLayoutSloganCenterY;
-
+    
     /**窗口模式*/
     /**窗口中心：CGPoint X Y*/
     NSNumber * clAuthWindowOrientationCenterX = layOutLandscapeDict[@"clAuthWindowOrientationCenterX"];
@@ -1783,10 +1809,10 @@
 - (void)finishAuthControllerCompletion:(FlutterResult)completion{
     [CLShanYanSDKManager finishAuthControllerAnimated:YES
                                            Completion:^{
-                                               if (completion) {
-                                                   completion(nil);
-                                               }
-                                           }];
+        if (completion) {
+            completion(nil);
+        }
+    }];
 }
 
 

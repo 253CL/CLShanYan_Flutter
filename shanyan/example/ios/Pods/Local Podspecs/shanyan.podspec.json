@@ -1,6 +1,6 @@
 {
   "name": "shanyan",
-  "version": "2.3.3.7",
+  "version": "2.3.4.0",
   "summary": "闪验SDK Flutter plguin.",
   "description": "A new Flutter plugin.",
   "homepage": "https://shanyan.253.com",
@@ -24,7 +24,7 @@
   "ios": {
     "dependencies": {
       "CL_ShanYanSDK": [
-        "~> 2.3.5.3"
+        "~> 2.3.5.8"
       ]
     }
   },

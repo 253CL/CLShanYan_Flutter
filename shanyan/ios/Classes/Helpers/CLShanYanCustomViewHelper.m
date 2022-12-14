@@ -65,18 +65,18 @@
         [customButton.titleLabel setFont:self.button_titleLabelFont];
     }
     
-    if (self.button_enabled) {
+    if (self.button_enabled!=nil) {
         [customButton setEnabled:self.button_enabled.boolValue];
     }
     
-    if (self.button_numberOfLines) {
+    if (self.button_numberOfLines!=nil) {
         [customButton.titleLabel setNumberOfLines:self.button_numberOfLines.integerValue];
     }
     
-    if (self.button_contentVerticalAlignment) {
+    if (self.button_contentVerticalAlignment!=nil) {
         [customButton setContentVerticalAlignment:self.button_contentVerticalAlignment.integerValue];
     }
-    if (self.button_contentHorizontalAlignment) {
+    if (self.button_contentHorizontalAlignment!=nil) {
         [customButton setContentHorizontalAlignment:self.button_contentHorizontalAlignment.integerValue];
     }
 }
@@ -95,10 +95,10 @@
     if (self.label_textColor) {
         [customLabel setTextColor:self.label_textColor];
     }
-    if (self.label_numberOfLines) {
+    if (self.label_numberOfLines!=nil) {
         [customLabel setNumberOfLines:self.label_numberOfLines.integerValue];
     }
-    if (self.label_textAlignment) {
+    if (self.label_textAlignment!=nil) {
         [customLabel setTextAlignment:self.label_textAlignment.integerValue];
     }
 }
@@ -112,35 +112,35 @@
 
 //UIView通用属性
 -(void)setCustonViewProperty:(UIView *)customView{
-    if (self.userInteractionEnabled) {
+    if (self.userInteractionEnabled!=nil) {
         [customView setUserInteractionEnabled:self.userInteractionEnabled.boolValue];
     }
-    if (self.tag) {
+    if (self.tag!=nil) {
         [customView setTag:self.tag.integerValue];
     }
-    if (self.contentMode) {
+    if (self.contentMode!=nil) {
         [customView setContentMode:self.contentMode.integerValue];
     }
     if (self.backgroundColor) {
         [customView setBackgroundColor:self.backgroundColor];
     }
-    if (self.clipsToBounds) {
+    if (self.clipsToBounds!=nil) {
         [customView setClipsToBounds:self.clipsToBounds.integerValue];
     }
-    if (self.hidden) {
+    if (self.hidden!=nil) {
         [customView setHidden:self.hidden.boolValue];
     }
-    if (self.alpha) {
+    if (self.alpha!=nil) {
         [customView setAlpha:self.alpha.floatValue];
     }
 }
 //CALayer通用属性
 -(void)setCustonLayerProperty:(UIView *)customView{
-    if (self.layer_cornerRadius) {
+    if (self.layer_cornerRadius!=nil) {
         customView.layer.cornerRadius = self.layer_cornerRadius.floatValue;
     }
     
-    if (self.layer_borderWidth) {
+    if (self.layer_borderWidth!=nil) {
         customView.layer.borderWidth = self.layer_borderWidth.floatValue;
     }
     
@@ -149,7 +149,7 @@
         
     }
     
-    if (self.layer_masksToBounds) {
+    if (self.layer_masksToBounds!=nil) {
         customView.layer.masksToBounds = self.layer_masksToBounds.boolValue;
     }
 }

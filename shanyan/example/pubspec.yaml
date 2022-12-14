@@ -1,5 +1,6 @@
 name: shanyan_example
 description: Demonstrates how to use the shanyan plugin.
+version: 1.0.0
 publish_to: 'none'
 
 environment:

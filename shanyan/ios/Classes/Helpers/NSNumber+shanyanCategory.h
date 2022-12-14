@@ -10,7 +10,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSNumber (shanyanCategory)
--(instancetype)clShanYanNegative;//取负值
+
+/// 取负值
+-(nullable instancetype)clShanYanNegative;
+
 @end
 
 NS_ASSUME_NONNULL_END

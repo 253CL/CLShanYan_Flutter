@@ -10,12 +10,11 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface CLShanYanCustomViewCongifure : NSObject
 @property(nonatomic,weak)UIButton * customButton;
 @property(nonatomic,weak)UILabel * customLabel;
 @property(nonatomic,weak)UIImageView * customImageView;
-//@property(nonatomic,copy)NSString * widgetId;
-//@property(nonatomic,assign)BOOL isFinish;
 
 //CALayer
 @property NSNumber * layer_cornerRadius;
@@ -58,8 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //UIlabel
 @property(nullable, nonatomic,copy)   NSString           *label_text; // default is nil
-@property(null_resettable, nonatomic,strong) UIFont      *label_font UI_APPEARANCE_SELECTOR; // default is nil (system font 17 plain)
-@property(null_resettable, nonatomic,strong) UIColor     *label_textColor UI_APPEARANCE_SELECTOR; // default is labelColor
+@property(nullable, nonatomic,strong) UIFont      *label_font UI_APPEARANCE_SELECTOR; // default is nil (system font 17 plain)
+@property(nullable, nonatomic,strong) UIColor     *label_textColor UI_APPEARANCE_SELECTOR; // default is labelColor
 @property(nullable, nonatomic,strong) UIColor            *label_shadowColor UI_APPEARANCE_SELECTOR; // default is nil (no shadow)
 @property(nonatomic)        CGSize             label_shadowOffset UI_APPEARANCE_SELECTOR; // default is CGSizeMake(0, -1) -- a top shadow
 @property(nonatomic)        NSNumber *    label_textAlignment;   // default is NSTextAlignmentNatural (before iOS 9, the default was NSTextAlignmentLeft)
@@ -91,12 +90,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @interface CLShanYanCustomViewHelper : NSObject
 +(UIButton*)customButtonWithCongifure:(CLShanYanCustomViewCongifure *)customButtonCongifure;
 +(UILabel*)customLabelWithCongifure:(CLShanYanCustomViewCongifure *)customLabelCongifure;
 +(UIImageView*)customImageViewWithCongifure:(CLShanYanCustomViewCongifure *)customImageViewCongifure;
 
-+(UIColor *)rgbaToUIColor:(id)rgba;
++(nullable UIColor *)rgbaToUIColor:(id)rgba;
 @end
 
 NS_ASSUME_NONNULL_END

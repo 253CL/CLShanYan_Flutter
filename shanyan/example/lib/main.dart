@@ -1,11 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
-// import 'package:modal_progress_hud/modal_progress_hud.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -64,7 +59,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    oneKeyLoginManager.setDebug(true);
     String appId = "7I5nJT7h";
     if (Platform.isIOS) {
       appId = "7I5nJT7h";
@@ -85,17 +79,21 @@ class _MyAppState extends State<MyApp> {
         //初始化失败
       }
     });
-    oneKeyLoginManager
-        .getOperatorType()
-        .then((value) => print("getOperatorType===" + value));
-    oneKeyLoginManager
-        .getOperatorInfo()
-        .then((value) => print("getOperatorInfo===" + value));
-    oneKeyLoginManager
-        .setPrivacyOnClickListener((PrivacyOnClickEvent privacyOnclickEvent) {
-      Map map = privacyOnclickEvent.toMap();
-      print("setPrivacyOnClickListener===" + map.toString());
-    });
+
+    if(Platform.isAndroid) {
+      oneKeyLoginManager.setDebug(true);
+      oneKeyLoginManager
+          .getOperatorType()
+          .then((value) => print("getOperatorType===" + value));
+      oneKeyLoginManager
+          .getOperatorInfo()
+          .then((value) => print("getOperatorInfo===" + value));
+      oneKeyLoginManager
+          .setPrivacyOnClickListener((PrivacyOnClickEvent privacyOnclickEvent) {
+        Map map = privacyOnclickEvent.toMap();
+        print("setPrivacyOnClickListener===" + map.toString());
+      });
+    }
   }
 
   Future<void> getPhoneInfoPlatformState() async {
@@ -243,6 +241,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setLoginBtnTextBold = false;
     shanYanUIConfig.ios.setLoginBtnBgColor = "#0000ff";
 
+
 //    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
 //    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
 //    shanYanUIConfig.ios.setLoginBtnDisabledBgImage = "login_btn_normal";
@@ -371,9 +370,9 @@ class _MyAppState extends State<MyApp> {
 
     List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
 
-    final String btn_widgetId = "other_custom_button"; // 标识控件 id
+    final String btnWidgetId = "other_custom_button"; // 标识控件 id
     ShanYanCustomWidgetIOS buttonWidgetiOS =
-        ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidgetIOS(btnWidgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetiOS.textContent = "其他方式登录 >1";
     buttonWidgetiOS.centerY = 100;
     buttonWidgetiOS.centerX = 0;
@@ -389,10 +388,10 @@ class _MyAppState extends State<MyApp> {
 
     shanyanCustomWidgetIOS.add(buttonWidgetiOS);
 
-    final String nav_right_btn_widgetId =
+    final String navRightBtnWidgetId =
         "other_custom_nav_right_button"; // 标识控件 id
     ShanYanCustomWidgetIOS navRightButtonWidgetiOS = ShanYanCustomWidgetIOS(
-        nav_right_btn_widgetId, ShanYanCustomWidgetType.Button);
+        navRightBtnWidgetId, ShanYanCustomWidgetType.Button);
     navRightButtonWidgetiOS.navPosition =
         ShanYanCustomWidgetiOSNavPosition.navright;
     navRightButtonWidgetiOS.textContent = "联系客服";
@@ -415,7 +414,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.setCheckBoxOffsetXY = [10, 5];
     shanYanUIConfig.androidPortrait.setLogBtnBackgroundColor="#ff0000";
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
-    String layout_name = "relative_item_view";
+    String layoutName = "relative_item_view";
     ConfigPrivacyBean configPrivacyBean1 = ConfigPrivacyBean("闪验测试1",
         "https://api.253.com/api_doc/yin-si-zheng-ce/wei-hu-wang-luo-an-quan-sheng-ming.html");
     configPrivacyBean1.color = "#aa00cc";
@@ -444,13 +443,13 @@ class _MyAppState extends State<MyApp> {
       "授权"
     ];
     ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
-        layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+        layoutName, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidget.top = 380;
     relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayout.add(relativeLayoutWidget);
     List<ShanYanCustomWidget> shanyanCustomWidgetAndroid = [];
     ShanYanCustomWidget buttonWidgetAndroid =
-        ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidget(btnWidgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetAndroid.textContent = "其他方式登录 >";
     buttonWidgetAndroid.top = 300;
     buttonWidgetAndroid.width = 150;
@@ -489,10 +488,10 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidLandscape.setLogBtnOffsetY = 120;
 
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayoutLand = [];
-    String layout_name_land = "relative_item_view";
+    String layoutNameLand = "relative_item_view";
     ShanYanCustomWidgetLayout relativeLayoutWidgetLand =
         ShanYanCustomWidgetLayout(
-            layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
+            layoutNameLand, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidgetLand.top = 200;
     relativeLayoutWidgetLand.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayoutLand.add(relativeLayoutWidgetLand);
@@ -693,9 +692,9 @@ class _MyAppState extends State<MyApp> {
 
     List<ShanYanCustomWidgetIOS> shanyanCustomWidgetIOS = [];
 
-    final String btn_widgetId = "other_custom_button"; // 标识控件 id
+    final String btnWidgetId = "other_custom_button"; // 标识控件 id
     ShanYanCustomWidgetIOS buttonWidgetiOS =
-        ShanYanCustomWidgetIOS(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidgetIOS(btnWidgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetiOS.textContent = "其他方式登录 >";
     buttonWidgetiOS.top = 140 + 20 + 10;
     buttonWidgetiOS.centerX = 0;
@@ -709,10 +708,10 @@ class _MyAppState extends State<MyApp> {
 
     shanyanCustomWidgetIOS.add(buttonWidgetiOS);
 
-    final String nav_right_btn_widgetId =
+    final String navRightBtnWidgetId =
         "other_custom_nav_right_button"; // 标识控件 id
     ShanYanCustomWidgetIOS navRightButtonWidgetiOS = ShanYanCustomWidgetIOS(
-        nav_right_btn_widgetId, ShanYanCustomWidgetType.Button);
+        navRightBtnWidgetId, ShanYanCustomWidgetType.Button);
     navRightButtonWidgetiOS.navPosition =
         ShanYanCustomWidgetiOSNavPosition.navright;
     navRightButtonWidgetiOS.textContent = "联系客服";
@@ -744,15 +743,15 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidPortrait.setLogBtnOffsetY = 130;
     shanYanUIConfig.androidPortrait.setAuthBGImgPath = "sysdk_login_bg";
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
-    String layout_name = "relative_item_view";
+    String layoutName = "relative_item_view";
     ShanYanCustomWidgetLayout relativeLayoutWidget = ShanYanCustomWidgetLayout(
-        layout_name, ShanYanCustomWidgetLayoutType.RelativeLayout);
+        layoutName, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidget.top = 270;
     relativeLayoutWidget.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayout.add(relativeLayoutWidget);
     List<ShanYanCustomWidget> shanyanCustomWidgetAndroid = [];
     ShanYanCustomWidget buttonWidgetAndroid =
-        ShanYanCustomWidget(btn_widgetId, ShanYanCustomWidgetType.Button);
+        ShanYanCustomWidget(btnWidgetId, ShanYanCustomWidgetType.Button);
     buttonWidgetAndroid.textContent = "其他方式登录 >";
     buttonWidgetAndroid.top = 200;
     buttonWidgetAndroid.width = 150;
@@ -782,10 +781,10 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.androidLandscape.setLogBtnOffsetY = 120;
 
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayoutLand = [];
-    String layout_name_land = "relative_item_view";
+    String layoutNameLand = "relative_item_view";
     ShanYanCustomWidgetLayout relativeLayoutWidgetLand =
         ShanYanCustomWidgetLayout(
-            layout_name_land, ShanYanCustomWidgetLayoutType.RelativeLayout);
+            layoutNameLand, ShanYanCustomWidgetLayoutType.RelativeLayout);
     relativeLayoutWidgetLand.top = 200;
     relativeLayoutWidgetLand.widgetLayoutId = ["weixin", "qq", "weibo"];
     shanYanCustomWidgetLayoutLand.add(relativeLayoutWidgetLand);
@@ -946,15 +945,19 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return new FlatButton(
+    return TextButton(
       onPressed: onPressed,
-      child: new Text("$title"),
-      color: Color(0xff585858),
-      highlightColor: Color(0xff888888),
-      splashColor: Color(0xff888888),
-      textColor: Colors.white,
-      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      child: Text("$title"),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith((states) {
+          if(states.contains(MaterialState.pressed)) {
+            return Color(0xff888888);
+          }
+          return Color(0xff585858);
+        }),
+        foregroundColor: MaterialStateProperty.all(Colors.white),
+        padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(10, 5, 10, 5)),
+      ),
     );
   }
 }

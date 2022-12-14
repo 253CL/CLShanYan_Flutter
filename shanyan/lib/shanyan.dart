@@ -47,88 +47,64 @@ class OneKeyLoginManager {
     _channel.invokeMethod("setDebugMode", {"debug": debug});
   }
 
-  /**
-   * 设置详细调试模式开关 Android
-   */
+  /// 设置详细调试模式开关 (Android + iOS)
   void setInitDebug(bool debug) {
     _channel.invokeMethod("setInitDebug", {"initDebug": debug});
   }
 
-  /**
-   * 设置预取号超时时间（单位：秒）
-   */
+  /// 设置预取号超时时间（单位：秒）(Android + iOS)
   void setTimeOutForPreLogin(int timeOut) {
     _channel.invokeMethod("setTimeOutForPreLogin", {"timeOut": timeOut});
   }
 
-  /**
-   * 设置是否获取OAID
-   */
+  /// 设置是否获取OAID
   void getOaidEnable(bool oaidEnable) {
     _channel.invokeMethod("getOaidEnable", {"oaidEnable": oaidEnable});
   }
 
-  /**
-   * 设置是否获取iccid
-   */
+  /// 设置是否获取iccid
   void getSinbEnable(bool sinbEnable) {
     _channel.invokeMethod("getSinbEnable", {"sinbEnable": sinbEnable});
   }
 
-  /**
-   * 设置是否获取IMSI
-   */
+  /// 设置是否获取IMSI
   void getSiEnable(bool sibEnable) {
     _channel.invokeMethod("getSiEnable", {"sibEnable": sibEnable});
   }
 
-  /**
-   * 设置是否获取IP
-   */
+  /// 设置是否获取IP(Android + iOS)
   void getIEnable(bool iEnable) {
     _channel.invokeMethod("getIEnable", {"iEnable": iEnable});
   }
 
-  /**
-   * 设置是否获取Mac地址
-   */
+  /// 设置是否获取Mac地址
   void getMaEnable(bool maEnable) {
     _channel.invokeMethod("getMaEnable", {"maEnable": maEnable});
   }
 
-  /**
-   * 设置是否获取IMEI
-   */
+  /// 设置是否获取IMEI
   void getImEnable(bool imEnable) {
     _channel.invokeMethod("getImEnable", {"imEnable": imEnable});
   }
 
-  /**
-   * 设置是否设置监听生命周期
-   */
+  /// 设置是否设置监听生命周期
   void setActivityLifecycleCallbacksEnable(bool enable) {
     _channel.invokeMethod("setActivityLifecycleCallbacksEnable",
         {"activityLifecycleCallbacksEnable": enable});
   }
 
-  /**
-   *设置是否判断方法是否在主进程调用
-   */
+  ///设置是否判断方法是否在主进程调用
   void checkProcessesEnable(bool enable) {
     _channel
         .invokeMethod("checkProcessesEnable", {"checkProcessesEnable": enable});
   }
 
-  /**
-   * 获取运营商类型
-   */
+  /// 获取运营商类型
   Future<String> getOperatorType() async {
     return await _channel.invokeMethod("getOperatorType");
   }
 
-  /**
-   * 获取运营商信息（协议名称、链接、运营商类型）
-   */
+  /// 获取运营商信息（协议名称、链接、运营商类型）
   Future<String> getOperatorInfo() async {
     return await _channel.invokeMethod("getOperatorInfo");
   }
@@ -222,23 +198,17 @@ class OneKeyLoginManager {
     _channel.invokeMethod("clearScripCache");
   }
 
-  /**
-   * 清理回调监听
-   */
+  /// 清理回调监听
   void removeAllListener() {
     _channel.invokeMethod("removeAllListener");
   }
 
-  /**
-   * 获取授权页协议勾选框CheckBox对象
-   */
+  /// 获取授权页协议勾选框CheckBox对象
   Future<Checkbox> getPrivacyCheckBox() async {
     return await _channel.invokeMethod("getPrivacyCheckBox");
   }
 
-  /**
-   * 触发登录按钮
-   */
+  /// 触发登录按钮(Android + iOS)
   void performLoginClick() {
     _channel.invokeMethod("performLoginClick");
   }
@@ -247,10 +217,10 @@ class OneKeyLoginManager {
   void setAuthThemeConfig({required ShanYanUIConfig uiConfig}) {
     shanYanUIConfig = uiConfig;
     if (Platform.isIOS) {
-      print("uiConfig====" + uiConfig.ios.toJson().toString());
+     // print("uiConfig====" + uiConfig.ios.toJson().toString());
     } else if (Platform.isAndroid) {
-      Map<String, dynamic> uiConfig_json = uiConfig.toJson();
-      _channel.invokeMethod("setAuthThemeConfig", uiConfig_json);
+      Map<String, dynamic> uiConfigJson = uiConfig.toJson();
+      _channel.invokeMethod("setAuthThemeConfig", uiConfigJson);
       print("uiConfig====" + uiConfig.androidLandscape.toJson().toString());
     }
   }
@@ -268,6 +238,7 @@ class OneKeyLoginManager {
         {
           String widgetId = call.arguments.cast<dynamic, dynamic>()['widgetId'];
           print("点击了：" + widgetId);
+          // ignore: unnecessary_null_comparison
           if (null != widgetId) {
             _eventHanders.shanYanWidgetEventListener?.call(widgetId);
           }
