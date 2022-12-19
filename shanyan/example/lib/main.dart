@@ -282,7 +282,7 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setAppPrivacyWebNavigationBarStyle =
         iOSBarStyle.styleDefault;
 
-//运营商品牌标签("中国**提供认证服务")，不得隐藏
+//运营商品牌标签("中国**提供认证服务")
     shanYanUIConfig.ios.setSloganTextSize = 11;
     shanYanUIConfig.ios.setSloganTextBold = false;
     shanYanUIConfig.ios.setSloganTextColor = "#CEBFFF";
