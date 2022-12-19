@@ -380,7 +380,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
 
     private void setInitDebug(MethodCall call) {
         boolean debug = call.argument("initDebug");
-        OneKeyLoginManager.getInstance().setDebug(debug);
+        OneKeyLoginManager.getInstance().setInitDebug(debug);
     }
 
     private void setAuthThemeConfig(MethodCall call, Result result) {
