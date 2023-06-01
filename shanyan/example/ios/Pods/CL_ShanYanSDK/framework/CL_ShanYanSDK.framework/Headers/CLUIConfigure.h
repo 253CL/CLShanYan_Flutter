@@ -12,7 +12,7 @@
 @class CLOrientationLayOut;
 NS_ASSUME_NONNULL_BEGIN
 
-/*⚠️⚠️ 注： 授权页一键登录按钮、运营商条款必须显示，不得隐藏，否则取号能力可能被运营商关闭 **/
+/**⚠️⚠️ 注： 授权页一键登录按钮、运营商条款必须显示，不得隐藏，否则取号能力可能被运营商关闭 */
 
 /// 授权页UI配置
 @interface CLUIConfigure : NSObject
@@ -178,11 +178,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic,strong) NSArray *clAppPrivacyThird;
 
-/*
+/**
  *用户自己隐私协议大于3条时，
- *可使用：@[@{@"decollator":@"、",
- *        @"privacyName":@"《自定义隐私协议》",
- *        @"privacyURL":@"https://"}
+ *可使用：@[@{@"decollator": @"、",               // 隐私协议拼接内容
+ *        @"lastDecollator": @"YES",            // 拼接内容是否放隐私条款后
+ *        @"privacyName": @"《自定义隐私协议》",   // 隐私条款名称
+ *        @"privacyURL": @"https://"}           // 隐私条款URL
  *       ];
  *ps：数组中字典的key不可更改
  */
@@ -311,14 +312,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSNumber *clLoadingIndicatorStyle;
 /// Loading Indicator渲染色 UIColor eg.[UIColor greenColor];
 @property(nonatomic,strong) UIColor *clLoadingTintColor;
-/**授权页自定义Loading
- - containerView为loading的全屏蒙版view
- - 请自行在containerView添加自定义loading
- - 设置block后，上述loading属性将无效
- */
+/// 授权页自定义Loading
+/// - containerView为loading的全屏蒙版view
+/// - 请自行在containerView添加自定义loading
+/// - 设置block后，上述loading属性将无效
 @property(nonatomic,copy)void(^loadingView)(UIView *containerView);
 
-// 添加自定义控件
+/**添加自定义控件*/
 /// 可设置背景色及添加控件
 @property(nonatomic,copy)void(^customAreaView)(UIView *customAreaView);
 /// 设置隐私协议弹窗
@@ -327,11 +327,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**横竖屏*/
 /// 是否支持自动旋转 BOOL
 @property(nonatomic,strong) NSNumber *shouldAutorotate;
-/*支持方向 UIInterfaceOrientationMask
- - 如果设置只支持竖屏，只需设置clOrientationLayOutPortrait竖屏布局对象
- - 如果设置只支持横屏，只需设置clOrientationLayOutLandscape横屏布局对象
- - 横竖屏均支持，需同时设置clOrientationLayOutPortrait和clOrientationLayOutLandscape
- */
+
+/// 支持方向 UIInterfaceOrientationMask
+/// - 如果设置只支持竖屏，只需设置clOrientationLayOutPortrait竖屏布局对象
+/// - 如果设置只支持横屏，只需设置clOrientationLayOutLandscape横屏布局对象
+/// - 横竖屏均支持，需同时设置clOrientationLayOutPortrait和clOrientationLayOutLandscape
 @property(nonatomic,strong) NSNumber *supportedInterfaceOrientations;
 /// 默认方向 UIInterfaceOrientation
 @property(nonatomic,strong) NSNumber *preferredInterfaceOrientationForPresentation;
@@ -343,11 +343,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 窗口圆角 float
 @property(nonatomic,strong) NSNumber *clAuthWindowCornerRadius;
 
-/**clAuthWindowModalTransitionStyle系统自带的弹出方式 仅支持以下三种
- UIModalTransitionStyleCoverVertical 底部弹出
- UIModalTransitionStyleCrossDissolve 淡入
- UIModalTransitionStyleFlipHorizontal 翻转显示
- */
+/// clAuthWindowModalTransitionStyle系统自带的弹出方式 仅支持以下三种
+/// - UIModalTransitionStyleCoverVertical 底部弹出
+/// - UIModalTransitionStyleCrossDissolve 淡入
+/// - UIModalTransitionStyleFlipHorizontal 翻转显示
 @property(nonatomic,strong) NSNumber *clAuthWindowModalTransitionStyle;
 
 /**UIModalPresentationStyle
@@ -376,7 +375,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 弹窗的MaskLayer，用于自定义窗口形状
 @property(nonatomic,strong) CALayer *clAuthWindowMaskLayer;
 
-//竖屏布局配置对象 -->创建一个布局对象，设置好控件约束属性值，再设置到此属性中
+/// 竖屏布局配置对象 -->创建一个布局对象，设置好控件约束属性值，再设置到此属性中
 /**竖屏：UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown
  *eg.   CLUIConfigure *baseUIConfigure = [CLUIConfigure new];
  *     CLOrientationLayOut *clOrientationLayOutPortrait = [CLOrientationLayOut new];
@@ -387,7 +386,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic,strong) CLOrientationLayOut *clOrientationLayOutPortrait;
 
-//横屏布局配置对象 -->创建一个布局对象，设置好控件约束属性值，再设置到此属性中
+/// 横屏布局配置对象 -->创建一个布局对象，设置好控件约束属性值，再设置到此属性中
 /**横屏：UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight
  *eg.   CLUIConfigure *baseUIConfigure = [CLUIConfigure new];
  *     CLOrientationLayOut *clOrientationLayOutLandscape = [CLOrientationLayOut new];

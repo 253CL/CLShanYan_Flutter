@@ -76,9 +76,9 @@
 
 /// 协议点击回调  （clAppPrivacyCustomWeb设置为YES时有效）
 /// 处理跳转自定义webview逻辑。如：[authPageVC.navigationController pushViewController:xxVC animated:YES];
-/// @param privacyName       协议名称
-/// @param URLString         协议链接
-/// @param authPageVC        导航控制器
+/// @param privacyName      协议名称
+/// @param URLString        协议链接
+/// @param authPageVC       导航控制器
 - (void)clShanYanPrivacyListener:(NSString *_Nonnull)privacyName
                       privacyURL:(NSString *_Nonnull)URLString
                         authPage:(UIViewController *_Nonnull)authPageVC;
@@ -118,10 +118,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setPreGetPhonenumberUseCacheIfNoCellularNetwork:(BOOL)isUseCache;
 
 /// 预取号
-///此调用将有助于提高闪验拉起授权页的速度和成功率
-///建议在一键登录前提前调用此方法，比如调一键登录的vc的viewdidload中
-///不建议在拉起授权页后调用
-///⚠️‼️以 if (completeResult.error == nil) 为判断成功的依据，而非返回码
+/// 此调用将有助于提高闪验拉起授权页的速度和成功率
+/// 建议在一键登录前调用此方法，比如调一键登录的vc的viewdidload中
+/// 不建议在拉起授权页后调用
+/// 以 if (completeResult.error == nil) 为判断成功的依据，而非返回码
 /// @param complete         回调block（⚠️在子线程中回调）
 + (void)preGetPhonenumber:(nullable CLComplete)complete;
 
@@ -140,9 +140,9 @@ NS_ASSUME_NONNULL_BEGIN
                 oneKeyLoginListener:(CLComplete)oneKeyLoginListener;
 
 /// 关闭授权页
-///注：若授权页未拉起或已经提前关闭，此方法调用无效果，complete不触发。内部实现为调用系统方法dismissViewcontroller:Complete
+/// 注：内部实现为调用系统方法dismissViewcontroller:complete； 若授权页未拉起或已关闭，此方法调用无效果
 /// @param flag             dismissViewcontroller`Animated, default is YES.
-/// @param completion       dismissViewcontroller`completion（⚠️在子线程中回调）
+/// @param completion       dismissViewcontroller`completion（⚠️在子线程中回调。）
 + (void)finishAuthControllerAnimated:(BOOL)flag
                           Completion:(void(^_Nullable)(void))completion;
 
@@ -178,15 +178,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)clearScripCache;
 
 /// 禁止日志上报获取IP（默认允许）
-/// @param forbidden YES:禁止 NO:允许
+/// @param forbidden        YES:禁止 NO:允许
 + (void)forbiddenNonessentialIp:(BOOL)forbidden;
 
 /// 禁止日志上报(默认开启)  此接口需要在初始化之前调用,否则配置不生效
 /// @param forbidden        YES:禁止上报 NO:允许上报
 + (void)forbiddenFullLogReport:(BOOL)forbidden;
-
-+ (void)sdkInit:(NSString *)appId
-       complete:(nullable CLComplete)complete DEPRECATED_MSG_ATTRIBUTE("Method deprecated. Use `initWithAppId: complete:`");
 
 /// 当前环境是否满足预取号
 + (BOOL)checkAuthEnable;

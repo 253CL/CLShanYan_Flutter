@@ -1,11 +1,11 @@
 PODS:
-  - CL_ShanYanSDK (2.3.5.9)
+  - CL_ShanYanSDK (2.3.6.1)
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - shanyan (2.3.4.1):
-    - CL_ShanYanSDK (~> 2.3.5.9)
+  - shanyan (2.3.4.2):
+    - CL_ShanYanSDK (~> 2.3.6.1)
     - Flutter
   - Toast (4.0.0)
 
@@ -28,12 +28,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shanyan/ios"
 
 SPEC CHECKSUMS:
-  CL_ShanYanSDK: 3ce7cdd0aae7666fb6303d164266e87190e622a2
+  CL_ShanYanSDK: b078ef09cd16b9e93448dd0ad5b264ec6d26b522
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
-  shanyan: 9efeb44e1d83e911d4596db159fb4afd6b90f3e4
+  fluttertoast: fafc4fa4d01a6a9e4f772ecd190ffa525e9e2d9c
+  shanyan: 77a4c983a4de94c8c8fe14df0152ed516b21c3ab
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
 PODFILE CHECKSUM: cbf008b6fa923145fab5f77d1fd79a6dc6fcbde1
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.0
