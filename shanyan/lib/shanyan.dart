@@ -203,10 +203,10 @@ class OneKeyLoginManager {
     _channel.invokeMethod("removeAllListener");
   }
 
-  /// 获取授权页协议勾选框CheckBox对象
-  Future<Checkbox> getPrivacyCheckBox() async {
-    return await _channel.invokeMethod("getPrivacyCheckBox");
-  }
+  // /// 获取授权页协议勾选框CheckBox对象
+  // Future<Checkbox> getPrivacyCheckBox() async {
+  //   return await _channel.invokeMethod("getPrivacyCheckBox");
+  // }
 
   /// 触发登录按钮(Android + iOS)
   void performLoginClick() {

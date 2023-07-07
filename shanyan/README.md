@@ -1,4 +1,4 @@
-# flutter 2.3.3 集成文档
+# flutter 2.3.4 集成文档
 
 注：「[插件示例代码地址](https://github.com/253CL/CLShanYan_Flutter)」<br />
 

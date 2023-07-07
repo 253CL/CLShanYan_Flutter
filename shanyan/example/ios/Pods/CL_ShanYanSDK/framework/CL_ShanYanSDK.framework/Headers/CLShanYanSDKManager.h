@@ -172,7 +172,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)printConsoleEnable:(BOOL)enable;
 
 /// 获取当前流量卡运营商，结果仅供参考（CTCC：电信、CMCC：移动、CUCC：联通、UNKNOW：未知）
-+ (NSString *)getOperatorType;
+/// 使用xcode14.3+在iOS16.4+不准确（用预取号返回值替代）
++ (NSString *)getOperatorType API_DEPRECATED("使用xcode14.3+在iOS16.4+不准确", ios(8.0, 16.4));
 
 /// 清除预取号缓存
 + (void)clearScripCache;
@@ -186,7 +187,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)forbiddenFullLogReport:(BOOL)forbidden;
 
 /// 当前环境是否满足预取号
-+ (BOOL)checkAuthEnable;
+/// 使用xcode14.3+在iOS16.4+不准确（用预取号返回值替代）
++ (BOOL)checkAuthEnable API_DEPRECATED("使用xcode14.3+在iOS16.4+不准确", ios(8.0, 16.4));
 
 /// 当前SIM卡数量
 + (NSInteger)currentSimCounts;
