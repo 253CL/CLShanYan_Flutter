@@ -1323,6 +1323,12 @@
                                     [player seekToTime:time];
                                     [player play];
                                 }];
+                                [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+                                    if(player) [player pause];
+                                }];
+                                [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+                                    if(player) [player play];
+                                }];
                             }
                         }
                         
