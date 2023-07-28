@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
     if (Platform.isIOS) {
       appId = "7I5nJT7h";
     } else if (Platform.isAndroid) {
-      appId = "loXN4jDs";
+      appId = "XUPwbkje";
     }
     //闪验SDK 初始化
     oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       oneKeyLoginManager.setDebug(true);
       oneKeyLoginManager
           .getOperatorType()
@@ -240,7 +240,6 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ios.setLoginBtnTextSize = 16;
     shanYanUIConfig.ios.setLoginBtnTextBold = false;
     shanYanUIConfig.ios.setLoginBtnBgColor = "#0000ff";
-
 
 //    shanYanUIConfig.ios.setLoginBtnNormalBgImage = "2-0btn_15";
 //    shanYanUIConfig.ios.setLoginBtnHightLightBgImage = "圆角矩形 2 拷贝";
@@ -408,11 +407,15 @@ class _MyAppState extends State<MyApp> {
 
     /*Android 页面样式具体设置*/
     shanYanUIConfig.androidPortrait.isFinish = true;
+    shanYanUIConfig.androidPortrait.setAuthBgVideoPath =
+        "login_demo_test_vedio";
+    //shanYanUIConfig.androidPortrait.setFitsSystemWindows = false;
+    //shanYanUIConfig.androidPortrait.setCheckBoxTipDisable = true;
     shanYanUIConfig.androidPortrait.setLogoImgPath = "sy_logo";
     shanYanUIConfig.androidPortrait.setPrivacyNavColor = "#aa00cc";
     shanYanUIConfig.androidPortrait.setPrivacyNavTextColor = "#00aacc";
     shanYanUIConfig.androidPortrait.setCheckBoxOffsetXY = [10, 5];
-    shanYanUIConfig.androidPortrait.setLogBtnBackgroundColor="#ff0000";
+    shanYanUIConfig.androidPortrait.setLogBtnBackgroundColor = "#ff0000";
     List<ShanYanCustomWidgetLayout> shanYanCustomWidgetLayout = [];
     String layoutName = "relative_item_view";
     ConfigPrivacyBean configPrivacyBean1 = ConfigPrivacyBean("闪验测试1",
@@ -950,7 +953,7 @@ class CustomButton extends StatelessWidget {
       child: Text("$title"),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
-          if(states.contains(MaterialState.pressed)) {
+          if (states.contains(MaterialState.pressed)) {
             return Color(0xff888888);
           }
           return Color(0xff585858);

@@ -40,6 +40,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setNavReturnImgPath = json['setNavReturnImgPath'] as String?
     ..setNavReturnImgHidden = json['setNavReturnImgHidden'] as bool?
     ..setBackPressedAvailable = json['setBackPressedAvailable'] as bool?
+    ..setFitsSystemWindows = json['setFitsSystemWindows'] as bool?
     ..setNavBackBtnAlimentRight = json['setNavBackBtnAlimentRight'] as bool?
     ..setNavigationBottomLineHidden =
         json['setNavigationBottomLineHidden'] as bool?
@@ -72,6 +73,7 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
         ?.map((e) => e as String)
         .toList()
     ..setPrivacyTextSize = json['setPrivacyTextSize'] as num?
+    ..setPrivacyWidth = json['setPrivacyWidth'] as num?
     ..setPrivacyTextBold = json['setPrivacyTextBold'] as bool?
     ..setAppPrivacyTextAlignment = _$enumDecodeNullable(
         _$iOSTextAlignmentEnumMap, json['setAppPrivacyTextAlignment'])
@@ -105,6 +107,9 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) {
     ..setCheckBoxTipMsg = json['setCheckBoxTipMsg'] as String?
     ..setCheckBoxTipDisable = json['setCheckBoxTipDisable'] as bool?
     ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool?
+    ..setPrivacyActivityEnabled = json['setPrivacyActivityEnabled'] as bool?
+    ..setPrivacyGravityHorizontalCenter =
+        json['setPrivacyGravityHorizontalCenter'] as bool?
     ..setPrivacyNavTextColor = json['setPrivacyNavTextColor'] as String?
     ..setPrivacyNavTextSize = json['setPrivacyNavTextSize'] as num?
     ..setPrivacyNavReturnImgPath = json['setPrivacyNavReturnImgPath'] as String?
@@ -210,6 +215,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
   writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
   writeNotNull('setBackPressedAvailable', instance.setBackPressedAvailable);
+  writeNotNull('setFitsSystemWindows', instance.setFitsSystemWindows);
   writeNotNull('setNavBackBtnAlimentRight', instance.setNavBackBtnAlimentRight);
   writeNotNull(
       'setNavigationBottomLineHidden', instance.setNavigationBottomLineHidden);
@@ -241,6 +247,7 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setLoginBtnBorderWidth', instance.setLoginBtnBorderWidth);
   writeNotNull('setAppPrivacyColor', instance.setAppPrivacyColor);
   writeNotNull('setPrivacyTextSize', instance.setPrivacyTextSize);
+  writeNotNull('setPrivacyWidth', instance.setPrivacyWidth);
   writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
   writeNotNull('setAppPrivacyTextAlignment',
       _$iOSTextAlignmentEnumMap[instance.setAppPrivacyTextAlignment]);
@@ -268,6 +275,9 @@ Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
   writeNotNull('setCheckBoxTipMsg', instance.setCheckBoxTipMsg);
   writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
   writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
+  writeNotNull('setPrivacyActivityEnabled', instance.setPrivacyActivityEnabled);
+  writeNotNull('setPrivacyGravityHorizontalCenter',
+      instance.setPrivacyGravityHorizontalCenter);
   writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
   writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);
   writeNotNull(
@@ -606,6 +616,7 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
     ..setNavReturnImgPath = json['setNavReturnImgPath'] as String?
     ..setNavReturnImgHidden = json['setNavReturnImgHidden'] as bool?
     ..setBackPressedAvailable = json['setBackPressedAvailable'] as bool?
+    ..setFitsSystemWindows = json['setFitsSystemWindows'] as bool?
     ..setAuthNavHidden = json['setAuthNavHidden'] as bool?
     ..setAuthNavTransparent = json['setAuthNavTransparent'] as bool?
     ..setNavTextBold = json['setNavTextBold'] as bool?
@@ -648,6 +659,7 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
         .toList()
     ..setPrivacySmhHidden = json['setPrivacySmhHidden'] as bool?
     ..setPrivacyTextSize = json['setPrivacyTextSize'] as int?
+    ..setPrivacyWidth = json['setPrivacyWidth'] as int?
     ..setAppPrivacyColor = (json['setAppPrivacyColor'] as List<dynamic>?)
         ?.map((e) => e as String)
         .toList()
@@ -668,9 +680,12 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
         ?.map((e) => e as String)
         .toList()
     ..setPrivacyTextBold = json['setPrivacyTextBold'] as bool?
+    ..setCheckBoxTipDisable = json['setCheckBoxTipDisable'] as bool?
     ..setPrivacyCustomToastText = json['setPrivacyCustomToastText'] as String?
     ..setPrivacyNameUnderline = json['setPrivacyNameUnderline'] as bool?
-    ..setOperatorPrivacyAtLast = json['setOperatorPrivacyAtLast'] as bool?
+    ..setPrivacyGravityHorizontalCenter =
+        json['setPrivacyGravityHorizontalCenter'] as bool?
+    ..setPrivacyActivityEnabled = json['setPrivacyActivityEnabled'] as bool?
     ..setSloganOffsetY = json['setSloganOffsetY'] as int?
     ..setSloganOffsetBottomY = json['setSloganOffsetBottomY'] as int?
     ..setSloganOffsetX = json['setSloganOffsetX'] as int?
@@ -759,6 +774,7 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
   writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
   writeNotNull('setBackPressedAvailable', instance.setBackPressedAvailable);
+  writeNotNull('setFitsSystemWindows', instance.setFitsSystemWindows);
   writeNotNull('setAuthNavHidden', instance.setAuthNavHidden);
   writeNotNull('setAuthNavTransparent', instance.setAuthNavTransparent);
   writeNotNull('setNavTextBold', instance.setNavTextBold);
@@ -795,6 +811,7 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull('setAppPrivacyThree', instance.setAppPrivacyThree);
   writeNotNull('setPrivacySmhHidden', instance.setPrivacySmhHidden);
   writeNotNull('setPrivacyTextSize', instance.setPrivacyTextSize);
+  writeNotNull('setPrivacyWidth', instance.setPrivacyWidth);
   writeNotNull('setAppPrivacyColor', instance.setAppPrivacyColor);
   writeNotNull(
       'setPrivacyOffsetGravityLeft', instance.setPrivacyOffsetGravityLeft);
@@ -807,9 +824,12 @@ Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
   writeNotNull('setCheckBoxMargin', instance.setCheckBoxMargin);
   writeNotNull('setPrivacyText', instance.setPrivacyText);
   writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
+  writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
   writeNotNull('setPrivacyCustomToastText', instance.setPrivacyCustomToastText);
   writeNotNull('setPrivacyNameUnderline', instance.setPrivacyNameUnderline);
-  writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
+  writeNotNull('setPrivacyGravityHorizontalCenter',
+      instance.setPrivacyGravityHorizontalCenter);
+  writeNotNull('setPrivacyActivityEnabled', instance.setPrivacyActivityEnabled);
   writeNotNull('setSloganOffsetY', instance.setSloganOffsetY);
   writeNotNull('setSloganOffsetBottomY', instance.setSloganOffsetBottomY);
   writeNotNull('setSloganOffsetX', instance.setSloganOffsetX);

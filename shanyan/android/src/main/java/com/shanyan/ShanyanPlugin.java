@@ -735,6 +735,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         Object setAuthNavTransparent = valueForKey(shanYanUIConfig, "setAuthNavTransparent");
         Object setNavTextBold = valueForKey(shanYanUIConfig, "setNavTextBold");
         Object setBackPressedAvailable = valueForKey(shanYanUIConfig, "setBackPressedAvailable");
+        Object setFitsSystemWindows = valueForKey(shanYanUIConfig, "setFitsSystemWindows");
 
 
         Object setLogoImgPath = valueForKey(shanYanUIConfig, "setLogoImgPath");
@@ -772,6 +773,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         Object setAppPrivacyThree = valueForKey(shanYanUIConfig, "setAppPrivacyThree");
         Object setPrivacySmhHidden = valueForKey(shanYanUIConfig, "setPrivacySmhHidden");
         Object setPrivacyTextSize = valueForKey(shanYanUIConfig, "setPrivacyTextSize");
+        Object setPrivacyWidth = valueForKey(shanYanUIConfig, "setPrivacyWidth");
         Object setAppPrivacyColor = valueForKey(shanYanUIConfig, "setAppPrivacyColor");
         Object setPrivacyOffsetBottomY = valueForKey(shanYanUIConfig, "setPrivacyOffsetBottomY");
         Object setPrivacyOffsetY = valueForKey(shanYanUIConfig, "setPrivacyOffsetY");
@@ -781,6 +783,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         Object setPrivacyOffsetGravityLeft = valueForKey(shanYanUIConfig, "setPrivacyOffsetGravityLeft");
         Object setPrivacyState = valueForKey(shanYanUIConfig, "setPrivacyState");
         Object setPrivacyActivityEnabled = valueForKey(shanYanUIConfig, "setPrivacyActivityEnabled");
+        Object setPrivacyGravityHorizontalCenter = valueForKey(shanYanUIConfig, "setPrivacyGravityHorizontalCenter");
         Object setUncheckedImgPath = valueForKey(shanYanUIConfig, "setUncheckedImgPath");
         Object setCheckedImgPath = valueForKey(shanYanUIConfig, "setCheckedImgPath");
         Object setCheckBoxHidden = valueForKey(shanYanUIConfig, "setCheckBoxHidden");
@@ -788,6 +791,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         Object setCheckBoxMargin = valueForKey(shanYanUIConfig, "setCheckBoxMargin");
         Object setPrivacyText = valueForKey(shanYanUIConfig, "setPrivacyText");
         Object setPrivacyTextBold = valueForKey(shanYanUIConfig, "setPrivacyTextBold");
+        Object setCheckBoxTipDisable = valueForKey(shanYanUIConfig, "setCheckBoxTipDisable");
         Object setPrivacyCustomToastText = valueForKey(shanYanUIConfig, "setPrivacyCustomToastText");
         Object setPrivacyNameUnderline = valueForKey(shanYanUIConfig, "setPrivacyNameUnderline");
         Object setOperatorPrivacyAtLast = valueForKey(shanYanUIConfig, "setOperatorPrivacyAtLast");
@@ -900,6 +904,9 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         }
         if (null != setBackPressedAvailable) {
             builder.setBackPressedAvailable((Boolean) setBackPressedAvailable);
+        }
+        if (null != setFitsSystemWindows) {
+            builder.setFitsSystemWindows((Boolean) setFitsSystemWindows);
         }
         if (null != setNavReturnBtnWidth) {
             builder.setNavReturnBtnWidth((Integer) setNavReturnBtnWidth);
@@ -1030,6 +1037,9 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         if (null != setPrivacyTextSize) {
             builder.setPrivacyTextSize((Integer) setPrivacyTextSize);
         }
+        if (null != setPrivacyWidth) {
+            builder.setPrivacyWidth((Integer) setPrivacyWidth);
+        }
         if (null != setAppPrivacyColor) {
             ArrayList<String> setAppPrivacyColorList = (ArrayList) setAppPrivacyColor;
             setAppPrivacyColorList.addAll(Arrays.asList("", ""));
@@ -1052,6 +1062,9 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         }
         if (null != setPrivacyActivityEnabled) {
             builder.setPrivacyActivityEnabled((Boolean) setPrivacyActivityEnabled);
+        }
+        if (null != setPrivacyGravityHorizontalCenter) {
+            builder.setPrivacyGravityHorizontalCenter((Boolean) setPrivacyGravityHorizontalCenter);
         }
         if (null != setUncheckedImgPath) {
             builder.setUncheckedImgPath(getDrawableByReflect(setUncheckedImgPath));
@@ -1085,6 +1098,9 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         }
         if (null != setPrivacyTextBold) {
             builder.setPrivacyTextBold((Boolean) setPrivacyTextBold);
+        }
+        if (null != setCheckBoxTipDisable) {
+            builder.setCheckBoxTipDisable((Boolean) setCheckBoxTipDisable);
         }
         if (null != setPrivacyCustomToastText) {
             builder.setPrivacyCustomToastText((String) setPrivacyCustomToastText);

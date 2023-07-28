@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "com.android.tools.build:gradle:4.1.0"
     }
 }
 
@@ -34,5 +34,5 @@ android {
     }
 }
 dependencies {
-    api files('libs/shanyan_sdk_v2.3.5.3.jar')
+    api files('libs/shanyan_sdk_v2.3.6.1_flutter.jar')
 }

@@ -141,6 +141,7 @@ class ShanYanUIConfig {
     -  List<String> setAppPrivacyThree; //设置开发者隐私条款3，包含两个参数：1.名称 2.URL
     -  bool setPrivacySmhHidden; //设置协议名称是否显示书名号《》，默认显示书名号（true：不显示；false：显示）
     -  int setPrivacyTextSize; //设置隐私栏字体大小
+    -  int setPrivacyWidth; //设置隐私栏宽度
     -  List<String> setAppPrivacyColor; //设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色
     -  int setPrivacyOffsetBottomY; //设置隐私条款相对于授权页面底部下边缘y偏移
     -  int setPrivacyOffsetY; //设置隐私条款相对于授权页面标题栏下边缘y偏移
@@ -206,28 +207,22 @@ class ShanYanUIConfigIOS {
   /// 授权页-背景视频
   String? setAuthBGVedioPath;
 
-
   /// 状态栏样式
   iOSStatusBarStyle? setPreferredStatusBarStyle;
 
-
   ///状态栏隐藏
   bool? setStatusBarHidden;
-
 
   //导航栏
 
   /// 导航栏 是否隐藏 BOOL default is NO
   bool? setAuthNavHidden;
 
-
   /// 导航栏样式
   iOSBarStyle? setNavigationBarStyle;
 
-
   /// 导航栏 背景透明 BOOL
   bool? setAuthNavTransparent;
-
 
   /// 导航栏标题*/
   String? setNavText; //设置导航栏标题文字
@@ -249,13 +244,14 @@ class ShanYanUIConfigIOS {
   /// 导航栏自带返回按钮隐藏，默认显示 BOOL
   bool? setBackPressedAvailable;
 
+  ///同系统 setFitsSystemWindows；视频背景需要伸入到状态栏时可以调用此方法
+  bool? setFitsSystemWindows;
 
   /// 返回按钮图片缩进 btn.imageInsets = UIEdgeInsetsMake(0, 0, 20, 20)*/
 //  @property (nonatomic,strong)NSValue * clNavBackBtnImageInsets;
 
   /// 自带返回(关闭)按钮位置 默认NO 居左,设置为YES居右显示
   bool? setNavBackBtnAlimentRight;
-
 
   /// 导航栏分割线 是否隐藏
   /// set backgroundImage=UIImage.new && shadowImage=UIImage.new
@@ -266,14 +262,11 @@ class ShanYanUIConfigIOS {
   /// 导航栏 渲染色*/
   String? setNavigationTintColor;
 
-
   /// 导航栏 背景色 default is white*/
   String? setNavigationBarTintColor;
 
-
   /// 导航栏 背景图片
   String? setNavigationBackgroundImage;
-
 
   /**导航栏 配合背景图片设置，用来控制在不同状态下导航栏的显示(横竖屏是否显示) UIBarMetrics eg.@(UIBarMetricsCompact)*/
 //  @property (nonatomic,strong)NSNumber * setNavigationBarMetrics;
@@ -281,20 +274,16 @@ class ShanYanUIConfigIOS {
   /// /// 导航栏 导航栏底部分割线（图片）
   String? setNavigationShadowImage;
 
-
 //LOGO图片
 
   /// LOGO图片
   String? setLogoImgPath;
 
-
   /// LOGO圆角
   num? setLogoCornerRadius;
 
-
   /// LOGO显隐
   bool? setLogoHidden;
-
 
 //手机号显示控件
   /// 号码栏字体颜色
@@ -306,10 +295,8 @@ class ShanYanUIConfigIOS {
   /// 号码栏字体是否加粗（true：加粗；false：不加粗）
   bool? setNumberBold;
 
-
   /// 手机号对齐方式
   iOSTextAlignment? setNumberTextAlignment;
-
 
 //一键登录按钮 !不得隐藏
   /// 按钮文字
@@ -345,22 +332,24 @@ class ShanYanUIConfigIOS {
   /// 按钮边框线框
   num? setLoginBtnBorderWidth;
 
-
 /*隐私条款Privacy
  注： 运营商隐私条款 不得隐藏
  用户条款不限制
  **/
+
   ///设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色,eg. ["#FFD13D","#CAACE1"]
   List<String>? setAppPrivacyColor;
 
-
   /**隐私条款文字字体*/
+
   /// 设置隐私栏字体大小
   num? setPrivacyTextSize;
 
+  /// 设置隐私栏宽度
+  num? setPrivacyWidth;
+
   /// 设置协议栏字体是否加粗
   bool? setPrivacyTextBold;
-
 
   /// 隐私条款文字对齐方式
   iOSTextAlignment? setAppPrivacyTextAlignment;
@@ -383,7 +372,6 @@ class ShanYanUIConfigIOS {
   /// 隐私条款--APP名称简写 默认取CFBundledisplayname 设置描述文本四后此属性无效
   String? setAppPrivacyAbbreviatedName;
 
-
   /// 隐私条款一:需同时设置Name和UrlString
   List<String>? setAppPrivacyFirst;
 
@@ -393,10 +381,10 @@ class ShanYanUIConfigIOS {
   /// 隐私条款三:需同时设置Name和UrlString
   List<String>? setAppPrivacyThird;
 
-
 /*
  隐私协议文本拼接: DesTextFirst+运营商条款+DesTextSecond+隐私条款一+DesTextThird+隐私条款二+DesTextFourth+隐私条款三+DesTextLast
  **/
+
   /// 描述文本 首部 default:"同意"
   String? setAppPrivacyNormalDesTextFirst;
 
@@ -421,10 +409,14 @@ class ShanYanUIConfigIOS {
   ///  使用sdk内部“一键登录”按钮点击时的吐丝提示("请勾选协议") - NO:默认使用sdk内部吐丝 YES:禁止使用
   bool? setCheckBoxTipDisable;
 
-
   /// 运营商协议后置
   bool? setOperatorPrivacyAtLast;
 
+  ///是否使用 SDK 内置协议页 activity（true：使用；false：不使用，只给回调，由开发者根据回调内容自行实现协议页 activity 及相关跳转；默认：true）
+  bool? setPrivacyActivityEnabled;
+
+  ///设置隐私协议栏是否居中显示（true：居中；false：居左；默认：false）
+  bool? setPrivacyGravityHorizontalCenter;
 
 //  String setPrivacyNavText;         /// 协议页导航栏统一标题，默认显示条款名称
   /// 协议页导航栏标题文字颜色
@@ -433,17 +425,14 @@ class ShanYanUIConfigIOS {
   /// 协议页标题文字大小
   num? setPrivacyNavTextSize;
 
-
   /// 隐私协议WEB页面导航返回按钮图片
   String? setPrivacyNavReturnImgPath;
-
 
   /// 协议页状态栏样式
   iOSStatusBarStyle? setAppPrivacyWebPreferredStatusBarStyle;
 
   /// 协议页导航栏样式
   iOSBarStyle? setAppPrivacyWebNavigationBarStyle;
-
 
   ///协议页导航栏其他属性
   String? setAppPrivacyWebNavigationTintColor;
@@ -471,7 +460,6 @@ class ShanYanUIConfigIOS {
   /// slogan是否隐藏
   bool? setSloganTextHidden;
 
-
 //供应商品牌标签("创蓝253提供认技术支持")
   /// slogan文字字体大小
   num? setShanYanSloganTextSize;
@@ -488,18 +476,17 @@ class ShanYanUIConfigIOS {
   /// slogan是否隐藏
   bool? setShanYanSloganHidden;
 
-
 /*CheckBox
  *协议勾选框，默认选中且在协议前显示
  *可在sdk_oauth.bundle中替换checkBox_unSelected、checkBox_selected图片
  *也可以通过属性设置选中和未选择图片
  **/
+
   /// 协议勾选框（默认显示,放置在协议之前）BOOL
   bool? setCheckBoxHidden;
 
   /// 协议勾选框默认值（默认选中）BOOL
   bool? setPrivacyState;
-
 
   /// 协议勾选框 宽高 eg. [40,40]
   List<num>? setCheckBoxWH;
@@ -507,20 +494,17 @@ class ShanYanUIConfigIOS {
   /// 协议勾选框 UIButton.image图片缩进,eg. [2, 2, 2, 2]
   List<num>? setCheckBoxImageEdgeInsets;
 
-
   /// 设置是否CheckBox顶部与隐私协议控件顶部对齐
   bool? setCheckBoxVerticalAlignmentToAppPrivacyTop;
 
   /// 设置是否CheckBox顶部与隐私协议控件竖向中心对齐，!!!与setCheckBoxVerticalAlignmentToAppPrivacyTop 同时只需设置一个
   bool? setCheckBoxVerticalAlignmentToAppPrivacyCenterY;
 
-
   /// 协议勾选框 非选中状态图片
   String? setUncheckedImgPath;
 
   /// 协议勾选框 选中状态图片
   String? setCheckedImgPath;
-
 
   /**授权页自定义 "请勾选协议"提示框
       - containerView为loading的全屏蒙版view
@@ -529,9 +513,9 @@ class ShanYanUIConfigIOS {
 //  @property (nonatomic,copy)void(^checkBoxTipView)(UIView * containerView);
 
 /*Loading*/
+
   /// Loading 大小
   List<num>? setLoadingSize;
-
 
   /// Loading 圆角
   num? setLoadingCornerRadius;
@@ -539,17 +523,14 @@ class ShanYanUIConfigIOS {
   /// Loading 背景色
   String? setLoadingBackgroundColor;
 
-
   /**UIActivityIndicatorViewStyle eg.@(UIActivityIndicatorViewStyleWhiteLarge)*/
 //  @property (nonatomic,strong) NSNumber *clLoadingIndicatorStyle;
 
   /// Loading Indicator渲染色
   String? setLoadingTintColor;
 
-
   ///自定义控件
   List<ShanYanCustomWidgetIOS>? widgets;
-
 
   /**授权页自定义Loading
       - containerView为loading的全屏蒙版view
@@ -568,7 +549,6 @@ class ShanYanUIConfigIOS {
   /// 是否支持自动旋转
   bool? setShouldAutorotate;
 
-
 /*支持方向
  - 如果设置只支持竖屏，只需配置竖屏布局layOutPortrait
  - 如果设置只支持横屏，只需设置横屏布局layOutLandscape
@@ -579,17 +559,14 @@ class ShanYanUIConfigIOS {
   /// 默认方向
   iOSInterfaceOrientation? preferredInterfaceOrientationForPresentation;
 
-
   /// 以窗口方式显示
   bool? setAuthTypeUseWindow;
 
   /// 窗口圆角
   num? setAuthWindowCornerRadius;
 
-
   /// 系统自带的弹出动画
   iOSModalTransitionStyle? setAuthWindowModalTransitionStyle;
-
 
 /* UIModalPresentationStyle
  * 若使用窗口模式，请设置为UIModalPresentationOverFullScreen 或不设置
@@ -605,7 +582,6 @@ class ShanYanUIConfigIOS {
   /// 协议页弹出样式。当授权页使用窗口模式时，协议页强制使用模态弹出，此时此属性有效
   iOSModalPresentationStyle? setAppPrivacyWebModalPresentationStyle;
 
-
 /* UIUserInterfaceStyle
  * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
  * UIUserInterfaceStyleLight       - 明亮
@@ -617,7 +593,6 @@ class ShanYanUIConfigIOS {
   /// 授权页面present弹出时animate动画设置，默认带动画
   bool? setAuthWindowPresentingAnimate;
 
-
   /**弹窗的MaskLayer，用于自定义窗口形状*/
 //  @property (nonatomic,strong) CALayer * clAuthWindowMaskLayer;
 
@@ -627,7 +602,6 @@ class ShanYanUIConfigIOS {
 
   /// 竖屏下使用的布局(不需要则不设置)
   ClOrientationLayOutIOS _layOutLandscape = new ClOrientationLayOutIOS();
-
 
   // ignore: unnecessary_getters_setters,
   set layOutPortrait(ClOrientationLayOutIOS layOutPortrait) => _layOutPortrait;
@@ -777,6 +751,8 @@ class ShanYanUIConfigAndroid {
   String? setNavReturnImgPath; //设置导航栏返回按钮图标
   bool? setNavReturnImgHidden = false; //设置导航栏返回按钮是否隐藏（true：隐藏；false：不隐藏）
   bool? setBackPressedAvailable = true; //设置物理返回键是否有效（true：有效；false：无效）
+  bool? setFitsSystemWindows =
+      true; //同系统 setFitsSystemWindows；视频背景需要伸入到状态栏时可以调用此方法
   bool? setAuthNavHidden; //设置导航栏是否隐藏（true：隐藏；false：不隐藏）
   bool? setAuthNavTransparent; //设置导航栏是否透明（true：透明；false：不透明）
   bool? setNavTextBold; //设置导航栏字体是否加粗（true：加粗；false：不加粗）
@@ -821,6 +797,7 @@ class ShanYanUIConfigAndroid {
   List<String>? setAppPrivacyThree; //设置开发者隐私条款3，包含两个参数：1.名称 2.URL
   bool? setPrivacySmhHidden; //设置协议名称是否显示书名号《》，默认显示书名号（true：不显示；false：显示）
   int? setPrivacyTextSize; //设置隐私栏字体大小
+  int? setPrivacyWidth; //设置隐私栏宽度
   List<String>? setAppPrivacyColor; //设置隐私条款文字颜色，包含两个参数：1.基础文字颜色 2.协议文字颜色
   bool? setPrivacyOffsetGravityLeft; //设置隐私条款文字左对齐（true：左对齐；false：居中）
   bool? setPrivacyState; //设置隐私条款的CheckBox是否选中（true：选中；false：未选中）
@@ -833,9 +810,14 @@ class ShanYanUIConfigAndroid {
   List<int>? setCheckBoxMargin; //设置checkbox的间距，包含四个参数：1.左间距 2.上间距 3.右间距 4.下间距
   List<String>? setPrivacyText; //设置隐私条款名称外的文字,包含五个参数
   bool? setPrivacyTextBold; //设置协议栏字体是否加粗（true：加粗；false：不加粗）
+  bool?
+      setCheckBoxTipDisable; //设置未勾选协议时 toast 提示是否关闭（true：关闭，false：开启，默认：false）
   String? setPrivacyCustomToastText; //未勾选协议时toast提示文字
   bool? setPrivacyNameUnderline; //协议是否显示下划线
-  bool? setOperatorPrivacyAtLast; //运营商协议是否为最后一个显示
+  bool?
+      setPrivacyGravityHorizontalCenter; //设置隐私协议栏是否居中显示（true：居中；false：居左；默认：false）
+  bool?
+      setPrivacyActivityEnabled; //是否使用 SDK 内置协议页 activity（true：使用；false：不使用，只给回调，由开发者根据回调内容自行实现协议页 activity 及相关跳转；默认：true）
 
   //授权页 slogan（***提供认证服务）
   int? setSloganOffsetY; //设置slogan相对于标题栏下边缘y偏移
@@ -902,7 +884,8 @@ class ShanYanCustomWidgetLayout {
   ShanYanCustomWidgetLayoutType type; //自定义控件类型，目前只支持 textView,button
   ShanYanCustomWidgetLayout(
       // ignore: invalid_required_positional_param
-      @required this.widgetLayoutName, @required this.type) {
+      @required this.widgetLayoutName,
+      @required this.type) {
     this.widgetLayoutName = widgetLayoutName;
     this.type = type;
   }
