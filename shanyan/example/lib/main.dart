@@ -59,11 +59,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    String appId = "7I5nJT7h";
+    String appId = "mchC0cTk";
     if (Platform.isIOS) {
       appId = "7I5nJT7h";
     } else if (Platform.isAndroid) {
-      appId = "XUPwbkje";
+      appId = "mchC0cTk";
     }
     //闪验SDK 初始化
     oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
