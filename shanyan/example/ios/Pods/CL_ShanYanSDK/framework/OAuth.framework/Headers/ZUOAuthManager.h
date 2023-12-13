@@ -10,58 +10,53 @@
 
 @interface ZUOAuthManager : NSObject
 
-
 /**
  *  获取联通能力接入单例对象
  */
 + (instancetype)getInstance;
-
-
 /**
- *  初始化方法
+ *  初始化方法 默认
  */
-- (void) init:(NSString*) apiKey pubKey:(NSString*)pubKey;
-
+- (void) initWithApiKey:(NSString*)apiKey;
 
 /**
- *  预取号接口
+ *  初始化方法 2
+ */
+- (void) initWithApiKey:(NSString*)apiKey withUA:(NSString *)ua;
+
+/**
+ *  一键登录功能 - 预取号接口
  */
 - (void)login:(double)timeout resultListener:(void (^)(NSDictionary *data))listener;
+/**
+ *  一键登录功能 - 关闭一键登录功能默认缓存功能
+ */
+- (void)closeLoginCachingStrategy:(BOOL)yesOrNo;
+/**
+ *  一键登录功能 - 清除缓存
+ */
+- (void)clearCULoginCache;
 
 
 /**
- * 清除缓存 ***注意***：SDK取号默认会使用缓存机制，请及时清理缓存；
+ *  号码认证功能 - 预认证接口
  */
-+ (BOOL)clearCULoginCache;
-
-
+- (void)oauth:(double)timeout resultListener:(void (^)(NSDictionary *data))listener;
 /**
- *  认证-联通
- 注意***：在不手动关闭缓存的时，请及时调用清除缓存方法
+ *  号码认证功能 - 关闭号码认证功能默认缓存
  */
-- (void) oauth:(double)timeout resultListener:(void (^)(NSDictionary *data))listener;
-
-
-/** 联通认证：是否关闭缓存策略（默认开启）
- 请注意及时调用clearOauthCache方法清除缓存；
- 手动关闭后，不必调用clearOauthCache；
- @param  yesOrNo 是否关闭联通认证缓存策略
- */
-+ (void) closeCUOauthCachingStrategy:(BOOL)yesOrNo;
-
-
+- (void)closeOauthCachingStrategy:(BOOL)yesOrNo;
 /**
- 联通认证：
- 清除联通认证缓存策略中产生的缓存数据；
- 在手动关闭缓存策略时，不必调用；
+ *  号码认证功能 - 清除缓存
  */
-+ (BOOL) clearCUOauthCache;
-
-
-#pragma mark - 其他方法
-+ (void) setDebug:(BOOL) ISD ;
-+ (void) useSchemeBInSecurityModule:(BOOL)schemeB;
-+ (void)setUAString:(NSString *)UAString;
-+ (void)removeUAString;
+- (void) clearCUOauthCache;
+/**
+ *  SDK Debug功能
+ */
+- (void)setDebug:(BOOL) yesOrNo;
+/**
+ *  SDK 获取当前版本号功能
+ */
 + (NSString *)getVersionInfo;
+
 @end
