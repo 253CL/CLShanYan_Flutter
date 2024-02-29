@@ -34,5 +34,5 @@ android {
     }
 }
 dependencies {
-    api files('libs/shanyan_sdk_v2.3.6.4.jar')
+    api files('libs/shanyan_sdk_v2.3.6.5.jar')
 }

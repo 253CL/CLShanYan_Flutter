@@ -28,9 +28,9 @@ class ShanYanUIConfig {
   }
 
   ShanYanUIConfigAndroid _androidPortrait =
-      new ShanYanUIConfigAndroid(); //Android竖屏
+  new ShanYanUIConfigAndroid(); //Android竖屏
   ShanYanUIConfigAndroid _androidLandscape =
-      new ShanYanUIConfigAndroid(); //Android横屏
+  new ShanYanUIConfigAndroid(); //Android横屏
 
   // ignore: unnecessary_getters_setters,
   set androidPortrait(ShanYanUIConfigAndroid androidPortrait) =>
@@ -411,6 +411,7 @@ class ShanYanUIConfigIOS {
 
   /// 运营商协议后置
   bool? setOperatorPrivacyAtLast;
+  bool? setPrivacyNameUnderline; //协议是否显示下划线
 
   ///是否使用 SDK 内置协议页 activity（true：使用；false：不使用，只给回调，由开发者根据回调内容自行实现协议页 activity 及相关跳转；默认：true）
   bool? setPrivacyActivityEnabled;
@@ -752,7 +753,7 @@ class ShanYanUIConfigAndroid {
   bool? setNavReturnImgHidden = false; //设置导航栏返回按钮是否隐藏（true：隐藏；false：不隐藏）
   bool? setBackPressedAvailable = true; //设置物理返回键是否有效（true：有效；false：无效）
   bool? setFitsSystemWindows =
-      true; //同系统 setFitsSystemWindows；视频背景需要伸入到状态栏时可以调用此方法
+  true; //同系统 setFitsSystemWindows；视频背景需要伸入到状态栏时可以调用此方法
   bool? setAuthNavHidden; //设置导航栏是否隐藏（true：隐藏；false：不隐藏）
   bool? setAuthNavTransparent; //设置导航栏是否透明（true：透明；false：不透明）
   bool? setNavTextBold; //设置导航栏字体是否加粗（true：加粗；false：不加粗）
@@ -806,18 +807,20 @@ class ShanYanUIConfigAndroid {
   bool? setCheckBoxHidden; //设置隐私条款的CheckBox是否隐藏（true：隐藏；false：不隐藏）
   List<int>? setCheckBoxWH; //设置checkbox的宽高，包含两个参数：1.宽 2.高
   List<int>?
-      setCheckBoxOffsetXY; //设置checkbox在协议框父控件中的位置，包含两个参数：1.左偏移量 2.上偏移量（默认：在父控件内居中）
+  setCheckBoxOffsetXY; //设置checkbox在协议框父控件中的位置，包含两个参数：1.左偏移量 2.上偏移量（默认：在父控件内居中）
   List<int>? setCheckBoxMargin; //设置checkbox的间距，包含四个参数：1.左间距 2.上间距 3.右间距 4.下间距
   List<String>? setPrivacyText; //设置隐私条款名称外的文字,包含五个参数
   bool? setPrivacyTextBold; //设置协议栏字体是否加粗（true：加粗；false：不加粗）
   bool?
-      setCheckBoxTipDisable; //设置未勾选协议时 toast 提示是否关闭（true：关闭，false：开启，默认：false）
+  setCheckBoxTipDisable; //设置未勾选协议时 toast 提示是否关闭（true：关闭，false：开启，默认：false）
   String? setPrivacyCustomToastText; //未勾选协议时toast提示文字
   bool? setPrivacyNameUnderline; //协议是否显示下划线
+  bool? setOperatorPrivacyAtLast; //运营商协议是否为最后一个显示（true：最后显示；false：显示在最前；默认：false）
+
   bool?
-      setPrivacyGravityHorizontalCenter; //设置隐私协议栏是否居中显示（true：居中；false：居左；默认：false）
+  setPrivacyGravityHorizontalCenter; //设置隐私协议栏是否居中显示（true：居中；false：居左；默认：false）
   bool?
-      setPrivacyActivityEnabled; //是否使用 SDK 内置协议页 activity（true：使用；false：不使用，只给回调，由开发者根据回调内容自行实现协议页 activity 及相关跳转；默认：true）
+  setPrivacyActivityEnabled; //是否使用 SDK 内置协议页 activity（true：使用；false：不使用，只给回调，由开发者根据回调内容自行实现协议页 activity 及相关跳转；默认：true）
 
   //授权页 slogan（***提供认证服务）
   int? setSloganOffsetY; //设置slogan相对于标题栏下边缘y偏移
@@ -852,9 +855,9 @@ class ShanYanUIConfigAndroid {
 
   String? setLoadingView; //设置授权页点击一键登录自定义loading
   List<String>?
-      setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
+  setDialogTheme; //设置授权页为弹窗样式，包含5个参数：1.弹窗宽度 2.弹窗高度 3.弹窗X偏移量（以屏幕中心为原点） 4.弹窗Y偏移量（以屏幕中心为原点） 5.授权页弹窗是否贴于屏幕底部
   List<String>?
-      setActivityTranslateAnim; //设置授权页进出场动画，包含两个参数：1.进场动画传xml文件名即可  2.退场动画传xml文件名即可
+  setActivityTranslateAnim; //设置授权页进出场动画，包含两个参数：1.进场动画传xml文件名即可  2.退场动画传xml文件名即可
   List<ShanYanCustomWidgetLayout>? widgetLayouts;
   List<ShanYanCustomWidget>? widgets;
   List<ConfigPrivacyBean>? morePrivacy;
@@ -882,8 +885,7 @@ class ShanYanCustomWidgetLayout {
   int width = 0; // 自定义控件宽度，单位dp
   int height = 0; // 自定义控件高度，单位dp
   ShanYanCustomWidgetLayoutType type; //自定义控件类型，目前只支持 textView,button
-  ShanYanCustomWidgetLayout(
-      // ignore: invalid_required_positional_param
+  ShanYanCustomWidgetLayout(// ignore: invalid_required_positional_param
       @required this.widgetLayoutName,
       @required this.type) {
     this.widgetLayoutName = widgetLayoutName;
@@ -988,7 +990,7 @@ class ShanYanCustomWidgetIOS {
       iOSTextAlignment.center; //自定义控件内容对齐方式 (Only Android available)
   ShanYanCustomWidgetType? type; //自定义控件类型，目前只支持 textView,button,ImageView
   ShanYanCustomWidgetiOSNavPosition?
-      navPosition; //如需添加到导航栏，请设置控件位置（左或右，导航栏按钮仅支持自定义width、height）
+  navPosition; //如需添加到导航栏，请设置控件位置（左或右，导航栏按钮仅支持自定义width、height）
   bool isFinish = true; //点击自定义控件是否自动销毁授权页
 
   // ignore: invalid_required_positional_param
@@ -1013,7 +1015,10 @@ String? getStringFromEnum<T>(T) {
     return null;
   }
 
-  return T.toString().split('.').last;
+  return T
+      .toString()
+      .split('.')
+      .last;
 }
 
 ///iOS 文字对齐方式

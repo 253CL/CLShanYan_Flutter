@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
     if (Platform.isIOS) {
       appId = "7I5nJT7h";
     } else if (Platform.isAndroid) {
-      appId = "mchC0cTk";
+      appId = "tp2jVxW6";
     }
     //闪验SDK 初始化
     oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
