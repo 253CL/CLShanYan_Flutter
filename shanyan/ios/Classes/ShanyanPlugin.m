@@ -183,7 +183,9 @@
         
         //一键登录回调
         if (strongSelf.channel) {
-            [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
+            });
         }
     }];
 }
