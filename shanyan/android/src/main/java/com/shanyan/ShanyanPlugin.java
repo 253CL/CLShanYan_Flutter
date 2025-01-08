@@ -262,20 +262,20 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
             @Override
             public void authenticationRespond(int code, String msg) {
                 Map<String, Object> map = new HashMap<>();
-                if (2000 == code) {
-                    map.put(shanyan_code, 1000);
-                } else {
-                    map.put(shanyan_code, code);
-                }
-                map.put(shanyan_message, msg);
                 try {
                     JSONObject jsonObject = new JSONObject(msg);
                     if (2000 == code) {
+                        code = 1000;
                         map.put(shanyan_token, jsonObject.optString("token"));
+                        map.put(shanyan_innerCode, code);
+                        map.put(shanyan_innerDesc, "获取token成功");
+                        map.put(shanyan_message, "token success");
                     } else {
                         map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
                         map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                        map.put(shanyan_message, jsonObject.optString("message"));
                     }
+                    map.put(shanyan_code, code);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -308,14 +308,17 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
                 //点击授权页“一键登录”按钮或者返回键（包括物理返回键）回调
                 Map<String, Object> map = new HashMap<>();
                 map.put(shanyan_code, code);
-                map.put(shanyan_message, msg);
                 try {
                     JSONObject jsonObject = new JSONObject(msg);
                     if (1000 == code) {
                         map.put(shanyan_token, jsonObject.optString("token"));
+                        map.put(shanyan_innerCode, code);
+                        map.put(shanyan_innerDesc, "获取token成功");
+                        map.put(shanyan_message, "token success");
                     } else {
                         map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
                         map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                        map.put(shanyan_message, jsonObject.optString("message"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -335,11 +338,12 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
                 } else {
                     map.put(shanyan_code, code);
                 }
-                map.put(shanyan_message, msg);
+
                 try {
                     JSONObject jsonObject = new JSONObject(msg);
                     map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
                     map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                    map.put(shanyan_message, jsonObject.optString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -359,11 +363,11 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
                 } else {
                     map.put(shanyan_code, code);
                 }
-                map.put(shanyan_message, msg);
                 try {
                     JSONObject jsonObject = new JSONObject(msg);
                     map.put(shanyan_innerCode, jsonObject.optInt("innerCode"));
                     map.put(shanyan_innerDesc, jsonObject.optString("innerDesc"));
+                    map.put(shanyan_message, jsonObject.optString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

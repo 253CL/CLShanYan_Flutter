@@ -5,10 +5,12 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.0"
+        classpath("com.android.tools.build:gradle:8.1.0")
     }
 }
 
@@ -16,23 +18,25 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    namespace = "com.shanyan"
+
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 16
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
     lintOptions {
-        disable 'InvalidPackage'
+        checkReleaseBuilds false
     }
 }
 dependencies {
-    api files('libs/shanyan_sdk_v2.3.6.5.jar')
+    api files('libs/shanyan_sdk_v2.3.6.7_flutter.jar')
 }
