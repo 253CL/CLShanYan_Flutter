@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'shanYanResult.dart';
 import 'shanYanUIConfig.dart';
 
@@ -62,29 +59,9 @@ class OneKeyLoginManager {
     _channel.invokeMethod("getOaidEnable", {"oaidEnable": oaidEnable});
   }
 
-  /// 设置是否获取iccid
-  void getSinbEnable(bool sinbEnable) {
-    _channel.invokeMethod("getSinbEnable", {"sinbEnable": sinbEnable});
-  }
-
-  /// 设置是否获取IMSI
-  void getSiEnable(bool sibEnable) {
-    _channel.invokeMethod("getSiEnable", {"sibEnable": sibEnable});
-  }
-
   /// 设置是否获取IP(Android + iOS)
   void getIEnable(bool iEnable) {
     _channel.invokeMethod("getIEnable", {"iEnable": iEnable});
-  }
-
-  /// 设置是否获取Mac地址
-  void getMaEnable(bool maEnable) {
-    _channel.invokeMethod("getMaEnable", {"maEnable": maEnable});
-  }
-
-  /// 设置是否获取IMEI
-  void getImEnable(bool imEnable) {
-    _channel.invokeMethod("getImEnable", {"imEnable": imEnable});
   }
 
   /// 设置是否设置监听生命周期
