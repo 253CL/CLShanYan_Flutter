@@ -8,9 +8,9 @@ part of 'shanYanResult.dart';
 
 ShanYanResult _$ShanYanResultFromJson(Map<String, dynamic> json) =>
     ShanYanResult(
-      code: json['code'] as int?,
+      code: (json['code'] as num?)?.toInt(),
       message: json['message'] as String?,
-      innerCode: json['innerCode'] as int?,
+      innerCode: (json['innerCode'] as num?)?.toInt(),
       innerDesc: json['innerDesc'] as String?,
       token: json['token'] as String?,
     );
