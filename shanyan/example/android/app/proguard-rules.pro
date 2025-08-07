@@ -21,10 +21,11 @@
 #-renamesourcefileattribute SourceFile
 -dontwarn com.cmic.gen.sdk.**
 -keep class com.cmic.gen.sdk.**{*;}
--dontwarn com.sdk.**
--keep class com.sdk.** { *;}
 -dontwarn cn.com.chinatelecom.account.**
 -keep class cn.com.chinatelecom.account.**{*;}
+-keep class com.unicom.online.account.shield.** {*;}
+-keep class com.unicom.online.account.kernel.** {*;}
+-keep class com.chuanglan.shanyan_sdk.**{*;}
 -keep public class * extends android.app.Activity
 
 -keep  class com.chuanglan.shanyan_sdk.OneKeyLoginManager{
