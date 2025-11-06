@@ -2,6 +2,8 @@
 * 闪验SDK 授权页UI 配置类
 * */
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -14,23 +16,28 @@ part 'shanYanUIConfig.g.dart';
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ShanYanUIConfig {
-  ShanYanUIConfigIOS _ios = new ShanYanUIConfigIOS(); //iOS
+  ShanYanUIConfigIOS _ios = ShanYanUIConfigIOS(); //iOS
   // ignore: unnecessary_getters_setters
   set ios(ShanYanUIConfigIOS ios) => _ios;
 
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigIOS get ios {
     // ignore: unnecessary_null_comparison
-    if (_ios == null) {
-      _ios = new ShanYanUIConfigIOS();
-    }
+    _ios ??= ShanYanUIConfigIOS();
     return _ios;
   }
 
+  ShanYanUIConfigHarmony _ohos = ShanYanUIConfigHarmony();
+  set ohos(ShanYanUIConfigHarmony ohos) => _ohos;
+  ShanYanUIConfigHarmony get ohos {
+    _ohos ??= ShanYanUIConfigHarmony();
+    return _ohos;
+  }
+
   ShanYanUIConfigAndroid _androidPortrait =
-  new ShanYanUIConfigAndroid(); //Android竖屏
+  ShanYanUIConfigAndroid(); //Android竖屏
   ShanYanUIConfigAndroid _androidLandscape =
-  new ShanYanUIConfigAndroid(); //Android横屏
+  ShanYanUIConfigAndroid(); //Android横屏
 
   // ignore: unnecessary_getters_setters,
   set androidPortrait(ShanYanUIConfigAndroid androidPortrait) =>
@@ -39,9 +46,7 @@ class ShanYanUIConfig {
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigAndroid get androidPortrait {
     // ignore: unnecessary_null_comparison
-    if (_androidPortrait == null) {
-      _androidPortrait = new ShanYanUIConfigAndroid();
-    }
+    _androidPortrait ??= ShanYanUIConfigAndroid();
     return _androidPortrait;
   }
 
@@ -52,9 +57,7 @@ class ShanYanUIConfig {
   // ignore: unnecessary_getters_setters
   ShanYanUIConfigAndroid get androidLandscape {
     // ignore: unnecessary_null_comparison
-    if (_androidLandscape == null) {
-      _androidLandscape = new ShanYanUIConfigAndroid();
-    }
+    _androidLandscape ??= ShanYanUIConfigAndroid();
     return _androidLandscape;
   }
 
@@ -599,10 +602,10 @@ class ShanYanUIConfigIOS {
 
   //布局设置
   /// 横屏下使用的布局
-  ClOrientationLayOutIOS _layOutPortrait = new ClOrientationLayOutIOS();
+  final ClOrientationLayOutIOS _layOutPortrait = ClOrientationLayOutIOS();
 
   /// 竖屏下使用的布局(不需要则不设置)
-  ClOrientationLayOutIOS _layOutLandscape = new ClOrientationLayOutIOS();
+  final ClOrientationLayOutIOS _layOutLandscape = ClOrientationLayOutIOS();
 
   // ignore: unnecessary_getters_setters,
   set layOutPortrait(ClOrientationLayOutIOS layOutPortrait) => _layOutPortrait;
@@ -890,8 +893,8 @@ class ShanYanCustomWidgetLayout {
       // ignore: invalid_required_positional_param
       @required this.widgetLayoutName,
       @required this.type) {
-    this.widgetLayoutName = widgetLayoutName;
-    this.type = type;
+    widgetLayoutName = widgetLayoutName;
+    type = type;
   }
 
   //反序列化
@@ -911,8 +914,8 @@ class ConfigPrivacyBean {
   String? title = ""; //协议页标题
   // ignore: invalid_required_positional_param
   ConfigPrivacyBean(@required this.name, @required this.url) {
-    this.name = name;
-    this.url = url;
+    name = name;
+    url = url;
   }
 
   //反序列化
@@ -955,8 +958,8 @@ class ShanYanCustomWidget {
 
   // ignore: invalid_required_positional_param
   ShanYanCustomWidget(@required this.widgetId, @required this.type) {
-    this.widgetId = widgetId;
-    this.type = type;
+    widgetId = widgetId;
+    type = type;
   }
 
 //反序列化
@@ -997,8 +1000,8 @@ class ShanYanCustomWidgetIOS {
 
   // ignore: invalid_required_positional_param
   ShanYanCustomWidgetIOS(@required this.widgetId, @required this.type) {
-    this.widgetId = widgetId;
-    this.type = type;
+    widgetId = widgetId;
+    type = type;
   }
 
 //反序列化
@@ -1126,4 +1129,222 @@ enum iOSUserInterfaceStyle {
   light, //亮
   @JsonValue(2)
   dark //暗黑 API_AVAILABLE(ios(13.0))
+}
+
+//====================鸿蒙配置======================================
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanHarmonyMarginOrPadding {
+  String? top;
+  String? left;
+  String? right;
+  String? bottom;
+  ShanYanHarmonyMarginOrPadding({
+    this.top,this.left,this.right,this.bottom
+  });
+
+  factory ShanYanHarmonyMarginOrPadding.fromJson(Map<String, dynamic> json)
+  => _$ShanYanHarmonyMarginOrPaddingFromJson(json);
+  Map<String, dynamic> toJson()
+  => _$ShanYanHarmonyMarginOrPaddingToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanHarmonyAlignRuleOption {
+  ShanYanHarmonyHorizontalAnchor? left;
+  ShanYanHarmonyHorizontalAnchor? middle;
+  ShanYanHarmonyHorizontalAnchor? right;
+
+  ShanYanHarmonyVerticalAnchor? top;
+  ShanYanHarmonyVerticalAnchor? bottom;
+  ShanYanHarmonyVerticalAnchor? center;
+  ShanYanHarmonyBias? bias;
+
+  ShanYanHarmonyAlignRuleOption();
+
+  factory ShanYanHarmonyAlignRuleOption.fromJson(Map<String, dynamic> json)
+  => _$ShanYanHarmonyAlignRuleOptionFromJson(json);
+  Map<String, dynamic> toJson()
+  => _$ShanYanHarmonyAlignRuleOptionToJson(this);
+
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanHarmonyBias{
+  num? horizontal;
+  num? vertical;
+  ShanYanHarmonyBias();
+
+  factory ShanYanHarmonyBias.fromJson(Map<String, dynamic> json)
+  => _$ShanYanHarmonyBiasFromJson(json);
+  Map<String, dynamic> toJson()
+  => _$ShanYanHarmonyBiasToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanHarmonyHorizontalAnchor{
+  String anchor;
+  ShanYanHorizontalAlign align;
+
+  ShanYanHarmonyHorizontalAnchor({
+    this.anchor = '__container__',
+    required this.align});
+
+  factory ShanYanHarmonyHorizontalAnchor.fromJson(Map<String, dynamic> json)
+  => _$ShanYanHarmonyHorizontalAnchorFromJson(json);
+  Map<String, dynamic> toJson()
+  => _$ShanYanHarmonyHorizontalAnchorToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanHarmonyVerticalAnchor{
+  String anchor;
+  ShanYanHarmonyVerticalAlign align;
+
+  ShanYanHarmonyVerticalAnchor({
+    this.anchor = '__container__',
+    required this.align});
+
+  factory ShanYanHarmonyVerticalAnchor.fromJson(Map<String, dynamic> json)
+  => _$ShanYanHarmonyVerticalAnchorFromJson(json);
+  Map<String, dynamic> toJson()
+  => _$ShanYanHarmonyVerticalAnchorToJson(this);
+}
+
+enum ShanYanHorizontalAlign{
+  @JsonValue(1)
+  Start,
+  @JsonValue(2)
+  Middle,
+  @JsonValue(3)
+  End,
+}
+
+enum ShanYanHarmonyVerticalAlign{
+  @JsonValue(4)
+  Top,
+  @JsonValue(5)
+  Center,
+  @JsonValue(6)
+  Bottom,
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanHarmonyPrivacyEntity {
+  String text;
+  num fontSize;
+  int fontWeight;
+  bool isProtocol;
+  String fontColor;
+  String? url;
+
+  ShanYanHarmonyPrivacyEntity({
+    required this.text,
+    required this.fontSize,
+    required this.fontWeight,
+    required this.isProtocol,
+    required this.fontColor,
+    this.url = ""});
+  factory ShanYanHarmonyPrivacyEntity.fromJson(Map<String, dynamic> json)
+  => _$ShanYanHarmonyPrivacyEntityFromJson(json);
+  Map<String, dynamic> toJson()
+  => _$ShanYanHarmonyPrivacyEntityToJson(this);
+}
+
+
+
+/*ohos独有布局*/
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanUIConfigHarmony {
+  ShanYanUIConfigHarmony();
+
+  // window.SystemBarProperties属性
+  String? statusBarColor;
+  bool? isStatusBarLightIcon;
+  String? statusBarContentColor;
+  String? navigationBarColor;
+  bool? isNavigationBarLightIcon;
+  String? navigationBarContentColor;
+  bool? enableStatusBarAnimation;
+  bool? enableNavigationBarAnimation;
+
+  int? navTextSize;        // 设置服务条款标题字体大小
+  String? navTextColor;       // 设置服务条款标题字体颜色,例如"#FFFFFF"
+  String? navColor;           // 设置服务栏颜色，例如"#000000"
+  int?    loginPageGrayScale; // 设置授权页灰度值，范围0-1
+
+  //手机号码设置
+  num?    numberSize;   // 设置号码字体带下
+  bool?   numberIsBold; // 设置号码字体是否是bolo
+  String? numberColor;  // 设置号码字体颜色
+  ShanYanHarmonyAlignRuleOption? numberAlignRuleOption; // 设置登手机号码相对布局偏移规则
+  ShanYanHarmonyMarginOrPadding? numberMargin;          // 设置手机号码边缘边距
+
+  num?    loginBtnWidth;        // 设置号码宽度
+  num?    loginBtnHeight;       // 设置号码高度
+  String? loginBtnText;         // 设置登录按钮文本内容
+  num?    loginBtnTextSize;     // 设置授权登录文本字体大小
+  String? loginBtnTextColor;    // 设置授权登录按钮字体颜色
+  String? loginBtnImgPath;      // 设置登录按钮背景图片
+  String? loginBtnColor;        // 设置登录按钮背景颜色
+  num?    loginBtnBorderRadius; // 设置登录按钮圆角
+  ShanYanHarmonyAlignRuleOption? loginBtnAlignRuleOption; //设置登录按钮相对布局偏移规则
+  ShanYanHarmonyMarginOrPadding? loginBtnMargin;          // 设置登录按钮边缘边距
+
+  // 隐私协议设置
+  List<ShanYanHarmonyPrivacyEntity>?      clauses;                //设置隐私条款
+  num?    checkBoxWidth;  // 设置隐私条款勾选框宽度
+  num?    checkBoxHeight; // 设置隐私条款勾选框高度
+  bool?   clauseState;    // 设置隐私条款勾选框勾选状态
+  String? checkedImage;   // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
+  String? unCheckedImage; // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
+  String? checkedColor;   // 设置勾选颜色
+  String? checkTipText;   // 设置未勾选提示的自定义提示文案。不设置则无提示。
+  ShanYanHarmonyMarginOrPadding? clauseMargin;           // 设置隐私协议边缘边距
+  ShanYanHarmonyAlignRuleOption? clauseAlignRuleOption;  // 设置隐私协议相对布局偏移规则
+  ShanYanHarmonyMarginOrPadding? checkBoxMargin;         // 设置隐私条款勾选框偏移边距
+  ShanYanHarmonyAlignRuleOption? checkBoxAlignRuleOption;// 设置隐私协议勾选框相对布局偏移规则
+
+  List<ShanYanCustomWidgetHarmony>? widgets;
+
+  bool? isInterceptionLogin;
+  bool? windowMode; // 设置窗口模式，默认非窗口模式，false
+
+  factory ShanYanUIConfigHarmony.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanUIConfigHarmonyFromJson(json);
+  Map<String, dynamic> toJson() => _$ShanYanUIConfigHarmonyToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ShanYanCustomWidgetHarmony {
+  String widgetId; //自定义控件ID
+  ShanYanHarmonyMarginOrPadding? margin;
+  ShanYanHarmonyAlignRuleOption? alignRuleOption;
+  String? width;
+  String? height;
+  num? cornerRadius;
+  num? borderWidth;
+  num? scaleType; // 适配imageview，鸿蒙类型：ImageFit 范围 0 ~ 15，0为Contain，15为MATRIX
+  num? textAlign; // 适配textview， 鸿蒙类型：TextAlign 范围 0 ~ 3，Center，Start，End，JUSTIFY
+  String? borderColor; // 自定义控件边框颜色
+  String? textContent; // 自定义控件内容
+  double? textFont = 13.0; // 自定义控件文字大小，单位sp
+  String? textColor; // 自定义控件文字颜色
+  String? backgroundColor; // 自定义控件背景颜色
+  String? image; //图片
+  String? backgroundImgPath; // 自定义控件背景图片(ImageView available)
+  iOSTextAlignment textAlignment =
+      iOSTextAlignment.center; //自定义控件内容对齐方式 (Only Android available)
+  ShanYanCustomWidgetType? type; //自定义控件类型，目前只支持 textView,button,ImageView
+  bool isFinish = true; //点击自定义控件是否自动销毁授权页
+
+  // ignore: invalid_required_positional_param
+  ShanYanCustomWidgetHarmony(@required this.widgetId, @required this.type) {
+    widgetId = widgetId;
+    type = type;
+  }
+
+  factory ShanYanCustomWidgetHarmony.fromJson(Map<String, dynamic> json) =>
+      _$ShanYanCustomWidgetHarmonyFromJson(json);
+  Map<String, dynamic> toJson() => _$ShanYanCustomWidgetHarmonyToJson(this);
+
 }

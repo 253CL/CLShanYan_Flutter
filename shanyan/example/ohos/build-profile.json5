@@ -1,0 +1,58 @@
+
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "debugtt",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan.p12",
+          "storePassword": "000000182CCA420B95B0E42278769C76AD3BFF06B8885A8AD12A4787DF5EC3403F3E589161A3FC91",
+          "keyAlias": "shanyan",
+          "keyPassword": "00000018F363EBEF7C52305184E28D59CB33B48498138BE31C957E96CA25188F5F6FD89E81A0727D",
+          "signAlg": "SHA256withECDSA",
+          "profile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan_debugDebug.p7b",
+          "certpath": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan_debug.cer"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "debugtt",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "profile"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

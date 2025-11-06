@@ -1,0 +1,12 @@
+{
+  "name": "shanyan",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@shanyan/shanyansdk": '^1.0.6'
+  },
+  "modelVersion": "5.0.0"
+}

@@ -63,6 +63,8 @@ class _MyAppState extends State<MyApp> {
       appId = "7I5nJT7h";
     } else if (Platform.isAndroid) {
       appId = "loXN4jDs";
+    }else if (Platform.isOhos){
+      appId = "8lxUuiVT";
     }
     //闪验SDK 初始化
     oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
@@ -480,6 +482,10 @@ class _MyAppState extends State<MyApp> {
       _toast("点击：${map.toString()}");
     });
 
+    oneKeyLoginManager.addHarmonyLoginClickListener((cust){
+      return true;
+    });
+
     shanYanUIConfig.androidLandscape.isFinish = true;
     shanYanUIConfig.androidLandscape.setAuthBGImgPath = "sy_login_test_bg";
     shanYanUIConfig.androidLandscape.setLogoImgPath = "sy_logo";
@@ -500,6 +506,80 @@ class _MyAppState extends State<MyApp> {
 
     shanYanUIConfig.androidLandscape.widgetLayouts =
         shanYanCustomWidgetLayoutLand;
+
+    //鸿蒙配置
+    shanYanUIConfig.ohos.clauses = [
+      ShanYanHarmonyPrivacyEntity(text: "同意", fontSize: 16, fontWeight: 0, isProtocol: false,fontColor: '#000000'),
+      ShanYanHarmonyPrivacyEntity(text: "《**CLAUSE**》", fontSize: 16, fontWeight: 0, isProtocol: true,fontColor: '#000000'),
+      ShanYanHarmonyPrivacyEntity(text: "、", fontSize: 16, fontWeight: 0, isProtocol: false,fontColor: '#000000'),
+      ShanYanHarmonyPrivacyEntity(text: "自定义协议1", fontSize: 16, fontWeight: 0, isProtocol: true,fontColor: '#000000',url:"https:www.baidu.com"),
+      ShanYanHarmonyPrivacyEntity(text: "、", fontSize: 16, fontWeight: 0, isProtocol: false,fontColor: '#000000'),
+      ShanYanHarmonyPrivacyEntity(text: "自定义协议2", fontSize: 16, fontWeight: 0, isProtocol: true,fontColor: '#000000',url:"https:www.sina.com"),
+      ShanYanHarmonyPrivacyEntity(text: "并使用本机号码", fontSize: 16, fontWeight: 0, isProtocol: false,fontColor: '#000000')
+    ];
+
+    ShanYanHarmonyAlignRuleOption ruleOption = ShanYanHarmonyAlignRuleOption();
+    ruleOption.center = ShanYanHarmonyVerticalAnchor(align: ShanYanHarmonyVerticalAlign.Center);
+    ruleOption.middle = ShanYanHarmonyHorizontalAnchor(align: ShanYanHorizontalAlign.Middle);
+    shanYanUIConfig.ohos.numberAlignRuleOption = ruleOption;
+    shanYanUIConfig.ohos.numberColor = "#ff2345";
+
+    ShanYanHarmonyMarginOrPadding numMargin = ShanYanHarmonyMarginOrPadding();
+    numMargin.top = "10";
+    shanYanUIConfig.ohos.numberMargin = numMargin;
+
+    ShanYanHarmonyAlignRuleOption loginRuleOption = ShanYanHarmonyAlignRuleOption();
+    loginRuleOption.center = ShanYanHarmonyVerticalAnchor(align: ShanYanHarmonyVerticalAlign.Center);
+    loginRuleOption.middle = ShanYanHarmonyHorizontalAnchor(align: ShanYanHorizontalAlign.Middle);
+    ShanYanHarmonyMarginOrPadding loginMargin = ShanYanHarmonyMarginOrPadding(top: "100");
+
+    shanYanUIConfig.ohos.loginBtnAlignRuleOption = loginRuleOption;
+    shanYanUIConfig.ohos.loginBtnMargin = loginMargin;
+
+    List<ShanYanCustomWidgetHarmony> shanyanCustomWidgetHarmony = [];
+
+    final String harmonybtnWidgetId = "other_custom_button"; // 标识控件 id
+    ShanYanCustomWidgetHarmony harmonybtn =
+    ShanYanCustomWidgetHarmony(harmonybtnWidgetId, ShanYanCustomWidgetType.Button);
+    harmonybtn.textContent = "其他方式登录 >";
+    harmonybtn.isFinish = false;
+
+    ShanYanHarmonyAlignRuleOption harmonybtnRuleOption = ShanYanHarmonyAlignRuleOption();
+    harmonybtnRuleOption.center = ShanYanHarmonyVerticalAnchor(align: ShanYanHarmonyVerticalAlign.Center);
+    harmonybtnRuleOption.middle = ShanYanHarmonyHorizontalAnchor(align: ShanYanHorizontalAlign.Middle);
+    ShanYanHarmonyMarginOrPadding harmonybtnMargin = ShanYanHarmonyMarginOrPadding(top: "220");
+    harmonybtn.width = "200";
+    harmonybtn.height = "40";
+    harmonybtn.alignRuleOption = harmonybtnRuleOption;
+    harmonybtn.margin = harmonybtnMargin;
+    harmonybtn.backgroundColor = "#330000";
+    shanyanCustomWidgetHarmony.add(harmonybtn);
+
+    final String harmonyImgWidgetId = "other_custom_image"; // 标识控件 id
+    ShanYanCustomWidgetHarmony harmonyImg =
+    ShanYanCustomWidgetHarmony(harmonyImgWidgetId, ShanYanCustomWidgetType.ImageView);
+    harmonyImg.isFinish = false;
+    ShanYanHarmonyAlignRuleOption harmonyImgRuleOption = ShanYanHarmonyAlignRuleOption();
+    harmonyImgRuleOption.center = ShanYanHarmonyVerticalAnchor(align: ShanYanHarmonyVerticalAlign.Center);
+    harmonyImgRuleOption.middle = ShanYanHarmonyHorizontalAnchor(align: ShanYanHorizontalAlign.Middle);
+    ShanYanHarmonyMarginOrPadding harmonyImgMargin = ShanYanHarmonyMarginOrPadding(top: "310");
+
+    harmonyImg.backgroundImgPath = "qq.png";
+    harmonyImg.width = "200";
+    harmonyImg.height = "40";
+    harmonyImg.alignRuleOption = harmonyImgRuleOption;
+    harmonyImg.margin = harmonyImgMargin;
+    harmonyImg.backgroundColor = "#330000";
+
+    shanyanCustomWidgetHarmony.add(harmonyImg);
+    shanYanUIConfig.ohos.widgets = shanyanCustomWidgetHarmony;
+
+
+
+
+
+
+
     oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
 
     setState(() {

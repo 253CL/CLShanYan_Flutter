@@ -9,6 +9,8 @@ part of 'shanYanUIConfig.dart';
 ShanYanUIConfig _$ShanYanUIConfigFromJson(Map<String, dynamic> json) =>
     ShanYanUIConfig()
       ..ios = ShanYanUIConfigIOS.fromJson(json['ios'] as Map<String, dynamic>)
+      ..ohos =
+          ShanYanUIConfigHarmony.fromJson(json['ohos'] as Map<String, dynamic>)
       ..androidPortrait = ShanYanUIConfigAndroid.fromJson(
           json['androidPortrait'] as Map<String, dynamic>)
       ..androidLandscape = ShanYanUIConfigAndroid.fromJson(
@@ -17,6 +19,7 @@ ShanYanUIConfig _$ShanYanUIConfigFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ShanYanUIConfigToJson(ShanYanUIConfig instance) =>
     <String, dynamic>{
       'ios': instance.ios.toJson(),
+      'ohos': instance.ohos.toJson(),
       'androidPortrait': instance.androidPortrait.toJson(),
       'androidLandscape': instance.androidLandscape.toJson(),
     };
@@ -193,231 +196,174 @@ ShanYanUIConfigIOS _$ShanYanUIConfigIOSFromJson(Map<String, dynamic> json) =>
       ..layOutLandscape = ClOrientationLayOutIOS.fromJson(
           json['layOutLandscape'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) =>
-    <String, dynamic>{
-      if (instance.isFinish case final value?) 'isFinish': value,
-      if (instance.setAuthBGImgPath case final value?)
-        'setAuthBGImgPath': value,
-      if (instance.setAuthBGVedioPath case final value?)
-        'setAuthBGVedioPath': value,
-      if (_$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle]
-          case final value?)
-        'setPreferredStatusBarStyle': value,
-      if (instance.setStatusBarHidden case final value?)
-        'setStatusBarHidden': value,
-      if (instance.setAuthNavHidden case final value?)
-        'setAuthNavHidden': value,
-      if (_$iOSBarStyleEnumMap[instance.setNavigationBarStyle]
-          case final value?)
-        'setNavigationBarStyle': value,
-      if (instance.setAuthNavTransparent case final value?)
-        'setAuthNavTransparent': value,
-      if (instance.setNavText case final value?) 'setNavText': value,
-      if (instance.setNavTextColor case final value?) 'setNavTextColor': value,
-      if (instance.setNavTextSize case final value?) 'setNavTextSize': value,
-      if (instance.setNavReturnImgPath case final value?)
-        'setNavReturnImgPath': value,
-      if (instance.setNavReturnImgHidden case final value?)
-        'setNavReturnImgHidden': value,
-      if (instance.setBackPressedAvailable case final value?)
-        'setBackPressedAvailable': value,
-      if (instance.setFitsSystemWindows case final value?)
-        'setFitsSystemWindows': value,
-      if (instance.setNavBackBtnAlimentRight case final value?)
-        'setNavBackBtnAlimentRight': value,
-      if (instance.setNavigationBottomLineHidden case final value?)
-        'setNavigationBottomLineHidden': value,
-      if (instance.setNavigationTintColor case final value?)
-        'setNavigationTintColor': value,
-      if (instance.setNavigationBarTintColor case final value?)
-        'setNavigationBarTintColor': value,
-      if (instance.setNavigationBackgroundImage case final value?)
-        'setNavigationBackgroundImage': value,
-      if (instance.setNavigationShadowImage case final value?)
-        'setNavigationShadowImage': value,
-      if (instance.setLogoImgPath case final value?) 'setLogoImgPath': value,
-      if (instance.setLogoCornerRadius case final value?)
-        'setLogoCornerRadius': value,
-      if (instance.setLogoHidden case final value?) 'setLogoHidden': value,
-      if (instance.setNumberColor case final value?) 'setNumberColor': value,
-      if (instance.setNumberSize case final value?) 'setNumberSize': value,
-      if (instance.setNumberBold case final value?) 'setNumberBold': value,
-      if (_$iOSTextAlignmentEnumMap[instance.setNumberTextAlignment]
-          case final value?)
-        'setNumberTextAlignment': value,
-      if (instance.setLogBtnText case final value?) 'setLogBtnText': value,
-      if (instance.setLogBtnTextColor case final value?)
-        'setLogBtnTextColor': value,
-      if (instance.setLoginBtnTextSize case final value?)
-        'setLoginBtnTextSize': value,
-      if (instance.setLoginBtnTextBold case final value?)
-        'setLoginBtnTextBold': value,
-      if (instance.setLoginBtnBgColor case final value?)
-        'setLoginBtnBgColor': value,
-      if (instance.setLoginBtnNormalBgImage case final value?)
-        'setLoginBtnNormalBgImage': value,
-      if (instance.setLoginBtnHightLightBgImage case final value?)
-        'setLoginBtnHightLightBgImage': value,
-      if (instance.setLoginBtnDisabledBgImage case final value?)
-        'setLoginBtnDisabledBgImage': value,
-      if (instance.setLoginBtnBorderColor case final value?)
-        'setLoginBtnBorderColor': value,
-      if (instance.setLoginBtnCornerRadius case final value?)
-        'setLoginBtnCornerRadius': value,
-      if (instance.setLoginBtnBorderWidth case final value?)
-        'setLoginBtnBorderWidth': value,
-      if (instance.setAppPrivacyColor case final value?)
-        'setAppPrivacyColor': value,
-      if (instance.setPrivacyTextSize case final value?)
-        'setPrivacyTextSize': value,
-      if (instance.setPrivacyWidth case final value?) 'setPrivacyWidth': value,
-      if (instance.setPrivacyTextBold case final value?)
-        'setPrivacyTextBold': value,
-      if (_$iOSTextAlignmentEnumMap[instance.setAppPrivacyTextAlignment]
-          case final value?)
-        'setAppPrivacyTextAlignment': value,
-      if (instance.setPrivacySmhHidden case final value?)
-        'setPrivacySmhHidden': value,
-      if (instance.setAppPrivacyLineSpacing case final value?)
-        'setAppPrivacyLineSpacing': value,
-      if (instance.setAppPrivacyNeedSizeToFit case final value?)
-        'setAppPrivacyNeedSizeToFit': value,
-      if (instance.setAppPrivacyAbbreviatedName case final value?)
-        'setAppPrivacyAbbreviatedName': value,
-      if (instance.setAppPrivacyFirst case final value?)
-        'setAppPrivacyFirst': value,
-      if (instance.setAppPrivacySecond case final value?)
-        'setAppPrivacySecond': value,
-      if (instance.setAppPrivacyThird case final value?)
-        'setAppPrivacyThird': value,
-      if (instance.setAppPrivacyNormalDesTextFirst case final value?)
-        'setAppPrivacyNormalDesTextFirst': value,
-      if (instance.setAppPrivacyNormalDesTextSecond case final value?)
-        'setAppPrivacyNormalDesTextSecond': value,
-      if (instance.setAppPrivacyNormalDesTextThird case final value?)
-        'setAppPrivacyNormalDesTextThird': value,
-      if (instance.setAppPrivacyNormalDesTextFourth case final value?)
-        'setAppPrivacyNormalDesTextFourth': value,
-      if (instance.setAppPrivacyNormalDesTextLast case final value?)
-        'setAppPrivacyNormalDesTextLast': value,
-      if (instance.morePrivacy?.map((e) => e.toJson()).toList()
-          case final value?)
-        'morePrivacy': value,
-      if (instance.setCheckBoxTipMsg case final value?)
-        'setCheckBoxTipMsg': value,
-      if (instance.setCheckBoxTipDisable case final value?)
-        'setCheckBoxTipDisable': value,
-      if (instance.setOperatorPrivacyAtLast case final value?)
-        'setOperatorPrivacyAtLast': value,
-      if (instance.setPrivacyNameUnderline case final value?)
-        'setPrivacyNameUnderline': value,
-      if (instance.setPrivacyActivityEnabled case final value?)
-        'setPrivacyActivityEnabled': value,
-      if (instance.setPrivacyGravityHorizontalCenter case final value?)
-        'setPrivacyGravityHorizontalCenter': value,
-      if (instance.setPrivacyNavTextColor case final value?)
-        'setPrivacyNavTextColor': value,
-      if (instance.setPrivacyNavTextSize case final value?)
-        'setPrivacyNavTextSize': value,
-      if (instance.setPrivacyNavReturnImgPath case final value?)
-        'setPrivacyNavReturnImgPath': value,
-      if (_$iOSStatusBarStyleEnumMap[
-              instance.setAppPrivacyWebPreferredStatusBarStyle]
-          case final value?)
-        'setAppPrivacyWebPreferredStatusBarStyle': value,
-      if (_$iOSBarStyleEnumMap[instance.setAppPrivacyWebNavigationBarStyle]
-          case final value?)
-        'setAppPrivacyWebNavigationBarStyle': value,
-      if (instance.setAppPrivacyWebNavigationTintColor case final value?)
-        'setAppPrivacyWebNavigationTintColor': value,
-      if (instance.setAppPrivacyWebNavigationBarTintColor case final value?)
-        'setAppPrivacyWebNavigationBarTintColor': value,
-      if (instance.setAppPrivacyWebNavigationBackgroundImage case final value?)
-        'setAppPrivacyWebNavigationBackgroundImage': value,
-      if (instance.setAppPrivacyWebNavigationShadowImage case final value?)
-        'setAppPrivacyWebNavigationShadowImage': value,
-      if (instance.setSloganTextSize case final value?)
-        'setSloganTextSize': value,
-      if (instance.setSloganTextBold case final value?)
-        'setSloganTextBold': value,
-      if (instance.setSloganTextColor case final value?)
-        'setSloganTextColor': value,
-      if (_$iOSTextAlignmentEnumMap[instance.setSloganTextAlignment]
-          case final value?)
-        'setSloganTextAlignment': value,
-      if (instance.setSloganTextHidden case final value?)
-        'setSloganTextHidden': value,
-      if (instance.setShanYanSloganTextSize case final value?)
-        'setShanYanSloganTextSize': value,
-      if (instance.setShanYanSloganTextBold case final value?)
-        'setShanYanSloganTextBold': value,
-      if (instance.setShanYanSloganTextColor case final value?)
-        'setShanYanSloganTextColor': value,
-      if (_$iOSTextAlignmentEnumMap[instance.setShanYanSloganTextAlignment]
-          case final value?)
-        'setShanYanSloganTextAlignment': value,
-      if (instance.setShanYanSloganHidden case final value?)
-        'setShanYanSloganHidden': value,
-      if (instance.setCheckBoxHidden case final value?)
-        'setCheckBoxHidden': value,
-      if (instance.setPrivacyState case final value?) 'setPrivacyState': value,
-      if (instance.setCheckBoxWH case final value?) 'setCheckBoxWH': value,
-      if (instance.setCheckBoxImageEdgeInsets case final value?)
-        'setCheckBoxImageEdgeInsets': value,
-      if (instance.setCheckBoxVerticalAlignmentToAppPrivacyTop
-          case final value?)
-        'setCheckBoxVerticalAlignmentToAppPrivacyTop': value,
-      if (instance.setCheckBoxVerticalAlignmentToAppPrivacyCenterY
-          case final value?)
-        'setCheckBoxVerticalAlignmentToAppPrivacyCenterY': value,
-      if (instance.setUncheckedImgPath case final value?)
-        'setUncheckedImgPath': value,
-      if (instance.setCheckedImgPath case final value?)
-        'setCheckedImgPath': value,
-      if (instance.setLoadingSize case final value?) 'setLoadingSize': value,
-      if (instance.setLoadingCornerRadius case final value?)
-        'setLoadingCornerRadius': value,
-      if (instance.setLoadingBackgroundColor case final value?)
-        'setLoadingBackgroundColor': value,
-      if (instance.setLoadingTintColor case final value?)
-        'setLoadingTintColor': value,
-      if (instance.widgets?.map((e) => e.toJson()).toList() case final value?)
-        'widgets': value,
-      if (instance.setShouldAutorotate case final value?)
-        'setShouldAutorotate': value,
-      if (_$iOSInterfaceOrientationMaskEnumMap[
-              instance.supportedInterfaceOrientations]
-          case final value?)
-        'supportedInterfaceOrientations': value,
-      if (_$iOSInterfaceOrientationEnumMap[
-              instance.preferredInterfaceOrientationForPresentation]
-          case final value?)
-        'preferredInterfaceOrientationForPresentation': value,
-      if (instance.setAuthTypeUseWindow case final value?)
-        'setAuthTypeUseWindow': value,
-      if (instance.setAuthWindowCornerRadius case final value?)
-        'setAuthWindowCornerRadius': value,
-      if (_$iOSModalTransitionStyleEnumMap[
-              instance.setAuthWindowModalTransitionStyle]
-          case final value?)
-        'setAuthWindowModalTransitionStyle': value,
-      if (_$iOSModalPresentationStyleEnumMap[
-              instance.setAuthWindowModalPresentationStyle]
-          case final value?)
-        'setAuthWindowModalPresentationStyle': value,
-      if (_$iOSModalPresentationStyleEnumMap[
-              instance.setAppPrivacyWebModalPresentationStyle]
-          case final value?)
-        'setAppPrivacyWebModalPresentationStyle': value,
-      if (_$iOSUserInterfaceStyleEnumMap[
-              instance.setAuthWindowOverrideUserInterfaceStyle]
-          case final value?)
-        'setAuthWindowOverrideUserInterfaceStyle': value,
-      if (instance.setAuthWindowPresentingAnimate case final value?)
-        'setAuthWindowPresentingAnimate': value,
-      'layOutPortrait': instance.layOutPortrait.toJson(),
-      'layOutLandscape': instance.layOutLandscape.toJson(),
-    };
+Map<String, dynamic> _$ShanYanUIConfigIOSToJson(ShanYanUIConfigIOS instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('isFinish', instance.isFinish);
+  writeNotNull('setAuthBGImgPath', instance.setAuthBGImgPath);
+  writeNotNull('setAuthBGVedioPath', instance.setAuthBGVedioPath);
+  writeNotNull('setPreferredStatusBarStyle',
+      _$iOSStatusBarStyleEnumMap[instance.setPreferredStatusBarStyle]);
+  writeNotNull('setStatusBarHidden', instance.setStatusBarHidden);
+  writeNotNull('setAuthNavHidden', instance.setAuthNavHidden);
+  writeNotNull('setNavigationBarStyle',
+      _$iOSBarStyleEnumMap[instance.setNavigationBarStyle]);
+  writeNotNull('setAuthNavTransparent', instance.setAuthNavTransparent);
+  writeNotNull('setNavText', instance.setNavText);
+  writeNotNull('setNavTextColor', instance.setNavTextColor);
+  writeNotNull('setNavTextSize', instance.setNavTextSize);
+  writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
+  writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
+  writeNotNull('setBackPressedAvailable', instance.setBackPressedAvailable);
+  writeNotNull('setFitsSystemWindows', instance.setFitsSystemWindows);
+  writeNotNull('setNavBackBtnAlimentRight', instance.setNavBackBtnAlimentRight);
+  writeNotNull(
+      'setNavigationBottomLineHidden', instance.setNavigationBottomLineHidden);
+  writeNotNull('setNavigationTintColor', instance.setNavigationTintColor);
+  writeNotNull('setNavigationBarTintColor', instance.setNavigationBarTintColor);
+  writeNotNull(
+      'setNavigationBackgroundImage', instance.setNavigationBackgroundImage);
+  writeNotNull('setNavigationShadowImage', instance.setNavigationShadowImage);
+  writeNotNull('setLogoImgPath', instance.setLogoImgPath);
+  writeNotNull('setLogoCornerRadius', instance.setLogoCornerRadius);
+  writeNotNull('setLogoHidden', instance.setLogoHidden);
+  writeNotNull('setNumberColor', instance.setNumberColor);
+  writeNotNull('setNumberSize', instance.setNumberSize);
+  writeNotNull('setNumberBold', instance.setNumberBold);
+  writeNotNull('setNumberTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setNumberTextAlignment]);
+  writeNotNull('setLogBtnText', instance.setLogBtnText);
+  writeNotNull('setLogBtnTextColor', instance.setLogBtnTextColor);
+  writeNotNull('setLoginBtnTextSize', instance.setLoginBtnTextSize);
+  writeNotNull('setLoginBtnTextBold', instance.setLoginBtnTextBold);
+  writeNotNull('setLoginBtnBgColor', instance.setLoginBtnBgColor);
+  writeNotNull('setLoginBtnNormalBgImage', instance.setLoginBtnNormalBgImage);
+  writeNotNull(
+      'setLoginBtnHightLightBgImage', instance.setLoginBtnHightLightBgImage);
+  writeNotNull(
+      'setLoginBtnDisabledBgImage', instance.setLoginBtnDisabledBgImage);
+  writeNotNull('setLoginBtnBorderColor', instance.setLoginBtnBorderColor);
+  writeNotNull('setLoginBtnCornerRadius', instance.setLoginBtnCornerRadius);
+  writeNotNull('setLoginBtnBorderWidth', instance.setLoginBtnBorderWidth);
+  writeNotNull('setAppPrivacyColor', instance.setAppPrivacyColor);
+  writeNotNull('setPrivacyTextSize', instance.setPrivacyTextSize);
+  writeNotNull('setPrivacyWidth', instance.setPrivacyWidth);
+  writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
+  writeNotNull('setAppPrivacyTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setAppPrivacyTextAlignment]);
+  writeNotNull('setPrivacySmhHidden', instance.setPrivacySmhHidden);
+  writeNotNull('setAppPrivacyLineSpacing', instance.setAppPrivacyLineSpacing);
+  writeNotNull(
+      'setAppPrivacyNeedSizeToFit', instance.setAppPrivacyNeedSizeToFit);
+  writeNotNull(
+      'setAppPrivacyAbbreviatedName', instance.setAppPrivacyAbbreviatedName);
+  writeNotNull('setAppPrivacyFirst', instance.setAppPrivacyFirst);
+  writeNotNull('setAppPrivacySecond', instance.setAppPrivacySecond);
+  writeNotNull('setAppPrivacyThird', instance.setAppPrivacyThird);
+  writeNotNull('setAppPrivacyNormalDesTextFirst',
+      instance.setAppPrivacyNormalDesTextFirst);
+  writeNotNull('setAppPrivacyNormalDesTextSecond',
+      instance.setAppPrivacyNormalDesTextSecond);
+  writeNotNull('setAppPrivacyNormalDesTextThird',
+      instance.setAppPrivacyNormalDesTextThird);
+  writeNotNull('setAppPrivacyNormalDesTextFourth',
+      instance.setAppPrivacyNormalDesTextFourth);
+  writeNotNull('setAppPrivacyNormalDesTextLast',
+      instance.setAppPrivacyNormalDesTextLast);
+  writeNotNull(
+      'morePrivacy', instance.morePrivacy?.map((e) => e.toJson()).toList());
+  writeNotNull('setCheckBoxTipMsg', instance.setCheckBoxTipMsg);
+  writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
+  writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
+  writeNotNull('setPrivacyNameUnderline', instance.setPrivacyNameUnderline);
+  writeNotNull('setPrivacyActivityEnabled', instance.setPrivacyActivityEnabled);
+  writeNotNull('setPrivacyGravityHorizontalCenter',
+      instance.setPrivacyGravityHorizontalCenter);
+  writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
+  writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);
+  writeNotNull(
+      'setPrivacyNavReturnImgPath', instance.setPrivacyNavReturnImgPath);
+  writeNotNull(
+      'setAppPrivacyWebPreferredStatusBarStyle',
+      _$iOSStatusBarStyleEnumMap[
+          instance.setAppPrivacyWebPreferredStatusBarStyle]);
+  writeNotNull('setAppPrivacyWebNavigationBarStyle',
+      _$iOSBarStyleEnumMap[instance.setAppPrivacyWebNavigationBarStyle]);
+  writeNotNull('setAppPrivacyWebNavigationTintColor',
+      instance.setAppPrivacyWebNavigationTintColor);
+  writeNotNull('setAppPrivacyWebNavigationBarTintColor',
+      instance.setAppPrivacyWebNavigationBarTintColor);
+  writeNotNull('setAppPrivacyWebNavigationBackgroundImage',
+      instance.setAppPrivacyWebNavigationBackgroundImage);
+  writeNotNull('setAppPrivacyWebNavigationShadowImage',
+      instance.setAppPrivacyWebNavigationShadowImage);
+  writeNotNull('setSloganTextSize', instance.setSloganTextSize);
+  writeNotNull('setSloganTextBold', instance.setSloganTextBold);
+  writeNotNull('setSloganTextColor', instance.setSloganTextColor);
+  writeNotNull('setSloganTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setSloganTextAlignment]);
+  writeNotNull('setSloganTextHidden', instance.setSloganTextHidden);
+  writeNotNull('setShanYanSloganTextSize', instance.setShanYanSloganTextSize);
+  writeNotNull('setShanYanSloganTextBold', instance.setShanYanSloganTextBold);
+  writeNotNull('setShanYanSloganTextColor', instance.setShanYanSloganTextColor);
+  writeNotNull('setShanYanSloganTextAlignment',
+      _$iOSTextAlignmentEnumMap[instance.setShanYanSloganTextAlignment]);
+  writeNotNull('setShanYanSloganHidden', instance.setShanYanSloganHidden);
+  writeNotNull('setCheckBoxHidden', instance.setCheckBoxHidden);
+  writeNotNull('setPrivacyState', instance.setPrivacyState);
+  writeNotNull('setCheckBoxWH', instance.setCheckBoxWH);
+  writeNotNull(
+      'setCheckBoxImageEdgeInsets', instance.setCheckBoxImageEdgeInsets);
+  writeNotNull('setCheckBoxVerticalAlignmentToAppPrivacyTop',
+      instance.setCheckBoxVerticalAlignmentToAppPrivacyTop);
+  writeNotNull('setCheckBoxVerticalAlignmentToAppPrivacyCenterY',
+      instance.setCheckBoxVerticalAlignmentToAppPrivacyCenterY);
+  writeNotNull('setUncheckedImgPath', instance.setUncheckedImgPath);
+  writeNotNull('setCheckedImgPath', instance.setCheckedImgPath);
+  writeNotNull('setLoadingSize', instance.setLoadingSize);
+  writeNotNull('setLoadingCornerRadius', instance.setLoadingCornerRadius);
+  writeNotNull('setLoadingBackgroundColor', instance.setLoadingBackgroundColor);
+  writeNotNull('setLoadingTintColor', instance.setLoadingTintColor);
+  writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());
+  writeNotNull('setShouldAutorotate', instance.setShouldAutorotate);
+  writeNotNull(
+      'supportedInterfaceOrientations',
+      _$iOSInterfaceOrientationMaskEnumMap[
+          instance.supportedInterfaceOrientations]);
+  writeNotNull(
+      'preferredInterfaceOrientationForPresentation',
+      _$iOSInterfaceOrientationEnumMap[
+          instance.preferredInterfaceOrientationForPresentation]);
+  writeNotNull('setAuthTypeUseWindow', instance.setAuthTypeUseWindow);
+  writeNotNull('setAuthWindowCornerRadius', instance.setAuthWindowCornerRadius);
+  writeNotNull(
+      'setAuthWindowModalTransitionStyle',
+      _$iOSModalTransitionStyleEnumMap[
+          instance.setAuthWindowModalTransitionStyle]);
+  writeNotNull(
+      'setAuthWindowModalPresentationStyle',
+      _$iOSModalPresentationStyleEnumMap[
+          instance.setAuthWindowModalPresentationStyle]);
+  writeNotNull(
+      'setAppPrivacyWebModalPresentationStyle',
+      _$iOSModalPresentationStyleEnumMap[
+          instance.setAppPrivacyWebModalPresentationStyle]);
+  writeNotNull(
+      'setAuthWindowOverrideUserInterfaceStyle',
+      _$iOSUserInterfaceStyleEnumMap[
+          instance.setAuthWindowOverrideUserInterfaceStyle]);
+  writeNotNull('setAuthWindowPresentingAnimate',
+      instance.setAuthWindowPresentingAnimate);
+  val['layOutPortrait'] = instance.layOutPortrait.toJson();
+  val['layOutLandscape'] = instance.layOutLandscape.toJson();
+  return val;
+}
 
 const _$iOSStatusBarStyleEnumMap = {
   iOSStatusBarStyle.styleDefault: 0,
@@ -539,91 +485,77 @@ ClOrientationLayOutIOS _$ClOrientationLayOutIOSFromJson(
           json['setAuthWindowOrientationHeight'] as num?;
 
 Map<String, dynamic> _$ClOrientationLayOutIOSToJson(
-        ClOrientationLayOutIOS instance) =>
-    <String, dynamic>{
-      if (instance.setLogoWidth case final value?) 'setLogoWidth': value,
-      if (instance.setLogoHeight case final value?) 'setLogoHeight': value,
-      if (instance.setLogoLeft case final value?) 'setLogoLeft': value,
-      if (instance.setLogoRight case final value?) 'setLogoRight': value,
-      if (instance.setLogoTop case final value?) 'setLogoTop': value,
-      if (instance.setLogoBottom case final value?) 'setLogoBottom': value,
-      if (instance.setLogoCenterX case final value?) 'setLogoCenterX': value,
-      if (instance.setLogoCenterY case final value?) 'setLogoCenterY': value,
-      if (instance.setNumFieldWidth case final value?)
-        'setNumFieldWidth': value,
-      if (instance.setNumFieldHeight case final value?)
-        'setNumFieldHeight': value,
-      if (instance.setNumFieldLeft case final value?) 'setNumFieldLeft': value,
-      if (instance.setNumFieldRight case final value?)
-        'setNumFieldRight': value,
-      if (instance.setNumFieldTop case final value?) 'setNumFieldTop': value,
-      if (instance.setNumFieldBottom case final value?)
-        'setNumFieldBottom': value,
-      if (instance.setNumFieldCenterX case final value?)
-        'setNumFieldCenterX': value,
-      if (instance.setNumFieldCenterY case final value?)
-        'setNumFieldCenterY': value,
-      if (instance.setLogBtnHeight case final value?) 'setLogBtnHeight': value,
-      if (instance.setLogBtnWidth case final value?) 'setLogBtnWidth': value,
-      if (instance.setLogBtnLeft case final value?) 'setLogBtnLeft': value,
-      if (instance.setLogBtnRight case final value?) 'setLogBtnRight': value,
-      if (instance.setLogBtnTop case final value?) 'setLogBtnTop': value,
-      if (instance.setLogBtnBottom case final value?) 'setLogBtnBottom': value,
-      if (instance.setLogBtnCenterX case final value?)
-        'setLogBtnCenterX': value,
-      if (instance.setLogBtnCenterY case final value?)
-        'setLogBtnCenterY': value,
-      if (instance.setPrivacyHeight case final value?)
-        'setPrivacyHeight': value,
-      if (instance.setPrivacyWidth case final value?) 'setPrivacyWidth': value,
-      if (instance.setPrivacyLeft case final value?) 'setPrivacyLeft': value,
-      if (instance.setPrivacyRight case final value?) 'setPrivacyRight': value,
-      if (instance.setPrivacyTop case final value?) 'setPrivacyTop': value,
-      if (instance.setPrivacyBottom case final value?)
-        'setPrivacyBottom': value,
-      if (instance.setPrivacyCenterX case final value?)
-        'setPrivacyCenterX': value,
-      if (instance.setPrivacyCenterY case final value?)
-        'setPrivacyCenterY': value,
-      if (instance.setSloganHeight case final value?) 'setSloganHeight': value,
-      if (instance.setSloganWidth case final value?) 'setSloganWidth': value,
-      if (instance.setSloganLeft case final value?) 'setSloganLeft': value,
-      if (instance.setSloganRight case final value?) 'setSloganRight': value,
-      if (instance.setSloganTop case final value?) 'setSloganTop': value,
-      if (instance.setSloganBottom case final value?) 'setSloganBottom': value,
-      if (instance.setSloganCenterX case final value?)
-        'setSloganCenterX': value,
-      if (instance.setSloganCenterY case final value?)
-        'setSloganCenterY': value,
-      if (instance.setShanYanSloganHeight case final value?)
-        'setShanYanSloganHeight': value,
-      if (instance.setShanYanSloganWidth case final value?)
-        'setShanYanSloganWidth': value,
-      if (instance.setShanYanSloganLeft case final value?)
-        'setShanYanSloganLeft': value,
-      if (instance.setShanYanSloganRight case final value?)
-        'setShanYanSloganRight': value,
-      if (instance.setShanYanSloganTop case final value?)
-        'setShanYanSloganTop': value,
-      if (instance.setShanYanSloganBottom case final value?)
-        'setShanYanSloganBottom': value,
-      if (instance.setShanYanSloganCenterX case final value?)
-        'setShanYanSloganCenterX': value,
-      if (instance.setShanYanSloganCenterY case final value?)
-        'setShanYanSloganCenterY': value,
-      if (instance.setAuthWindowOrientationCenterX case final value?)
-        'setAuthWindowOrientationCenterX': value,
-      if (instance.setAuthWindowOrientationCenterY case final value?)
-        'setAuthWindowOrientationCenterY': value,
-      if (instance.setAuthWindowOrientationOriginX case final value?)
-        'setAuthWindowOrientationOriginX': value,
-      if (instance.setAuthWindowOrientationOriginY case final value?)
-        'setAuthWindowOrientationOriginY': value,
-      if (instance.setAuthWindowOrientationWidth case final value?)
-        'setAuthWindowOrientationWidth': value,
-      if (instance.setAuthWindowOrientationHeight case final value?)
-        'setAuthWindowOrientationHeight': value,
-    };
+    ClOrientationLayOutIOS instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('setLogoWidth', instance.setLogoWidth);
+  writeNotNull('setLogoHeight', instance.setLogoHeight);
+  writeNotNull('setLogoLeft', instance.setLogoLeft);
+  writeNotNull('setLogoRight', instance.setLogoRight);
+  writeNotNull('setLogoTop', instance.setLogoTop);
+  writeNotNull('setLogoBottom', instance.setLogoBottom);
+  writeNotNull('setLogoCenterX', instance.setLogoCenterX);
+  writeNotNull('setLogoCenterY', instance.setLogoCenterY);
+  writeNotNull('setNumFieldWidth', instance.setNumFieldWidth);
+  writeNotNull('setNumFieldHeight', instance.setNumFieldHeight);
+  writeNotNull('setNumFieldLeft', instance.setNumFieldLeft);
+  writeNotNull('setNumFieldRight', instance.setNumFieldRight);
+  writeNotNull('setNumFieldTop', instance.setNumFieldTop);
+  writeNotNull('setNumFieldBottom', instance.setNumFieldBottom);
+  writeNotNull('setNumFieldCenterX', instance.setNumFieldCenterX);
+  writeNotNull('setNumFieldCenterY', instance.setNumFieldCenterY);
+  writeNotNull('setLogBtnHeight', instance.setLogBtnHeight);
+  writeNotNull('setLogBtnWidth', instance.setLogBtnWidth);
+  writeNotNull('setLogBtnLeft', instance.setLogBtnLeft);
+  writeNotNull('setLogBtnRight', instance.setLogBtnRight);
+  writeNotNull('setLogBtnTop', instance.setLogBtnTop);
+  writeNotNull('setLogBtnBottom', instance.setLogBtnBottom);
+  writeNotNull('setLogBtnCenterX', instance.setLogBtnCenterX);
+  writeNotNull('setLogBtnCenterY', instance.setLogBtnCenterY);
+  writeNotNull('setPrivacyHeight', instance.setPrivacyHeight);
+  writeNotNull('setPrivacyWidth', instance.setPrivacyWidth);
+  writeNotNull('setPrivacyLeft', instance.setPrivacyLeft);
+  writeNotNull('setPrivacyRight', instance.setPrivacyRight);
+  writeNotNull('setPrivacyTop', instance.setPrivacyTop);
+  writeNotNull('setPrivacyBottom', instance.setPrivacyBottom);
+  writeNotNull('setPrivacyCenterX', instance.setPrivacyCenterX);
+  writeNotNull('setPrivacyCenterY', instance.setPrivacyCenterY);
+  writeNotNull('setSloganHeight', instance.setSloganHeight);
+  writeNotNull('setSloganWidth', instance.setSloganWidth);
+  writeNotNull('setSloganLeft', instance.setSloganLeft);
+  writeNotNull('setSloganRight', instance.setSloganRight);
+  writeNotNull('setSloganTop', instance.setSloganTop);
+  writeNotNull('setSloganBottom', instance.setSloganBottom);
+  writeNotNull('setSloganCenterX', instance.setSloganCenterX);
+  writeNotNull('setSloganCenterY', instance.setSloganCenterY);
+  writeNotNull('setShanYanSloganHeight', instance.setShanYanSloganHeight);
+  writeNotNull('setShanYanSloganWidth', instance.setShanYanSloganWidth);
+  writeNotNull('setShanYanSloganLeft', instance.setShanYanSloganLeft);
+  writeNotNull('setShanYanSloganRight', instance.setShanYanSloganRight);
+  writeNotNull('setShanYanSloganTop', instance.setShanYanSloganTop);
+  writeNotNull('setShanYanSloganBottom', instance.setShanYanSloganBottom);
+  writeNotNull('setShanYanSloganCenterX', instance.setShanYanSloganCenterX);
+  writeNotNull('setShanYanSloganCenterY', instance.setShanYanSloganCenterY);
+  writeNotNull('setAuthWindowOrientationCenterX',
+      instance.setAuthWindowOrientationCenterX);
+  writeNotNull('setAuthWindowOrientationCenterY',
+      instance.setAuthWindowOrientationCenterY);
+  writeNotNull('setAuthWindowOrientationOriginX',
+      instance.setAuthWindowOrientationOriginX);
+  writeNotNull('setAuthWindowOrientationOriginY',
+      instance.setAuthWindowOrientationOriginY);
+  writeNotNull(
+      'setAuthWindowOrientationWidth', instance.setAuthWindowOrientationWidth);
+  writeNotNull('setAuthWindowOrientationHeight',
+      instance.setAuthWindowOrientationHeight);
+  return val;
+}
 
 ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
         Map<String, dynamic> json) =>
@@ -789,204 +721,142 @@ ShanYanUIConfigAndroid _$ShanYanUIConfigAndroidFromJson(
           .toList();
 
 Map<String, dynamic> _$ShanYanUIConfigAndroidToJson(
-        ShanYanUIConfigAndroid instance) =>
-    <String, dynamic>{
-      'isFinish': instance.isFinish,
-      if (instance.setAuthBGImgPath case final value?)
-        'setAuthBGImgPath': value,
-      if (instance.setAuthBgGifPath case final value?)
-        'setAuthBgGifPath': value,
-      if (instance.setAuthBgVideoPath case final value?)
-        'setAuthBgVideoPath': value,
-      if (instance.setStatusBarHidden case final value?)
-        'setStatusBarHidden': value,
-      if (instance.setStatusBarColor case final value?)
-        'setStatusBarColor': value,
-      if (instance.setLogBtnBackgroundColor case final value?)
-        'setLogBtnBackgroundColor': value,
-      if (instance.setLightColor case final value?) 'setLightColor': value,
-      if (instance.setVirtualKeyTransparent case final value?)
-        'setVirtualKeyTransparent': value,
-      if (instance.setAuthFlagSecureEnable case final value?)
-        'setAuthFlagSecureEnable': value,
-      if (instance.setPrivacyFlagSecureEnable case final value?)
-        'setPrivacyFlagSecureEnable': value,
-      if (instance.setFullScreen case final value?) 'setFullScreen': value,
-      if (instance.setNavReturnBtnWidth case final value?)
-        'setNavReturnBtnWidth': value,
-      if (instance.setNavReturnBtnHeight case final value?)
-        'setNavReturnBtnHeight': value,
-      if (instance.setNavReturnBtnOffsetRightX case final value?)
-        'setNavReturnBtnOffsetRightX': value,
-      if (instance.setNavReturnBtnOffsetX case final value?)
-        'setNavReturnBtnOffsetX': value,
-      if (instance.setNavReturnBtnOffsetY case final value?)
-        'setNavReturnBtnOffsetY': value,
-      if (instance.setNavColor case final value?) 'setNavColor': value,
-      if (instance.setNavText case final value?) 'setNavText': value,
-      if (instance.setNavTextColor case final value?) 'setNavTextColor': value,
-      if (instance.setNavTextSize case final value?) 'setNavTextSize': value,
-      if (instance.setNavReturnImgPath case final value?)
-        'setNavReturnImgPath': value,
-      if (instance.setNavReturnImgHidden case final value?)
-        'setNavReturnImgHidden': value,
-      if (instance.setBackPressedAvailable case final value?)
-        'setBackPressedAvailable': value,
-      if (instance.setFitsSystemWindows case final value?)
-        'setFitsSystemWindows': value,
-      if (instance.setAuthNavHidden case final value?)
-        'setAuthNavHidden': value,
-      if (instance.setAuthNavTransparent case final value?)
-        'setAuthNavTransparent': value,
-      if (instance.setNavTextBold case final value?) 'setNavTextBold': value,
-      if (instance.setLogoImgPath case final value?) 'setLogoImgPath': value,
-      if (instance.setLogoHidden case final value?) 'setLogoHidden': value,
-      if (instance.setLogoOffsetY case final value?) 'setLogoOffsetY': value,
-      if (instance.setLogoOffsetBottomY case final value?)
-        'setLogoOffsetBottomY': value,
-      if (instance.setLogoOffsetX case final value?) 'setLogoOffsetX': value,
-      if (instance.setLogoWidth case final value?) 'setLogoWidth': value,
-      if (instance.setLogoHeight case final value?) 'setLogoHeight': value,
-      if (instance.setNumFieldOffsetY case final value?)
-        'setNumFieldOffsetY': value,
-      if (instance.setNumFieldOffsetBottomY case final value?)
-        'setNumFieldOffsetBottomY': value,
-      if (instance.setNumberSize case final value?) 'setNumberSize': value,
-      if (instance.setNumFieldOffsetX case final value?)
-        'setNumFieldOffsetX': value,
-      if (instance.setNumFieldWidth case final value?)
-        'setNumFieldWidth': value,
-      if (instance.setNumFieldHeight case final value?)
-        'setNumFieldHeight': value,
-      if (instance.setNumberColor case final value?) 'setNumberColor': value,
-      if (instance.setNumberBold case final value?) 'setNumberBold': value,
-      if (instance.setLogBtnOffsetY case final value?)
-        'setLogBtnOffsetY': value,
-      if (instance.setLogBtnOffsetBottomY case final value?)
-        'setLogBtnOffsetBottomY': value,
-      if (instance.setLogBtnTextSize case final value?)
-        'setLogBtnTextSize': value,
-      if (instance.setLogBtnOffsetX case final value?)
-        'setLogBtnOffsetX': value,
-      if (instance.setLogBtnHeight case final value?) 'setLogBtnHeight': value,
-      if (instance.setLogBtnWidth case final value?) 'setLogBtnWidth': value,
-      if (instance.setLogBtnText case final value?) 'setLogBtnText': value,
-      if (instance.setLogBtnTextColor case final value?)
-        'setLogBtnTextColor': value,
-      if (instance.setLogBtnImgPath case final value?)
-        'setLogBtnImgPath': value,
-      if (instance.setLogBtnTextBold case final value?)
-        'setLogBtnTextBold': value,
-      if (instance.setPrivacyOffsetBottomY case final value?)
-        'setPrivacyOffsetBottomY': value,
-      if (instance.setPrivacyOffsetY case final value?)
-        'setPrivacyOffsetY': value,
-      if (instance.setPrivacyOffsetX case final value?)
-        'setPrivacyOffsetX': value,
-      if (instance.setAppPrivacyOne case final value?)
-        'setAppPrivacyOne': value,
-      if (instance.setAppPrivacyTwo case final value?)
-        'setAppPrivacyTwo': value,
-      if (instance.setAppPrivacyThree case final value?)
-        'setAppPrivacyThree': value,
-      if (instance.setPrivacySmhHidden case final value?)
-        'setPrivacySmhHidden': value,
-      if (instance.setPrivacyTextSize case final value?)
-        'setPrivacyTextSize': value,
-      if (instance.setPrivacyWidth case final value?) 'setPrivacyWidth': value,
-      if (instance.setAppPrivacyColor case final value?)
-        'setAppPrivacyColor': value,
-      if (instance.setPrivacyOffsetGravityLeft case final value?)
-        'setPrivacyOffsetGravityLeft': value,
-      if (instance.setPrivacyState case final value?) 'setPrivacyState': value,
-      if (instance.setUncheckedImgPath case final value?)
-        'setUncheckedImgPath': value,
-      if (instance.setCheckedImgPath case final value?)
-        'setCheckedImgPath': value,
-      if (instance.setCheckBoxHidden case final value?)
-        'setCheckBoxHidden': value,
-      if (instance.setCheckBoxWH case final value?) 'setCheckBoxWH': value,
-      if (instance.setCheckBoxOffsetXY case final value?)
-        'setCheckBoxOffsetXY': value,
-      if (instance.setCheckBoxMargin case final value?)
-        'setCheckBoxMargin': value,
-      if (instance.setPrivacyText case final value?) 'setPrivacyText': value,
-      if (instance.setPrivacyTextBold case final value?)
-        'setPrivacyTextBold': value,
-      if (instance.setCheckBoxTipDisable case final value?)
-        'setCheckBoxTipDisable': value,
-      if (instance.setPrivacyCustomToastText case final value?)
-        'setPrivacyCustomToastText': value,
-      if (instance.setPrivacyNameUnderline case final value?)
-        'setPrivacyNameUnderline': value,
-      if (instance.setOperatorPrivacyAtLast case final value?)
-        'setOperatorPrivacyAtLast': value,
-      if (instance.setPrivacyGravityHorizontalCenter case final value?)
-        'setPrivacyGravityHorizontalCenter': value,
-      if (instance.setPrivacyActivityEnabled case final value?)
-        'setPrivacyActivityEnabled': value,
-      if (instance.setSloganOffsetY case final value?)
-        'setSloganOffsetY': value,
-      if (instance.setSloganOffsetBottomY case final value?)
-        'setSloganOffsetBottomY': value,
-      if (instance.setSloganOffsetX case final value?)
-        'setSloganOffsetX': value,
-      if (instance.setSloganTextColor case final value?)
-        'setSloganTextColor': value,
-      if (instance.setSloganTextSize case final value?)
-        'setSloganTextSize': value,
-      if (instance.setSloganHidden case final value?) 'setSloganHidden': value,
-      if (instance.setSloganTextBold case final value?)
-        'setSloganTextBold': value,
-      if (instance.setShanYanSloganOffsetY case final value?)
-        'setShanYanSloganOffsetY': value,
-      if (instance.setShanYanSloganOffsetBottomY case final value?)
-        'setShanYanSloganOffsetBottomY': value,
-      if (instance.setShanYanSloganOffsetX case final value?)
-        'setShanYanSloganOffsetX': value,
-      if (instance.setShanYanSloganTextColor case final value?)
-        'setShanYanSloganTextColor': value,
-      if (instance.setShanYanSloganTextSize case final value?)
-        'setShanYanSloganTextSize': value,
-      if (instance.setShanYanSloganHidden case final value?)
-        'setShanYanSloganHidden': value,
-      if (instance.setShanYanSloganTextBold case final value?)
-        'setShanYanSloganTextBold': value,
-      if (instance.setPrivacyNavColor case final value?)
-        'setPrivacyNavColor': value,
-      if (instance.setPrivacyNavTextBold case final value?)
-        'setPrivacyNavTextBold': value,
-      if (instance.setPrivacyNavTextColor case final value?)
-        'setPrivacyNavTextColor': value,
-      if (instance.setPrivacyNavTextSize case final value?)
-        'setPrivacyNavTextSize': value,
-      if (instance.setPrivacyNavReturnImgPath case final value?)
-        'setPrivacyNavReturnImgPath': value,
-      if (instance.setPrivacyNavReturnImgHidden case final value?)
-        'setPrivacyNavReturnImgHidden': value,
-      if (instance.setPrivacyNavReturnBtnWidth case final value?)
-        'setPrivacyNavReturnBtnWidth': value,
-      if (instance.setPrivacyNavReturnBtnHeight case final value?)
-        'setPrivacyNavReturnBtnHeight': value,
-      if (instance.setPrivacyNavReturnBtnOffsetRightX case final value?)
-        'setPrivacyNavReturnBtnOffsetRightX': value,
-      if (instance.setPrivacyNavReturnBtnOffsetX case final value?)
-        'setPrivacyNavReturnBtnOffsetX': value,
-      if (instance.setPrivacyNavReturnBtnOffsetY case final value?)
-        'setPrivacyNavReturnBtnOffsetY': value,
-      if (instance.setLoadingView case final value?) 'setLoadingView': value,
-      if (instance.setDialogTheme case final value?) 'setDialogTheme': value,
-      if (instance.setActivityTranslateAnim case final value?)
-        'setActivityTranslateAnim': value,
-      if (instance.widgetLayouts?.map((e) => e.toJson()).toList()
-          case final value?)
-        'widgetLayouts': value,
-      if (instance.widgets?.map((e) => e.toJson()).toList() case final value?)
-        'widgets': value,
-      if (instance.morePrivacy?.map((e) => e.toJson()).toList()
-          case final value?)
-        'morePrivacy': value,
-    };
+    ShanYanUIConfigAndroid instance) {
+  final val = <String, dynamic>{
+    'isFinish': instance.isFinish,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('setAuthBGImgPath', instance.setAuthBGImgPath);
+  writeNotNull('setAuthBgGifPath', instance.setAuthBgGifPath);
+  writeNotNull('setAuthBgVideoPath', instance.setAuthBgVideoPath);
+  writeNotNull('setStatusBarHidden', instance.setStatusBarHidden);
+  writeNotNull('setStatusBarColor', instance.setStatusBarColor);
+  writeNotNull('setLogBtnBackgroundColor', instance.setLogBtnBackgroundColor);
+  writeNotNull('setLightColor', instance.setLightColor);
+  writeNotNull('setVirtualKeyTransparent', instance.setVirtualKeyTransparent);
+  writeNotNull('setAuthFlagSecureEnable', instance.setAuthFlagSecureEnable);
+  writeNotNull(
+      'setPrivacyFlagSecureEnable', instance.setPrivacyFlagSecureEnable);
+  writeNotNull('setFullScreen', instance.setFullScreen);
+  writeNotNull('setNavReturnBtnWidth', instance.setNavReturnBtnWidth);
+  writeNotNull('setNavReturnBtnHeight', instance.setNavReturnBtnHeight);
+  writeNotNull(
+      'setNavReturnBtnOffsetRightX', instance.setNavReturnBtnOffsetRightX);
+  writeNotNull('setNavReturnBtnOffsetX', instance.setNavReturnBtnOffsetX);
+  writeNotNull('setNavReturnBtnOffsetY', instance.setNavReturnBtnOffsetY);
+  writeNotNull('setNavColor', instance.setNavColor);
+  writeNotNull('setNavText', instance.setNavText);
+  writeNotNull('setNavTextColor', instance.setNavTextColor);
+  writeNotNull('setNavTextSize', instance.setNavTextSize);
+  writeNotNull('setNavReturnImgPath', instance.setNavReturnImgPath);
+  writeNotNull('setNavReturnImgHidden', instance.setNavReturnImgHidden);
+  writeNotNull('setBackPressedAvailable', instance.setBackPressedAvailable);
+  writeNotNull('setFitsSystemWindows', instance.setFitsSystemWindows);
+  writeNotNull('setAuthNavHidden', instance.setAuthNavHidden);
+  writeNotNull('setAuthNavTransparent', instance.setAuthNavTransparent);
+  writeNotNull('setNavTextBold', instance.setNavTextBold);
+  writeNotNull('setLogoImgPath', instance.setLogoImgPath);
+  writeNotNull('setLogoHidden', instance.setLogoHidden);
+  writeNotNull('setLogoOffsetY', instance.setLogoOffsetY);
+  writeNotNull('setLogoOffsetBottomY', instance.setLogoOffsetBottomY);
+  writeNotNull('setLogoOffsetX', instance.setLogoOffsetX);
+  writeNotNull('setLogoWidth', instance.setLogoWidth);
+  writeNotNull('setLogoHeight', instance.setLogoHeight);
+  writeNotNull('setNumFieldOffsetY', instance.setNumFieldOffsetY);
+  writeNotNull('setNumFieldOffsetBottomY', instance.setNumFieldOffsetBottomY);
+  writeNotNull('setNumberSize', instance.setNumberSize);
+  writeNotNull('setNumFieldOffsetX', instance.setNumFieldOffsetX);
+  writeNotNull('setNumFieldWidth', instance.setNumFieldWidth);
+  writeNotNull('setNumFieldHeight', instance.setNumFieldHeight);
+  writeNotNull('setNumberColor', instance.setNumberColor);
+  writeNotNull('setNumberBold', instance.setNumberBold);
+  writeNotNull('setLogBtnOffsetY', instance.setLogBtnOffsetY);
+  writeNotNull('setLogBtnOffsetBottomY', instance.setLogBtnOffsetBottomY);
+  writeNotNull('setLogBtnTextSize', instance.setLogBtnTextSize);
+  writeNotNull('setLogBtnOffsetX', instance.setLogBtnOffsetX);
+  writeNotNull('setLogBtnHeight', instance.setLogBtnHeight);
+  writeNotNull('setLogBtnWidth', instance.setLogBtnWidth);
+  writeNotNull('setLogBtnText', instance.setLogBtnText);
+  writeNotNull('setLogBtnTextColor', instance.setLogBtnTextColor);
+  writeNotNull('setLogBtnImgPath', instance.setLogBtnImgPath);
+  writeNotNull('setLogBtnTextBold', instance.setLogBtnTextBold);
+  writeNotNull('setPrivacyOffsetBottomY', instance.setPrivacyOffsetBottomY);
+  writeNotNull('setPrivacyOffsetY', instance.setPrivacyOffsetY);
+  writeNotNull('setPrivacyOffsetX', instance.setPrivacyOffsetX);
+  writeNotNull('setAppPrivacyOne', instance.setAppPrivacyOne);
+  writeNotNull('setAppPrivacyTwo', instance.setAppPrivacyTwo);
+  writeNotNull('setAppPrivacyThree', instance.setAppPrivacyThree);
+  writeNotNull('setPrivacySmhHidden', instance.setPrivacySmhHidden);
+  writeNotNull('setPrivacyTextSize', instance.setPrivacyTextSize);
+  writeNotNull('setPrivacyWidth', instance.setPrivacyWidth);
+  writeNotNull('setAppPrivacyColor', instance.setAppPrivacyColor);
+  writeNotNull(
+      'setPrivacyOffsetGravityLeft', instance.setPrivacyOffsetGravityLeft);
+  writeNotNull('setPrivacyState', instance.setPrivacyState);
+  writeNotNull('setUncheckedImgPath', instance.setUncheckedImgPath);
+  writeNotNull('setCheckedImgPath', instance.setCheckedImgPath);
+  writeNotNull('setCheckBoxHidden', instance.setCheckBoxHidden);
+  writeNotNull('setCheckBoxWH', instance.setCheckBoxWH);
+  writeNotNull('setCheckBoxOffsetXY', instance.setCheckBoxOffsetXY);
+  writeNotNull('setCheckBoxMargin', instance.setCheckBoxMargin);
+  writeNotNull('setPrivacyText', instance.setPrivacyText);
+  writeNotNull('setPrivacyTextBold', instance.setPrivacyTextBold);
+  writeNotNull('setCheckBoxTipDisable', instance.setCheckBoxTipDisable);
+  writeNotNull('setPrivacyCustomToastText', instance.setPrivacyCustomToastText);
+  writeNotNull('setPrivacyNameUnderline', instance.setPrivacyNameUnderline);
+  writeNotNull('setOperatorPrivacyAtLast', instance.setOperatorPrivacyAtLast);
+  writeNotNull('setPrivacyGravityHorizontalCenter',
+      instance.setPrivacyGravityHorizontalCenter);
+  writeNotNull('setPrivacyActivityEnabled', instance.setPrivacyActivityEnabled);
+  writeNotNull('setSloganOffsetY', instance.setSloganOffsetY);
+  writeNotNull('setSloganOffsetBottomY', instance.setSloganOffsetBottomY);
+  writeNotNull('setSloganOffsetX', instance.setSloganOffsetX);
+  writeNotNull('setSloganTextColor', instance.setSloganTextColor);
+  writeNotNull('setSloganTextSize', instance.setSloganTextSize);
+  writeNotNull('setSloganHidden', instance.setSloganHidden);
+  writeNotNull('setSloganTextBold', instance.setSloganTextBold);
+  writeNotNull('setShanYanSloganOffsetY', instance.setShanYanSloganOffsetY);
+  writeNotNull(
+      'setShanYanSloganOffsetBottomY', instance.setShanYanSloganOffsetBottomY);
+  writeNotNull('setShanYanSloganOffsetX', instance.setShanYanSloganOffsetX);
+  writeNotNull('setShanYanSloganTextColor', instance.setShanYanSloganTextColor);
+  writeNotNull('setShanYanSloganTextSize', instance.setShanYanSloganTextSize);
+  writeNotNull('setShanYanSloganHidden', instance.setShanYanSloganHidden);
+  writeNotNull('setShanYanSloganTextBold', instance.setShanYanSloganTextBold);
+  writeNotNull('setPrivacyNavColor', instance.setPrivacyNavColor);
+  writeNotNull('setPrivacyNavTextBold', instance.setPrivacyNavTextBold);
+  writeNotNull('setPrivacyNavTextColor', instance.setPrivacyNavTextColor);
+  writeNotNull('setPrivacyNavTextSize', instance.setPrivacyNavTextSize);
+  writeNotNull(
+      'setPrivacyNavReturnImgPath', instance.setPrivacyNavReturnImgPath);
+  writeNotNull(
+      'setPrivacyNavReturnImgHidden', instance.setPrivacyNavReturnImgHidden);
+  writeNotNull(
+      'setPrivacyNavReturnBtnWidth', instance.setPrivacyNavReturnBtnWidth);
+  writeNotNull(
+      'setPrivacyNavReturnBtnHeight', instance.setPrivacyNavReturnBtnHeight);
+  writeNotNull('setPrivacyNavReturnBtnOffsetRightX',
+      instance.setPrivacyNavReturnBtnOffsetRightX);
+  writeNotNull(
+      'setPrivacyNavReturnBtnOffsetX', instance.setPrivacyNavReturnBtnOffsetX);
+  writeNotNull(
+      'setPrivacyNavReturnBtnOffsetY', instance.setPrivacyNavReturnBtnOffsetY);
+  writeNotNull('setLoadingView', instance.setLoadingView);
+  writeNotNull('setDialogTheme', instance.setDialogTheme);
+  writeNotNull('setActivityTranslateAnim', instance.setActivityTranslateAnim);
+  writeNotNull(
+      'widgetLayouts', instance.widgetLayouts?.map((e) => e.toJson()).toList());
+  writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'morePrivacy', instance.morePrivacy?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 ShanYanCustomWidgetLayout _$ShanYanCustomWidgetLayoutFromJson(
         Map<String, dynamic> json) =>
@@ -1060,28 +930,34 @@ ShanYanCustomWidget _$ShanYanCustomWidgetFromJson(Map<String, dynamic> json) =>
           _$ShanYanCustomWidgetGravityTypeEnumMap, json['textAlignment'])
       ..isFinish = json['isFinish'] as bool;
 
-Map<String, dynamic> _$ShanYanCustomWidgetToJson(
-        ShanYanCustomWidget instance) =>
-    <String, dynamic>{
-      'widgetId': instance.widgetId,
-      'left': instance.left,
-      'top': instance.top,
-      'right': instance.right,
-      'bottom': instance.bottom,
-      'width': instance.width,
-      'height': instance.height,
-      'textContent': instance.textContent,
-      'textFont': instance.textFont,
-      'textColor': instance.textColor,
-      if (instance.backgroundColor case final value?) 'backgroundColor': value,
-      if (instance.backgroundImgPath case final value?)
-        'backgroundImgPath': value,
-      'textAlignment':
-          _$ShanYanCustomWidgetGravityTypeEnumMap[instance.textAlignment]!,
-      if (_$ShanYanCustomWidgetTypeEnumMap[instance.type] case final value?)
-        'type': value,
-      'isFinish': instance.isFinish,
-    };
+Map<String, dynamic> _$ShanYanCustomWidgetToJson(ShanYanCustomWidget instance) {
+  final val = <String, dynamic>{
+    'widgetId': instance.widgetId,
+    'left': instance.left,
+    'top': instance.top,
+    'right': instance.right,
+    'bottom': instance.bottom,
+    'width': instance.width,
+    'height': instance.height,
+    'textContent': instance.textContent,
+    'textFont': instance.textFont,
+    'textColor': instance.textColor,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('backgroundColor', instance.backgroundColor);
+  writeNotNull('backgroundImgPath', instance.backgroundImgPath);
+  val['textAlignment'] =
+      _$ShanYanCustomWidgetGravityTypeEnumMap[instance.textAlignment]!;
+  writeNotNull('type', _$ShanYanCustomWidgetTypeEnumMap[instance.type]);
+  val['isFinish'] = instance.isFinish;
+  return val;
+}
 
 const _$ShanYanCustomWidgetTypeEnumMap = {
   ShanYanCustomWidgetType.TextView: 'TextView',
@@ -1125,37 +1001,411 @@ ShanYanCustomWidgetIOS _$ShanYanCustomWidgetIOSFromJson(
       ..isFinish = json['isFinish'] as bool;
 
 Map<String, dynamic> _$ShanYanCustomWidgetIOSToJson(
-        ShanYanCustomWidgetIOS instance) =>
-    <String, dynamic>{
-      'widgetId': instance.widgetId,
-      if (instance.left case final value?) 'left': value,
-      if (instance.top case final value?) 'top': value,
-      if (instance.right case final value?) 'right': value,
-      if (instance.bottom case final value?) 'bottom': value,
-      if (instance.width case final value?) 'width': value,
-      if (instance.height case final value?) 'height': value,
-      if (instance.centerX case final value?) 'centerX': value,
-      if (instance.centerY case final value?) 'centerY': value,
-      if (instance.cornerRadius case final value?) 'cornerRadius': value,
-      if (instance.borderWidth case final value?) 'borderWidth': value,
-      if (instance.borderColor case final value?) 'borderColor': value,
-      if (instance.textContent case final value?) 'textContent': value,
-      if (instance.textFont case final value?) 'textFont': value,
-      if (instance.textColor case final value?) 'textColor': value,
-      if (instance.backgroundColor case final value?) 'backgroundColor': value,
-      if (instance.image case final value?) 'image': value,
-      if (instance.backgroundImgPath case final value?)
-        'backgroundImgPath': value,
-      'textAlignment': _$iOSTextAlignmentEnumMap[instance.textAlignment]!,
-      if (_$ShanYanCustomWidgetTypeEnumMap[instance.type] case final value?)
-        'type': value,
-      if (_$ShanYanCustomWidgetiOSNavPositionEnumMap[instance.navPosition]
-          case final value?)
-        'navPosition': value,
-      'isFinish': instance.isFinish,
-    };
+    ShanYanCustomWidgetIOS instance) {
+  final val = <String, dynamic>{
+    'widgetId': instance.widgetId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('left', instance.left);
+  writeNotNull('top', instance.top);
+  writeNotNull('right', instance.right);
+  writeNotNull('bottom', instance.bottom);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('centerX', instance.centerX);
+  writeNotNull('centerY', instance.centerY);
+  writeNotNull('cornerRadius', instance.cornerRadius);
+  writeNotNull('borderWidth', instance.borderWidth);
+  writeNotNull('borderColor', instance.borderColor);
+  writeNotNull('textContent', instance.textContent);
+  writeNotNull('textFont', instance.textFont);
+  writeNotNull('textColor', instance.textColor);
+  writeNotNull('backgroundColor', instance.backgroundColor);
+  writeNotNull('image', instance.image);
+  writeNotNull('backgroundImgPath', instance.backgroundImgPath);
+  val['textAlignment'] = _$iOSTextAlignmentEnumMap[instance.textAlignment]!;
+  writeNotNull('type', _$ShanYanCustomWidgetTypeEnumMap[instance.type]);
+  writeNotNull('navPosition',
+      _$ShanYanCustomWidgetiOSNavPositionEnumMap[instance.navPosition]);
+  val['isFinish'] = instance.isFinish;
+  return val;
+}
 
 const _$ShanYanCustomWidgetiOSNavPositionEnumMap = {
   ShanYanCustomWidgetiOSNavPosition.navleft: 'navleft',
   ShanYanCustomWidgetiOSNavPosition.navright: 'navright',
 };
+
+ShanYanHarmonyMarginOrPadding _$ShanYanHarmonyMarginOrPaddingFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanHarmonyMarginOrPadding(
+      top: json['top'] as String?,
+      left: json['left'] as String?,
+      right: json['right'] as String?,
+      bottom: json['bottom'] as String?,
+    );
+
+Map<String, dynamic> _$ShanYanHarmonyMarginOrPaddingToJson(
+    ShanYanHarmonyMarginOrPadding instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('top', instance.top);
+  writeNotNull('left', instance.left);
+  writeNotNull('right', instance.right);
+  writeNotNull('bottom', instance.bottom);
+  return val;
+}
+
+ShanYanHarmonyAlignRuleOption _$ShanYanHarmonyAlignRuleOptionFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanHarmonyAlignRuleOption()
+      ..left = json['left'] == null
+          ? null
+          : ShanYanHarmonyHorizontalAnchor.fromJson(
+              json['left'] as Map<String, dynamic>)
+      ..middle = json['middle'] == null
+          ? null
+          : ShanYanHarmonyHorizontalAnchor.fromJson(
+              json['middle'] as Map<String, dynamic>)
+      ..right = json['right'] == null
+          ? null
+          : ShanYanHarmonyHorizontalAnchor.fromJson(
+              json['right'] as Map<String, dynamic>)
+      ..top = json['top'] == null
+          ? null
+          : ShanYanHarmonyVerticalAnchor.fromJson(
+              json['top'] as Map<String, dynamic>)
+      ..bottom = json['bottom'] == null
+          ? null
+          : ShanYanHarmonyVerticalAnchor.fromJson(
+              json['bottom'] as Map<String, dynamic>)
+      ..center = json['center'] == null
+          ? null
+          : ShanYanHarmonyVerticalAnchor.fromJson(
+              json['center'] as Map<String, dynamic>)
+      ..bias = json['bias'] == null
+          ? null
+          : ShanYanHarmonyBias.fromJson(json['bias'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ShanYanHarmonyAlignRuleOptionToJson(
+    ShanYanHarmonyAlignRuleOption instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('left', instance.left?.toJson());
+  writeNotNull('middle', instance.middle?.toJson());
+  writeNotNull('right', instance.right?.toJson());
+  writeNotNull('top', instance.top?.toJson());
+  writeNotNull('bottom', instance.bottom?.toJson());
+  writeNotNull('center', instance.center?.toJson());
+  writeNotNull('bias', instance.bias?.toJson());
+  return val;
+}
+
+ShanYanHarmonyBias _$ShanYanHarmonyBiasFromJson(Map<String, dynamic> json) =>
+    ShanYanHarmonyBias()
+      ..horizontal = json['horizontal'] as num?
+      ..vertical = json['vertical'] as num?;
+
+Map<String, dynamic> _$ShanYanHarmonyBiasToJson(ShanYanHarmonyBias instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('horizontal', instance.horizontal);
+  writeNotNull('vertical', instance.vertical);
+  return val;
+}
+
+ShanYanHarmonyHorizontalAnchor _$ShanYanHarmonyHorizontalAnchorFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanHarmonyHorizontalAnchor(
+      anchor: json['anchor'] as String? ?? '__container__',
+      align: $enumDecode(_$ShanYanHorizontalAlignEnumMap, json['align']),
+    );
+
+Map<String, dynamic> _$ShanYanHarmonyHorizontalAnchorToJson(
+        ShanYanHarmonyHorizontalAnchor instance) =>
+    <String, dynamic>{
+      'anchor': instance.anchor,
+      'align': _$ShanYanHorizontalAlignEnumMap[instance.align]!,
+    };
+
+const _$ShanYanHorizontalAlignEnumMap = {
+  ShanYanHorizontalAlign.Start: 1,
+  ShanYanHorizontalAlign.Middle: 2,
+  ShanYanHorizontalAlign.End: 3,
+};
+
+ShanYanHarmonyVerticalAnchor _$ShanYanHarmonyVerticalAnchorFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanHarmonyVerticalAnchor(
+      anchor: json['anchor'] as String? ?? '__container__',
+      align: $enumDecode(_$ShanYanHarmonyVerticalAlignEnumMap, json['align']),
+    );
+
+Map<String, dynamic> _$ShanYanHarmonyVerticalAnchorToJson(
+        ShanYanHarmonyVerticalAnchor instance) =>
+    <String, dynamic>{
+      'anchor': instance.anchor,
+      'align': _$ShanYanHarmonyVerticalAlignEnumMap[instance.align]!,
+    };
+
+const _$ShanYanHarmonyVerticalAlignEnumMap = {
+  ShanYanHarmonyVerticalAlign.Top: 4,
+  ShanYanHarmonyVerticalAlign.Center: 5,
+  ShanYanHarmonyVerticalAlign.Bottom: 6,
+};
+
+ShanYanHarmonyPrivacyEntity _$ShanYanHarmonyPrivacyEntityFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanHarmonyPrivacyEntity(
+      text: json['text'] as String,
+      fontSize: json['fontSize'] as num,
+      fontWeight: (json['fontWeight'] as num).toInt(),
+      isProtocol: json['isProtocol'] as bool,
+      fontColor: json['fontColor'] as String,
+      url: json['url'] as String? ?? "",
+    );
+
+Map<String, dynamic> _$ShanYanHarmonyPrivacyEntityToJson(
+    ShanYanHarmonyPrivacyEntity instance) {
+  final val = <String, dynamic>{
+    'text': instance.text,
+    'fontSize': instance.fontSize,
+    'fontWeight': instance.fontWeight,
+    'isProtocol': instance.isProtocol,
+    'fontColor': instance.fontColor,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('url', instance.url);
+  return val;
+}
+
+ShanYanUIConfigHarmony _$ShanYanUIConfigHarmonyFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanUIConfigHarmony()
+      ..statusBarColor = json['statusBarColor'] as String?
+      ..isStatusBarLightIcon = json['isStatusBarLightIcon'] as bool?
+      ..statusBarContentColor = json['statusBarContentColor'] as String?
+      ..navigationBarColor = json['navigationBarColor'] as String?
+      ..isNavigationBarLightIcon = json['isNavigationBarLightIcon'] as bool?
+      ..navigationBarContentColor = json['navigationBarContentColor'] as String?
+      ..enableStatusBarAnimation = json['enableStatusBarAnimation'] as bool?
+      ..enableNavigationBarAnimation =
+          json['enableNavigationBarAnimation'] as bool?
+      ..navTextSize = (json['navTextSize'] as num?)?.toInt()
+      ..navTextColor = json['navTextColor'] as String?
+      ..navColor = json['navColor'] as String?
+      ..loginPageGrayScale = (json['loginPageGrayScale'] as num?)?.toInt()
+      ..numberSize = json['numberSize'] as num?
+      ..numberIsBold = json['numberIsBold'] as bool?
+      ..numberColor = json['numberColor'] as String?
+      ..numberAlignRuleOption = json['numberAlignRuleOption'] == null
+          ? null
+          : ShanYanHarmonyAlignRuleOption.fromJson(
+              json['numberAlignRuleOption'] as Map<String, dynamic>)
+      ..numberMargin = json['numberMargin'] == null
+          ? null
+          : ShanYanHarmonyMarginOrPadding.fromJson(
+              json['numberMargin'] as Map<String, dynamic>)
+      ..loginBtnWidth = json['loginBtnWidth'] as num?
+      ..loginBtnHeight = json['loginBtnHeight'] as num?
+      ..loginBtnText = json['loginBtnText'] as String?
+      ..loginBtnTextSize = json['loginBtnTextSize'] as num?
+      ..loginBtnTextColor = json['loginBtnTextColor'] as String?
+      ..loginBtnImgPath = json['loginBtnImgPath'] as String?
+      ..loginBtnColor = json['loginBtnColor'] as String?
+      ..loginBtnBorderRadius = json['loginBtnBorderRadius'] as num?
+      ..loginBtnAlignRuleOption = json['loginBtnAlignRuleOption'] == null
+          ? null
+          : ShanYanHarmonyAlignRuleOption.fromJson(
+              json['loginBtnAlignRuleOption'] as Map<String, dynamic>)
+      ..loginBtnMargin = json['loginBtnMargin'] == null
+          ? null
+          : ShanYanHarmonyMarginOrPadding.fromJson(
+              json['loginBtnMargin'] as Map<String, dynamic>)
+      ..clauses = (json['clauses'] as List<dynamic>?)
+          ?.map((e) =>
+              ShanYanHarmonyPrivacyEntity.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..checkBoxWidth = json['checkBoxWidth'] as num?
+      ..checkBoxHeight = json['checkBoxHeight'] as num?
+      ..clauseState = json['clauseState'] as bool?
+      ..checkedImage = json['checkedImage'] as String?
+      ..unCheckedImage = json['unCheckedImage'] as String?
+      ..checkedColor = json['checkedColor'] as String?
+      ..checkTipText = json['checkTipText'] as String?
+      ..clauseMargin = json['clauseMargin'] == null
+          ? null
+          : ShanYanHarmonyMarginOrPadding.fromJson(
+              json['clauseMargin'] as Map<String, dynamic>)
+      ..clauseAlignRuleOption = json['clauseAlignRuleOption'] == null
+          ? null
+          : ShanYanHarmonyAlignRuleOption.fromJson(
+              json['clauseAlignRuleOption'] as Map<String, dynamic>)
+      ..checkBoxMargin = json['checkBoxMargin'] == null
+          ? null
+          : ShanYanHarmonyMarginOrPadding.fromJson(
+              json['checkBoxMargin'] as Map<String, dynamic>)
+      ..checkBoxAlignRuleOption = json['checkBoxAlignRuleOption'] == null
+          ? null
+          : ShanYanHarmonyAlignRuleOption.fromJson(
+              json['checkBoxAlignRuleOption'] as Map<String, dynamic>)
+      ..widgets = (json['widgets'] as List<dynamic>?)
+          ?.map((e) =>
+              ShanYanCustomWidgetHarmony.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..isInterceptionLogin = json['isInterceptionLogin'] as bool?
+      ..windowMode = json['windowMode'] as bool?;
+
+Map<String, dynamic> _$ShanYanUIConfigHarmonyToJson(
+    ShanYanUIConfigHarmony instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('statusBarColor', instance.statusBarColor);
+  writeNotNull('isStatusBarLightIcon', instance.isStatusBarLightIcon);
+  writeNotNull('statusBarContentColor', instance.statusBarContentColor);
+  writeNotNull('navigationBarColor', instance.navigationBarColor);
+  writeNotNull('isNavigationBarLightIcon', instance.isNavigationBarLightIcon);
+  writeNotNull('navigationBarContentColor', instance.navigationBarContentColor);
+  writeNotNull('enableStatusBarAnimation', instance.enableStatusBarAnimation);
+  writeNotNull(
+      'enableNavigationBarAnimation', instance.enableNavigationBarAnimation);
+  writeNotNull('navTextSize', instance.navTextSize);
+  writeNotNull('navTextColor', instance.navTextColor);
+  writeNotNull('navColor', instance.navColor);
+  writeNotNull('loginPageGrayScale', instance.loginPageGrayScale);
+  writeNotNull('numberSize', instance.numberSize);
+  writeNotNull('numberIsBold', instance.numberIsBold);
+  writeNotNull('numberColor', instance.numberColor);
+  writeNotNull(
+      'numberAlignRuleOption', instance.numberAlignRuleOption?.toJson());
+  writeNotNull('numberMargin', instance.numberMargin?.toJson());
+  writeNotNull('loginBtnWidth', instance.loginBtnWidth);
+  writeNotNull('loginBtnHeight', instance.loginBtnHeight);
+  writeNotNull('loginBtnText', instance.loginBtnText);
+  writeNotNull('loginBtnTextSize', instance.loginBtnTextSize);
+  writeNotNull('loginBtnTextColor', instance.loginBtnTextColor);
+  writeNotNull('loginBtnImgPath', instance.loginBtnImgPath);
+  writeNotNull('loginBtnColor', instance.loginBtnColor);
+  writeNotNull('loginBtnBorderRadius', instance.loginBtnBorderRadius);
+  writeNotNull(
+      'loginBtnAlignRuleOption', instance.loginBtnAlignRuleOption?.toJson());
+  writeNotNull('loginBtnMargin', instance.loginBtnMargin?.toJson());
+  writeNotNull('clauses', instance.clauses?.map((e) => e.toJson()).toList());
+  writeNotNull('checkBoxWidth', instance.checkBoxWidth);
+  writeNotNull('checkBoxHeight', instance.checkBoxHeight);
+  writeNotNull('clauseState', instance.clauseState);
+  writeNotNull('checkedImage', instance.checkedImage);
+  writeNotNull('unCheckedImage', instance.unCheckedImage);
+  writeNotNull('checkedColor', instance.checkedColor);
+  writeNotNull('checkTipText', instance.checkTipText);
+  writeNotNull('clauseMargin', instance.clauseMargin?.toJson());
+  writeNotNull(
+      'clauseAlignRuleOption', instance.clauseAlignRuleOption?.toJson());
+  writeNotNull('checkBoxMargin', instance.checkBoxMargin?.toJson());
+  writeNotNull(
+      'checkBoxAlignRuleOption', instance.checkBoxAlignRuleOption?.toJson());
+  writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());
+  writeNotNull('isInterceptionLogin', instance.isInterceptionLogin);
+  writeNotNull('windowMode', instance.windowMode);
+  return val;
+}
+
+ShanYanCustomWidgetHarmony _$ShanYanCustomWidgetHarmonyFromJson(
+        Map<String, dynamic> json) =>
+    ShanYanCustomWidgetHarmony(
+      json['widgetId'] as String,
+      $enumDecodeNullable(_$ShanYanCustomWidgetTypeEnumMap, json['type']),
+    )
+      ..margin = json['margin'] == null
+          ? null
+          : ShanYanHarmonyMarginOrPadding.fromJson(
+              json['margin'] as Map<String, dynamic>)
+      ..alignRuleOption = json['alignRuleOption'] == null
+          ? null
+          : ShanYanHarmonyAlignRuleOption.fromJson(
+              json['alignRuleOption'] as Map<String, dynamic>)
+      ..width = json['width'] as String?
+      ..height = json['height'] as String?
+      ..cornerRadius = json['cornerRadius'] as num?
+      ..borderWidth = json['borderWidth'] as num?
+      ..scaleType = json['scaleType'] as num?
+      ..textAlign = json['textAlign'] as num?
+      ..borderColor = json['borderColor'] as String?
+      ..textContent = json['textContent'] as String?
+      ..textFont = (json['textFont'] as num?)?.toDouble()
+      ..textColor = json['textColor'] as String?
+      ..backgroundColor = json['backgroundColor'] as String?
+      ..image = json['image'] as String?
+      ..backgroundImgPath = json['backgroundImgPath'] as String?
+      ..textAlignment =
+          $enumDecode(_$iOSTextAlignmentEnumMap, json['textAlignment'])
+      ..isFinish = json['isFinish'] as bool;
+
+Map<String, dynamic> _$ShanYanCustomWidgetHarmonyToJson(
+    ShanYanCustomWidgetHarmony instance) {
+  final val = <String, dynamic>{
+    'widgetId': instance.widgetId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('margin', instance.margin?.toJson());
+  writeNotNull('alignRuleOption', instance.alignRuleOption?.toJson());
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('cornerRadius', instance.cornerRadius);
+  writeNotNull('borderWidth', instance.borderWidth);
+  writeNotNull('scaleType', instance.scaleType);
+  writeNotNull('textAlign', instance.textAlign);
+  writeNotNull('borderColor', instance.borderColor);
+  writeNotNull('textContent', instance.textContent);
+  writeNotNull('textFont', instance.textFont);
+  writeNotNull('textColor', instance.textColor);
+  writeNotNull('backgroundColor', instance.backgroundColor);
+  writeNotNull('image', instance.image);
+  writeNotNull('backgroundImgPath', instance.backgroundImgPath);
+  val['textAlignment'] = _$iOSTextAlignmentEnumMap[instance.textAlignment]!;
+  writeNotNull('type', _$ShanYanCustomWidgetTypeEnumMap[instance.type]);
+  val['isFinish'] = instance.isFinish;
+  return val;
+}

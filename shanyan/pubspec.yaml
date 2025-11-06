@@ -5,32 +5,53 @@ author: CL253 <app@253.com>
 homepage: https://www.chuanglan.com
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
-  flutter: ">=1.20.0"
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
-  build_resolvers: ^2.4.3
+#  build_resolvers: ^2.0.2
   flutter:
     sdk: flutter
+  plugin_platform_interface: ^2.0.2
   json_annotation: 4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^3.0.0
   build_runner: ^2.4.6
-  json_serializable: 6.9.4
+  json_serializable: 6.8.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-  # This sectiopub publish --dry-runn identifies this Flutter project as a plugin project.
-  # The androidPackage and pluginClass identifiers should not ordinarily
-  # be modified. They are used by the tooling to maintain consistency when
-  # adding or updating assets for this project.
   plugin:
-    androidPackage: com.shanyan
-    pluginClass: ShanyanPlugin
+    platforms:
+      android:
+        package: com.shanyan
+        pluginClass: ShanyanPlugin
+      ohos:
+        pluginClass: ShanyanPlugin
+      ios:
+        pluginClass: ShanyanPlugin
+#  # This sectiopub publish --dry-runn identifies this Flutter project as a plugin project.
+#  # The androidPackage and pluginClass identifiers should not ordinarily
+#  # be modified. They are used by the tooling to maintain consistency when
+#  # adding or updating assets for this project.
+#  plugin:
+#    androidPackage: com.shanyan
+#    pluginClass: ShanyanPlugin
+
+#  platforms:
+#    android:
+#      package: com.shanyan
+#      pluginClass: ShanyanPlugin
+#    ohos:
+#      package: shanyan
+#      pluginClass: ShanyanPlugin
+#    ios:
+#      pluginClass: ShanyanPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

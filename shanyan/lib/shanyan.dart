@@ -19,6 +19,8 @@ typedef AuthPageActionListener = void Function(AuthPageActionEvent event);
 /// 闪验SDK 协议点击事件监听
 typedef PricacyOnClickListener = void Function(PrivacyOnClickEvent event);
 
+typedef HarmonyOneKeyLoginListener = bool Function(String custAlert);
+
 class OneKeyLoginManager {
   final ShanYanEventHandlers _eventHanders = new ShanYanEventHandlers();
 
@@ -27,7 +29,7 @@ class OneKeyLoginManager {
   ShanYanUIConfig shanYanUIConfig = new ShanYanUIConfig();
 
   OneKeyLoginManager() {
-    _channel.setMethodCallHandler(_handlerMethod);
+     _channel.setMethodCallHandler(_handlerMethod);
   }
 
   /// 授权页控件的点击事件（“复选框”、"协议"） Android
@@ -113,6 +115,7 @@ class OneKeyLoginManager {
   Future<ShanYanResult> init({required String appId}) async {
     Map result = await _channel.invokeMethod("init", {"appId": appId});
     Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
+    print(newResult);
     return ShanYanResult.fromJson(newResult);
   }
 
@@ -133,6 +136,10 @@ class OneKeyLoginManager {
     _eventHanders.shanYanWidgetEventListener = callback;
   }
 
+  addHarmonyLoginClickListener(HarmonyOneKeyLoginListener callback){
+    _eventHanders.harmonyOneKeyLoginListener = callback;
+  }
+
   ///闪验SDK 拉起授权页(Android+iOS)
   Future<ShanYanResult> openLoginAuth() async {
     if (Platform.isAndroid) {
@@ -146,17 +153,25 @@ class OneKeyLoginManager {
           await _channel.invokeMethod("openLoginAuth", iosConfigure);
       Map<String, dynamic> newResult = new Map<String, dynamic>.from(result);
       return ShanYanResult.fromJson(newResult);
-    } else {
+    }else if (Platform.isOhos){
+      Map ohosConfigure = shanYanUIConfig.ohos.toJson();
+      Map<dynamic, dynamic> result =
+      await _channel.invokeMethod("openLoginAuth", ohosConfigure);
+      Map<String, dynamic> newResult = Map<String, dynamic>.from(result);
+      return ShanYanResult.fromJson(newResult);
+    }else {
       return ShanYanResult(code: 1003, message: "拉起授权页失败,暂不支持此设备");
     }
   }
 
-  ///闪验SDK 主动销毁授权页 Android+IOS
+  ///闪验SDK 主动销毁授权页 Android+IOS + harmony
   Future<void> finishAuthControllerCompletion() async {
     if (Platform.isIOS) {
       return await _channel.invokeMethod("finishAuthControllerCompletion");
     } else if (Platform.isAndroid) {
       return await _channel.invokeMethod("finishAuthActivity");
+    }else if (Platform.isOhos){
+      return await _channel.invokeMethod("finishAuthControllerCompletion");
     }
   }
 
@@ -226,7 +241,7 @@ class OneKeyLoginManager {
   }
 
   //Android
-  Future<void> _handlerMethod(MethodCall call) async {
+  Future<dynamic> _handlerMethod(MethodCall call) async {
     switch (call.method) {
       case 'onReceiveAuthPageEvent':
         Map<String, dynamic> newResult =
@@ -253,6 +268,11 @@ class OneKeyLoginManager {
         Map json = call.arguments.cast<dynamic, dynamic>();
         PrivacyOnClickEvent ev = PrivacyOnClickEvent.fromJson(json);
         _eventHanders.pricacyOnClickListener?.call(ev);
+        break;
+      case 'onAuthLoginListeneryy':
+        print("yyyyy");
+        String cust = call.arguments.cast<dynamic, dynamic>()['res'];
+        return _eventHanders.harmonyOneKeyLoginListener?.call(cust);
         break;
       default:
         throw new UnsupportedError("Unrecognized Event");
@@ -306,6 +326,7 @@ class ShanYanEventHandlers {
   ShanYanWidgetEventListener? shanYanWidgetEventListener;
   AuthPageActionListener? authPageActionListener;
   PricacyOnClickListener? pricacyOnClickListener;
+  HarmonyOneKeyLoginListener? harmonyOneKeyLoginListener;
 }
 
 //

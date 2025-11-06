@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "shanyan",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}
