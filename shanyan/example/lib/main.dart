@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shanyan/shanYanResult.dart';
@@ -482,10 +483,6 @@ class _MyAppState extends State<MyApp> {
       _toast("点击：${map.toString()}");
     });
 
-    oneKeyLoginManager.addHarmonyLoginClickListener((cust){
-      return true;
-    });
-
     shanYanUIConfig.androidLandscape.isFinish = true;
     shanYanUIConfig.androidLandscape.setAuthBGImgPath = "sy_login_test_bg";
     shanYanUIConfig.androidLandscape.setLogoImgPath = "sy_logo";
@@ -536,6 +533,9 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ohos.loginBtnAlignRuleOption = loginRuleOption;
     shanYanUIConfig.ohos.loginBtnMargin = loginMargin;
 
+    shanYanUIConfig.ohos.checkBoxMargin = ShanYanHarmonyMarginOrPadding(left: '20',top: '10',bottom: '40',right: '0');
+    shanYanUIConfig.ohos.clauseMargin = ShanYanHarmonyMarginOrPadding(left: '10',right: '20',bottom: '30');
+
     List<ShanYanCustomWidgetHarmony> shanyanCustomWidgetHarmony = [];
 
     final String harmonybtnWidgetId = "other_custom_button"; // 标识控件 id
@@ -564,7 +564,7 @@ class _MyAppState extends State<MyApp> {
     harmonyImgRuleOption.middle = ShanYanHarmonyHorizontalAnchor(align: ShanYanHorizontalAlign.Middle);
     ShanYanHarmonyMarginOrPadding harmonyImgMargin = ShanYanHarmonyMarginOrPadding(top: "310");
 
-    harmonyImg.backgroundImgPath = "qq.png";
+    harmonyImg.backgroundImgPath = "qq";
     harmonyImg.width = "200";
     harmonyImg.height = "40";
     harmonyImg.alignRuleOption = harmonyImgRuleOption;

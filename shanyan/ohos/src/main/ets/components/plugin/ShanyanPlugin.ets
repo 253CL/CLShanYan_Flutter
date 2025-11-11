@@ -61,6 +61,12 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
        this.finishAuthControllerCompletion(result)
     }else if (call.method == 'clearScripCache'){
        this.clearScripCache()
+    }else if (call.method == 'setInitDebug'){
+      this.setInitDebug(call)
+    }else if (call.method == 'startAuthentication'){
+      this.mobileCheckWithLocalPhoneNumberComplete(call,result)
+    }else if (call.method == 'setTimeOutForPreLogin'){
+      this.setPreGetPhonenumberTimeOut(call)
     }
     else {
       result.notImplemented()
@@ -107,6 +113,26 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
 
     async clearScripCache(){
       CLSDKManager.clearScripCache()
+    }
+
+    setInitDebug(call:MethodCall){
+      let arg:Map<string,ESObject> = call.args as Map<string,ESObject>
+      let enable = arg.get('iEnable') as boolean
+      CLSDKManager.printConsoleEnable(enable)
+    }
+    async mobileCheckWithLocalPhoneNumberComplete(call:MethodCall,callResult:MethodResult){
+      const result:CLResult = await CLSDKManager.mobileCheckWithLocalPhoneNumberComplete()
+      if (result) {
+         callResult.success(this.completeResultToJson(result))
+      }else {
+         callResult.error('2010','本机号认证获取token出错','')
+      }
+    }
+
+    setPreGetPhonenumberTimeOut(call:MethodCall){
+      let arg:Map<string,ESObject> = call.args as Map<string,ESObject>
+      let timeout = arg.get('timeOut') as number
+      CLSDKManager.setPreGetPhoneNumberTimeOut(timeout)
     }
 
 
@@ -170,7 +196,6 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
               "widgetId":item.widgetId,
               "isFinish":item.isFinish
             }
-            console.log("输出一下当前的item.isFinish" + JSON.stringify(item.isFinish))
             this.channel?.invokeMethod("onReceiveClickWidgetEvent",map)
             if (item.isFinish && item.isFinish === true) {
               CLSDKManager.closeAuthLoginPage()
@@ -205,7 +230,7 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
               let res:Record<string,string> = {
                 "res":"点击一键登录"
               }
-              self.channel?.invokeMethod("onAuthLoginListeneryy",res,resultHandler)
+              self.channel?.invokeMethod("onAuthLoginHarmonyListener",res,resultHandler)
             }
           })
         }
@@ -576,8 +601,8 @@ function FlutterWidgetView(){
           })
 
       }else if (item.type === FlutterWidgetType.ImageView){
-        Image($rawfile(`flutter_assets/assets/Img/${item.backgroundImgPath}`))
-        // Image($r(`app.media.${item.backgroundImgPath}`))
+        // Image($rawfile(`flutter_assets/assets/Img/${item.backgroundImgPath}`))
+        Image($r(`app.media.${item.backgroundImgPath}`))
           .id(item.widgetId)
           .width(item.width)
           .height(item.height)

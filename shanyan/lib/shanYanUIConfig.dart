@@ -1305,8 +1305,8 @@ class ShanYanUIConfigHarmony {
   ShanYanHarmonyAlignRuleOption? checkBoxAlignRuleOption;// 设置隐私协议勾选框相对布局偏移规则
 
   List<ShanYanCustomWidgetHarmony>? widgets;
-
   bool? isInterceptionLogin;
+
   bool? windowMode; // 设置窗口模式，默认非窗口模式，false
 
   factory ShanYanUIConfigHarmony.fromJson(Map<String, dynamic> json) =>

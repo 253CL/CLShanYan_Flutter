@@ -19,7 +19,7 @@ typedef AuthPageActionListener = void Function(AuthPageActionEvent event);
 /// 闪验SDK 协议点击事件监听
 typedef PricacyOnClickListener = void Function(PrivacyOnClickEvent event);
 
-typedef HarmonyOneKeyLoginListener = bool Function(String custAlert);
+typedef HarmonyOneKeyLoginListener = Future<bool> Function(String custAlert);
 
 class OneKeyLoginManager {
   final ShanYanEventHandlers _eventHanders = new ShanYanEventHandlers();
@@ -140,7 +140,7 @@ class OneKeyLoginManager {
     _eventHanders.harmonyOneKeyLoginListener = callback;
   }
 
-  ///闪验SDK 拉起授权页(Android+iOS)
+  ///闪验SDK 拉起授权页(Android+iOS + harmony)
   Future<ShanYanResult> openLoginAuth() async {
     if (Platform.isAndroid) {
       Map<dynamic, dynamic> result =
@@ -269,10 +269,11 @@ class OneKeyLoginManager {
         PrivacyOnClickEvent ev = PrivacyOnClickEvent.fromJson(json);
         _eventHanders.pricacyOnClickListener?.call(ev);
         break;
-      case 'onAuthLoginListeneryy':
-        print("yyyyy");
+      case 'onAuthLoginHarmonyListener':
         String cust = call.arguments.cast<dynamic, dynamic>()['res'];
-        return _eventHanders.harmonyOneKeyLoginListener?.call(cust);
+        Future<bool>? res = _eventHanders.harmonyOneKeyLoginListener?.call(cust);
+        bool result = await (res ?? Future.value(false));
+        return result;
         break;
       default:
         throw new UnsupportedError("Unrecognized Event");
