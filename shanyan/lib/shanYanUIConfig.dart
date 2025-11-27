@@ -1317,12 +1317,7 @@ class ShanYanUIConfigHarmony {
   bool? windowIsModal;
   bool? windowAutoCancel;
   String? windowMaskColor;
-  int? windowKeyboardAvoidMode;
-  bool? windowEnableHoverMode;
-  int? windowHoverModeArea;
-  int? windowLevelMode;
-  int? windowLevelUniqueId;
-  int? windowImmersiveMode;
+
 
   factory ShanYanUIConfigHarmony.fromJson(Map<String, dynamic> json) =>
       _$ShanYanUIConfigHarmonyFromJson(json);

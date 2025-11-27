@@ -1293,14 +1293,7 @@ ShanYanUIConfigHarmony _$ShanYanUIConfigHarmonyFromJson(
       ..windowShowInSubWindow = json['windowShowInSubWindow'] as bool?
       ..windowIsModal = json['windowIsModal'] as bool?
       ..windowAutoCancel = json['windowAutoCancel'] as bool?
-      ..windowMaskColor = json['windowMaskColor'] as String?
-      ..windowKeyboardAvoidMode =
-          (json['windowKeyboardAvoidMode'] as num?)?.toInt()
-      ..windowEnableHoverMode = json['windowEnableHoverMode'] as bool?
-      ..windowHoverModeArea = (json['windowHoverModeArea'] as num?)?.toInt()
-      ..windowLevelMode = (json['windowLevelMode'] as num?)?.toInt()
-      ..windowLevelUniqueId = (json['windowLevelUniqueId'] as num?)?.toInt()
-      ..windowImmersiveMode = (json['windowImmersiveMode'] as num?)?.toInt();
+      ..windowMaskColor = json['windowMaskColor'] as String?;
 
 Map<String, dynamic> _$ShanYanUIConfigHarmonyToJson(
     ShanYanUIConfigHarmony instance) {
@@ -1368,12 +1361,6 @@ Map<String, dynamic> _$ShanYanUIConfigHarmonyToJson(
   writeNotNull('windowIsModal', instance.windowIsModal);
   writeNotNull('windowAutoCancel', instance.windowAutoCancel);
   writeNotNull('windowMaskColor', instance.windowMaskColor);
-  writeNotNull('windowKeyboardAvoidMode', instance.windowKeyboardAvoidMode);
-  writeNotNull('windowEnableHoverMode', instance.windowEnableHoverMode);
-  writeNotNull('windowHoverModeArea', instance.windowHoverModeArea);
-  writeNotNull('windowLevelMode', instance.windowLevelMode);
-  writeNotNull('windowLevelUniqueId', instance.windowLevelUniqueId);
-  writeNotNull('windowImmersiveMode', instance.windowImmersiveMode);
   return val;
 }
 
