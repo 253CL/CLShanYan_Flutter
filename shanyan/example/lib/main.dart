@@ -65,7 +65,8 @@ class _MyAppState extends State<MyApp> {
     } else if (Platform.isAndroid) {
       appId = "loXN4jDs";
     }else if (Platform.isOhos){
-      appId = "8lxUuiVT";
+      // appId = "8lxUuiVT";
+      appId = "rvLuhZSw";
     }
     //闪验SDK 初始化
     oneKeyLoginManager.init(appId: appId).then((shanYanResult) {
@@ -575,11 +576,6 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ohos.widgets = shanyanCustomWidgetHarmony;
 
 
-
-
-
-
-
     oneKeyLoginManager.setAuthThemeConfig(uiConfig: shanYanUIConfig);
 
     setState(() {
@@ -884,6 +880,11 @@ class _MyAppState extends State<MyApp> {
       print("setActionListener" + map.toString());
       _toast("点击：${map.toString()}");
     });
+
+
+
+    shanYanUIConfig.ohos.windowMode = true;
+
 
     setState(() {
       _content = "界面配置成功";

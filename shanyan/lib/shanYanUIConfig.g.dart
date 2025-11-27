@@ -1284,7 +1284,23 @@ ShanYanUIConfigHarmony _$ShanYanUIConfigHarmonyFromJson(
               ShanYanCustomWidgetHarmony.fromJson(e as Map<String, dynamic>))
           .toList()
       ..isInterceptionLogin = json['isInterceptionLogin'] as bool?
-      ..windowMode = json['windowMode'] as bool?;
+      ..windowMode = json['windowMode'] as bool?
+      ..windowWidth = json['windowWidth'] as String?
+      ..windowHeight = json['windowHeight'] as String?
+      ..windowAlignment = (json['windowAlignment'] as num?)?.toInt()
+      ..windowOffsetX = json['windowOffsetX'] as String?
+      ..windowOffsetY = json['windowOffsetY'] as String?
+      ..windowShowInSubWindow = json['windowShowInSubWindow'] as bool?
+      ..windowIsModal = json['windowIsModal'] as bool?
+      ..windowAutoCancel = json['windowAutoCancel'] as bool?
+      ..windowMaskColor = json['windowMaskColor'] as String?
+      ..windowKeyboardAvoidMode =
+          (json['windowKeyboardAvoidMode'] as num?)?.toInt()
+      ..windowEnableHoverMode = json['windowEnableHoverMode'] as bool?
+      ..windowHoverModeArea = (json['windowHoverModeArea'] as num?)?.toInt()
+      ..windowLevelMode = (json['windowLevelMode'] as num?)?.toInt()
+      ..windowLevelUniqueId = (json['windowLevelUniqueId'] as num?)?.toInt()
+      ..windowImmersiveMode = (json['windowImmersiveMode'] as num?)?.toInt();
 
 Map<String, dynamic> _$ShanYanUIConfigHarmonyToJson(
     ShanYanUIConfigHarmony instance) {
@@ -1343,6 +1359,21 @@ Map<String, dynamic> _$ShanYanUIConfigHarmonyToJson(
   writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());
   writeNotNull('isInterceptionLogin', instance.isInterceptionLogin);
   writeNotNull('windowMode', instance.windowMode);
+  writeNotNull('windowWidth', instance.windowWidth);
+  writeNotNull('windowHeight', instance.windowHeight);
+  writeNotNull('windowAlignment', instance.windowAlignment);
+  writeNotNull('windowOffsetX', instance.windowOffsetX);
+  writeNotNull('windowOffsetY', instance.windowOffsetY);
+  writeNotNull('windowShowInSubWindow', instance.windowShowInSubWindow);
+  writeNotNull('windowIsModal', instance.windowIsModal);
+  writeNotNull('windowAutoCancel', instance.windowAutoCancel);
+  writeNotNull('windowMaskColor', instance.windowMaskColor);
+  writeNotNull('windowKeyboardAvoidMode', instance.windowKeyboardAvoidMode);
+  writeNotNull('windowEnableHoverMode', instance.windowEnableHoverMode);
+  writeNotNull('windowHoverModeArea', instance.windowHoverModeArea);
+  writeNotNull('windowLevelMode', instance.windowLevelMode);
+  writeNotNull('windowLevelUniqueId', instance.windowLevelUniqueId);
+  writeNotNull('windowImmersiveMode', instance.windowImmersiveMode);
   return val;
 }
 

@@ -1308,6 +1308,21 @@ class ShanYanUIConfigHarmony {
   bool? isInterceptionLogin;
 
   bool? windowMode; // 设置窗口模式，默认非窗口模式，false
+  String? windowWidth;
+  String? windowHeight;
+  int? windowAlignment;
+  String? windowOffsetX;
+  String? windowOffsetY;
+  bool? windowShowInSubWindow;
+  bool? windowIsModal;
+  bool? windowAutoCancel;
+  String? windowMaskColor;
+  int? windowKeyboardAvoidMode;
+  bool? windowEnableHoverMode;
+  int? windowHoverModeArea;
+  int? windowLevelMode;
+  int? windowLevelUniqueId;
+  int? windowImmersiveMode;
 
   factory ShanYanUIConfigHarmony.fromJson(Map<String, dynamic> json) =>
       _$ShanYanUIConfigHarmonyFromJson(json);

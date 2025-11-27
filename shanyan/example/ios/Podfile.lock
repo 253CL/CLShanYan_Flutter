@@ -1,7 +1,7 @@
 PODS:
   - CL_ShanYanSDK (2.3.7.1)
   - Flutter (1.0.0)
-  - shanyan (2.3.4.6):
+  - shanyan (2.3.5.0):
     - CL_ShanYanSDK (~> 2.3.7.1)
     - Flutter
 
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CL_ShanYanSDK: 0504509e9aa12be16d41f7e193bb507e825f855b
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  shanyan: a8599b00d33c52ff0919f92bb4554fb538e1dcaf
+  shanyan: 4df9624fe6530b09a8ebbc7f6073d76682adeb72
 
 PODFILE CHECKSUM: 2abc8bd77b0ff3f2d023fd292ae6a3342b0c2412
 

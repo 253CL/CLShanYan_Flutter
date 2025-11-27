@@ -14,12 +14,26 @@
           "profile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan_debugDebug.p7b",
           "certpath": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan_debug.cer"
         }
+      },
+      {
+        "name": "releaseyjdl",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "../cer/com.release.yjdl/shanyan.p12",
+          "storePassword": "00000019562FA2724C51F97D7030979F25394FB3795BB999658384F23669896BCA8E93CA76A4655A8B",
+          "keyAlias": "shanyan",
+          "keyPassword": "000000190F320DA0CE2B8F74128826D24832D04C218F44B0C2B9B882A83093ED8D26C42CF0ECDA9810",
+          "signAlg": "SHA256withECDSA",
+          "profile": "../cer/com.release.yjdl/shanyanreleaseyjdlDebug.p7b",
+          "certpath": "../cer/com.release.yjdl/shanyanyjdl.cer"
+        }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "debugtt",
+        "signingConfig": "releaseyjdl",
+        "bundleName": "com.release.yjdl",
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {

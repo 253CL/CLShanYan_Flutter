@@ -6,10 +6,11 @@ import {
   MethodChannel,
   MethodResult,
 } from '@ohos/flutter_ohos';
-import {CLAuthLoginCallBack, CLResult, CLSDKManager, CLUIConfigure ,PrivacyEntity} from '@shanyan/shanyansdk'
+import {CLAuthLoginCallBack, CLResult, CLSDKManager, CLUIConfigure ,PrivacyEntity,CLLoginDialogOptions} from '@shanyan/shanyansdk'
 import common from '@ohos.app.ability.common';
-import { BusinessError } from '@kit.BasicServicesKit';
-import { window } from '@kit.ArkUI';
+import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
+import { LevelMode, window } from '@kit.ArkUI';
+
 
 class WidgetEvent {
   list?:FlutterWidget[];
@@ -183,9 +184,15 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         configure.checkedImage = mapModel.checkedImage   // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
         configure.unCheckedImage = mapModel.unCheckedImage // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
         configure.checkedColor = mapModel.checkedColor   // 设置勾选颜色
-        configure.checkTipText = mapModel.checkTipText
 
+        if (mapModel.checkTipText && mapModel.checkTipText.length >0) {
+          configure.checkTipText = mapModel.checkTipText
+        }else {
+          configure.checkTipText = '请勾选协议'
+        }
         configure.windowMode = mapModel.windowMode
+        //窗口模式配置
+        configure.dialogOptions = this.windowToDialogOptions(mapModel)
 
         if (mapModel.widgets && mapModel.widgets?.length > 0){
           WidgetEvent.getInstance().list = toHamonyWidget(mapModel.widgets)
@@ -201,38 +208,39 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
               CLSDKManager.closeAuthLoginPage()
             }
           }
+        }else{
+          configure.loginPageComponent = FlutterBlankWidgetView
         }
 
-
         if (mapModel.isInterceptionLogin && mapModel.isInterceptionLogin === true) {
-          const self = this
-          configure.authLoginListener = ({
-            onAuthLoginListener(context: UIContext, callBack: CLAuthLoginCallBack) {
-              const resultHandler: MethodResult = {
-                success: (res: ESObject) => {
-                  console.log('Flutter 返回:', JSON.stringify(res));
-                  if (res && res === true) {
-                    CLSDKManager.clearScripCache()
-                    callBack.onAuthLoginCallBack(true)
-                  }else {
+            const self = this
+            configure.authLoginListener = ({
+              onAuthLoginListener(context: UIContext, callBack: CLAuthLoginCallBack) {
+                const resultHandler: MethodResult = {
+                  success: (res: ESObject) => {
+                    // console.log('Flutter 返回:', JSON.stringify(res));
+                    if (res && res === true) {
+                      CLSDKManager.clearScripCache()
+                      callBack.onAuthLoginCallBack(true)
+                    }else {
+                      callBack.onAuthLoginCallBack(false)
+                    }
+                  },
+                  error: (code: string, msg: string, details: ESObject) => {
+                    // console.error('Flutter 错误:', code, msg);
+                    callBack.onAuthLoginCallBack(false)
+                  },
+                  notImplemented: () => {
+                    console.warn('Flutter 未实现该方法');
                     callBack.onAuthLoginCallBack(false)
                   }
-                },
-                error: (code: string, msg: string, details: ESObject) => {
-                  console.error('Flutter 错误:', code, msg);
-                  callBack.onAuthLoginCallBack(false)
-                },
-                notImplemented: () => {
-                  console.warn('Flutter 未实现该方法');
-                  callBack.onAuthLoginCallBack(false)
+                };
+                let res:Record<string,string> = {
+                  "res":"点击一键登录"
                 }
-              };
-              let res:Record<string,string> = {
-                "res":"点击一键登录"
+                self.channel?.invokeMethod("onAuthLoginHarmonyListener",res,resultHandler)
               }
-              self.channel?.invokeMethod("onAuthLoginHarmonyListener",res,resultHandler)
-            }
-          })
+            })
         }
 
         configure.loginClickListener = ({
@@ -282,6 +290,41 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
       }
       return result
     }
+
+    windowToDialogOptions(model:ShanYanUIConfigHarmony):CLLoginDialogOptions{
+      let alignmentArray = [
+        DialogAlignment.Top,DialogAlignment.Center,DialogAlignment.Bottom,
+        DialogAlignment.Default,
+        DialogAlignment.TopStart,DialogAlignment.TopEnd,
+        DialogAlignment.CenterStart,DialogAlignment.CenterEnd,
+        DialogAlignment.BottomStart,DialogAlignment.BottomEnd
+      ]
+      let tmpAlignment = DialogAlignment.Center
+      if (model.windowAlignment && model.windowAlignment >=0 && model.windowAlignment <9) {
+        tmpAlignment = alignmentArray[model.windowAlignment]
+      }
+      let dialogOptions:CLLoginDialogOptions = {
+        width:model.windowWidth ?? '70%',
+        height:model.windowHeight ??'50%',
+        autoCancel:model.windowAutoCancel ?? false,
+        maskColor:model.windowMaskColor,
+        offset:{dx:model.windowOffsetX ?? 0,dy: model.windowHeight ?? 0},
+        showInSubWindow:model.windowShowInSubWindow,
+        isModal:model.windowIsModal,
+        alignment:tmpAlignment
+      }
+      if (deviceInfo.sdkApiVersion >= 15 ) {
+        dialogOptions.levelMode = model.windowLevelMode
+        dialogOptions.levelUniqueId = model.windowLevelUniqueId
+        dialogOptions.immersiveMode = model.windowImmersiveMode
+      }
+      if (deviceInfo.sdkApiVersion >=14) {
+        dialogOptions.enableHoverMode = model.windowEnableHoverMode
+        dialogOptions.hoverModeArea = model.windowHoverModeArea
+      }
+      return dialogOptions
+    }
+
 }
 
 function  mapToObject(map: Map<string, ESObject>): Record<string, ESObject> {
@@ -480,6 +523,21 @@ interface ShanYanUIConfigHarmony {
   widgets ?:Map<string,ESObject>[];
   // ---------- 窗口模式 ----------
   windowMode?: boolean; // 窗口模式，默认 false
+  windowWidth?: string
+  windowHeight?: string
+  windowAlignment?: number
+  windowOffsetX?: string
+  windowOffsetY?: string
+  windowShowInSubWindow?: boolean
+  windowIsModal?: boolean
+  windowAutoCancel?: boolean
+  windowMaskColor?: string
+  windowKeyboardAvoidMode?: number
+  windowEnableHoverMode?: boolean
+  windowHoverModeArea?: number
+  windowLevelMode?: number
+  windowLevelUniqueId?: number
+  windowImmersiveMode?: number
 }
 
 
@@ -638,5 +696,14 @@ function FlutterWidgetView(){
       }
     },(item:FlutterWidget) => item.widgetId)
   }
+}
+
+@Builder
+function FlutterBlankWidgetView(){
+  RelativeContainer(){
+
+  }.width('100%')
+  .height('100%')
+  .backgroundColor('#ffffff')
 }
 
