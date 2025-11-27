@@ -78,11 +78,8 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     async init(call:MethodCall,result: MethodResult){
       CLSDKManager.printConsoleEnable(true)
       let arg:Map<string,ESObject> = call.args as Map<string,ESObject>
-      console.log("🍊🍊🍊🍊🍊" + call.args)
-      console.log("🍊🍊🍊🍊🍊" + JSON.stringify(arg))
       let context = this.context
       let appId = arg.get('appId') as string
-      console.log("🍊🍊🍊🍊🍊" + JSON.stringify(appId))
       const res:CLResult = await CLSDKManager.init(context,appId)
       result.success(this.completeResultToJson(res))
     }
@@ -96,10 +93,7 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     async quickAuthLoginWithConfigure(call:MethodCall,callResult:MethodResult){
       let arg:Map<string,ESObject> = call.args as Map<string,ESObject>
       let configure = this.configureWithConfig(arg)
-
-      console.log("🍊🍊🍊🍊🍊🍌🍌🍌tt" + JSON.stringify(mapToObject(arg)))
       const res:CLResult = await CLSDKManager.quickAuthLoginWithConfigure(configure, async (result:CLResult)=>{
-        console.log("🍊🍊🍊🍊🍊🍌🍌🍌1111111111" )
         this.channel?.invokeMethod("onReceiveAuthPageEvent",this.completeResultToJson(result))
       })
       if (res) {
@@ -387,10 +381,8 @@ function toHamonyWidget(items?:Map<string,ESObject>[]):FlutterWidget[]{
   if (!items || items.length <=0) { return []}
   let array:FlutterWidget[] =[]
   items.forEach((item:Map<string,ESObject>)=>{
-    console.log("🍊🍊🍊====🍊🍊🍊🍊🍊" + JSON.stringify(item))
     let tt = mapToObject(item) as FlutterWidget
     array.push(tt)
-    console.log("🍊🍊🍊🍊🍊🍊🍊🍊" + JSON.stringify(tt))
   })
   return array
 }
