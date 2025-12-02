@@ -1236,8 +1236,8 @@ ShanYanUIConfigHarmony _$ShanYanUIConfigHarmonyFromJson(
           ? null
           : ShanYanHarmonyMarginOrPadding.fromJson(
               json['numberMargin'] as Map<String, dynamic>)
-      ..loginBtnWidth = json['loginBtnWidth'] as num?
-      ..loginBtnHeight = json['loginBtnHeight'] as num?
+      ..loginBtnWidth = json['loginBtnWidth'] as String?
+      ..loginBtnHeight = json['loginBtnHeight'] as String?
       ..loginBtnText = json['loginBtnText'] as String?
       ..loginBtnTextSize = json['loginBtnTextSize'] as num?
       ..loginBtnTextColor = json['loginBtnTextColor'] as String?
@@ -1279,6 +1279,8 @@ ShanYanUIConfigHarmony _$ShanYanUIConfigHarmonyFromJson(
           ? null
           : ShanYanHarmonyAlignRuleOption.fromJson(
               json['checkBoxAlignRuleOption'] as Map<String, dynamic>)
+      ..clauseNavMarginTop = json['clauseNavMarginTop'] as num?
+      ..windowLayoutFullScreen = json['windowLayoutFullScreen'] as bool?
       ..widgets = (json['widgets'] as List<dynamic>?)
           ?.map((e) =>
               ShanYanCustomWidgetHarmony.fromJson(e as Map<String, dynamic>))
@@ -1349,6 +1351,8 @@ Map<String, dynamic> _$ShanYanUIConfigHarmonyToJson(
   writeNotNull('checkBoxMargin', instance.checkBoxMargin?.toJson());
   writeNotNull(
       'checkBoxAlignRuleOption', instance.checkBoxAlignRuleOption?.toJson());
+  writeNotNull('clauseNavMarginTop', instance.clauseNavMarginTop);
+  writeNotNull('windowLayoutFullScreen', instance.windowLayoutFullScreen);
   writeNotNull('widgets', instance.widgets?.map((e) => e.toJson()).toList());
   writeNotNull('isInterceptionLogin', instance.isInterceptionLogin);
   writeNotNull('windowMode', instance.windowMode);

@@ -3,7 +3,6 @@
 * */
 
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -1279,8 +1278,8 @@ class ShanYanUIConfigHarmony {
   ShanYanHarmonyAlignRuleOption? numberAlignRuleOption; // 设置登手机号码相对布局偏移规则
   ShanYanHarmonyMarginOrPadding? numberMargin;          // 设置手机号码边缘边距
 
-  num?    loginBtnWidth;        // 设置号码宽度
-  num?    loginBtnHeight;       // 设置号码高度
+  String? loginBtnWidth;        // 设置号码宽度，示例"400",或者“80%”
+  String? loginBtnHeight;       // 设置号码高度，示例"400",或者“80%”
   String? loginBtnText;         // 设置登录按钮文本内容
   num?    loginBtnTextSize;     // 设置授权登录文本字体大小
   String? loginBtnTextColor;    // 设置授权登录按钮字体颜色
@@ -1291,7 +1290,7 @@ class ShanYanUIConfigHarmony {
   ShanYanHarmonyMarginOrPadding? loginBtnMargin;          // 设置登录按钮边缘边距
 
   // 隐私协议设置
-  List<ShanYanHarmonyPrivacyEntity>?      clauses;                //设置隐私条款
+  List<ShanYanHarmonyPrivacyEntity>?      clauses;       //设置隐私条款，具体参考demo设置
   num?    checkBoxWidth;  // 设置隐私条款勾选框宽度
   num?    checkBoxHeight; // 设置隐私条款勾选框高度
   bool?   clauseState;    // 设置隐私条款勾选框勾选状态
@@ -1303,20 +1302,22 @@ class ShanYanUIConfigHarmony {
   ShanYanHarmonyAlignRuleOption? clauseAlignRuleOption;  // 设置隐私协议相对布局偏移规则
   ShanYanHarmonyMarginOrPadding? checkBoxMargin;         // 设置隐私条款勾选框偏移边距
   ShanYanHarmonyAlignRuleOption? checkBoxAlignRuleOption;// 设置隐私协议勾选框相对布局偏移规则
+  num? clauseNavMarginTop;       // 设置协议页标题栏margin.top，范围为 0-99，全屏下需要设置状态栏的高度
+  bool? windowLayoutFullScreen;  // 设置是否为全屏，默认app当前的设置
 
   List<ShanYanCustomWidgetHarmony>? widgets;
   bool? isInterceptionLogin;
 
-  bool? windowMode; // 设置窗口模式，默认非窗口模式，false
-  String? windowWidth;
-  String? windowHeight;
-  int? windowAlignment;
-  String? windowOffsetX;
-  String? windowOffsetY;
-  bool? windowShowInSubWindow;
-  bool? windowIsModal;
-  bool? windowAutoCancel;
-  String? windowMaskColor;
+  bool? windowMode;           //设置窗口模式，默认非窗口模式，false
+  String? windowWidth;        //设置窗口宽度，示例"200"或者"70%"
+  String? windowHeight;       //设置窗口高度，示例"400"或者"70%"
+  int? windowAlignment;       //设置窗口位置，0~8,具体可参考鸿蒙DialogAlignment枚举，0为Top
+  String? windowOffsetX;      //设置窗口位置
+  String? windowOffsetY;      //设置窗口位置
+  bool? windowShowInSubWindow;//设置窗口是否在子窗口上
+  bool? windowIsModal;        //设置窗口是否模态弹出
+  bool? windowAutoCancel;     //设置窗口是否自动取消
+  String? windowMaskColor;    //设置窗口背景蒙版颜色，示例"#ffffff"
 
 
   factory ShanYanUIConfigHarmony.fromJson(Map<String, dynamic> json) =>

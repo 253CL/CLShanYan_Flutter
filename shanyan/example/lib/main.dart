@@ -534,8 +534,16 @@ class _MyAppState extends State<MyApp> {
     shanYanUIConfig.ohos.loginBtnAlignRuleOption = loginRuleOption;
     shanYanUIConfig.ohos.loginBtnMargin = loginMargin;
 
+    shanYanUIConfig.ohos.checkedImage = 'checked';
+    shanYanUIConfig.ohos.unCheckedImage = 'uncheck';
     shanYanUIConfig.ohos.checkBoxMargin = ShanYanHarmonyMarginOrPadding(left: '20',top: '10',bottom: '40',right: '0');
     shanYanUIConfig.ohos.clauseMargin = ShanYanHarmonyMarginOrPadding(left: '10',right: '20',bottom: '30');
+    // shanYanUIConfig.ohos.clauseNavMarginTop = MediaQueryData.fromWindow(window).padding.top;
+    //app全屏显示时，需设置该属性，否则协议页显示会被遮挡
+    shanYanUIConfig.ohos.clauseNavMarginTop = MediaQuery.of(context).padding.top;
+    // shanYanUIConfig.ohos.windowLayoutFullScreen = true;
+    shanYanUIConfig.ohos.navColor = "#ff0000";
+    shanYanUIConfig.ohos.statusBarColor = "#ff0000";
 
     List<ShanYanCustomWidgetHarmony> shanyanCustomWidgetHarmony = [];
 

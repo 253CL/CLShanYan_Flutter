@@ -134,12 +134,19 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     configureWithConfig(map:Map<string,ESObject>):CLUIConfigure{
       let configure = new CLUIConfigure()
       let context = getContext() as common.UIAbilityContext
-      let windowStage = context.windowStage
-      windowStage.getMainWindowSync().setWindowLayoutFullScreen(false)
       configure.uiContext = context.windowStage.getMainWindowSync().getUIContext()
 
       if (map && map.size > 0) {
         let mapModel = mapToObject(map) as ShanYanUIConfigHarmony
+        if (mapModel.windowLayoutFullScreen) {
+          if (mapModel.windowLayoutFullScreen===true) {
+            let windowStage = context.windowStage
+            windowStage.getMainWindowSync().setWindowLayoutFullScreen(true)
+          }else {
+            let windowStage = context.windowStage
+            windowStage.getMainWindowSync().setWindowLayoutFullScreen(false)
+          }
+        }
 
         let systemBarProperties: window.SystemBarProperties = {
           statusBarColor:mapModel.statusBarColor,
@@ -167,7 +174,7 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         configure.loginBtnText   = mapModel.loginBtnText       // 设置登录按钮文本内容
         configure.loginBtnTextSize = mapModel.loginBtnTextSize     // 设置授权登录文本字体大小
         configure.loginBtnTextColor= mapModel.loginBtnTextColor    // 设置授权登录按钮字体颜色
-        configure.loginBtnImgPath = mapModel.loginBtnImgPath      // 设置登录按钮背景图片
+        configure.loginBtnImgPath = $r(`app.media.${mapModel.loginBtnImgPath}`)      // 设置登录按钮背景图片
         configure.loginBtnColor = mapModel.loginBtnColor        // 设置登录按钮背景颜色
         configure.loginBtnBorderRadius = mapModel.loginBtnBorderRadius // 设置登录按钮圆角
 
@@ -175,9 +182,10 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         configure.checkBoxWidth = mapModel.checkBoxWidth  // 设置隐私条款勾选框宽度
         configure.checkBoxHeight = mapModel.checkBoxHeight // 设置隐私条款勾选框高度
         configure.clauseState = mapModel.clauseState    // 设置隐私条款勾选框勾选状态
-        configure.checkedImage = mapModel.checkedImage   // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
-        configure.unCheckedImage = mapModel.unCheckedImage // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
+        configure.checkedImage = $r(`app.media.${mapModel.checkedImage}`)   // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
+        configure.unCheckedImage = $r(`app.media.${mapModel.unCheckedImage}`) // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
         configure.checkedColor = mapModel.checkedColor   // 设置勾选颜色
+        configure.clauseNavMarginTop = mapModel.clauseNavMarginTop
 
         if (mapModel.checkTipText && mapModel.checkTipText.length >0) {
           configure.checkTipText = mapModel.checkTipText
@@ -190,7 +198,7 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
 
         if (mapModel.widgets && mapModel.widgets?.length > 0){
           WidgetEvent.getInstance().list = toHamonyWidget(mapModel.widgets)
-          console.log("输出一下当前的" + WidgetEvent.getInstance().list)
+          // console.log("输出一下当前的" + WidgetEvent.getInstance().list)
           configure.loginPageComponent = FlutterWidgetView
           WidgetEvent.getInstance().onclick = (item:FlutterWidget)=>{
             let map:Record<string,ESObject> = {
@@ -508,6 +516,8 @@ interface ShanYanUIConfigHarmony {
   clauseAlignRuleOption?: FlutterAlignRuleOption;      // 隐私协议布局偏移规则
   checkBoxMargin?: FlutterMarginOrPadding;             // 勾选框偏移边距
   checkBoxAlignRuleOption?: FlutterAlignRuleOption;   // 勾选框布局偏移规则
+  clauseNavMarginTop?:number                          // 设置协议页标题栏margin.top，范围为 0-99
+  windowLayoutFullScreen?: boolean                    // 设置是否全屏，默认不配置
 
 
   isInterceptionLogin?:boolean;
