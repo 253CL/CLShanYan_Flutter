@@ -1,4 +1,3 @@
-
 {
   "app": {
     "signingConfigs": [
@@ -6,26 +5,26 @@
         "name": "debugtt",
         "type": "HarmonyOS",
         "material": {
-          "storeFile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan.p12",
-          "storePassword": "000000182CCA420B95B0E42278769C76AD3BFF06B8885A8AD12A4787DF5EC3403F3E589161A3FC91",
-          "keyAlias": "shanyan",
-          "keyPassword": "00000018F363EBEF7C52305184E28D59CB33B48498138BE31C957E96CA25188F5F6FD89E81A0727D",
+          "certpath": "/Users/ydong/.ohos/config/debugtt_ohos_X82acz9wjnripWpH-XykTD_1INnSp1ILH0mCv35Oge4=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B9483F5219432D67DC22E29DC8E4F1267FCCAE3A794B0E296C2407AB9DC35ADFD3538E4B69601ED",
+          "profile": "/Users/ydong/.ohos/config/debugtt_ohos_X82acz9wjnripWpH-XykTD_1INnSp1ILH0mCv35Oge4=.p7b",
           "signAlg": "SHA256withECDSA",
-          "profile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan_debugDebug.p7b",
-          "certpath": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/debug.com.shan.test/shanyan_debug.cer"
+          "storeFile": "/Users/ydong/.ohos/config/debugtt_ohos_X82acz9wjnripWpH-XykTD_1INnSp1ILH0mCv35Oge4=.p12",
+          "storePassword": "0000001B5BD8CB3DA08C62C9C782D8B09F47BD6194F6BFFAE617D4F0E7551D32710F61A16E82A0B12D0FCD"
         }
       },
       {
         "name": "releaseyjdl",
         "type": "HarmonyOS",
         "material": {
-          "storeFile": "../cer/com.release.yjdl/shanyan.p12",
-          "storePassword": "00000019562FA2724C51F97D7030979F25394FB3795BB999658384F23669896BCA8E93CA76A4655A8B",
+          "certpath": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/com.release.yjdl/shanyan.cer",
           "keyAlias": "shanyan",
-          "keyPassword": "000000190F320DA0CE2B8F74128826D24832D04C218F44B0C2B9B882A83093ED8D26C42CF0ECDA9810",
+          "keyPassword": "000000192D37976D85891365A333F3E85C4F73182F16A6F4CEFEF6EB0E0447DBB4927EAC76D21A90FB",
+          "profile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/com.release.yjdl/releaseyjdlDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "profile": "../cer/com.release.yjdl/shanyanreleaseyjdlDebug.p7b",
-          "certpath": "../cer/com.release.yjdl/shanyanyjdl.cer"
+          "storeFile": "/Users/ydong/Desktop/chuanglan/flash-harmonyos/cer/com.release.yjdl/shanyan.p12",
+          "storePassword": "00000019D0B1763FD4DBF1013D3A17EA6E07C82B3B9ED916F3B13F535E043D89169497ADAC35DC819D"
         }
       }
     ],

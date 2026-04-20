@@ -573,7 +573,7 @@ class _MyAppState extends State<MyApp> {
     harmonyImgRuleOption.middle = ShanYanHarmonyHorizontalAnchor(align: ShanYanHorizontalAlign.Middle);
     ShanYanHarmonyMarginOrPadding harmonyImgMargin = ShanYanHarmonyMarginOrPadding(top: "310");
 
-    harmonyImg.backgroundImgPath = "qq";
+    harmonyImg.backgroundImgPath = "qqtt";
     harmonyImg.width = "200";
     harmonyImg.height = "40";
     harmonyImg.alignRuleOption = harmonyImgRuleOption;

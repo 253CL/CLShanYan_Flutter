@@ -28,12 +28,7 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        package: com.shanyan
-        pluginClass: ShanyanPlugin
       ohos:
-        pluginClass: ShanyanPlugin
-      ios:
         pluginClass: ShanyanPlugin
 #  # This sectiopub publish --dry-runn identifies this Flutter project as a plugin project.
 #  # The androidPackage and pluginClass identifiers should not ordinarily

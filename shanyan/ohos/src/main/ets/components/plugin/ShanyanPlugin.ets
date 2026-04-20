@@ -112,7 +112,7 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
 
     setInitDebug(call:MethodCall){
       let arg:Map<string,ESObject> = call.args as Map<string,ESObject>
-      let enable = arg.get('iEnable') as boolean
+      let enable = arg.get('initDebug') as boolean
       CLSDKManager.printConsoleEnable(enable)
     }
     async mobileCheckWithLocalPhoneNumberComplete(call:MethodCall,callResult:MethodResult){
@@ -133,88 +133,89 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
 
     configureWithConfig(map:Map<string,ESObject>):CLUIConfigure{
       let configure = new CLUIConfigure()
-      let context = getContext() as common.UIAbilityContext
-      configure.uiContext = context.windowStage.getMainWindowSync().getUIContext()
+      try {
+        let context = getContext() as common.UIAbilityContext
+        configure.uiContext = context.windowStage.getMainWindowSync().getUIContext()
 
-      if (map && map.size > 0) {
-        let mapModel = mapToObject(map) as ShanYanUIConfigHarmony
-        if (mapModel.windowLayoutFullScreen) {
-          if (mapModel.windowLayoutFullScreen===true) {
-            let windowStage = context.windowStage
-            windowStage.getMainWindowSync().setWindowLayoutFullScreen(true)
+        if (map && map.size > 0) {
+          let mapModel = mapToObject(map) as ShanYanUIConfigHarmony
+          if (mapModel.windowLayoutFullScreen) {
+            if (mapModel.windowLayoutFullScreen===true) {
+              let windowStage = context.windowStage
+              windowStage.getMainWindowSync().setWindowLayoutFullScreen(true)
+            }else {
+              let windowStage = context.windowStage
+              windowStage.getMainWindowSync().setWindowLayoutFullScreen(false)
+            }
+          }
+
+          let systemBarProperties: window.SystemBarProperties = {
+            statusBarColor:mapModel.statusBarColor,
+            isStatusBarLightIcon:mapModel.isStatusBarLightIcon,
+            statusBarContentColor:mapModel.statusBarContentColor,
+            navigationBarColor:mapModel.navigationBarColor,
+            isNavigationBarLightIcon:mapModel.isNavigationBarLightIcon,
+            navigationBarContentColor :mapModel.navigationBarContentColor,
+            enableStatusBarAnimation :mapModel.enableStatusBarAnimation,
+            enableNavigationBarAnimation:mapModel.enableNavigationBarAnimation
+          }
+          configure.systemBarProperties = systemBarProperties
+
+          configure.navTextSize = mapModel.navTextSize
+          configure.navTextColor = mapModel.navTextColor
+          configure.navColor = mapModel.navColor
+          configure.loginPageGrayScale = mapModel.loginPageGrayScale
+
+          configure.numberSize = mapModel.numberSize
+          configure.numberIsBold = mapModel.numberIsBold
+          configure.numberColor = mapModel.numberColor
+
+          configure.loginBtnWidth = mapModel.loginBtnWidth;        // 设置号码宽度
+          configure.loginBtnHeight = mapModel.loginBtnHeight      // 设置号码高度
+          configure.loginBtnText   = mapModel.loginBtnText       // 设置登录按钮文本内容
+          configure.loginBtnTextSize = mapModel.loginBtnTextSize     // 设置授权登录文本字体大小
+          configure.loginBtnTextColor= mapModel.loginBtnTextColor    // 设置授权登录按钮字体颜色
+          configure.loginBtnImgPath = $r(`app.media.${mapModel.loginBtnImgPath}`)      // 设置登录按钮背景图片
+          configure.loginBtnColor = mapModel.loginBtnColor        // 设置登录按钮背景颜色
+          configure.loginBtnBorderRadius = mapModel.loginBtnBorderRadius // 设置登录按钮圆角
+
+
+          configure.checkBoxWidth = mapModel.checkBoxWidth  // 设置隐私条款勾选框宽度
+          configure.checkBoxHeight = mapModel.checkBoxHeight // 设置隐私条款勾选框高度
+          configure.clauseState = mapModel.clauseState    // 设置隐私条款勾选框勾选状态
+          configure.checkedImage = $r(`app.media.${mapModel.checkedImage}`)   // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
+          configure.unCheckedImage = $r(`app.media.${mapModel.unCheckedImage}`) // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
+          configure.checkedColor = mapModel.checkedColor   // 设置勾选颜色
+          configure.clauseNavMarginTop = mapModel.clauseNavMarginTop
+
+          if (mapModel.checkTipText && mapModel.checkTipText.length >0) {
+            configure.checkTipText = mapModel.checkTipText
           }else {
-            let windowStage = context.windowStage
-            windowStage.getMainWindowSync().setWindowLayoutFullScreen(false)
+            configure.checkTipText = '请勾选协议'
           }
-        }
+          configure.windowMode = mapModel.windowMode
+          //窗口模式配置
+          configure.dialogOptions = this.windowToDialogOptions(mapModel)
 
-        let systemBarProperties: window.SystemBarProperties = {
-          statusBarColor:mapModel.statusBarColor,
-          isStatusBarLightIcon:mapModel.isStatusBarLightIcon,
-          statusBarContentColor:mapModel.statusBarContentColor,
-          navigationBarColor:mapModel.navigationBarColor,
-          isNavigationBarLightIcon:mapModel.isNavigationBarLightIcon,
-          navigationBarContentColor :mapModel.navigationBarContentColor,
-          enableStatusBarAnimation :mapModel.enableStatusBarAnimation,
-          enableNavigationBarAnimation:mapModel.enableNavigationBarAnimation
-        }
-        configure.systemBarProperties = systemBarProperties
-
-        configure.navTextSize = mapModel.navTextSize
-        configure.navTextColor = mapModel.navTextColor
-        configure.navColor = mapModel.navColor
-        configure.loginPageGrayScale = mapModel.loginPageGrayScale
-
-        configure.numberSize = mapModel.numberSize
-        configure.numberIsBold = mapModel.numberIsBold
-        configure.numberColor = mapModel.numberColor
-
-        configure.loginBtnWidth = mapModel.loginBtnWidth;        // 设置号码宽度
-        configure.loginBtnHeight = mapModel.loginBtnHeight      // 设置号码高度
-        configure.loginBtnText   = mapModel.loginBtnText       // 设置登录按钮文本内容
-        configure.loginBtnTextSize = mapModel.loginBtnTextSize     // 设置授权登录文本字体大小
-        configure.loginBtnTextColor= mapModel.loginBtnTextColor    // 设置授权登录按钮字体颜色
-        configure.loginBtnImgPath = $r(`app.media.${mapModel.loginBtnImgPath}`)      // 设置登录按钮背景图片
-        configure.loginBtnColor = mapModel.loginBtnColor        // 设置登录按钮背景颜色
-        configure.loginBtnBorderRadius = mapModel.loginBtnBorderRadius // 设置登录按钮圆角
-
-
-        configure.checkBoxWidth = mapModel.checkBoxWidth  // 设置隐私条款勾选框宽度
-        configure.checkBoxHeight = mapModel.checkBoxHeight // 设置隐私条款勾选框高度
-        configure.clauseState = mapModel.clauseState    // 设置隐私条款勾选框勾选状态
-        configure.checkedImage = $r(`app.media.${mapModel.checkedImage}`)   // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
-        configure.unCheckedImage = $r(`app.media.${mapModel.unCheckedImage}`) // 设置 checkbox 勾选和未勾选图片(需同时设置checkedImage、unCheckedImage)
-        configure.checkedColor = mapModel.checkedColor   // 设置勾选颜色
-        configure.clauseNavMarginTop = mapModel.clauseNavMarginTop
-
-        if (mapModel.checkTipText && mapModel.checkTipText.length >0) {
-          configure.checkTipText = mapModel.checkTipText
-        }else {
-          configure.checkTipText = '请勾选协议'
-        }
-        configure.windowMode = mapModel.windowMode
-        //窗口模式配置
-        configure.dialogOptions = this.windowToDialogOptions(mapModel)
-
-        if (mapModel.widgets && mapModel.widgets?.length > 0){
-          WidgetEvent.getInstance().list = toHamonyWidget(mapModel.widgets)
-          // console.log("输出一下当前的" + WidgetEvent.getInstance().list)
-          configure.loginPageComponent = FlutterWidgetView
-          WidgetEvent.getInstance().onclick = (item:FlutterWidget)=>{
-            let map:Record<string,ESObject> = {
-              "widgetId":item.widgetId,
-              "isFinish":item.isFinish
+          if (mapModel.widgets && mapModel.widgets?.length > 0){
+            WidgetEvent.getInstance().list = toHamonyWidget(mapModel.widgets)
+            // console.log("输出一下当前的" + WidgetEvent.getInstance().list)
+            configure.loginPageComponent = FlutterWidgetView
+            WidgetEvent.getInstance().onclick = (item:FlutterWidget)=>{
+              let map:Record<string,ESObject> = {
+                "widgetId":item.widgetId,
+                "isFinish":item.isFinish
+              }
+              this.channel?.invokeMethod("onReceiveClickWidgetEvent",map)
+              if (item.isFinish && item.isFinish === true) {
+                CLSDKManager.closeAuthLoginPage()
+              }
             }
-            this.channel?.invokeMethod("onReceiveClickWidgetEvent",map)
-            if (item.isFinish && item.isFinish === true) {
-              CLSDKManager.closeAuthLoginPage()
-            }
+          }else{
+            configure.loginPageComponent = FlutterBlankWidgetView
           }
-        }else{
-          configure.loginPageComponent = FlutterBlankWidgetView
-        }
 
-        if (mapModel.isInterceptionLogin && mapModel.isInterceptionLogin === true) {
+          if (mapModel.isInterceptionLogin && mapModel.isInterceptionLogin === true) {
             const self = this
             configure.authLoginListener = ({
               onAuthLoginListener(context: UIContext, callBack: CLAuthLoginCallBack) {
@@ -243,37 +244,42 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
                 self.channel?.invokeMethod("onAuthLoginHarmonyListener",res,resultHandler)
               }
             })
-        }
-
-        configure.loginClickListener = ({
-          onLoginClickStart(context:UIContext){
-
-          },
-          onLoginClickComplete(context:UIContext){
           }
-        })
 
+          configure.loginClickListener = ({
+            onLoginClickStart(context:UIContext){
 
-        // configure.loginBtnMargin = {top:30}
-        try {
-          configure.clauses = toHarmonyPrivacyEntity(mapModel.clauses)
+            },
+            onLoginClickComplete(context:UIContext){
+            }
+          })
 
-          configure.numberMargin = toHarmonyMargin(mapModel.numberMargin)
-          configure.numberAlignRuleOption = toHarmonyAlignRuleOption(mapModel.numberAlignRuleOption)
+          configure.clauseComponent = clauseComponent
 
-          configure.loginBtnMargin = toHarmonyMargin(mapModel.loginBtnMargin)
-          configure.loginBtnAlignRuleOption = toHarmonyAlignRuleOption(mapModel.loginBtnAlignRuleOption)
+          // configure.loginBtnMargin = {top:30}
+          try {
+            configure.clauses = toHarmonyPrivacyEntity(mapModel.clauses)
 
-          configure.clauseMargin = toHarmonyMargin(mapModel.clauseMargin)
-          configure.clauseAlignRuleOption = toHarmonyAlignRuleOption(mapModel.clauseAlignRuleOption)
+            configure.numberMargin = toHarmonyMargin(mapModel.numberMargin)
+            configure.numberAlignRuleOption = toHarmonyAlignRuleOption(mapModel.numberAlignRuleOption)
 
-          configure.checkBoxMargin = toHarmonyMargin(mapModel.checkBoxMargin)
-          configure.checkBoxAlignRuleOption = toHarmonyAlignRuleOption(mapModel.checkBoxAlignRuleOption)
+            configure.loginBtnMargin = toHarmonyMargin(mapModel.loginBtnMargin)
+            configure.loginBtnAlignRuleOption = toHarmonyAlignRuleOption(mapModel.loginBtnAlignRuleOption)
 
-        }catch (e) {
-          let error = e as BusinessError
-          console.log(`configure转化异常:name:${error.name},code=${error.code},message:${error.message},stack:${error.stack}`)
+            configure.clauseMargin = toHarmonyMargin(mapModel.clauseMargin)
+            configure.clauseAlignRuleOption = toHarmonyAlignRuleOption(mapModel.clauseAlignRuleOption)
+
+            configure.checkBoxMargin = toHarmonyMargin(mapModel.checkBoxMargin)
+            configure.checkBoxAlignRuleOption = toHarmonyAlignRuleOption(mapModel.checkBoxAlignRuleOption)
+
+          }catch (e) {
+            let error = e as BusinessError
+            console.log(`configure转化异常:name:${error.name},code=${error.code},message:${error.message},stack:${error.stack}`)
+          }
         }
+      }catch (e) {
+        let error = e as BusinessError
+        console.log(`configure转化异常:name:${error.name},code=${error.code},message:${error.message},stack:${error.stack}`)
       }
       return configure
     }
@@ -707,5 +713,20 @@ function FlutterBlankWidgetView(){
   }.width('100%')
   .height('100%')
   .backgroundColor('#ffffff')
+}
+
+@Builder
+export function clauseComponent(): void {
+  Column() {
+    Text('自定义协议页标题栏')
+      .fontSize(20)
+      .alignRules({
+        middle: { anchor: '__container__', align: HorizontalAlign.Center },
+        center: { anchor: '__container__', align: VerticalAlign.Center },
+      })
+  }.width('100%')
+  .height(50)
+  .backgroundColor(0x7f0086d0)
+  .id('clauseComponent')
 }
 
