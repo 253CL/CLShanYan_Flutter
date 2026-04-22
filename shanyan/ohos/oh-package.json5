@@ -6,7 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@shanyan/shanyansdk": '^1.0.6'
+    "@shanyan/shanyansdk": "file:./lib/ShanYanSDK-signed.har"
   },
   "modelVersion": "5.0.0"
 }

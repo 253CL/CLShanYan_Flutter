@@ -91,8 +91,10 @@ export default class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     async quickAuthLoginWithConfigure(call:MethodCall,callResult:MethodResult){
+      let pathStack = AppStorage.get<NavPathStack>('navPathStack')
       let arg:Map<string,ESObject> = call.args as Map<string,ESObject>
       let configure = this.configureWithConfig(arg)
+      CLSDKManager.registNavigation(pathStack)
       const res:CLResult = await CLSDKManager.quickAuthLoginWithConfigure(configure, async (result:CLResult)=>{
         this.channel?.invokeMethod("onReceiveAuthPageEvent",this.completeResultToJson(result))
       })
