@@ -798,22 +798,6 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         Object setPrivacyCustomToastText = valueForKey(shanYanUIConfig, "setPrivacyCustomToastText");
         Object setPrivacyNameUnderline = valueForKey(shanYanUIConfig, "setPrivacyNameUnderline");
         Object setOperatorPrivacyAtLast = valueForKey(shanYanUIConfig, "setOperatorPrivacyAtLast");
-        Object setSloganTextColor = valueForKey(shanYanUIConfig, "setSloganTextColor");
-        Object setSloganTextSize = valueForKey(shanYanUIConfig, "setSloganTextSize");
-        Object setSloganOffsetY = valueForKey(shanYanUIConfig, "setSloganOffsetY");
-        Object setSloganHidden = valueForKey(shanYanUIConfig, "setSloganHidden");
-        Object setSloganOffsetBottomY = valueForKey(shanYanUIConfig, "setSloganOffsetBottomY");
-        Object setSloganOffsetX = valueForKey(shanYanUIConfig, "setSloganOffsetX");
-        Object setSloganTextBold = valueForKey(shanYanUIConfig, "setSloganTextBold");
-
-        Object setShanYanSloganTextColor = valueForKey(shanYanUIConfig, "setShanYanSloganTextColor");
-        Object setShanYanSloganTextSize = valueForKey(shanYanUIConfig, "setShanYanSloganTextSize");
-        Object setShanYanSloganOffsetY = valueForKey(shanYanUIConfig, "setShanYanSloganOffsetY");
-        Object setShanYanSloganHidden = valueForKey(shanYanUIConfig, "setShanYanSloganHidden");
-        Object setShanYanSloganOffsetBottomY = valueForKey(shanYanUIConfig, "setShanYanSloganOffsetBottomY");
-        Object setShanYanSloganOffsetX = valueForKey(shanYanUIConfig, "setShanYanSloganOffsetX");
-        Object setShanYanSloganTextBold = valueForKey(shanYanUIConfig, "setShanYanSloganTextBold");
-
         Object setPrivacyNavColor = valueForKey(shanYanUIConfig, "setPrivacyNavColor");
         Object setPrivacyNavTextBold = valueForKey(shanYanUIConfig, "setPrivacyNavTextBold");
         Object setPrivacyNavTextColor = valueForKey(shanYanUIConfig, "setPrivacyNavTextColor");
@@ -1113,50 +1097,6 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
         }
         if (null != setOperatorPrivacyAtLast) {
             builder.setOperatorPrivacyAtLast((Boolean) setOperatorPrivacyAtLast);
-        }
-        //授权页 slogan（***提供认证服务）
-        if (null != setSloganTextColor) {
-            builder.setSloganTextColor(Color.parseColor((String) setSloganTextColor));
-        }
-        if (null != setSloganTextSize) {
-            builder.setSloganTextSize((Integer) setSloganTextSize);
-        }
-        if (null != setSloganOffsetY) {
-            builder.setSloganOffsetY((Integer) setSloganOffsetY);
-        }
-        if (null != setSloganHidden) {
-            builder.setSloganHidden((Boolean) setSloganHidden);
-        }
-        if (null != setSloganOffsetBottomY) {
-            builder.setSloganOffsetBottomY((Integer) setSloganOffsetBottomY);
-        }
-        if (null != setSloganOffsetX) {
-            builder.setSloganOffsetX((Integer) setSloganOffsetX);
-        }
-        if (null != setSloganTextBold) {
-            builder.setSloganTextBold((Boolean) setSloganTextBold);
-        }
-        //授权页 创蓝slogan（创蓝提供技术支持）
-        if (null != setShanYanSloganTextColor) {
-            builder.setShanYanSloganTextColor(Color.parseColor((String) setShanYanSloganTextColor));
-        }
-        if (null != setShanYanSloganTextSize) {
-            builder.setShanYanSloganTextSize((Integer) setShanYanSloganTextSize);
-        }
-        if (null != setShanYanSloganOffsetY) {
-            builder.setShanYanSloganOffsetY((Integer) setShanYanSloganOffsetY);
-        }
-        if (null != setShanYanSloganHidden) {
-            builder.setShanYanSloganHidden((Boolean) setShanYanSloganHidden);
-        }
-        if (null != setShanYanSloganOffsetBottomY) {
-            builder.setShanYanSloganOffsetBottomY((Integer) setShanYanSloganOffsetBottomY);
-        }
-        if (null != setShanYanSloganOffsetX) {
-            builder.setShanYanSloganOffsetX((Integer) setShanYanSloganOffsetX);
-        }
-        if (null != setShanYanSloganTextBold) {
-            builder.setShanYanSloganTextBold((Boolean) setShanYanSloganTextBold);
         }
         //协议页导航栏
         if (null != setPrivacyNavColor) {
