@@ -24,8 +24,8 @@
           "keyAlias": "shanyan",
           "keyPassword": "000000190F320DA0CE2B8F74128826D24832D04C218F44B0C2B9B882A83093ED8D26C42CF0ECDA9810",
           "signAlg": "SHA256withECDSA",
-          "profile": "../cer/com.release.yjdl/shanyanreleaseyjdlDebug.p7b",
-          "certpath": "../cer/com.release.yjdl/shanyanyjdl.cer"
+          "profile": "../cer/com.release.yjdl/releaseyjdlDebug.p7b",
+          "certpath": "../cer/com.release.yjdl/shanyan.cer"
         }
       }
     ],
