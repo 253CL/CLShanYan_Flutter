@@ -403,6 +403,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
             for (Map widgetMap : portraitWidgets) {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
+                Log.e(TAG, "widget_type=" + type);
                 if ("TextView".equals(type)) {
                     addCustomTextWidgets(widgetMap, builder);
                 } else if ("Button".equals(type)) {
@@ -436,6 +437,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
             for (Map widgetMap : landscapeWidgets) {
                 /// 新增自定义的控件
                 String type = (String) widgetMap.get("type");
+                Log.e(TAG, "landscapewidget_type=" + type);
                 if ("TextView".equals(type)) {
                     addCustomTextWidgets(widgetMap, landscapeBuilder);
                 } else if ("Button".equals(type)) {
@@ -1157,6 +1159,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private int getRawForId(String rawName) {
+        Log.e(TAG, "raw_Name=" + rawName);
         if (null == rawName) {
             return 0;
         } else {
@@ -1170,6 +1173,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     public int getLayoutForId(String layoutname) {
+        Log.e(TAG, "layout_Name=" + layoutname);
         if (null == layoutname) {
             return 0;
         } else {
@@ -1186,6 +1190,7 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
      * 取id资源
      */
     public int getId(String idname) {
+        Log.e(TAG, "ResourcesId_Name=" + idname);
         if (null == idname) {
             return 0;
         } else {
@@ -1199,25 +1204,31 @@ public class ShanyanPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private Drawable getDrawableByReflect(Object imageName) {
-        Class drawable = R.drawable.class;
-        Field field = null;
-        int r_id = 0;
-        if (null == imageName) {
+        try {
+            Log.e(TAG, "drawable_Name=" + imageName);
+            Class drawable = R.drawable.class;
+            Field field = null;
+            int r_id = 0;
+            if (null == imageName) {
+                return null;
+            }
+            try {
+                field = drawable.getField((String) imageName);
+                r_id = field.getInt(field.getName());
+            } catch (Exception e) {
+                r_id = 0;
+            }
+            if (r_id == 0) {
+                r_id = context.getResources().getIdentifier((String) imageName, "drawable", context.getPackageName());
+            }
+            if (r_id == 0) {
+                r_id = context.getResources().getIdentifier((String) imageName, "mipmap", context.getPackageName());
+            }
+            return context.getResources().getDrawable(r_id);
+        } catch (Exception e) {
+            Log.e(TAG, "drawable_Name=" + imageName+e);
             return null;
         }
-        try {
-            field = drawable.getField((String) imageName);
-            r_id = field.getInt(field.getName());
-        } catch (Exception e) {
-            r_id = 0;
-        }
-        if (r_id == 0) {
-            r_id = context.getResources().getIdentifier((String) imageName, "drawable", context.getPackageName());
-        }
-        if (r_id == 0) {
-            r_id = context.getResources().getIdentifier((String) imageName, "mipmap", context.getPackageName());
-        }
-        return context.getResources().getDrawable(r_id);
     }
 
     /**
