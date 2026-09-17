@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'shanyan'
-  s.version          = '2.3.5.0'
+  s.version          = '2.3.5.1'
   s.summary          = '闪验SDK Flutter plguin.'
   s.description      = <<-DESC
 A new Flutter plugin.
@@ -16,7 +16,7 @@ A new Flutter plugin.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.static_framework = true
-  s.ios.dependency 'CL_ShanYanSDK', '~> 2.3.7.1'
-  s.ios.deployment_target = '11.0'
+  s.ios.dependency 'CL_ShanYanSDK', '~> 2.3.7.7'
+  s.ios.deployment_target = '15.0'
 end
 

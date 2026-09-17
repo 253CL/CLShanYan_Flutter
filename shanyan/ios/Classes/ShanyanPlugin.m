@@ -125,7 +125,10 @@
     result[@"code"] = @(code);
     result[@"message"] = message;
     if (self.channel) {
-        [self.channel invokeMethod:@"onReceiveAuthEvent" arguments:result];
+        [ShanyanPlugin performMainBlock:^{
+            [self.channel invokeMethod:@"onReceiveAuthEvent" arguments:result];
+        }];
+        
     }
 }
 
@@ -159,7 +162,7 @@
     
     [CLShanYanSDKManager preGetPhonenumber:^(CLCompleteResult * _Nonnull completeResult) {
         if (complete) {
-            complete([ShanyanPlugin completeResultToJson:completeResult]);
+            complete([ShanyanPlugin completePhoneResultToJson:completeResult]);
         }
     }];
 }
@@ -183,7 +186,10 @@
         
         //一键登录回调
         if (strongSelf.channel) {
-            [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
+            [ShanyanPlugin performMainBlock:^{
+                [strongSelf.channel invokeMethod:@"onReceiveAuthPageEvent" arguments:[ShanyanPlugin completeResultToJson:completeResult]];
+            }];
+            
         }
     }];
 }
@@ -292,6 +298,39 @@
     unsigned hexComponent;
     [[NSScanner scannerWithString: fullHex] scanHexInt: &hexComponent];
     return hexComponent / 255.0;
+}
+
+
++(NSDictionary *)completePhoneResultToJson:(CLCompleteResult *)completeResult{
+    NSMutableDictionary * result = [NSMutableDictionary new];
+    if (completeResult.error != nil) {
+        result[@"code"] = @(completeResult.code);
+        result[@"message"] = completeResult.message;
+        if (completeResult.innerCode != 0) {
+            result[@"innerCode"] = @(completeResult.innerCode);
+        }
+        if ([completeResult.innerDesc isKindOfClass:NSString.class] && completeResult.innerDesc.length > 0) {
+            result[@"innerDesc"] = completeResult.innerDesc;
+        }
+    }else{
+        result[@"code"] = @(1000);
+        result[@"message"] = completeResult.message;
+        if (completeResult.innerCode != 0) {
+            result[@"innerCode"] = @(completeResult.innerCode);
+        }
+        if ([completeResult.innerDesc isKindOfClass:NSString.class] && completeResult.innerDesc.length > 0) {
+            result[@"innerDesc"] = completeResult.innerDesc;
+        }
+        if ([completeResult.data isKindOfClass:NSDictionary.class] && completeResult.data.count > 0) {
+            result[@"protocolName"] = completeResult.data[@"protocolName"] ?: @"";
+            result[@"telecom"] = completeResult.data[@"telecom"] ?: @"";
+            result[@"number"] = completeResult.data[@"number"] ?: @"";
+            result[@"protocolUrl"] = completeResult.data[@"protocolUrl"] ?: @"";
+            result[@"slogan"] = completeResult.data[@"slogan"] ?: @"";
+            result[@"clTokenFromType"] = completeResult.data[@"clTokenFromType"] ?: @"";
+        }
+    }
+    return result;
 }
 
 /**
@@ -1364,7 +1403,9 @@
     result[@"widgetId"] = sender.widgetId;
     result[@"isFinish"] = @(sender.isFinish);
     if (self.channel) {
-        [self.channel invokeMethod:@"onReceiveClickWidgetEvent" arguments:result];
+        [ShanyanPlugin performMainBlock:^{
+            [self.channel invokeMethod:@"onReceiveClickWidgetEvent" arguments:result];
+        }];
     }
     
     
@@ -1834,22 +1875,59 @@
 
 
 // 获取栈顶 UIViewController
+//- (UIViewController *)findVisibleVC {
+//    UIViewController *visibleVc = nil;
+//    UIWindow *visibleWindow = nil;
+//    NSArray *windows = [[UIApplication sharedApplication] windows];
+//    for (UIWindow *window in windows) {
+//        if (!window.hidden && !visibleWindow) {
+//            visibleWindow = window;
+//        }
+//        if ([UIWindow instancesRespondToSelector:@selector(rootViewController)]) {
+//            if ([window rootViewController]) {
+//                visibleVc = window.rootViewController;
+//                break;
+//            }
+//        }
+//    }
+//    
+//    return visibleVc ?: [[UIApplication sharedApplication].delegate window].rootViewController;
+//}
+
+
++ (void)performMainBlock:(void(^)(void))block{
+    if ([[NSThread currentThread] isMainThread]) {
+        block();
+    }else{
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
+}
+
 - (UIViewController *)findVisibleVC {
-    UIViewController *visibleVc = nil;
-    UIWindow *visibleWindow = nil;
-    NSArray *windows = [[UIApplication sharedApplication] windows];
-    for (UIWindow *window in windows) {
-        if (!window.hidden && !visibleWindow) {
-            visibleWindow = window;
-        }
-        if ([UIWindow instancesRespondToSelector:@selector(rootViewController)]) {
-            if ([window rootViewController]) {
-                visibleVc = window.rootViewController;
-                break;
+    UIWindow *keyWindow = nil;
+
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *scene in [UIApplication sharedApplication].connectedScenes) {
+            if (scene.activationState == UISceneActivationStateForegroundActive) {
+                for (UIWindow *window in scene.windows) {
+                    if (window.isKeyWindow) {
+                        keyWindow = window;
+                        break;
+                    }
+                }
             }
         }
+    } else {
+        keyWindow = [UIApplication sharedApplication].keyWindow;
     }
-    
-    return visibleVc ?: [[UIApplication sharedApplication].delegate window].rootViewController;
+
+    UIViewController *rootVC = keyWindow.rootViewController;
+
+    while (rootVC.presentedViewController) {
+        rootVC = rootVC.presentedViewController;
+    }
+
+    return rootVC;
 }
+
 @end
